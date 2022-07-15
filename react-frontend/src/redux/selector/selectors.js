@@ -15,14 +15,6 @@ export const categorySelector = (state) => {
   return tmpCategories;
 };
 
-// SLIDE1
-// export const slideCategorySelector1 = (state) => {
-//   const slideCates = state.categories.categories.filter((category) => {
-//     return category.category_root_name.includes("Sweet Grocery")
-//   });
-//   return slideCates;
-// }
-
 export const productSlideCategorySelector1 = (state) => {
   const productSlideCates = state.product.products.filter((products) => {
     return products.category_name.includes(state.product.filter1.category_name);
