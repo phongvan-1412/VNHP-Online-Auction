@@ -7,8 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Header";
 import Body from "./Body";
 import ReactDOM from "react-dom/client";
-const headerBody1 = ReactDOM.createRoot(document.getElementById("root1"));
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+const headerBody1 = ReactDOM.createRoot(document.getElementById("root"));
 
 function showTime() {
   const myElement = (
@@ -17,16 +17,19 @@ function showTime() {
     </div>
   );
 
-  
   headerBody1.render(myElement);
 }
 
 setInterval(showTime, 1000);
 
 const header = ReactDOM.createRoot(document.getElementById("header"));
-header.render(<Header />);
-const body = ReactDOM.createRoot(document.getElementById("body"));
-body.render(<Body />);
+header.render(
+  <Router>
+    <Header />
+  </Router>
+);
+// const body = ReactDOM.createRoot(document.getElementById("body"));
+// body.render(<Body />);
 
 // const footer = ReactDOM.createRoot(document.getElementById("footer"));
 // footer.render(<Footer />);
