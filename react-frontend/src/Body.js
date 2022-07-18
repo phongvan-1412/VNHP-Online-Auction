@@ -6,16 +6,8 @@ import $ from "jquery";
 
 const Body = () => {
   function onClick(e) {
-    $("#test-header").val($("#test-text").val());
-    // $("#test-text").data("index", [
-    //   { name: "phuong", age: 1 },
-    //   { name: "van", age: 2 },
-    //   { name: "nhan", age: 1 },
-    //   { name: "hanh", age: 2 },
-    // ]);
-    if($("#test-text").data("index") == null) return;
-    $("#test-text")
-      .data("index")
+    $("#data")
+      .data("products")
       .forEach((item) => {
         console.log(item.product_name);
       });

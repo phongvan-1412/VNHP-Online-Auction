@@ -26,9 +26,9 @@ class Header extends Component {
     this.setState({ products: res3.data });
 
     $("#data").data("categories", res1.data);
-    $("#data").data("categoriesRoot", res2.data);
-    $("#data").data("cart", res3.data);
-    $("#data").data("products", this.state.cart);
+    $("#data").data("categoriesroot", res2.data);
+    $("#data").data("cart", this.state.cart);
+    $("#data").data("products", res3.data);
   }
 
   render() {
@@ -41,7 +41,7 @@ class Header extends Component {
           justifyContent: "space-evenly",
         }}
       >
-        <input type="text" id="data" data-categories={""} data-categoriesRoot={""} data-cart={""} data-products={""}hidden/>
+        <input type="text" id="data" data-categories={""} data-categoriesroot={""} data-cart={""} data-products={""} hidden/>
 
         <Routes>
           {/* Home  */}
