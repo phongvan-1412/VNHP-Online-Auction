@@ -7,10 +7,21 @@ import $ from "jquery";
 const Body = () => {
   function onClick(e) {
     $("#test-header").val($("#test-text").val());
+    $("#test-text").data("index", [
+      { name: "phuong", age: 1 },
+      { name: "van", age: 2 },
+      { name: "nhan", age: 1 },
+      { name: "hanh", age: 2 },
+    ]);
+    $("#test-text")
+      .data("index")
+      .forEach((item) => {
+        console.log(item.name);
+      });
   }
   return (
     <div>
-      <input type="text" id="test-text" />
+      <input type="text" id="test-text" data-index={""} />
       <button onClick={onClick}>submit </button>
     </div>
   );
