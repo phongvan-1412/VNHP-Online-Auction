@@ -43,7 +43,9 @@ class HomePage extends Component {
     this.setState({ categoriesRoot: res2.data });
 
     const res3 = await axios.get("http://127.0.0.1:8000/api/selectallproducts");
+
     this.setState({ products: res3.data });
+    
 
     $("#data").data("categories", res1.data);
     $("#data").data("categoriesRoot", res2.data);
