@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Routes,Link } from "react-router-dom";
+import { BrowserRouter as Router,Routes, Link } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
 import Dropdown from "./DropdownNavBar/Dropdown";
@@ -8,16 +8,22 @@ class Header extends Component {
   state = {
     categories: [],
     categoriesRoot: [],
+    cart: [],
+    products: [],
     drop: false,
   };
 
   async componentDidMount() {
     const res1 = await axios.get("http://127.0.0.1:8000/api/selectallcategory");
     this.setState({ categories: res1.data });
+
     const res2 = await axios.get(
       "http://127.0.0.1:8000/api/selectcategoryroot"
     );
     this.setState({ categoriesRoot: res2.data });
+
+    const res3 = await axios.get("http://127.0.0.1:8000/api/selectallproducts");
+    this.setState({ products: res3.data });
   }
 
   render() {
