@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router,Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Link } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
 import Dropdown from "./DropdownNavBar/Dropdown";
@@ -24,6 +24,11 @@ class Header extends Component {
 
     const res3 = await axios.get("http://127.0.0.1:8000/api/selectallproducts");
     this.setState({ products: res3.data });
+
+    $("#data").data("categories", res1.data);
+    $("#data").data("categoriesRoot", res2.data);
+    $("#data").data("cart", res3.data);
+    $("#data").data("products", this.state.cart);
   }
 
   render() {
@@ -36,6 +41,8 @@ class Header extends Component {
           justifyContent: "space-evenly",
         }}
       >
+        <input type="text" id="data" data-categories={""} data-categoriesRoot={""} data-cart={""} data-products={""}hidden/>
+
         <Routes>
           {/* Home  */}
           {/* <Route path="/" element={<LandingPage products={products} cart={cart} categories={categories} categoriesRoot={categoriesRoot} />}></Route>
