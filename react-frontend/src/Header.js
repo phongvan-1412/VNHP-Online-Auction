@@ -6,32 +6,11 @@ import Dropdown from "./DropdownNavBar/Dropdown";
 
 class Header extends Component {
   state = {
-    categories: [],
-    categoriesRoot: [],
-    cart: [],
-    products: [],
     drop: false,
   };
 
-  async componentDidMount() {
-    const res1 = await axios.get("http://127.0.0.1:8000/api/selectallcategory");
-    this.setState({ categories: res1.data });
-
-    const res2 = await axios.get(
-      "http://127.0.0.1:8000/api/selectcategoryroot"
-    );
-    this.setState({ categoriesRoot: res2.data });
-
-    const res3 = await axios.get("http://127.0.0.1:8000/api/selectallproducts");
-    this.setState({ products: res3.data });
-
-    $("#data").data("categories", res1.data);
-    $("#data").data("categoriesroot", res2.data);
-    $("#data").data("cart", this.state.cart);
-    $("#data").data("products", res3.data);
-  }
-
   render() {
+    const {categories,categoriesRoot} = this.props;
     return (
       <div
         className="header-menu"
@@ -41,33 +20,17 @@ class Header extends Component {
           justifyContent: "space-evenly",
         }}
       >
-        <input type="text" id="data" data-categories={""} data-categoriesroot={""} data-cart={""} data-products={""} hidden/>
+        <input
+          type="text"
+          id="data"
+          data-categories={""}
+          data-categoriesRoot={""}
+          data-cart={""}
+          data-products={""}
+          hidden
+        />
 
-        <Routes>
-          {/* Home  */}
-          {/* <Route path="/" element={<LandingPage products={products} cart={cart} categories={categories} categoriesRoot={categoriesRoot} />}></Route>
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/contactus" element={<ContactUs />}></Route>
-          <Route path="/term-and-policy" element={<TermAndPolicy />}></Route> */}
-
-          {/* Cart */}
-          {/* <Route path="/cart" element={<Cart cart={cart} updateCart={updateCart}/>}></Route>
-          <Route path="/updatecart" element={<LandingPage updateCart={updateCart}/>}></Route> */}
-
-          {/* Product */}
-          {/* {categories.map((category) => (
-            <Route key={category.category_id} path={`/${category.category_root_name}/${category.category_name}`} element={<ProductByCategory category={category} categories={categories} categoriesRoot={categoriesRoot} products={products}/>}></Route>
-          ))} */}
-
-          {/* {categoriesRoot.map((categoryRoot) => (
-            <Route key={categoryRoot.category_id} path={`/${categoryRoot.category_name}`} element={<ProductByCategory products={products} categoriesRoot={categoriesRoot} categoryRoot={categoryRoot} categories={categories}/>}></Route>
-          ))} */}
-
-          {/* Product Detail   */}
-          {/* {products.map((product) => (
-            <Route key={product.product_SKU} path={`/${product.category_name}/${product.product_name}`} element={<ProductDetail product={product} products={products} categories={categories}/>}></Route>
-          ))}  */}
-        </Routes>
+        
         <header className="menu">
           {/* <Link to="/" replace>
               <img
@@ -75,15 +38,15 @@ class Header extends Component {
                 className="logo"
               />
             </Link> */}
-          <Link to="/about" replace className="about">
+          {/* <Link to="#" replace className="about">
             About
-          </Link>
+          </Link> */}
           {/* <Link to="/blog" replace className="blog">
               Blog
             </Link> */}
-          <Link to="/contactus" replace className="contact">
+          {/* <Link to="#" replace className="contact">
             Contact
-          </Link>
+          </Link> */}
           <div
             style={{ height: "50px", marginTop: "57px" }}
             className="product"
@@ -95,8 +58,8 @@ class Header extends Component {
               <span>
                 {this.state.drop ? (
                   <Dropdown
-                    categoriesRoot={this.state.categoriesRoot}
-                    categories={this.state.categories}
+                    categoriesRoot={categoriesRoot}
+                    categories={categories}
                   />
                 ) : null}
               </span>
@@ -106,9 +69,9 @@ class Header extends Component {
           {/* <Link to="/shipping" replace className="shipping">
             Shipping
           </Link> */}
-          <Link to="/term-and-policy" replace className="needhelp">
+          {/* <Link to="#" replace className="needhelp">
             Needhelp
-          </Link>
+          </Link> */}
 
           {/* {isCustomerLogin ? (
               <Link to="/customer" replace className="customer">
