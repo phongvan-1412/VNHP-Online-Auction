@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Routes,Link } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
 import Dropdown from "./DropdownNavBar/Dropdown";
@@ -30,6 +30,31 @@ class Header extends Component {
           justifyContent: "space-evenly",
         }}
       >
+        <Routes>
+          {/* Home  */}
+          {/* <Route path="/" element={<LandingPage products={products} cart={cart} categories={categories} categoriesRoot={categoriesRoot} />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/contactus" element={<ContactUs />}></Route>
+          <Route path="/term-and-policy" element={<TermAndPolicy />}></Route> */}
+
+          {/* Cart */}
+          {/* <Route path="/cart" element={<Cart cart={cart} updateCart={updateCart}/>}></Route>
+          <Route path="/updatecart" element={<LandingPage updateCart={updateCart}/>}></Route> */}
+
+          {/* Product */}
+          {/* {categories.map((category) => (
+            <Route key={category.category_id} path={`/${category.category_root_name}/${category.category_name}`} element={<ProductByCategory category={category} categories={categories} categoriesRoot={categoriesRoot} products={products}/>}></Route>
+          ))} */}
+
+          {/* {categoriesRoot.map((categoryRoot) => (
+            <Route key={categoryRoot.category_id} path={`/${categoryRoot.category_name}`} element={<ProductByCategory products={products} categoriesRoot={categoriesRoot} categoryRoot={categoryRoot} categories={categories}/>}></Route>
+          ))} */}
+
+          {/* Product Detail   */}
+          {/* {products.map((product) => (
+            <Route key={product.product_SKU} path={`/${product.category_name}/${product.product_name}`} element={<ProductDetail product={product} products={products} categories={categories}/>}></Route>
+          ))}  */}
+        </Routes>
         <header className="menu">
           {/* <Link to="/" replace>
               <img
