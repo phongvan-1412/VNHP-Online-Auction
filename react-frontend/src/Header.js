@@ -27,6 +27,7 @@ class Header extends Component {
           data-categoriesRoot={""}
           data-cart={""}
           data-products={""}
+          data-categoryid={15}
           hidden
         />
 

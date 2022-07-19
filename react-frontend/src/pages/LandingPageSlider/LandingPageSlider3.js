@@ -8,7 +8,7 @@ import { GiNextButton, GiPreviousButton } from "react-icons/gi";
 
 import ProductItem from "../../pages/Products/ProductByCategory/ProductItem";
 
-const LandingPageSlider3 = ({ products, categories }) => {
+const LandingPageSlider3 = ({ products, categories, test }) => {
   const ref = useRef({});
 
   const next = () => {
@@ -26,10 +26,12 @@ const LandingPageSlider3 = ({ products, categories }) => {
     slidesToShow: 5,
     slidesToScroll: 5,
   };
-
+  
   let horizontalState = 1;
-  const horizontalTab = (index) => {
-    horizontalState = index.target.value;
+  const horizontalTab = (e) => {
+    horizontalState = e.target.value;
+    $("#data").data("categoryid", e.target.name);
+    test();
   };
 
   return (
@@ -42,7 +44,7 @@ const LandingPageSlider3 = ({ products, categories }) => {
           return (
             <button
               value={category.category_name}
-              name={category.category_name}
+              name={category.category_id}
               className={
                 horizontalState == category.category_name
                   ? "btn-category mb-2 btn-active-show"
