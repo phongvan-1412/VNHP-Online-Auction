@@ -1,17 +1,5 @@
 import React, { Component } from "react";
 import reportWebVitals from "./reportWebVitals";
-<<<<<<< HEAD
-=======
-import $ from "jquery";
-import axios from "axios";
-import LandingPage from "./pages/LandingPageSlider/LandingPage";
-import "bootstrap/dist/css/bootstrap.min.css";
-// import HeaderBody from "./layout/HeaderBody/HeaderBody";
-// import Footer from "./layout/Footer";
-import Header from "./Header";
-import Body from "./Body";
-import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
->>>>>>> e8d4a147ab8aa4a5624e52a08ca0c0e630c4d4ec
 import ReactDOM from "react-dom/client";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -140,10 +128,7 @@ class HomePage extends Component {
             ></Route>
           ))}
         </Routes>
-<<<<<<< HEAD
         <Footer />
-=======
->>>>>>> e8d4a147ab8aa4a5624e52a08ca0c0e630c4d4ec
       </Router>
     );
   }
