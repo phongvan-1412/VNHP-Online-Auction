@@ -12,6 +12,8 @@ import "./css/style-tablet.css";
 import "./css/style-laptop.css";
 
 import Header from "./Header";
+import About from "./AboutUs/About";
+import Contact from "./Contact/Contact";
 import LandingPage from "./pages/LandingPageSlider/LandingPage";
 import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
 import Footer from "./Footer";
@@ -89,9 +91,10 @@ class HomePage extends Component {
               />
             }
           ></Route>
-          {/* <Route path="/about" element={<About />}></Route>
-          <Route path="/contactus" element={<ContactUs />}></Route>
-          <Route path="/term-and-policy" element={<TermAndPolicy />}></Route> */}
+
+          <Route path="/about" element={<About />}></Route> 
+          <Route path="/contactus" element={<Contact />}></Route>
+          {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
           {/* Cart */}
           {/* <Route
