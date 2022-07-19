@@ -15,7 +15,7 @@ import Header from "./Header";
 import LandingPage from "./pages/LandingPageSlider/LandingPage";
 import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
 import Footer from "./Footer";
-
+import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
 
 // const headerBody1 = ReactDOM.createRoot(document.getElementById("headerBody1"));
 
@@ -70,7 +70,7 @@ class HomePage extends Component {
           data-products={""}
           data-categoryid={15}
           data-category={""}
-          data-product={""}
+          data-productid={""}
           hidden
         />
 
