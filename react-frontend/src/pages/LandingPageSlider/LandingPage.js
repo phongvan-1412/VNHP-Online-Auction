@@ -16,11 +16,11 @@ class LandingPage extends Component {
   render() {
     const { products, categories } = this.props;
 
-    if (this.state.curStatus == false) {
+    if (this.state.curStatus === false) {
       let tmpProduct = [];
 
       products.forEach((product) => {
-        if (product.category_id == 15) {
+        if (product.category_id === 15) {
           console.log(product.category_id);
 
           tmpProduct = [...tmpProduct, product];
@@ -38,7 +38,7 @@ class LandingPage extends Component {
       this.setState({ currentProducts: [] });
 
       products.forEach((product) => {
-        if (product.category_id == $("#data").data("categoryid")) {
+        if (product.category_id === $("#data").data("categoryid")) {
           tmpProduct = [...tmpProduct, product];
         }
       });

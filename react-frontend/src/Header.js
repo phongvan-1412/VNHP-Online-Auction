@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Routes, Link } from "react-router-dom";
-import axios from "axios";
+import { BrowserRouter as Link } from "react-router-dom";
 import Dropdown from "./DropdownNavBar/Dropdown";
 
 class Header extends Component {

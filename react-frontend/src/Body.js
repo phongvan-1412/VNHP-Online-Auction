@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import LandingPage from "./pages/LandingPageSlider/LandingPage";
 
 const Body = ({categories,products}) => {
   return (

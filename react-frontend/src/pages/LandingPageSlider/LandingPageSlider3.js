@@ -46,7 +46,7 @@ const LandingPageSlider3 = ({ products, categories, test }) => {
               value={category.category_name}
               name={category.category_id}
               className={
-                horizontalState == category.category_name
+                horizontalState === category.category_name
                   ? "btn-category mb-2 btn-active-show"
                   : "btn-category mb-2 btn-show"
               }
