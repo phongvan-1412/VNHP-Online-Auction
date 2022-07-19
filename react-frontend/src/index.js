@@ -1,33 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
 import reportWebVitals from "./reportWebVitals";
-import $ from "jquery";
-import axios from "axios";
-import LandingPage from "./pages/LandingPageSlider/LandingPage";
-import "bootstrap/dist/css/bootstrap.min.css";
-// import HeaderBody from "./layout/HeaderBody/HeaderBody";
-// import Footer from "./layout/Footer";
-import Header from "./Header";
-import Body from "./Body";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Component } from "react";
+import $ from "jquery";
+import axios from "axios";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/style-mobile.css";
 import "./css/style-tablet.css";
 import "./css/style-laptop.css";
+
+import Header from "./Header";
+import LandingPage from "./pages/LandingPageSlider/LandingPage";
 import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
-const headerBody1 = ReactDOM.createRoot(document.getElementById("root"));
+import Footer from "./Footer";
 
-function showTime() {
-  const myElement = (
-    <div>
-      <h2 style={{ marginLeft: "200px" }}>{new Date().toLocaleTimeString()}</h2>
-    </div>
-  );
 
-  headerBody1.render(myElement);
-}
+// const headerBody1 = ReactDOM.createRoot(document.getElementById("headerBody1"));
 
-setInterval(showTime, 1000);
+// function showTime() {
+//   const myElement = (
+//     <div>
+//       <h2 style={{ marginLeft: "200px" }}>{new Date().toLocaleTimeString()}</h2>
+//     </div>
+//   );
+
+//   headerBody1.render(myElement);
+// }
+
+// setInterval(showTime, 1000);
 
 class HomePage extends Component {
   state = {
@@ -147,10 +148,7 @@ class HomePage extends Component {
             ></Route>
           ))} */}
         </Routes>
-        <Body
-          categories={this.state.categories}
-          products={this.state.products}
-        />
+        <Footer />
       </Router>
     );
   }
@@ -158,24 +156,11 @@ class HomePage extends Component {
 
 export default HomePage;
 
-const body = ReactDOM.createRoot(document.getElementById("header"));
-body.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <React.Fragment>
     <HomePage />
   </React.Fragment>
 );
 
-// const body1 = ReactDOM.createRoot(document.getElementById("body"));
-// body1.render(
-//   <Router>
-//     <Body />
-//   </Router>
-// );
-
-// const footer = ReactDOM.createRoot(document.getElementById("footer"));
-// footer.render(<Footer />);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
