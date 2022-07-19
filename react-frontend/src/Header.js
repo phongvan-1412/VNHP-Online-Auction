@@ -33,12 +33,12 @@ class Header extends Component {
 
         
         <header className="menu">
-          {/* <Link to="/" replace>
+          <Link to="/" replace>
               <img
-                src={require("../../img/Header/logo.jpg")}
+                src={require("./img/Header/logo.jpg")}
                 className="logo"
               />
-            </Link> */}
+            </Link>
           {/* <Link to="#" replace className="about">
             About
           </Link> */}
