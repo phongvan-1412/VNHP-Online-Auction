@@ -1,6 +1,19 @@
 import React, { Component } from "react";
 import reportWebVitals from "./reportWebVitals";
+<<<<<<< HEAD
+=======
+import $ from "jquery";
+import axios from "axios";
+import LandingPage from "./pages/LandingPageSlider/LandingPage";
+import "bootstrap/dist/css/bootstrap.min.css";
+// import HeaderBody from "./layout/HeaderBody/HeaderBody";
+// import Footer from "./layout/Footer";
+import Header from "./Header";
+import Body from "./Body";
+import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
+>>>>>>> e8d4a147ab8aa4a5624e52a08ca0c0e630c4d4ec
 import ReactDOM from "react-dom/client";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
@@ -50,7 +63,6 @@ class HomePage extends Component {
     const res3 = await axios.get("http://127.0.0.1:8000/api/selectallproducts");
 
     this.setState({ products: res3.data });
-    
 
     $("#data").data("categories", res1.data);
     $("#data").data("categoriesroot", res2.data);
@@ -107,14 +119,7 @@ class HomePage extends Component {
             <Route
               key={category.category_id}
               path={`/${category.category_root_name}/${category.category_name}`}
-              element={
-                <ProductByCategory
-                  category={category}
-                  categories={this.state.categories}
-                  categoriesRoot={this.state.categoriesRoot}
-                  products={this.state.products}
-                />
-              }
+              element={<ProductByCategory />}
             ></Route>
           ))}
 
@@ -122,33 +127,23 @@ class HomePage extends Component {
             <Route
               key={categoryRoot.category_id}
               path={`/${categoryRoot.category_name}`}
-              element={
-                <ProductByCategory
-                  products={this.state.products}
-                  categoriesRoot={this.state.categoriesRoot}
-                  categoryRoot={categoryRoot}
-                  categories={this.state.categories}
-                />
-              }
+              element={<ProductByCategory />}
             ></Route>
           ))}
 
           {/* Product Detail   */}
-          {/* {this.state.products.map((product) => (
+          {this.state.products.map((product) => (
             <Route
               key={product.product_SKU}
               path={`/${product.category_name}/${product.product_name}`}
-              element={
-                <ProductDetail
-                  product={product}
-                  products={this.state.products}
-                  categories={this.state.categories}
-                />
-              }
+              element={<ProductDetail />}
             ></Route>
-          ))} */}
+          ))}
         </Routes>
+<<<<<<< HEAD
         <Footer />
+=======
+>>>>>>> e8d4a147ab8aa4a5624e52a08ca0c0e630c4d4ec
       </Router>
     );
   }
