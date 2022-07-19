@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Link } from "react-router-dom";
-import $ from "jquery";
 import axios from "axios";
 import Dropdown from "./DropdownNavBar/Dropdown";
 
@@ -20,19 +19,6 @@ class Header extends Component {
           justifyContent: "space-evenly",
         }}
       >
-        <input
-          type="text"
-          id="data"
-          data-categories={""}
-          data-categoriesroot={""}
-          data-cart={""}
-          data-products={""}
-          data-categoryid={15}
-          data-productbycate={""}
-          hidden
-        />
-
-        
         <header className="menu">
           <Link to="/" replace>
               <img

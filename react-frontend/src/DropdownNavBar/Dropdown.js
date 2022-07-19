@@ -21,7 +21,6 @@ const Dropdown = ({ categoriesRoot, categories }) => {
                       className="submenu-name"
                       to={category.category_name}
                       id={category.category_id}
-                      data-name={category.category_id}
                       onClick={onClick}
                     >
                       {category.category_name.replace("-", " ")}

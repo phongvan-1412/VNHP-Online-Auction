@@ -11,19 +11,18 @@ const DropdownItem = ({ category_name, categories }) => {
   }
   return (
     <div className="row submenu-subname">
-      {cates.map((cate) => {
+      {cates.map((category) => {
         return (
-          <div className="col-12" key={cate.category_id}>
+          <div className="col-12" key={category.category_id}>
             <Link
               style={{ cursor: "pointer", color: "black" }}
-              key={cate.category_id}
-              to={`/${cate.category_root_name}/${cate.category_name}`}
-              id={cate.category_id}
-              data-name={cate.category_id}
+              key={category.category_id}
+              to={`/${category.category_root_name}/${category.category_name}`}
+              id={category.category_id}
               onClick={onClick}
               className="submenu-subname-name"
             >
-              {cate.category_name.replace("-", " ")}
+              {category.category_name.replace("-", " ")}
             </Link>
           </div>
         );

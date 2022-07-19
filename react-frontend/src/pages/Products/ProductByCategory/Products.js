@@ -1,25 +1,73 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import $ from "jquery";
 import ProductView from "./ProductView";
 
+const Products = ({}) => {
+  let category_id = $("#data").data("productbycate");
+  let products = $("#data").data("products");
+  let categories = $("#data").data("categories");
+  let categoriesroot = $("#data").data("categoriesroot");
 
-const Products = ({ category }) => {
+  // get current category
+  let cate = [];
+  let check = false;
+  if (category_id <= 5) {
+    check = true;
+    categoriesroot.forEach((category) => {
+      if (category.category_id == category_id) {
+        cate = category;
+      }
+    });
+  } else {
+    categories.forEach((category) => {
+      if (category.category_id == category_id) {
+        cate = category;
+      }
+    });
+  }
 
+  // get subCate
   let subCate = [];
-  let currentCate = "";
-  let check = true;
+  categories.forEach((cate) => {
+    if (cate.category_root == category_id) {
+      subCate = [...subCate, cate];
+    }
+  });
 
-  //Get current products
+  // get products
+  let currentProducts = [];
 
+  if (category_id <= 5) {
+    categories.forEach((cate) => {
+      products.forEach((product) => {
+        if (cate.category_root == category_id) {
+          if (product.category_id == cate.category_id) {
+            currentProducts = [...currentProducts, product];
+          }
+        }
+      });
+    });
+  } else {
+    products.forEach((product) => {
+      if (product.category_id == category_id) {
+        currentProducts = [...currentProducts, product];
+      }
+    });
+  }
+
+  function onClick(e) {
+    console.log(e.target.id);
+    $("#data").data("productbycate", e.target.id);
+  }
 
   //Change page
-//   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-//   let pageNumbers = [];
+  //   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  //   let pageNumbers = [];
 
-//   for (let i = 1; i <= Math.ceil(localProducts.length / productsPerPage); i++) {
-//     pageNumbers.push(i);
-//   }
+  //   for (let i = 1; i <= Math.ceil(localProducts.length / productsPerPage); i++) {
+  //     pageNumbers.push(i);
+  //   }
 
   return (
     <div className="row">
@@ -37,13 +85,14 @@ const Products = ({ category }) => {
                   </li>
                   <li className="item-link1">
                     <Link
-                      to={`/${currentCate}`}
+                      to={`/${cate.category_name}`}
+                      id={cate.category_id}
                       replace
-                    //   onClick={onClick}
-                      name={currentCate}
+                      // onClick={onClick}
+                      name={cate.category_name}
                     >
                       {/* <span className="categoryRoot-link1" > */}
-                        {currentCate.replace("-", " ")}
+                      {cate.category_name.replace("-", " ")}
                       {/* </span> */}
                     </Link>
                   </li>
@@ -70,7 +119,8 @@ const Products = ({ category }) => {
                               <Link
                                 to={`/${cate.category_root_name}/${cate.category_name}`}
                                 replace
-                                // onClick={onClick}
+                                id={cate.category_id}
+                                onClick={onClick}
                                 name={cate.category_name}
                               >
                                 {cate.category_name.replace("-", " ")}
@@ -86,8 +136,8 @@ const Products = ({ category }) => {
               {/* display-products  */}
 
               <div className="col-md-9">
-                <div className="row" style={{marginTop: "-20px"}}>
-                  {subCate.map((product) => {
+                <div className="row" style={{ marginTop: "-20px" }}>
+                  {currentProducts.map((product) => {
                     return (
                       <ProductView
                         key={product.product_SKU}
@@ -112,18 +162,18 @@ const Products = ({ category }) => {
                   </li>
                   <li className="item-link">
                     <Link
-                      to={`/${category.category_root_name}`}
+                      to={`/${cate.category_root_name}`}
                       replace
-                      name={category.category_root_name}
-                    //   onClick={onClick}
-                      style={{textTransform:"uppercase"}}
+                      name={cate.category_root_name}
+                      // onClick={onClick}
+                      style={{ textTransform: "uppercase" }}
                     >
-                      {category.category_root_name.replace("-", " ")}
+                      {cate.category_root_name.replace("-", " ")}
                     </Link>
                   </li>
                   <li className="item-link">
-                    <span className="categoryRoot-link" >
-                      {category.category_name.replace("-", " ")}
+                    <span className="categoryRoot-link">
+                      {cate.category_name.replace("-", " ")}
                     </span>
                   </li>
                 </ul>
@@ -158,8 +208,8 @@ const Products = ({ category }) => {
               </div>
 
               {/* display-products  */}
-              {/* <div className="col-md-9">
-                <div className="row">
+              <div className="col-md-9">
+                <div className="row" style={{ marginTop: "-20px" }}>
                   {currentProducts.map((product) => {
                     return (
                       <ProductView
@@ -169,7 +219,7 @@ const Products = ({ category }) => {
                     );
                   })}
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         )}

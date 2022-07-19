@@ -52,7 +52,7 @@ class HomePage extends Component {
     
 
     $("#data").data("categories", res1.data);
-    $("#data").data("categoriesRoot", res2.data);
+    $("#data").data("categoriesroot", res2.data);
     $("#data").data("cart", this.state.cart);
     $("#data").data("products", res3.data);
   }
@@ -64,8 +64,10 @@ class HomePage extends Component {
           type="text"
           id="data"
           data-categories={""}
-          data-categoriesRoot={""}
+          data-categoriesroot={""}
+          data-cart={""}
           data-products={""}
+          data-categoryid={15}
           data-category={""}
           hidden
         />
@@ -115,7 +117,7 @@ class HomePage extends Component {
             ></Route>
           ))}
 
-          {/* {this.state.categoriesRoot.map((categoryRoot) => (
+          {this.state.categoriesRoot.map((categoryRoot) => (
             <Route
               key={categoryRoot.category_id}
               path={`/${categoryRoot.category_name}`}
@@ -128,7 +130,7 @@ class HomePage extends Component {
                 />
               }
             ></Route>
-          ))} */}
+          ))}
 
           {/* Product Detail   */}
           {/* {this.state.products.map((product) => (
