@@ -61,13 +61,16 @@ const Products = ({}) => {
     $("#data").data("productbycate", e.target.id);
   }
 
-  //Change page
-  //   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  //   let pageNumbers = [];
+  const productsPerPage = 8;
+  const currentPage = 1;
 
-  //   for (let i = 1; i <= Math.ceil(localProducts.length / productsPerPage); i++) {
-  //     pageNumbers.push(i);
-  //   }
+  //Change page
+    const paginate = (pageNumber) => currentPage = pageNumber;
+    let pageNumbers = [];
+
+    for (let i = 1; i <= Math.ceil(currentProducts.length / productsPerPage); i++) {
+      pageNumbers.push(i);
+    }
 
   return (
     <div className="row">
@@ -225,7 +228,7 @@ const Products = ({}) => {
         )}
       </div>
 
-      {/* <div className="row" style={{ padding: "0px", margin: "0px" }}>
+      <div className="row" style={{ padding: "0px", margin: "0px" }}>
         <div
           className="col-md-3"
           style={{ padding: "0px", margin: "0px" }}
@@ -246,7 +249,7 @@ const Products = ({}) => {
             ))}
           </ul>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
