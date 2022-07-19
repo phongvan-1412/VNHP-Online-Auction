@@ -7,8 +7,7 @@ const DropdownItem = ({ category_name, categories }) => {
     (cat) => cat.category_root_name === category_name
   );
   function onClick(e) {
-    console.log(e.target.id);
-    $("#test-text").val($("#"+e.target.id).data('name'));
+    $("#data").data("productbycate", e.target.id);
   }
   return (
     <div className="row submenu-subname">

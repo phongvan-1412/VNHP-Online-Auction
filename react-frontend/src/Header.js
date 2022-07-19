@@ -24,10 +24,11 @@ class Header extends Component {
           type="text"
           id="data"
           data-categories={""}
-          data-categoriesRoot={""}
+          data-categoriesroot={""}
           data-cart={""}
           data-products={""}
           data-categoryid={15}
+          data-productbycate={""}
           hidden
         />
 

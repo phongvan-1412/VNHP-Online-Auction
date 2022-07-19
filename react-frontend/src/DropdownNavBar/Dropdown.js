@@ -6,7 +6,7 @@ import DropdownItem from "./DropdownItem";
 
 const Dropdown = ({ categoriesRoot, categories }) => {
   function onClick(e) {
-    console.log($('#'+e.target.id).data("name"));
+    $("#data").data("productbycate", e.target.id);
   }
   return (
     <ul className="services-submenu" style={{position:"absolute"}} >
