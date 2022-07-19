@@ -11,6 +11,10 @@ import Body from "./Body";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Component } from "react";
+import "./css/style-mobile.css";
+import "./css/style-tablet.css";
+import "./css/style-laptop.css";
+
 const headerBody1 = ReactDOM.createRoot(document.getElementById("root"));
 
 function showTime() {
