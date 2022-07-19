@@ -70,6 +70,7 @@ class HomePage extends Component {
           data-products={""}
           data-categoryid={15}
           data-category={""}
+          data-product={""}
           hidden
         />
 
