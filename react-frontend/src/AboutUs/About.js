@@ -1,20 +1,22 @@
-import { Link } from "react-router-dom";
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Aboutheader from "./Aboutheader";
 import Aboutfooter from "./Aboutfooter";
 import Aboutbody from "./Aboutbody";
+import Aboutinvestor from "./Aboutinvestor";
 import "../css/nicepage.css";
-import "../css/home.css";
+import "../css/Home.css";
 
-function About(){
-    return(
-        <div className="u-body u-xl-mode" data-lang="en">
-            <Aboutheader/>
-            <Aboutbody/>
-            <Aboutfooter/>
-        </div>
-    )
+class About extends Component{
+    render(){
+        return(
+            <div className="u-body u-xl-mode" data-lang="en">
+                <Aboutheader title="ABOUT US"/>
+                <Aboutbody/>
+                <Aboutinvestor/>
+                <Aboutfooter/>
+            </div>
+        )
+    }
 }
 
 export default About
