@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import ProductView from "./ProductView";
 
-const Products = () => {
+const Products = ({}) => {
   let category_id = $("#data").data("productbycate");
   let products = $("#data").data("products");
   let categories = $("#data").data("categories");
@@ -15,13 +15,13 @@ const Products = () => {
   if (category_id <= 5) {
     check = true;
     categoriesroot.forEach((category) => {
-      if (category.category_id === category_id) {
+      if (category.category_id == category_id) {
         cate = category;
       }
     });
   } else {
     categories.forEach((category) => {
-      if (category.category_id === category_id) {
+      if (category.category_id == category_id) {
         cate = category;
       }
     });
@@ -30,7 +30,7 @@ const Products = () => {
   // get subCate
   let subCate = [];
   categories.forEach((cate) => {
-    if (cate.category_root === category_id) {
+    if (cate.category_root == category_id) {
       subCate = [...subCate, cate];
     }
   });
@@ -41,8 +41,8 @@ const Products = () => {
   if (category_id <= 5) {
     categories.forEach((cate) => {
       products.forEach((product) => {
-        if (cate.category_root === category_id) {
-          if (product.category_id === cate.category_id) {
+        if (cate.category_root == category_id) {
+          if (product.category_id == cate.category_id) {
             currentProducts = [...currentProducts, product];
           }
         }
@@ -50,7 +50,7 @@ const Products = () => {
     });
   } else {
     products.forEach((product) => {
-      if (product.category_id === category_id) {
+      if (product.category_id == category_id) {
         currentProducts = [...currentProducts, product];
       }
     });

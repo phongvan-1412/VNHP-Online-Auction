@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ProductItem from "./ProductItem";
+import DetailItem from "../ProductDetail/DetailItem";
 
 const ProductView = ({ product }) => {
+  const [productQV, setProductQV] = useState(false);
+  const [productShow, setProductShow] = useState(false);
+
+  const onCLick = () => {
+    setProductShow(false);
+    setProductQV(false);
+  };
   return (
     <div className="product-grid-wrapper col-xl-3 col-md-4 col-xs-6"
-    // onMouseEnter={() => setProductQV(true)} 
-    // onMouseLeave={() => setProductQV(false)}
-    >
+    onMouseEnter={() => setProductQV(true)} 
+    onMouseLeave={() => setProductQV(false)}>
       {/* {productQV ? (
         <div style={{ position: "absolute", marginTop: "160px" }}>
           <div

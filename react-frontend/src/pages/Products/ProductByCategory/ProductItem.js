@@ -1,13 +1,16 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
+import $ from "jquery";
 
 const ProductItem = ({ product }) => {
   return (
     <div className="product-grid">
       <div>
         <Link
-          to={`/${product.category_name}/${product.product_name}`}
+          //to={`/${product.category_name}/${product.product_name}`}
+          to="#"
           replace
           className="product-name-item"
         >
@@ -24,7 +27,8 @@ const ProductItem = ({ product }) => {
 
       <div className="product-name">
         <Link
-          to={`/${product.category_name}/${product.product_name}`}
+          //to={`/${product.category_name}/${product.product_name}`}
+          to="#"
           replace
           className="product-name-item"
         >

@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import $ from "jquery";
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
