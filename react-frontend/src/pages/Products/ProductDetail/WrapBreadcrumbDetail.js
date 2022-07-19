@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import $ from "jquery";
 
-const WrapBreadcrumbDetail = ({product,category}) => {
+const WrapBreadcrumbDetail = ({ product, category }) => {
+  function onClick(e) {
+    $("#data").data("productbycate", e.target.id);
+  }
   return (
     <div className="wrap-breadcrumb">
       <ul>
@@ -14,8 +18,8 @@ const WrapBreadcrumbDetail = ({product,category}) => {
           <Link
             to={`/${category.category_root_name}/${category.category_name}`}
             replace
-            // onClick={onClick}
-            name={category.category_id}
+            onClick={onClick}
+            id={category.category_id}
           >
             {product.category_name.replace(/-/g, " ")}
           </Link>

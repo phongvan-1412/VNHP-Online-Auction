@@ -8,7 +8,7 @@ const ProductItem = ({ product }) => {
     $("#data").data("productid", e.target.name);
   };
 
-  //countdown test 
+  //countdown test
   var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
 
   // Update the count down every 1 second
@@ -27,20 +27,26 @@ const ProductItem = ({ product }) => {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Display the result in the element with id="demo"
-    document.getElementById("progressBar").innerHTML =
-      days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-
     // If the count down is finished, write some text
-    if (distance < 0) {
+    if (
+      document.getElementById(product.product_id + product.product_name) ==
+        null ||
+      distance < 0
+    ) {
       clearInterval(x);
-      document.getElementById("progressBar").innerHTML = "EXPIRED";
+      document.getElementById(
+        product.product_id + product.product_name
+      ).innerHTML = "EXPIRED";
     }
+    // Display the result in the element with id="demo"
+    document.getElementById(
+      product.product_id + product.product_name
+    ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   }, 1000);
 
   return (
     <div className="product-grid">
-      <div type="text" id="progressBar" style={{ marginLeft: "100px" }}></div>
+      <div id={product.product_id + product.product_name}></div>
 
       <div>
         <Link

@@ -51,7 +51,7 @@ class LandingPage extends Component {
       <div className="container" style={{ padding: "0px", margin: "0px" }}>
         <TopSlider />
         <LandingPageSlider1 products={products} />
-        <LandingPageSlider2 products={products} />
+        {/* <LandingPageSlider2 products={products} /> */}
         <LandingPageSlider3
           products={this.state.currentProducts}
           categories={categories}
