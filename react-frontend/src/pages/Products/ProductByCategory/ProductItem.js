@@ -14,7 +14,10 @@ const ProductItem = ({ product }) => {
           replace
           className="product-name-item"
         >
-          <img className="product-item-content product-img" src={require(`../../../../../LaravelAPI/public/ProductImage/${product.product_img_name}`)}/>
+          <img
+            className="product-item-content product-img"
+            src={require(`../../../../../LaravelAPI/public/ProductImage/${product.product_img_name}`)}
+          />
         </Link>
       </div>
 

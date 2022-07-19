@@ -5,7 +5,6 @@ import LandingPageSlider3 from "./LandingPageSlider3";
 import TopSlider from "./TopSlider";
 import BottomImg from "./BottomImg";
 import $ from "jquery";
-import { renderMatches } from "react-router-dom";
 
 class LandingPage extends Component {
   state = {

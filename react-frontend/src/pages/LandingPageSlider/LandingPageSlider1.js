@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { GiNextButton, GiPreviousButton } from "react-icons/gi";
 import $ from "jquery";
 
-import ProductItem from "../../pages/Products/ProductByCategory/ProductItem";
+import ProductItem from "../Products/ProductByCategory/ProductItem";
 
 const LandingPageSlider1 = ({products}) => {
   const ref = useRef({});

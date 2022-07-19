@@ -14,7 +14,7 @@ import { Component } from "react";
 import "./css/style-mobile.css";
 import "./css/style-tablet.css";
 import "./css/style-laptop.css";
-
+import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
 const headerBody1 = ReactDOM.createRoot(document.getElementById("root"));
 
 function showTime() {
@@ -100,7 +100,7 @@ class HomePage extends Component {
           ></Route> */}
 
           {/* Product */}
-          {/* {this.state.categories.map((category) => (
+          {this.state.categories.map((category) => (
             <Route
               key={category.category_id}
               path={`/${category.category_root_name}/${category.category_name}`}
@@ -108,12 +108,12 @@ class HomePage extends Component {
                 <ProductByCategory
                   category={category}
                   categories={this.state.categories}
-                  categoriesRoot={cthis.state.ategoriesRoot}
+                  categoriesRoot={this.state.categoriesRoot}
                   products={this.state.products}
                 />
               }
             ></Route>
-          ))} */}
+          ))}
 
           {/* {this.state.categoriesRoot.map((categoryRoot) => (
             <Route

@@ -18,8 +18,7 @@ const DropdownItem = ({ category_name, categories }) => {
             <Link
               style={{ cursor: "pointer", color: "black" }}
               key={cate.category_id}
-              //to={`/${cate.category_root_name}/${cate.category_name}`}
-              to="#"
+              to={`/${cate.category_root_name}/${cate.category_name}`}
               id={cate.category_id}
               data-name={cate.category_id}
               onClick={onClick}

@@ -19,8 +19,7 @@ const Dropdown = ({ categoriesRoot, categories }) => {
                   <div className="col-12 " key={category.category_id}>
                     <Link
                       className="submenu-name"
-                      // to={category.category_name}
-                      to="#"
+                      to={category.category_name}
                       id={category.category_id}
                       data-name={category.category_id}
                       onClick={onClick}
