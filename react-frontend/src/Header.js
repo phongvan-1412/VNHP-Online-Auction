@@ -26,15 +26,15 @@ class Header extends Component {
                 className="logo"
               />
             </Link>
-          {/* <Link to="#" replace className="about">
+          <Link to="/about" replace className="about">
             About
-          </Link> */}
+          </Link>
           {/* <Link to="/blog" replace className="blog">
               Blog
             </Link> */}
-          {/* <Link to="#" replace className="contact">
+          <Link to="contactus" replace className="contact">
             Contact
-          </Link> */}
+          </Link>
           <div
             style={{ height: "50px", marginTop: "57px" }}
             className="product"
