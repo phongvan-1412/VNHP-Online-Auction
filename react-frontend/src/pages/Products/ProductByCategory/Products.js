@@ -57,8 +57,7 @@ const Products = ({}) => {
   }
 
   function onClick(e) {
-    console.log(e.target.id);
-    $("#data").data("productbycate", e.target.id);
+    $("#data").data("productbycate", e.target.name);
   }
 
   const productsPerPage = 8;
@@ -89,10 +88,9 @@ const Products = ({}) => {
                   <li className="item-link1">
                     <Link
                       to={`/${cate.category_name}`}
-                      id={cate.category_id}
+                      name={cate.category_id}
                       replace
-                      // onClick={onClick}
-                      name={cate.category_name}
+                      onClick={onClick}
                     >
                       {/* <span className="categoryRoot-link1" > */}
                       {cate.category_name.replace("-", " ")}
@@ -167,8 +165,8 @@ const Products = ({}) => {
                     <Link
                       to={`/${cate.category_root_name}`}
                       replace
-                      name={cate.category_root_name}
-                      // onClick={onClick}
+                      name={cate.category_root}
+                      onClick={onClick}
                       style={{ textTransform: "uppercase" }}
                     >
                       {cate.category_root_name.replace("-", " ")}

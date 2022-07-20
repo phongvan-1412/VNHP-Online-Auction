@@ -4,6 +4,7 @@ import $ from "jquery";
 
 const WrapBreadcrumbDetail = ({ product, category }) => {
   function onClick(e) {
+    console.log(e.target.id)
     $("#data").data("productbycate", e.target.id);
   }
   return (
