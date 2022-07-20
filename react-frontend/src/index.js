@@ -61,6 +61,7 @@ class HomePage extends Component {
   }
 
   render() {
+    
     return (
       <Router>
         <input
@@ -92,7 +93,7 @@ class HomePage extends Component {
             }
           ></Route>
 
-          <Route path="/about" element={<About />}></Route> 
+          <Route path="/about" element={<About />}></Route>
           <Route path="/contactus" element={<Contact />}></Route>
           {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 

@@ -47,6 +47,7 @@ class LandingPage extends Component {
       });
     };
 
+    
     return (
       <div className="container" style={{ padding: "0px", margin: "0px" }}>
         <TopSlider />

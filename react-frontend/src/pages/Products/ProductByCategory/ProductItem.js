@@ -26,7 +26,10 @@ const ProductItem = ({ product }) => {
     );
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
+    if (
+      document.getElementById(product.product_id + product.product_name) == null
+    )
+      return;
     // If the count down is finished, write some text
     if (
       document.getElementById(product.product_id + product.product_name) ==
@@ -38,7 +41,8 @@ const ProductItem = ({ product }) => {
         product.product_id + product.product_name
       ).innerHTML = "EXPIRED";
     }
-    // Display the result in the element with id="demo"
+    // Display the result in the element with id
+
     document.getElementById(
       product.product_id + product.product_name
     ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
