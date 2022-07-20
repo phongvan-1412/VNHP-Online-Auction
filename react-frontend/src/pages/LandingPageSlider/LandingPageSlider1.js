@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { GiNextButton, GiPreviousButton } from "react-icons/gi";
 import $ from "jquery";
 
-import ProductItem from "../Products/ProductByCategory/ProductItem";
+import SliderItem1 from "./SliderItem1";
 
 const LandingPageSlider1 = ({products}) => {
   const ref = useRef({});
@@ -34,23 +34,14 @@ const LandingPageSlider1 = ({products}) => {
           <b>UP COMING PRODUCTS</b>
         </h4>
       </div>
-      <input
-        type="text"
-        id="data1"
-        data-categories={""}
-        data-categoriesroot={""}
-        data-cart={""}
-        data-products={""}
-        hidden
-      />
 
       <Slider ref={ref} {...settings}>
         {products.map((product) => (
           <div className="product-grid-wrapper">
-            <ProductItem
+            <SliderItem1
               key={product.product_SKU}
               product={product}
-            ></ProductItem>
+            ></SliderItem1>
           </div>
         ))}
       </Slider>

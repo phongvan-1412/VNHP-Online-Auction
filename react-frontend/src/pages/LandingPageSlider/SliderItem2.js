@@ -12,7 +12,7 @@ const ProductItem = ({ product }) => {
   var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
 
   // Update the count down every 1 second
-  var slider1 = setInterval(function() {
+  var slider2 = setInterval(function() {
     // Get today's date and time
     var now = new Date().getTime();
 
@@ -27,70 +27,29 @@ const ProductItem = ({ product }) => {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     if (
-      document.getElementById('slider1' + product.product_id + product.product_name) == null
+      document.getElementById('slider2' + product.product_id + product.product_name) == null
     )
       return;
     // If the count down is finished, write some text
     if (
-      document.getElementById('slider1' + product.product_id + product.product_name) ==
+      document.getElementById('slider2' + product.product_id + product.product_name) ==
         null ||
       distance < 0
     ) {
-      clearInterval(slider1);
-      document.getElementById('slider1' +
+      clearInterval(slider2);
+      document.getElementById('slider2' + 
         product.product_id + product.product_name
       ).innerHTML = "EXPIRED";
     }
     // Display the result in the element with id
 
-    document.getElementById('slider1' +
+    document.getElementById('slider2' + 
       product.product_id + product.product_name
     ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   }, 1000);
 
-
-   //countdown Buy It Now
-   var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
-
-   // Update the count down every 1 second
-   var slider2 = setInterval(function() {
-     // Get today's date and time
-     var now = new Date().getTime();
- 
-     // Find the distance between now and the count down date
-     var distance = countDownDate - now;
- 
-     // Time calculations for days, hours, minutes and seconds
-     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-     var hours = Math.floor(
-       (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-     );
-     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-     if (
-       document.getElementById('slider2' + product.product_id + product.product_name) == null
-     )
-       return;
-     // If the count down is finished, write some text
-     if (
-       document.getElementById('slider2' + product.product_id + product.product_name) ==
-         null ||
-       distance < 0
-     ) {
-       clearInterval(slider2);
-       document.getElementById('slider2' +
-         product.product_id + product.product_name
-       ).innerHTML = "EXPIRED";
-     }
-     // Display the result in the element with id
- 
-     document.getElementById('slider2' +
-       product.product_id + product.product_name
-     ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-   }, 1000);
   return (
     <div className="product-grid">
-      <div id={'slider1' + product.product_id + product.product_name}></div>
       <div id={'slider2' + product.product_id + product.product_name}></div>
 
       <div>
@@ -103,7 +62,7 @@ const ProductItem = ({ product }) => {
           <img
             className="product-item-content product-img"
             name={product.product_id}
-            src={require(`../../../../../LaravelAPI/public/ProductImage/${product.product_img_name}`)}
+            src={require(`../../../../LaravelAPI/public/ProductImage/${product.product_img_name}`)}
           />
         </Link>
       </div>

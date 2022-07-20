@@ -85,27 +85,12 @@ class HomePage extends Component {
           {/* Home  */}
           <Route
             path="/"
-            element={
-              <LandingPage
-                products={this.state.products}
-                categories={this.state.categories}
-              />
-            }
+            element={<LandingPage products={this.state.products} categories={this.state.categories} />}
           ></Route>
 
           <Route path="/about" element={<About />}></Route>
           <Route path="/contactus" element={<Contact />}></Route>
           {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
-
-          {/* Cart */}
-          {/* <Route
-            path="/cart"
-            element={<Cart />}
-          ></Route> */}
-          {/* <Route
-            path="/updatecart"
-            element={<LandingPage  />}
-          ></Route> */}
 
           {/* Product */}
           {this.state.categories.map((category) => (

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import $ from "jquery";
+
+import TopSlider from "./TopSlider";
 import LandingPageSlider1 from "./LandingPageSlider1";
 import LandingPageSlider2 from "./LandingPageSlider2";
-import LandingPageSlider3 from "./LandingPageSlider3";
-import TopSlider from "./TopSlider";
-import BottomImg from "./BottomImg";
-import $ from "jquery";
+// import LandingPageSlider3 from "./LandingPageSlider3";
 
 class LandingPage extends Component {
   state = {
@@ -49,18 +49,16 @@ class LandingPage extends Component {
 
     
     return (
-      <div className="container" style={{ padding: "0px", margin: "0px" }}>
+      <div className="row">
         <TopSlider />
-        <LandingPageSlider1 products={products} />
-        {/* <LandingPageSlider2 products={products} /> */}
-        <LandingPageSlider3
-          products={this.state.currentProducts}
-          categories={categories}
-          test={test}
-        />
-
-        <BottomImg />
+        <div className="col-md-1"></div>
+        <div className="col-md-10" style={{ padding: "0px", margin: "0px" }}>
+          <LandingPageSlider1 products={products} />
+          <LandingPageSlider2 products={products} />
+        </div>
+        <div className="col-md-1"></div>
       </div>
+        
     );
   }
 }
