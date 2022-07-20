@@ -11,13 +11,13 @@ import "./css/style-mobile.css";
 import "./css/style-tablet.css";
 import "./css/style-laptop.css";
 
-import Header from "./Header";
+import Header from "./layout/Header/Header";
 import About from "./AboutUs/About";
 import Contact from "./Contact/Contact";
 import LandingPage from "./pages/LandingPageSlider/LandingPage";
 import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
-import Footer from "./Footer";
 import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
+import Footer from "./layout/Footer";
 
 // const headerBody1 = ReactDOM.createRoot(document.getElementById("headerBody1"));
 
