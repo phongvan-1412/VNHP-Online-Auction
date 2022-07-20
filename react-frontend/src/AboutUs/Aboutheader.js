@@ -24,7 +24,7 @@ class Aboutheader extends Component{
                         </div>
                         <div className="u-custom-menu u-nav-container">
                             <ul className="u-nav u-unstyled u-nav-1">
-                                <li className="u-nav-item">
+                                <li className="u-nav-item" >
                                     <Link className="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" to="Home.html" style={{padding: "10px 18px"}}>Home</Link>
                                 </li>   
                                 <li className="u-nav-item">
@@ -46,8 +46,8 @@ class Aboutheader extends Component{
                                 <div className="u-inner-container-layout u-sidenav-overflow">
                                     <div className="u-menu-close"></div>
                                     <ul className="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                                        <li className="u-nav-item">
-                                            <Link className="u-button-style u-nav-link" to="Home.html">Home</Link>
+                                        <li className="u-nav-item " >
+                                            <Link className="u-button-style u-nav-link"  to="Home.html">Home</Link>
                                         </li>
                                         <li className="u-nav-item">
                                             <Link className="u-button-style u-nav-link" to="/about">About</Link>

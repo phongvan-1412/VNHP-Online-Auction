@@ -25027,13 +25027,13 @@ section.u-palette-1-base:before,
 .u-palette-1-base > .u-inner-container-layout:before,
 .u-container-layout.u-container-layout.u-palette-1-base:before,
 .u-table-alt-palette-1-base tr:nth-child(even) {
-  color: #ffffff;
-  background-color: #478ac9;
+  color: #000000;
+  background-color: #e5e5e5;
 }
 .u-button-style.u-palette-1-base,
 .u-button-style.u-palette-1-base[class*="u-border-"] {
-  color: #ffffff !important;
-  background-color: #478ac9 !important;
+  color: #000000 !important;
+  background-color: #e5e5e5 !important;
 }
 .u-button-style.u-palette-1-base:hover,
 .u-button-style.u-palette-1-base[class*="u-border-"]:hover,
@@ -25045,8 +25045,8 @@ section.u-palette-1-base:before,
 .u-button-style.u-button-style.u-palette-1-base[class*="u-border-"].active,
 li.active > .u-button-style.u-button-style.u-palette-1-base,
 li.active > .u-button-style.u-button-style.u-palette-1-base[class*="u-border-"] {
-  color: #ffffff !important;
-  background-color: #387cbd !important;
+  color: #000000 !important;
+  background-color: #e5e5e5 !important;
 }
 .u-hover-palette-1-base:hover,
 .u-hover-palette-1-base[class*="u-border-"]:hover,
