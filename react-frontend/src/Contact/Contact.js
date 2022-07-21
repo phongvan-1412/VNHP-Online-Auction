@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Aboutheader from "../AboutUs/Aboutheader";
 import Aboutfooter from "../AboutUs/Aboutfooter";
 import Contacts from "./Contacts";
-import "../css/nicepage.css";
-import "../css/Home.css";
+
 
 class Contact extends Component{
     render(){

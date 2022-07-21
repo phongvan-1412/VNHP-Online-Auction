@@ -10,6 +10,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/style-mobile.css";
 import "./css/style-tablet.css";
 import "./css/style-laptop.css";
+import "./css/nicepage.css";
+import "./css/home.css";
 
 import Header from "./layout/Header/Header";
 import About from "./AboutUs/About";
