@@ -13,6 +13,8 @@ import "./css/style-laptop.css";
 import "./css/nicepage.css";
 import "./css/home.css";
 import "./css/admin.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import Header from "./layout/Header/Header";
 import About from "./AboutUs/About";
