@@ -12,6 +12,7 @@ import "./css/style-tablet.css";
 import "./css/style-laptop.css";
 import "./css/nicepage.css";
 import "./css/home.css";
+import "./css/admin.css";
 
 import Header from "./layout/Header/Header";
 import About from "./AboutUs/About";
@@ -21,6 +22,8 @@ import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCateg
 import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
 import Footer from "./layout/Footer";
 
+import AddCategory from "./pages/Admin/AddCategory";
+import AddProduct from "./pages/Admin/AddProduct";
 // const headerBody1 = ReactDOM.createRoot(document.getElementById("headerBody1"));
 
 // function showTime() {
@@ -92,6 +95,8 @@ class HomePage extends Component {
 
           <Route path="/about" element={<About />}></Route>
           <Route path="/contactus" element={<Contact />}></Route>
+          <Route path="/addcategory" element={<AddCategory />}></Route>
+          <Route path="/addproduct" element={<AddProduct />}></Route>
           {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
           {/* Product */}
