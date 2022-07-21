@@ -11,7 +11,7 @@ class CategoryAPI extends Controller
 {
     public function SelectCategoryRoot()
     {
-        $tmp_categories = DB::select("exec sp_select_category_root");
+        $tmp_categories = DB::select("select * from category");
         $categories = self::AddCollection($tmp_categories);
         return $categories;
     }
