@@ -10,7 +10,7 @@ class Header extends Component {
   };
 
   render() {
-    const { categories, categoriesRoot } = this.props;
+    const { categories} = this.props;
     return (
       <div
         className="header-menu"
@@ -47,7 +47,6 @@ class Header extends Component {
               <span>
                 {this.state.drop ? (
                   <Dropdown
-                    categoriesRoot={categoriesRoot}
                     categories={categories}
                   />
                 ) : null}

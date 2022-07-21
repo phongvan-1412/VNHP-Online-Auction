@@ -41,8 +41,6 @@ import Footer from "./layout/Footer";
 class HomePage extends Component {
   state = {
     categories: [],
-    categoriesRoot: [],
-    cart: [],
     products: [],
   };
 
@@ -57,28 +55,14 @@ class HomePage extends Component {
     
     return (
       <Router>
-        <input
-          type="text"
-          id="data"
-          data-categories={""}
-          data-categoriesroot={""}
-          data-cart={""}
-          data-products={""}
-          data-categoryid={15}
-          data-category={""}
-          data-productid={""}
-          hidden
-        />
-
         <Header
           categories={this.state.categories}
-          categoriesRoot={this.state.categoriesRoot}
         />
         <Routes>
           {/* Home  */}
           <Route
             path="/"
-            element={<LandingPage products={this.state.products} categories={this.state.categories} />}
+            element={<LandingPage products={this.state.products} categories={this.state.categories}/>}
           ></Route>
 
           <Route path="/about" element={<About />}></Route>
@@ -91,15 +75,7 @@ class HomePage extends Component {
           {this.state.categories.map((category) => (
             <Route
               key={category.category_id}
-              path={`/${category.category_root_name}/${category.category_name}`}
-              element={<ProductByCategory />}
-            ></Route>
-          ))}
-
-          {this.state.categoriesRoot.map((categoryRoot) => (
-            <Route
-              key={categoryRoot.category_id}
-              path={`/${categoryRoot.category_name}`}
+              path={`/${category.category_name}`}
               element={<ProductByCategory />}
             ></Route>
           ))}
@@ -124,7 +100,7 @@ export default HomePage;
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.Fragment>
-    <HomePage />
+    <HomePage style={{ padding: "0px", margin: "0px" }}/>
   </React.Fragment>
 );
 
