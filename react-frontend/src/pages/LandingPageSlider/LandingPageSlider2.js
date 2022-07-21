@@ -1,9 +1,6 @@
 import React, { useRef } from "react";
 import $ from "jquery";
-
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { GiNextButton, GiPreviousButton} from 'react-icons/gi'
 
 import SliderItem2 from "./SliderItem2";
