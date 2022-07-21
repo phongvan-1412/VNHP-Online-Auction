@@ -21,7 +21,7 @@ import LandingPage from "./pages/LandingPageSlider/LandingPage";
 import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
 import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
 import Footer from "./layout/Footer";
-import UserLogin from "./pages/User/UserLogin";
+// import UserLogin from "./pages/User/UserLogin";
 
 import AddCategory from "./pages/Admin/AddCategory";
 import AddProduct from "./pages/Admin/AddProduct";
@@ -49,19 +49,12 @@ class HomePage extends Component {
     const res1 = await axios.get("http://127.0.0.1:8000/api/selectallcategory");
     this.setState({ categories: res1.data });
 
-    const res2 = await axios.get(
-      "http://127.0.0.1:8000/api/selectcategoryroot"
-    );
-    this.setState({ categoriesRoot: res2.data });
 
-    const res3 = await axios.get("http://127.0.0.1:8000/api/selectallproducts");
-
-    this.setState({ products: res3.data });
+    const res2 = await axios.get("http://127.0.0.1:8000/api/selectallproducts");
+    this.setState({ products: res2.data });
 
     $("#data").data("categories", res1.data);
-    $("#data").data("categoriesroot", res2.data);
-    $("#data").data("cart", this.state.cart);
-    $("#data").data("products", res3.data);
+    $("#data").data("products", res2.data);
   }
 
   render() {
@@ -82,7 +75,7 @@ class HomePage extends Component {
           <Route path="/contactus" element={<Contact />}></Route>
           <Route path="/addcategory" element={<AddCategory />}></Route>
           <Route path="/addproduct" element={<AddProduct />}></Route>
-          <Route path="/login" element={<UserLogin />}></Route>
+          {/* <Route path="/login" element={<UserLogin />}></Route> */}
           {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
           {/* Product */}
