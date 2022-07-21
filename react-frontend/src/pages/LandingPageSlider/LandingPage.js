@@ -4,6 +4,7 @@ import $ from "jquery";
 import TopSlider from "./TopSlider";
 import LandingPageSlider1 from "./LandingPageSlider1";
 import LandingPageSlider2 from "./LandingPageSlider2";
+import LandingPageCategories from "./LandingPageCategories";
 // import LandingPageSlider3 from "./LandingPageSlider3";
 
 class LandingPage extends Component {
@@ -51,12 +52,13 @@ class LandingPage extends Component {
     return (
       <div className="row">
         <TopSlider />
-        <div className="col-md-1"></div>
+        <div className="col-md-1" style={{ padding: "0px", margin: "0px" }}></div>
         <div className="col-md-10" style={{ padding: "0px", margin: "0px" }}>
           <LandingPageSlider1 products={products} />
           <LandingPageSlider2 products={products} />
+          <LandingPageCategories categories={categories} />
         </div>
-        <div className="col-md-1"></div>
+        <div className="col-md-1" style={{ padding: "0px", margin: "0px" }}></div>
       </div>
         
     );
