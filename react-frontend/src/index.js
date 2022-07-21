@@ -47,22 +47,16 @@ class HomePage extends Component {
   };
 
   async componentDidMount() {
-    const res1 = await axios.get("http://127.0.0.1:8000/api/selectallcategory");
+    const res1 = await axios.get("http://127.0.0.1:8000/api/selectcategoryroot");
     this.setState({ categories: res1.data });
 
     const res2 = await axios.get(
-      "http://127.0.0.1:8000/api/selectcategoryroot"
+      "http://127.0.0.1:8000/api/selectallproducts"
     );
-    this.setState({ categoriesRoot: res2.data });
-
-    const res3 = await axios.get("http://127.0.0.1:8000/api/selectallproducts");
-
-    this.setState({ products: res3.data });
+    this.setState({ products: res2.data });
 
     $("#data").data("categories", res1.data);
-    $("#data").data("categoriesroot", res2.data);
-    $("#data").data("cart", this.state.cart);
-    $("#data").data("products", res3.data);
+    $("#data").data("products", res2.data);
   }
 
   render() {

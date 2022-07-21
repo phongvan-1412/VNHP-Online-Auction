@@ -12,7 +12,7 @@ const LandingPageCategories = ({categories}) => {
                         <Link to="#">
                             <img src={require('../../img/LandingPage/Fine Art.jpg')} />            
                             <div className="landingpage-category-item-title">
-                                <Link to ="/" className="landingpage-category-item-name">{category.category_name.replace("-", " ")}</Link>
+                                <Link to ="/" className="landingpage-category-item-name">{category.category_name.replace(/-/g, " ")}</Link>
                             </div>
                         </Link> 
                 )})}
