@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Link } from "react-router-dom";
 import axios from "axios";
-import { FaFacebook, FaInstagramSquare, FaTwitter }  from "react-icons/fa"
+import { FaFacebook, FaInstagramSquare, FaTwitter } from "react-icons/fa";
 import Dropdown from "./DropdownNavBar/Dropdown";
 
 class Header extends Component {
@@ -10,7 +10,7 @@ class Header extends Component {
   };
 
   render() {
-    const {categories,categoriesRoot} = this.props;
+    const { categories, categoriesRoot } = this.props;
     return (
       <div
         className="header-menu"
@@ -22,20 +22,17 @@ class Header extends Component {
       >
         <header className="menu">
           <Link to="/" replace>
-              <img
-                src={require("../../img/Header/logo.jpg")}
-                className="logo"
-              />
+            <img src={require("../../img/Header/logo.jpg")} className="logo" />
           </Link>
 
-          <Link to="#" replace className="about">
+          <Link to="/about" replace className="about">
             About
           </Link>
           {/* <Link to="/blog" replace className="blog">
               Blog
             </Link> */}
 
-          <Link to="#" replace className="contact">
+          <Link to="/contactus" replace className="contact">
             Contact
           </Link>
 
@@ -58,6 +55,13 @@ class Header extends Component {
             </Link>
           </div>
 
+          <Link to="/addcategory" replace className="addcategory">
+            Add Category
+          </Link>
+
+          <Link to="/addproduct" replace className="addproduct">
+            Add Product
+          </Link>
           {/* <Link to="/shipping" replace className="shipping">
             Shipping
           </Link> */}
@@ -76,18 +80,15 @@ class Header extends Component {
               </div>
             )} */}
 
-           <a href="https://www.facebook.com/" className="meta-facebook">
-              <FaFacebook />
-            </a>
-            <a
-              href="https://www.instagram.com/?hl=en"
-              className="meta-instagram"
-            >
-              <FaInstagramSquare />
-            </a>
-            <a href="https://twitter.com/" className="meta-twitter">
-              <FaTwitter />
-            </a>
+          <a href="https://www.facebook.com/" className="meta-facebook">
+            <FaFacebook />
+          </a>
+          <a href="https://www.instagram.com/?hl=en" className="meta-instagram">
+            <FaInstagramSquare />
+          </a>
+          <a href="https://twitter.com/" className="meta-twitter">
+            <FaTwitter />
+          </a>
         </header>
       </div>
     );

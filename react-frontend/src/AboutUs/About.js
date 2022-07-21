@@ -3,8 +3,7 @@ import Aboutheader from "./Aboutheader";
 import Aboutfooter from "./Aboutfooter";
 import Aboutbody from "./Aboutbody";
 import Aboutinvestor from "./Aboutinvestor";
-import "../css/nicepage.css";
-import "../css/Home.css";
+
 
 class About extends Component{
     render(){
@@ -19,4 +18,4 @@ class About extends Component{
     }
 }
 
-export default About
+export default About;
