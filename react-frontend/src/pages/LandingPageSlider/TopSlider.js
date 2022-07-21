@@ -26,6 +26,8 @@ class TopSlider extends Component {
       slidesToScroll: 1,
       arrows: true,
       fade: true,
+      cssEase: 'ease',
+      easing: 'linear'
     };
     return (
       <div className="row page-content-panel landingpage-slider">

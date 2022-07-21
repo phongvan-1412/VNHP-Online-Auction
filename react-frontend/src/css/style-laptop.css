@@ -438,40 +438,48 @@
     border: none;
 
 }
-/* ----------PANEL-BOTTOM---------- */
-.panel-bottom{
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin-bottom: 50px;
+/* ----------LANGDINGPAGE CATEGORIES---------- */
+.landingpage-category-item-wrapper{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-self: center;
 }
-.row-panel-bottom-img-col2{
-    width: 100%;
-    height: 87%;
+.landingpage-category-item-wrapper>a{
+    position: relative;
+    margin-right: 190px;
+}
+.landingpage-category-item-wrapper img{
+    width: 300px;
+    height: auto;
     object-fit: center;
     object-position: center;
+    margin-bottom: 20px;
 }
-.bottom-col-2{
-    display: flex;
-    justify-content: center;
+.landingpage-category-headtext{
+    margin-bottom: 20px;
+    padding: 0px;
+    font-size: 24px;
 }
-.img2, .img3{
-    position: relative;
-    left: 14px;
-    padding: 0px 12px;
+.landingpage-category-item-name{
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 10px;
+    background-color: rgba(0,0,0,0.25);
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--textColor);
 }
-.img3{
-    top: 22px;
-}
+
 /* --------------------PAGES-------------------- */
 /* ---------------CONTACT--------------- */
 
 .map-container{
     position: relative !important;
     margin-top: 20px !important;
-}
-.send-massage{
-  
 }
 .send-massage .form{
     display: grid;
