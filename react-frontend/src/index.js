@@ -21,6 +21,7 @@ import LandingPage from "./pages/LandingPageSlider/LandingPage";
 import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
 import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
 import Footer from "./layout/Footer";
+import UserLogin from "./pages/User/UserLogin";
 
 import AddCategory from "./pages/Admin/AddCategory";
 import AddProduct from "./pages/Admin/AddProduct";
@@ -97,6 +98,7 @@ class HomePage extends Component {
           <Route path="/contactus" element={<Contact />}></Route>
           <Route path="/addcategory" element={<AddCategory />}></Route>
           <Route path="/addproduct" element={<AddProduct />}></Route>
+          <Route path="/login" element={<UserLogin />}></Route>
           {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
           {/* Product */}
