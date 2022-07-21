@@ -25,14 +25,14 @@ class Header extends Component {
             <img src={require("../../img/Header/logo.jpg")} className="logo" />
           </Link>
 
-          <Link to="#" replace className="about">
+          <Link to="/about" replace className="about">
             About
           </Link>
           {/* <Link to="/blog" replace className="blog">
               Blog
             </Link> */}
 
-          <Link to="#" replace className="contact">
+          <Link to="/contactus" replace className="contact">
             Contact
           </Link>
 
