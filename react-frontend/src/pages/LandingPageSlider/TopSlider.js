@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
+import { Link } from "react-router-dom";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 class TopSlider extends Component {
   constructor(props) {
@@ -19,39 +22,35 @@ class TopSlider extends Component {
       dots: false,
       infinite: true,
       autoplay: true,
-      autoplaySpeed: 3000,
+      autoplaySpeed :3000,
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: true,
-      fade: true,
-      cssEase: "ease",
-      easing: "linear",
+      fade: true
     };
     return (
-      <div className="row page-content-panel landingpage-slider">
-        <div>
-          <button type="button" className="slick-prev" onClick={this.previous}>
-            Previous
-          </button>
-        </div>
-        <div>
-          <Slider ref={(c) => (this.slider = c)} {...settings}>
-            <img
-              className="page-content row-panel-img"
-              src={require(`../../img/LandingPage/banner-ecom-1920x900-loyalty-app.jpg`)}
-            />
-            <img
-              className="page-content row-panel-img"
-              src={require(`../../img/LandingPage/EN-grab-agm-ecom-1920x900.jpg`)}
-            />
+      <div className="row page-content-panel landingpage-topslide-wrapper" style={{ padding: "0px", margin: "0px"}}>
+          <Slider ref={(c) => (this.slider = c)}{...settings} className="page-content landingpage-topslide-img-wrapper">
+              <img
+                className="page-content landingpage-topslide-img"
+                src={require('../../img/LandingPage/landingpage_topslide.jpg')}
+                />
+              <img
+                className="page-content landingpage-topslide-img"
+                src={require('../../img/LandingPage/landingpage_topslide1.jpg')}
+                />
           </Slider>
+
+          <div className="landingpage-topslide-message-wrapper">
+            <div className="landingpage-topslide-logo">
+              <Link to="/"><img src={require('../../img/Header/logo.jpg')}/></Link>
+            </div>
+            <h2 className="landingpage-topslide-quote" >
+              The VNHP Online Auction portal is your gate to the auction houses' arena
+            </h2>
+          </div>
+
         </div>
-        <div>
-          <button type="button" className="slick-next" onClick={this.next}>
-            Next
-          </button>
-        </div>
-      </div>
     );
   }
 }

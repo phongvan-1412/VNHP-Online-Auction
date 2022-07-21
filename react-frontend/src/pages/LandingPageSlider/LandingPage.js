@@ -50,8 +50,8 @@ class LandingPage extends Component {
 
     
     return (
-      <div className="row">
-        <TopSlider />
+      <div className="row" style={{ padding: "0px", margin: "0px" }}>
+        <TopSlider style={{ padding: "0px", margin: "0px" }}/>
         <div className="col-md-1" style={{ padding: "0px", margin: "0px" }}></div>
         <div className="col-md-10" style={{ padding: "0px", margin: "0px" }}>
           <LandingPageSlider1 products={products} />

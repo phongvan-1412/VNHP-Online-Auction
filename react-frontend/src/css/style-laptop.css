@@ -376,18 +376,49 @@
 }
 /* ---------------LANDINGPAGE--------------- */
 /* ----------TOP-SLIDE---------- */
-.page-content-panel{
-    margin-bottom: 30px;
-}
 .slick-prev::before, .slick-next::before{
     display: none;
 }
+.landingpage-topslide-wrapper{
+    position: relative;
+    align-self: center;
+}
+.landingpage-topslide-img{
+    width: 100%;
+    height: 300px;
+    object-fit: center;
+    object-position: center;
+    opacity: 0.8;
+    filter: blur(1px)
+}
+.landingpage-topslide-message-wrapper{
+    height: 50px;
+    position: absolute;
+    text-align: center;
+    z-index: 2;
+    bottom: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.landingpage-topslide-logo a img{
+    width: 85px;
+    height: 85px;
+    border-radius: 1000px;
+}
+.landingpage-topslide-quote{
+    padding: 10px;
+    background-color: rgba(0,0,0,0.25);
+    color: white;
+}
+
 /* ----------LANDINGPAGE-SLIDE---------- */
+.landingpage-slider{
+    margin-top: 100px;
+}
 .slick-list{
     z-index: 2;
     margin: 0 -5px;
 }
-
 .slide-title .top-content{
     display: flex;
     align-items: center;
