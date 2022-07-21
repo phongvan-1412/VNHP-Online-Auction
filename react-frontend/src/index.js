@@ -50,13 +50,7 @@ class HomePage extends Component {
     const res1 = await axios.get("http://127.0.0.1:8000/api/selectcategoryroot");
     this.setState({ categories: res1.data });
 
-    const res2 = await axios.get(
-      "http://127.0.0.1:8000/api/selectallproducts"
-    );
-    this.setState({ products: res2.data });
-
     $("#data").data("categories", res1.data);
-    $("#data").data("products", res2.data);
   }
 
   render() {
