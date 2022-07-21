@@ -61,9 +61,9 @@ class Header extends Component {
           <Link to="/addproduct" replace className="addproduct">
             Add Product
           </Link>
-          {/* <Link to="/shipping" replace className="shipping">
-            Shipping
-          </Link> */}
+          <Link to="/login" replace className="login">
+            Login
+          </Link>
           {/* <Link to="#" replace className="needhelp">
             Needhelp
           </Link> */}
