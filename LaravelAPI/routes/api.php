@@ -21,7 +21,7 @@ use App\Http\Controllers\CustomerApi;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/selectallcategory',[CategoryAPI::class, 'SelectCategories']);
+Route::get('/selectcategories',[CategoryAPI::class, 'SelectCategories']);
 
 Route::get('/selectallproducts',[ProductAPI::class, 'SelectProducts']);
 

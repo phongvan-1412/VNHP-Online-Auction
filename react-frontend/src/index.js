@@ -48,9 +48,9 @@ class HomePage extends Component {
   };
 
   async componentDidMount() {
-    const res1 = await axios.get("http://127.0.0.1:8000/api/selectallcategory");
+    const res1 = await axios.get("http://127.0.0.1:8000/api/selectcategories");
     this.setState({ categories: res1.data });
-
+    console.log(res1.data)
 
     const res2 = await axios.get("http://127.0.0.1:8000/api/selectallproducts");
     this.setState({ products: res2.data });
@@ -63,6 +63,7 @@ class HomePage extends Component {
     
     return (
       <Router>
+        <div id="data" hidden></div>
         <Header
           categories={this.state.categories}
         />
