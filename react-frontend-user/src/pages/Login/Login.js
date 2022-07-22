@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -30,37 +30,37 @@ class Login extends Component {
     return (
       <div className="row">
         <div className="col-2"></div>
-        <div className="col-4">
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1" className="text-uppercase">
+        <div className="col-4 login-form">
+          <div className="login-form-group">
+            <label htmlFor="exampleInputEmail1" className="">
               Email
             </label>
             <input type="text" className="form-control" name="email" />
           </div>
-          <div className="form-group">
-            <label htmlFor="exampleInputPassword1" className="text-uppercase">
+          <div className="login-form-group">
+            <label htmlFor="exampleInputPassword1" className="">
               Password
             </label>
             <input type="password" className="form-control" name="pwd" />
           </div>
 
-          <div className="row">
-            <div className="col-md-8">
-              {/* <p>
-                <Link to="/forgetpassword" replace>
+          <div className="row login-form-group">
+            <div className="col-md-8 link-group">
+              <p >
+                <Link to="/forgetpassword" className="login-link" replace>
                   Forgot password
                 </Link>
               </p>
               <br />
-              <p>
+              <p >
                 Don't have an account?{" "}
-                <Link to="/register" replace>
+                <Link to="/register"  className="login-link"replace>
                   Sign up.
                 </Link>
-              </p> */}
+              </p>
             </div>
             <div className="col-md-4 pt-1">
-              <button type="submit" className="btn btn-primary float-right ">
+              <button type="submit" className="btn btn-primary float-right">
                 Login
               </button>
             </div>

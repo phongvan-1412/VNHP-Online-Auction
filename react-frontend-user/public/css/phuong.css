@@ -1,0 +1,24 @@
+ /* login form */
+.login-form{
+    margin-top: 20px;
+}
+.login-form-group{
+    padding: 10px;
+}
+.link-group>p>.login-link{
+    color: blue;
+}
+ /* register form */
+ .form-register{
+    margin-top: 50px;
+ }
+.register-term>.term-link{
+    color: blue;
+}
+  /* forget password form */
+.forget-password-background{
+    background-image: url("../../src/img/Footer/image-9.jpg");
+}
+.forget-password-form{
+    padding: 10px;
+}

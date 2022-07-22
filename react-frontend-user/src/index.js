@@ -52,7 +52,7 @@ const HomePage = () => {
         <Route path="/contactus" element={<Contacts />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/forgetpassword" element={<Register />}></Route>
+        <Route path="/forgetpassword" element={<ForgetPassword />}></Route>
         {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
         {/* Product */}
