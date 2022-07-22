@@ -613,10 +613,10 @@
 }
 /* ---------------CONTACT--------------- */
 .embed-responsive{
-    position: relative;
-    margin-top: 20px;
-    text-align: center;
-    margin-bottom: 100px;
+    position: relative !important;
+    margin-top: 20px !important;
+    text-align: center !important;
+    margin-bottom: 100px !important;
 }
 .embed-responsive-item{
     width: 1000px;
@@ -638,12 +638,12 @@
 .contact-send-massage button{
     color: white;
     font-weight: bold;
-    padding: 10px 100px;
-    margin: 0 40%;
     border-radius: 3px;
     background-color: black;
     text-align: center;
-    margin-bottom: 50px;
+    padding: 10px 0px;
+    margin: 0px 320px ;
+
 }
 .form .message-info{
     display: grid;
@@ -677,6 +677,7 @@
     justify-content: center;
     text-align: center;
     margin-bottom: 100px;
+    margin-top: 100px;
 }
 .contact-content-wrapper .info .location, .contact-content-wrapper .info .callus{
     margin-right: 55px;

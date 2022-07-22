@@ -17,7 +17,7 @@ const Contact = () => {
         
                 <div className="contact-send-massage">
                     <div className="message">SEND US A MESSAGE</div>
-                    <form className="form">
+                    <div className="form">
                         <div className="message-info">
                             <div className="name">
                                 <span>Name</span>
@@ -36,8 +36,8 @@ const Contact = () => {
                             <span>Message</span>
                             <textarea name="" id="" cols="30" rows="10"></textarea>
                         </div>
-                    </form>
-                    <button type="submit">SUBMIT</button>
+                        <button type="submit">SUBMIT</button>
+                    </div>
                 </div>
 
                 <div className="info">
