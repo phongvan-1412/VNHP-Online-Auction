@@ -1,19 +1,23 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 
-import AboutPost from './AboutPost';
-import AboutFounder from './AboutFounder';
-import AboutInvestor from "./AboutInvestor";
+import AboutStory from "./AboutStory";
+import AboutFounder from "./AboutFounder";
+const About = () => {
+    return(
+        <div className="row" style={{margin: "0px", padding: "0px"}}>
+            <AboutStory />
+            <div className="about-img"><img src={require('../../img/About/about2.jpg')} alt="Our Store" /></div>
+            <AboutFounder />
 
-
-class About extends Component{
-    render(){
-        return(
-            <div className="u-body u-xl-mode" data-lang="en">
-                <AboutFounder/>
-                <AboutInvestor/>
+            <div className="about-register">
+                <div className="register-content">SPECIALS SIGN UP</div>
+                <input type="email" name="email" id="email" placeholder="Enter your email" />
+                <Link to="../register">SIGN-UP</Link>
             </div>
-        )
-    }
+        </div>
+        
+    )
 }
 
 export default About;

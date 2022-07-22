@@ -368,15 +368,124 @@
     grid-row-end: 3;
 }
 /* ---------------ABOUT--------------- */
-.about-content-wrapper{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
+.about-story{
+    margin-top: 100px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 50px 100px 50px;
+    width: 100%;
+    height: 300px;
+}
+.about-story>.content{
+    margin: 0 400px;
+}
+.title1{
+    color: red;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
+}
+.title2{
+    font-weight: bold;
+    font-size: 40px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
+.about-img>img{
+    width: 100%;
+    height: 400px;
+    object-position: center;
+    object-fit: cover;
+    margin-bottom: 100px;
+}
+.about-founders{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 0;
+    padding-bottom: 100px;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 250px;
+}
+.founders-info{
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    padding-left: 60px;
+}
+.info-content{
+    top: 50px;
+    width: 300px;
+    height: 300px;
+    border: 0.5px gray solid;
+    box-shadow: 0.5em;
+}
+.info-content>.name{
+    margin-top: 60px;
+}
+.info-content>img{
+    position: relative;
+    bottom: 250px;
+    object-fit: cover;
+    object-position: top;
+    width: 30%;
+    height: 30%;
+    border: 3px red solid;
+    border-radius: 1000px;
+}
+.name{
+    font-size: 20px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+}
+.name>a{
+    color: black;
+    text-decoration: none;
+}
+.name>a:hover{
+    color: red;
+}
+.position{
+    font-size: 10px;
+    font-weight: bold;
+}
+.about-register{
+    background-color: whitesmoke;
+    width: 100%;
+    height: 300px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 10px;
+    position: relative;
     align-items: center;
 }
-.about-headtext{
+.about-register>.register-content{
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: bold;
     text-align: right;
 }
+.about-register>input{
+    border-radius: 3px;
+    border: 1px gray solid;
+    padding-left: 15px;
+}
+.about-register>a{
+    text-align: center;
+    text-decoration: none;
+    width: 200px;
+    border: black;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+}
+.about-register>a:hover{
+    color: red;
+}
+
 /* ---------------LANDINGPAGE--------------- */
 /* ----------TOP-SLIDE---------- */
 .landingpage-topslide-wrapper{
@@ -396,7 +505,7 @@
     position: absolute;
     text-align: center;
     z-index: 2;
-    bottom: 30%;
+    bottom: 23%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
