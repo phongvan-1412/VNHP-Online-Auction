@@ -1113,7 +1113,7 @@
     height: 250px;
     position: absolute;
     bottom: 20%;
-    top: 60%;
+    top: 40%;
     left: 25%;
     padding: 0px 50px;
     background-color: #212529;
@@ -1278,6 +1278,9 @@
     .services-submenu{
         margin-left: -100px;
     }
+    .forget-password-form-wrapper{
+        top: 35%;
+    }
 }
 @media screen and (max-width: 950px){
     .menu .needhelp, .footer-container1-col3{
@@ -1299,7 +1302,7 @@
         margin-left: -200px;
     }
     .forget-password-form-wrapper{
-        top: 40%;
+        top: 28%;
     }
 }
 @media screen and (max-width: 850px){
@@ -1356,8 +1359,8 @@
         margin-left: 80px;
     }
     .forget-password-form-wrapper{
-        top: 30%;
-        left: 18%;
+        top: 23%;
+        left: 15%;
         width: 500px;
     }
 }

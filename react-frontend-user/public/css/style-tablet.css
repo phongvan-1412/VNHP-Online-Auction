@@ -1031,15 +1031,15 @@
         display: none;
     }
     .forget-password-form-wrapper{
-        top: 30%;
+        top: 22%;
         left: 10%;
         width: 550px;
     }
 }
 @media(max-width: 700px){
     .forget-password-form-wrapper{
-        top: 30%;
-        left: 8%;
+        top: 21%;
+        left: 10%;
         width: 500px;
     }
 }
@@ -1054,14 +1054,14 @@
         margin-left: 50px;
     }
     .forget-password-form-wrapper{
-        top: 25%;
+        top: 19%;
         left: 8%;
         width: 450px;
     }
 }  
 @media(max-width: 600px){
     .forget-password-form-wrapper{
-        top: 25%;
+        top: 18%;
         left: 8%;
         width: 350px;
         height: 200px;
