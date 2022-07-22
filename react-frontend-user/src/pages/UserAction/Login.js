@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
+import $ from "jquery";
 
 class Login extends Component {
   constructor(props) {
@@ -27,6 +28,52 @@ class Login extends Component {
       cssEase: "ease",
       easing: "linear",
     };
+    const validateEmail = (email) => {
+      return email.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+    };
+    const validate = () => {
+      const $result = $("#emailResult");
+      const email = $("#email").val();
+      $result.text("");
+
+      if (!email) {
+        $result.text("*Please enter your email");
+        $result.css("color", "red");
+      } else {
+        if (validateEmail(email)) {
+          $result.text(email + " is valid.");
+          $result.css("color", "green");
+        } else {
+          $result.text(email + " is not valid.");
+          $result.css("color", "red");
+        }
+      }
+    };
+
+    const validatePassword = (password) => {
+      if (password.length <= 6) return false;
+      return true;
+    };
+
+    const onEmailChange = () => {
+      validate();
+    };
+
+    const onPasswordChange = () => {
+      const $result = $("#passwordResult");
+      const password = $("#password").val();
+      $result.text("");
+
+      if (validatePassword(password)) {
+        $result.text("Password is valid.");
+        $result.css("color", "green");
+      } else {
+        $result.text("Password is not valid.");
+        $result.css("color", "red");
+      }
+    };
     return (
       <div className="row">
         <div className="col-2"></div>
@@ -35,26 +82,38 @@ class Login extends Component {
             <label htmlFor="exampleInputEmail1" className="">
               Email
             </label>
-            <input type="text" className="form-control" name="email" />
+            <input
+              type="text"
+              className="form-control"
+              id="email"
+              onBlur={onEmailChange}
+            />
+            <div id="emailResult"></div>
           </div>
           <div className="login-form-group">
             <label htmlFor="exampleInputPassword1" className="">
               Password
             </label>
-            <input type="password" className="form-control" name="pwd" />
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              onBlur={onPasswordChange}
+            />
+            <div id="passwordResult"></div>
           </div>
 
           <div className="row login-form-group">
             <div className="col-md-8 link-group">
-              <p >
+              <p>
                 <Link to="/forgetpassword" className="login-link" replace>
                   Forgot password
                 </Link>
               </p>
               <br />
-              <p >
+              <p>
                 Don't have an account?{" "}
-                <Link to="/register"  className="login-link"replace>
+                <Link to="/register" className="login-link" replace>
                   Sign up.
                 </Link>
               </p>

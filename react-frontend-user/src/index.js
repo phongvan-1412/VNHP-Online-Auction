@@ -3,7 +3,7 @@ import reportWebVitals from "./reportWebVitals";
 import ReactDOM from "react-dom/client";
 
 import { BrowserRouter , Router, Routes, Route } from "react-router-dom";
-import $ from "jquery";
+
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
