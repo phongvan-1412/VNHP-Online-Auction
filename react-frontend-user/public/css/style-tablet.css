@@ -1058,6 +1058,9 @@
         left: 8%;
         width: 450px;
     }
+    .about-founders{
+        margin-left: 140px;
+    }
 }  
 @media(max-width: 600px){
     .forget-password-form-wrapper{
@@ -1069,6 +1072,9 @@
     .forget-password-form-wrapper input{
         margin-bottom: 10px;
     }
+    .about-founders{
+        margin-left: 120px;
+    }
 } 
 @media(max-width: 500px){
     .menu .shopping{
@@ -1076,6 +1082,9 @@
     }
     .landingpage-slider .img1, .landingpage-slider .img4{
         margin-left: 40px;
+    }
+    .about-founders{
+        margin-left: 80px;
     }
     
 }

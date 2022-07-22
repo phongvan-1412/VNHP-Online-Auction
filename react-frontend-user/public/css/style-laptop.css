@@ -506,43 +506,37 @@
     width: 100%;
     height: 300px;
 }
-.about-story>.content{
-    margin: 0 400px;
+.about-story .content{
+    text-align: center;
 }
-.title1{
+.about-founders-wrapper .title1, .about-story .title1{
+    text-align: center;
     color: red;
     font-size: 18px;
     font-style: italic;
     font-weight: bold;
 }
-.title2{
+.about-founders-wrapper .title2, .about-story .title2{
+    text-align: center;
     font-weight: bold;
     font-size: 40px;
     letter-spacing: 2px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
-.about-img>img{
+.about-img img{
     width: 100%;
     height: 400px;
     object-position: center;
     object-fit: cover;
-    margin-bottom: 100px;
+    margin-bottom: 60px;
 }
 .about-founders{
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-top: 0;
-    padding-bottom: 100px;
-    width: 100%;
-    height: 300px;
-    margin-bottom: 250px;
+    margin-top: 50px;
+    margin-bottom: 100px;
 }
 .founders-info{
+    display: flex;
     text-align: center;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    padding-left: 60px;
 }
 .info-content{
     top: 50px;
@@ -551,12 +545,12 @@
     border: 0.5px gray solid;
     box-shadow: 0.5em;
 }
-.info-content>.name{
-    margin-top: 60px;
+.info-content .name{
+    margin-top: 100px;
 }
-.info-content>img{
+.info-content img{
     position: relative;
-    bottom: 250px;
+    bottom: 90%;
     object-fit: cover;
     object-position: top;
     width: 30%;
@@ -564,21 +558,24 @@
     border: 3px red solid;
     border-radius: 1000px;
 }
-.name{
+.info-content .name{
     font-size: 20px;
     font-weight: bolder;
     letter-spacing: 1px;
 }
-.name>a{
+.info-content .name a{
     color: black;
     text-decoration: none;
 }
-.name>a:hover{
+.info-content .name a:hover{
     color: red;
 }
-.position{
+.info-content .position{
     font-size: 10px;
     font-weight: bold;
+}
+.info-content .content{
+    padding: 0px 40px;
 }
 .about-register{
     background-color: whitesmoke;
@@ -590,18 +587,18 @@
     position: relative;
     align-items: center;
 }
-.about-register>.register-content{
+.about-register .register-content{
     font-size: 18px;
     letter-spacing: 2px;
     font-weight: bold;
     text-align: right;
 }
-.about-register>input{
+.about-register input{
     border-radius: 3px;
     border: 1px gray solid;
     padding-left: 15px;
 }
-.about-register>a{
+.about-register a{
     text-align: center;
     text-decoration: none;
     width: 200px;
@@ -611,7 +608,7 @@
     background-color: black;
     color: white;
 }
-.about-register>a:hover{
+.about-register a:hover{
     color: red;
 }
 /* ---------------CONTACT--------------- */
@@ -654,7 +651,7 @@
     grid-gap: 50px;
     width: 1000px;
 }
-.message-info>.name,.message-info>.email,.message-info>.phone{
+.message-info .name,.message-info .email,.message-info .phone{
     display: grid;
     grid-template-rows: repeat(2,25px);
 }
@@ -662,7 +659,7 @@
     font-size: 18px;
     font-weight: bold;
 }
-.name>input,.email>input,.phone>input{
+.name input, .email input, .phone input{
     width: 300px;
     font-size: 15px;
     padding: 5px 0px 5px 5px;
@@ -1218,6 +1215,10 @@
         font-size: 14px;
         font-weight: 500;
     }
+    .about-founders{
+        margin-left: 100px;
+        margin-right: -100px;
+    }
 }
 @media screen and (max-width: 1100px){
     .footer-container1-col1, .footer-container1-col2, .footer-container1-col3{
@@ -1250,6 +1251,10 @@
     }
     .product-name{
         width: 100px;
+    }
+    .about-founders{
+        margin-left: 60px;
+        margin-right: -60px;
     }
 }
 @media screen and (max-width: 1024px){
@@ -1304,6 +1309,10 @@
     .forget-password-form-wrapper{
         top: 28%;
     }
+    .about-founders{
+        margin-left: 40px;
+        margin-right: -40px;
+    }
 }
 @media screen and (max-width: 850px){
     .menu .contact{
@@ -1326,6 +1335,10 @@
     }
     .services-submenu{
         margin-left: -250px;
+    }
+    .about-founders{
+        margin-left: 20px;
+        margin-right: -20px;
     }
 }
 @media screen and (max-width: 768px){
@@ -1362,5 +1375,8 @@
         top: 23%;
         left: 15%;
         width: 500px;
+    }
+    .about-founders{
+        margin-left: 170px;
     }
 }

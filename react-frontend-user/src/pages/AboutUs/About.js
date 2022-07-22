@@ -7,7 +7,7 @@ const About = () => {
     return(
         <div className="row" style={{margin: "0px", padding: "0px"}}>
             <AboutStory />
-            <div className="about-img"><img src={require('../../img/About/about2.jpg')} alt="Our Store" /></div>
+            <div className="about-img" style={{margin: "0px", padding: "0px"}}><img src={require('../../img/About/about2.jpg')} alt="Our Store" /></div>
             <AboutFounder />
 
             <div className="about-register">
