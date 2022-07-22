@@ -12,21 +12,7 @@ class CategoryAPI extends Controller
     public function SelectCategories()
     {
         $tmp_categories = DB::select("select * from category");
-        $categories = self::AddCollection($tmp_categories);
         return $categories;
     }
 
-    public function AddCollection($arr)
-    {
-        $collection = collect();
-
-        foreach($arr as $category)
-        {
-            $newCategory = new Category();
-            $newCategory = $category;
-            $collection->add($newCategory);
-            }
-
-        return $collection;
-    }
 }

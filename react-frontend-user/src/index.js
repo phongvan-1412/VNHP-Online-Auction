@@ -17,8 +17,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import Header from "./layout/Header/Header";
-import About from "./AboutUs/About";
-import Contact from "./Contact/Contact";
+import About from "./pages/AboutUs/About";
+import Contact from "./Contact/Contacts";
 import LandingPage from "./pages/LandingPageSlider/LandingPage";
 import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
 import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
@@ -63,7 +63,7 @@ class HomePage extends Component {
     
     return (
       <Router>
-        <div id="data" hidden></div>
+        <div id="data" hidden>{res1}</div>
         <Header
           categories={this.state.categories}
         />

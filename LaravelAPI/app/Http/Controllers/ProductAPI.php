@@ -11,22 +11,31 @@ class ProductAPI extends Controller
 
     public function SelectProducts()
     {
-        $tmp_products = DB::select("exec sp_select_products");
-        $products = self::AddCollection($tmp_products);
+        $tmp_products = DB::select("select * from product");
         return $tmp_products;
     }
 
-    public function AddCollection($arr)
-    {
-        $collection = collect();
+    public function SelectProductsByCategory($id){
+        $tmp_products = DB::select("select * from product where category_id = $id");
+        return $tmp_products;
+    }
 
-        foreach($arr as $products)
-        {
-            $newProduct = new Product();
-            $newProduct = $newProduct;
-            $collection->add($newProduct);
-            }
+    public function SelectProductsByStartDate($start_date){
+        $tmp_products = DB::select("select * from product where product_start_aution_day = $start_date");
+        return $tmp_products;
+    }
 
-        return $collection;
+    public function SelectProductsByEndDate($end_date){
+        $tmp_products = DB::select("select * from product where product_end_aution_day = $end_date");
+        return $tmp_products;
+    }
+
+    public function SelectProductsTop15ByCountCustomerId(){
+        $tmp_products = DB::select
+        ("select top 15 * from product p join auction_price a on (
+            p.product_id = a.product_id) 
+            group by p.product_id
+            order by count(a.customer_id)");
+        return $tmp_products;
     }
 }

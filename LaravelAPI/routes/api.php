@@ -21,12 +21,22 @@ use App\Http\Controllers\CustomerApi;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//CATEGORIES
 Route::get('/selectcategories',[CategoryAPI::class, 'SelectCategories']);
 
+//PRODUCTS
 Route::get('/selectallproducts',[ProductAPI::class, 'SelectProducts']);
+Route::get('/selectproductsbycate', [ProductAPI::class, 'SelectProductsByCategory']);
+Route::get('/selectproductsbystartdate', [ProductAPI::class, 'SelectProductsByStartDate']);
+Route::get('/selectproductsbyenddate', [ProductAPI::class, 'SelectProductsByEndDate']);
+Route::get('/selectproductstop15', [ProductAPI::class, 'SelectProductsTop15ByCountCustomerId']);
 
+
+//BILL
 Route::post('/submitcart',[BillApi::class, 'InsertBill']);
 
+
+//LOGIN
 Route::get('/customerlogin',[CustomerApi::class, 'CustomerLoginInfo']);
 
 // Route::get('/selectactiveblog',[BlogApi::class, 'SelectActiveBlog']);

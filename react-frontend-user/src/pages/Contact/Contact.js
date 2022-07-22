@@ -1,6 +1,6 @@
 import React from "react";
 
-function Contacts(){
+function Contact(){
     return(
         <section className="u-align-center u-clearfix u-image u-section-3" id="carousel_b381" data-image-width="1200" data-image-height="925">
             <div className="u-clearfix u-sheet u-sheet-1">
@@ -38,4 +38,4 @@ function Contacts(){
     )
 }
 
-export default Contacts
+export default Contact;
