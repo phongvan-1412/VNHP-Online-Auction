@@ -120,7 +120,7 @@
     color: black;
 }
 
-/* ----------QUICK VIEW CART---------- */
+/* ----------QUICK VIEW CART----------
 .quick-view-cart{
     background: white;
     width: 500px;
@@ -176,7 +176,7 @@
     font-weight: bold;
     color: white;
     text-transform: uppercase;
-}
+} */
 
 /* ----------FOOTER---------- */
 .footer-container1{
@@ -1101,104 +1101,47 @@
     object-fit: cover;
     object-position: center;
 }
-/* ---------------CART--------------- */
-.cart-title{
-    margin-bottom: 50px;
-    font-size: 20px;
-    font-weight: 550;
-}
-.cart-table-title-wrapper{
-    margin: 0px 0px 20px 0px;
-    padding: 10px 5px;
-    border-bottom: var(--selectBorder);
-}
-.cart-table-title{
-    font-size: 15px;
-    font-weight: 550;
-}
-.product-item-wrapper{
-    margin: 20px 0px;
-    padding-bottom: 20px;
-    border-bottom: var(--selectBorder);
-}
-.cart-img-wrapper{
-    margin: 0px;
-    padding: 0px;
-}
-.cart-img{
-    width: 100%;
-    height: auto;
-    object-fit: center;
+/* ---------------USERACTION--------------- */
+/* -----Forget-password-form----- */
+.forget-password-background{
+    position: relative;
+    object-fit: cover;
     object-position: center;
-    border: var(--selectBorder)
+    opacity: 0.4;
 }
-.cart-product-name {
-    font-size: 13px;
-    font-weight: 530;
+.forget-password-form-wrapper{
+    height: 250px;
+    position: absolute;
+    bottom: 20%;
+    top: 60%;
+    left: 25%;
+    padding: 0px 50px;
+    background-color: #212529;
 }
-.cart-product-price, .cart-product-total{
-    font-size: 15px;
-    font-weight: bold;
+.forget-password-form-wrapper label{
+    margin: 30px 0px 15px 0px;
     text-align: center;
-}
-.input-text-qty{
-    padding: 3px 7px;
-}
-.cart-checkout-icons{
-    display: flex;
-    justify-content: space-evenly;
-}
-.meta-update{
-    color: var(--iconHover);
-}
-.cart-product-total{
-    margin-top: 10px;
-}
-.cart-summary-container{
-    margin: 0px;
-    padding: 0px;
-    background-color: whitesmoke;
-}
-.cart-summary-title{
-   background-color: black;
-   font-size: 13px;
-   color: var(--buttonColor);
-   font-weight: bold;
-   text-transform: uppercase;
-   margin: 0;
-   width: 100%;
-   border-bottom: 1px solid #e6e6e6;
-   padding: 20px 0 20px 20px;
-   float: left;
-}
-.cart-summary-content{
-   display: inline-block;
-   position: relative;
-   width: 100%;
-   padding-left: 8px;
-}
-.cart-summary-subtotal{
-    padding: 25px 0px;
-}
-.cart-product-subtotal-title{
-    font-size: 15px;
-}
-.cart-product-subtotal-price{
-    color: var(--productPriceColor);
+    font-size: 30px;
     font-weight: bold;
+    letter-spacing: 3px;
+    color: white;
 }
-.btn-proceed-checkout{
-    align-self: center;
+.forget-password-form-wrapper input{
+    margin-bottom: 50px;
 }
-.btn-checkout{
-    width: 200px;
-    border: none; 
-    background-color: #007a65; 
-    color: white; 
-    margin: 10px 0px 25px 0px;
-    padding: 7px;
-    font-size: 15px;
+.forget-password-form button{
+    margin: 6px 0px;
+    background-color: white;
+    color: #212529;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
+.forget-password-form button:hover{
+    background-color: red;
+    color: white;
+}
+
 /* ---------------RESPONSIVE--------------- */
 @media screen and (max-width: 2560px){
 }
@@ -1355,6 +1298,9 @@
     .services-submenu{
         margin-left: -200px;
     }
+    .forget-password-form-wrapper{
+        top: 40%;
+    }
 }
 @media screen and (max-width: 850px){
     .menu .contact{
@@ -1409,5 +1355,9 @@
     .landingpage-slider{
         margin-left: 80px;
     }
-    
+    .forget-password-form-wrapper{
+        top: 30%;
+        left: 18%;
+        width: 500px;
+    }
 }

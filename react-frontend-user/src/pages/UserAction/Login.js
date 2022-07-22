@@ -66,7 +66,7 @@ class Login extends Component {
             </div>
           </div>
         </div>
-        <div className="col-4">
+        <div className="col-md-4 pt-3">
           <Slider ref={(c) => (this.slider = c)} {...settings}>
             <img
               className="page-content row-panel-img"

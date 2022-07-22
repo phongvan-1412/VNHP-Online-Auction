@@ -1030,6 +1030,18 @@
     .menu .shipping, .menu .cart{
         display: none;
     }
+    .forget-password-form-wrapper{
+        top: 30%;
+        left: 10%;
+        width: 550px;
+    }
+}
+@media(max-width: 700px){
+    .forget-password-form-wrapper{
+        top: 30%;
+        left: 8%;
+        width: 500px;
+    }
 }
 @media(max-width: 650px){
     .product-per-page{
@@ -1041,7 +1053,23 @@
     .landingpage-slider .img1, .landingpage-slider .img4{
         margin-left: 50px;
     }
-}   
+    .forget-password-form-wrapper{
+        top: 25%;
+        left: 8%;
+        width: 450px;
+    }
+}  
+@media(max-width: 600px){
+    .forget-password-form-wrapper{
+        top: 25%;
+        left: 8%;
+        width: 350px;
+        height: 200px;
+    }
+    .forget-password-form-wrapper input{
+        margin-bottom: 10px;
+    }
+} 
 @media(max-width: 500px){
     .menu .shopping{
         display: none;
@@ -1049,5 +1077,5 @@
     .landingpage-slider .img1, .landingpage-slider .img4{
         margin-left: 40px;
     }
-
+    
 }
