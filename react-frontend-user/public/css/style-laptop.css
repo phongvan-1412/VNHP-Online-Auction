@@ -116,7 +116,9 @@
 .services-submenu .submenu-name:hover{
     color: var(--iconHover)
 }
-
+.submenu-name-wrapper>.category-name{
+    color: black;
+}
 
 /* ----------QUICK VIEW CART---------- */
 .quick-view-cart{
