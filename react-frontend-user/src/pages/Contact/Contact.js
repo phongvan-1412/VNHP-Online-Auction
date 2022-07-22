@@ -1,41 +1,78 @@
 import React from "react";
+import { BsClockFill } from 'react-icons/bs';
+import { MdLocationOn } from 'react-icons/md';
+import { FaPhoneAlt } from 'react-icons/fa';
 
-function Contact(){
+const Contact = () => {
     return(
-        <section className="u-align-center u-clearfix u-image u-section-3" id="carousel_b381" data-image-width="1200" data-image-height="925">
-            <div className="u-clearfix u-sheet u-sheet-1">
-                <div className="u-expanded-width-xs u-grey-light-2 u-map u-map-1">
-                    <div className="embed-responsive">
-                    <iframe className="embed-responsive-item" src="//maps.google.com/maps?output=embed&amp;q=Manhattan%2C%20New%20York&amp;z=10&amp;t=m" data-map="JTdCJTIyYWRkcmVzcyUyMiUzQSUyMk1hbmhhdHRhbiUyQyUyME5ldyUyMFlvcmslMjIlMkMlMjJ6b29tJTIyJTNBMTAlMkMlMjJ0eXBlSWQlMjIlM0ElMjJyb2FkJTIyJTJDJTIybGFuZyUyMiUzQW51bGwlMkMlMjJhcGlLZXklMjIlM0FudWxsJTJDJTIybWFya2VycyUyMiUzQSU1QiU1RCU3RA=="></iframe>
+        <div className="row contact-wrapper" style={{margin: "0px", padding: "0px"}}>
+            <div className="col-md-1" style={{margin: "0px", padding: "0px"}}></div>
+
+            <div className="col-md-10 contact-content-wrapper" style={{margin: "0px", padding: "0px"}}>
+                <div>
+                  <div className="contact-map embed-responsive">
+                    <iframe className="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31354.520974994266!2d106.65631927377615!3d10.787159215500305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529ed00409f09%3A0x11f7708a5c77d777!2zQXB0ZWNoIENvbXB1dGVyIEVkdWNhdGlvbiAtIEjhu4cgVGjhu5FuZyDEkMOgbyB04bqhbyBM4bqtcCBUcsOsbmggVmnDqm4gUXXhu5FjIHThur8gQXB0ZWNo!5e0!3m2!1svi!2s!4v1658497598453!5m2!1svi!2s"></iframe>
+                </div>
+        
+        
+                <div className="contact-send-massage">
+                    <div className="message">SEND US A MESSAGE</div>
+                    <form className="form">
+                        <div className="message-info">
+                            <div className="name">
+                                <span>Name</span>
+                                <input type="text" placeholder="Name" />
+                            </div>
+                            <div className="email">
+                                <span>Email</span>
+                                <input type="email" placeholder="Email" />
+                            </div>
+                            <div className="phone">
+                                <span>Phone</span>
+                                <input type="text" placeholder="Phone" />
+                            </div>
+                        </div>
+                        <div className="message-content">
+                            <span>Message</span>
+                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                        </div>
+                    </form>
+                    <button type="submit">SUBMIT</button>
+                </div>
+
+                <div className="info">
+
+                    <div className="location">
+                        <div className="location-content">
+                            <span className="title"><MdLocationOn /> LOCATION</span>
+                            <span className="content">7th floor-35/6 D5 Str-Binh Thanh Dist-HCM city</span>
+                        </div>
+                    </div>
+
+                    <div className="callus">
+                        <div className="callus-content">
+                            <span className="title"><FaPhoneAlt /> CALL US</span>
+                            <span className="content">(+84) 99 999 9999</span>
+                        </div>
+                    </div>
+
+                    <div className="opening">
+                        <div className="opening-content">
+                            <span className="title"><BsClockFill /> OPENING HOURS</span>
+                            <span className="content">
+                                Weekdays 07:30 - 22:30 <br />
+                                Weekends 07:00 - 22:30
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <h1 className="u-custom-font u-font-montserrat u-text u-text-body-alt-color u-text-1">SEND US A MESSAGE</h1>
-                <div className="u-expanded-width-xs u-form u-form-1">
-                    <div className="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" style={{padding: "0px"}}>
-                        <div className="u-form-group u-form-name">
-                            <label for="name-3b9a" className="u-form-control-hidden u-label" wfd-invisible="true">Name</label>
-                            <input type="text" placeholder="Enter your Name" id="name-3b9a" name="name" className="u-border-2 u-border-white u-input u-input-rectangle u-white u-input-1" required=""/>
-                        </div>
-                        <div className="u-form-email u-form-group">
-                            <label for="email-3b9a" className="u-form-control-hidden u-label" wfd-invisible="true">Email</label>
-                            <input type="email" placeholder="Enter a valid email address" id="email-3b9a" name="email" className="u-border-2 u-border-white u-input u-input-rectangle u-white u-input-2" required=""/>
-                        </div>
-                        <div className="u-form-group u-form-message">
-                            <label for="message-3b9a" className="u-form-control-hidden u-label" wfd-invisible="true">Message</label>
-                            <textarea placeholder="Enter your message" rows="4" cols="50" id="message-3b9a" name="message" className="u-border-2 u-border-white u-input u-input-rectangle u-white u-input-3" required=""></textarea>
-                        </div>
-                        <div className="u-align-left u-form-group u-form-submit">
-                            <a href="#" className="u-active-palette-1-dark-2 u-border-none u-btn u-btn-submit u-button-style u-hover-palette-1-dark-1 u-palette-1-dark-2 u-text-hover-black u-text-white u-btn-1">Submit</a>
-                            <input type="submit" value="submit" className="u-form-control-hidden" wfd-invisible="true"/>
-                        </div>
-                        <div className="u-form-send-message u-form-send-success" wfd-invisible="true"> Thank you! Your message has been sent. </div>
-                        <div className="u-form-send-error u-form-send-message" wfd-invisible="true"> Unable to send your message. Please fix errors then try again. </div>
-                        <input type="hidden" value="" name="recaptchaResponse" wfd-invisible="true"/>
-                    </div>
+  
                 </div>
             </div>
-        </section> 
-    )
+
+            <div className="col-md-1" style={{margin: "0px", padding: "0px"}}></div>
+        </div>
+    );
 }
 
 export default Contact;
