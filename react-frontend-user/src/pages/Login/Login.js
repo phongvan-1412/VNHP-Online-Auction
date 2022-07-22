@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
+import { BrowserRouter as Link } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -30,31 +31,36 @@ class Login extends Component {
       <div className="row">
         <div className="col-2"></div>
         <div className="col-4">
-          <div class="form-group">
-            <label for="exampleInputEmail1" class="text-uppercase">
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1" className="text-uppercase">
               Email
             </label>
-            <input type="text" class="form-control" name="email" />
+            <input type="text" className="form-control" name="email" />
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1" class="text-uppercase">
+          <div className="form-group">
+            <label htmlFor="exampleInputPassword1" className="text-uppercase">
               Password
             </label>
-            <input type="password" class="form-control" name="pwd" />
+            <input type="password" className="form-control" name="pwd" />
           </div>
 
-          <div class="row">
-            <div class="col-md-8">
-              <span>
-                <a href="{{route('forgetpass')}}">Forgot password</a>
-              </span>{" "}
+          <div className="row">
+            <div className="col-md-8">
+              {/* <p>
+                <Link to="/forgetpassword" replace>
+                  Forgot password
+                </Link>
+              </p>
               <br />
-              <span>
-                Don't have an account? <a href="/register">Sign up.</a>{" "}
-              </span>
+              <p>
+                Don't have an account?{" "}
+                <Link to="/register" replace>
+                  Sign up.
+                </Link>
+              </p> */}
             </div>
-            <div class="col-md-4 pt-1">
-              <button type="submit" class="btn btn-primary float-right ">
+            <div className="col-md-4 pt-1">
+              <button type="submit" className="btn btn-primary float-right ">
                 Login
               </button>
             </div>

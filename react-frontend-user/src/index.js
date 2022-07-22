@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import reportWebVitals from "./reportWebVitals";
 import ReactDOM from "react-dom/client";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter , Router, Routes, Route } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
 
@@ -18,7 +18,7 @@ import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
 import Footer from "./layout/Footer";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Login/Register";
-
+import ForgetPassword from "./pages/Login/ForgetPassword";
 // const headerBody1 = ReactDOM.createRoot(document.getElementById("headerBody1"));
 
 // function showTime() {
@@ -35,7 +35,7 @@ import Register from "./pages/Login/Register";
 
 const HomePage = () => {
   return (
-    <Router>
+    <div>
       <div id="data" hidden></div>
       <Header />
       <Routes>
@@ -52,7 +52,7 @@ const HomePage = () => {
         <Route path="/contactus" element={<Contacts />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-
+        <Route path="/forgetpassword" element={<Register />}></Route>
         {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
         {/* Product */}
@@ -74,7 +74,7 @@ const HomePage = () => {
         ))} */}
       </Routes>
       <Footer />
-    </Router>
+    </div>
   );
 };
 
@@ -82,9 +82,9 @@ export default HomePage;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.Fragment>
+  <BrowserRouter>
     <HomePage style={{ padding: "0px", margin: "0px" }} />
-  </React.Fragment>
+  </BrowserRouter>
 );
 
 reportWebVitals();

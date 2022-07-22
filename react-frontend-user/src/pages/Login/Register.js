@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Link } from "react-router-dom";
+import { BrowserRouter as  Link } from "react-router-dom";
 
 function Register() {
   return (
@@ -40,13 +40,13 @@ function Register() {
           By clicking Submit, I agree that the information I provide to David’s
           Bridal will be used to create an account and will be subject to the
           David’s Bridal
-          <Link to="#" style={{ textDecoration: "underline" }}>
+          {/* <Link to="#" style={{ textDecoration: "underline" }}>
             Terms and Conditions
           </Link>
           and
           <Link to="#" style={{ textDecoration: "underline" }}>
             Privacy Policy.
-          </Link>
+          </Link> */}
         </p>
 
         <div className="mt-5 mb-2">
