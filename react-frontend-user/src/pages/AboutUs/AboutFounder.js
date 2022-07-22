@@ -55,10 +55,12 @@ class AboutFounder extends Component {
                   <div className="position">{founder.founder_position}</div>
                   <br />
                   <div className="content">{founder.founder_info}</div>
-                  <img
-                    src={require(`../../img/About/${founder.founder_img}`)}
-                    alt="Founder Image"
-                  />
+                  <Link to="#">
+                    <img
+                      src={require(`../../img/About/${founder.founder_img}`)}
+                      alt="Founder Image"
+                    />
+                  </Link>
                 </div>
               </div>
             </div>
