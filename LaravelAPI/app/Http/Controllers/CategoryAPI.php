@@ -11,8 +11,7 @@ class CategoryAPI extends Controller
 {
     public function SelectCategories()
     {
-        $tmp_categories = DB::select("select * from category");
+        $categories = DB::select("select * from category");
         return $categories;
     }
-
 }
