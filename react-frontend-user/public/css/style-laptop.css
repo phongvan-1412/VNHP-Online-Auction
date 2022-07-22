@@ -497,26 +497,58 @@
 
 /* --------------------PAGES-------------------- */
 /* ---------------ABOUT--------------- */
-.about-story{
-    margin-top: 100px;
+.about-story-wrapper{
+    margin-top: 80px;
+    margin-bottom: 400px;
+    padding: 0px 100px;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 50px 100px 50px;
     width: 100%;
     height: 300px;
 }
-.about-story .content{
-    text-align: center;
+.about-story-wrapper .about-story-content1, .about-story-wrapper .about-story-content2{
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 1.5px;
+    font-weight: lighter;
 }
-.about-founders-wrapper .title1, .about-story .title1{
+.about-story-content1-paragraph1{
+    padding: 0px 10px;
+    text-align: left;
+    font-size: 20px;
+}
+.about-story-content1-paragraph2{
+    padding: 0px 10px;
+    text-align: right;
+    font-size: 30px;
+}
+.about-story-headline{
+    margin-top: 50px;
+    color: var(--iconHover);
+    font-weight: lighter;
+}
+.about-story-content2-paragraph1{
+    text-align: left;
+    padding: 0px 10px;
+
+}
+.about-story-content2-paragraph2{
+    padding: 0px 10px;
+}
+.about-story-content2-paragraph3{
+    text-align: right;
+    padding: 0px 10px;
+}
+
+.about-founders-wrapper .title1, .about-story-wrapper .title1{
     text-align: center;
-    color: red;
+    color: var(--iconHover);
     font-size: 18px;
     font-style: italic;
     font-weight: bold;
 }
-.about-founders-wrapper .title2, .about-story .title2{
+.about-founders-wrapper .title2, .about-story-wrapper .title2{
     text-align: center;
     font-weight: bold;
     font-size: 40px;
@@ -528,7 +560,7 @@
     height: 400px;
     object-position: center;
     object-fit: cover;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
 }
 .about-founders{
     margin-top: 50px;
@@ -1144,10 +1176,7 @@
 @media screen and (max-width: 2560px){
 }
 @media screen and (max-width: 1500px){
-    .img2, .img3{
-        padding: 0px 24px;
-        left: 18px;
-    }   
+
 }
 @media screen and (max-width: 1440px){
     .wrap-breadcrumb{
@@ -1165,33 +1194,27 @@
         font-size: 16px;
         font-weight: 500;
     }
-    .img2, .img3{
-        padding: 0px 24px;
-        left: 24px;
-    }  
+
 }
 @media screen and (max-width: 1400px){
-    .img2, .img3{
-        padding: 0px 24px;
-        left: 30px;
-    } 
+
 }
 @media screen and (max-width: 1350px){
-    .img2, .img3{
-        padding: 0px 36px;
-        left: 36px;
-    }  
+
 } 
 @media screen and (max-width: 1300px){
-    .img2, .img3{
-        padding: 0px 36px;
-        left: 42px;
-    } 
+    .about-story-content2{
+        font-size: 13px;
+    }
+    .about-story-content1-paragraph1{
+        font-size: 18px;
+    }
+    .about-story-content1-paragraph2{
+        font-size: 23px;
+    }
 }
 @media screen and (max-width: 1250px){
-    .img2, .img3{
-        display: none;
-    } 
+
 }
 @media screen and (max-width: 1200px){
     .menu .contact{
@@ -1219,6 +1242,15 @@
     .about-founders{
         margin-left: 100px;
         margin-right: -100px;
+    }
+    .about-story-content2{
+        font-size: 13px;
+    }
+    .about-story-content1-paragraph1{
+        font-size: 18px;
+    }
+    .about-story-content1-paragraph2{
+        font-size: 23px;
     }
 }
 @media screen and (max-width: 1100px){
@@ -1314,6 +1346,15 @@
         margin-left: 40px;
         margin-right: -40px;
     }
+    .about-story-content2{
+        font-size: 13px;
+    }
+    .about-story-content1-paragraph1{
+        font-size: 15px;
+    }
+    .about-story-content1-paragraph2{
+        font-size: 18px;
+    }
 }
 @media screen and (max-width: 850px){
     .menu .contact{
@@ -1337,10 +1378,20 @@
     .services-submenu{
         margin-left: -250px;
     }
+    .about-story-content2{
+        font-size: 10px;
+    }
+    .about-story-content1-paragraph1{
+        font-size: 15px;
+    }
+    .about-story-content1-paragraph2{
+        font-size: 20px;
+    }
     .about-founders{
         margin-left: 20px;
         margin-right: -20px;
     }
+    
 }
 @media screen and (max-width: 768px){
     .logo{
@@ -1376,6 +1427,15 @@
         top: 23%;
         left: 15%;
         width: 500px;
+    }
+    .about-story-content2{
+        font-size: 10px;
+    }
+    .about-story-content1-paragraph1{
+        font-size: 15px;
+    }
+    .about-story-content1-paragraph2{
+        font-size: 18px;
     }
     .about-founders{
         margin-left: 170px;

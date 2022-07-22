@@ -1034,12 +1034,53 @@
     .footer-container1-col1{
         display: none;
     }
+    .about-story-wrapper .title1{
+        font-size: 11px;
+    }
+    .about-story-wrapper .title2{
+        font-size: 13px;
+    }
+    .about-story-headline{
+        font-size: 10px;
+    }
+    .about-story-content2{
+        font-size: 7px;
+    }
+    .about-story-content1-paragraph1{
+        font-size: 7px;
+    }
+    .about-story-content1-paragraph2{
+        font-size: 7px;
+    }
+    .about-founders{
+        margin-left: 40px;
+    }
+    .about-register{
+        display: none;
+    }
 }
 @media(max-width: 375px){  
     .menu .about{
         display: none;
     } 
-
+    .about-story-wrapper .title1{
+        font-size: 10px;
+    }
+    .about-story-wrapper .title2{
+        font-size: 11px;
+    }
+    .about-story-content2{
+        font-size: 6px;
+    }
+    .about-story-content1-paragraph1{
+        font-size: 6px;
+    }
+    .about-story-content1-paragraph2{
+        font-size: 6px;
+    }
+    .about-founders{
+        margin-left: 20px;
+    }
 }
 @media(max-width: 320px){   
     .menu .shopping{
