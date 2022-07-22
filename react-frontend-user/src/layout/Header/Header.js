@@ -40,20 +40,20 @@ class Header extends Component {
           Needhelp
         </Link> */}
           <div
-            style={{ height: "50px", marginTop: "57px" }}
+            style={{ height: "100px", marginTop: "77px" }}
             className="product"
             onMouseEnter={() => this.setState({ drop: true })}
             onMouseLeave={() => this.setState({ drop: false })}
           >
             <Link to="#" replace>
               Product
-              <span>
+              <div>
                 {this.state.drop ? (
-                  <Dropdown
-                    categories={categories}
-                  />
-                ) : null}
-              </span>
+                    <Dropdown
+                      categories={categories}
+                    />
+                  ) : null}
+              </div>
             </Link>
           </div>
 
