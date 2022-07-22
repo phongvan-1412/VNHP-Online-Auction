@@ -61,7 +61,7 @@ class Header extends Component {
             Login
           </Link>
 
-          <Link to="/login" replace className="register">
+          <Link to="/register" replace className="register">
             Register
           </Link>
 

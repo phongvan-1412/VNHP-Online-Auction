@@ -16,7 +16,8 @@ import LandingPage from "./pages/LandingPageSlider/LandingPage";
 import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
 import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
 import Footer from "./layout/Footer";
-// import UserLogin from "./pages/User/UserLogin";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Login/Register";
 
 // const headerBody1 = ReactDOM.createRoot(document.getElementById("headerBody1"));
 
@@ -49,7 +50,9 @@ const HomePage = () => {
 
         <Route path="/about" element={<About />}></Route>
         <Route path="/contactus" element={<Contacts />}></Route>
-        {/* <Route path="/login" element={<UserLogin />}></Route> */}
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<Register />}></Route>
+
         {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
         {/* Product */}

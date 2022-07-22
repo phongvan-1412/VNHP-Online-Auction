@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 
-class UserLogin extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.next = this.next.bind(this);
@@ -81,4 +81,4 @@ class UserLogin extends Component {
     );
   }
 }
-export default UserLogin;
+export default Login;

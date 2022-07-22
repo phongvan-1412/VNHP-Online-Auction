@@ -25,7 +25,8 @@ const Dropdown = () => {
           const tmp = document.createElement("a");
           tmp.innerHTML = category.category_name;
           tmp.className = "col-3 category-name";
-          document.getElementById("categories-dropdown").appendChild(tmp);
+          document.getElementById("categories-dropdown").append(tmp);
+          return;
         });
       });
   }
