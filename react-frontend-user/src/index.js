@@ -32,74 +32,55 @@ import Footer from "./layout/Footer";
 
 // setInterval(showTime, 1000);
 
-class HomePage extends Component {
-  state = {
-    categories: [],
-    products: [],
-  };
+const HomePage = () => {
+  return (
+    <Router>
+      <div id="data" hidden></div>
+      <Header />
+      <Routes>
+        {/* Home  */}
+        <Route
+          path="/"
+          element={
+            <LandingPage
+            />
+          }
+        ></Route>
 
-  async componentDidMount() {
-    const res1 = await axios.get("http://127.0.0.1:8000/api/selectcategories");
-    this.setState({ categories: res1.data });
-    console.log(res1.data)
+        <Route path="/about" element={<About />}></Route>
+        <Route path="/contactus" element={<Contacts />}></Route>
+        {/* <Route path="/login" element={<UserLogin />}></Route> */}
+        {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
-    const res2 = await axios.get("http://127.0.0.1:8000/api/selectallproducts");
-    this.setState({ products: res2.data });
-
-    $("#data").data("categories", res1.data);
-    $("#data").data("products", res2.data);
-  }
-
-  render() {
-    
-    return (
-      <Router>
-        <div id="data" hidden></div>
-        <Header
-          categories={this.state.categories}
-        />
-        <Routes>
-          {/* Home  */}
+        {/* Product */}
+        {/* {this.state.categories.map((category) => (
           <Route
-            path="/"
-            element={<LandingPage products={this.state.products} categories={this.state.categories}/>}
+            key={category.category_id}
+            path={`/${category.category_name}`}
+            element={<ProductByCategory />}
           ></Route>
+        ))} */}
 
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/contactus" element={<Contacts />}></Route>
-          {/* <Route path="/login" element={<UserLogin />}></Route> */}
-          {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
-
-          {/* Product */}
-          {this.state.categories.map((category) => (
-            <Route
-              key={category.category_id}
-              path={`/${category.category_name}`}
-              element={<ProductByCategory />}
-            ></Route>
-          ))}
-
-          {/* Product Detail   */}
-          {this.state.products.map((product) => (
-            <Route
-              key={product.product_SKU}
-              path={`/${product.category_name}/${product.product_name}`}
-              element={<ProductDetail />}
-            ></Route>
-          ))}
-        </Routes>
-        <Footer />
-      </Router>
-    );
-  }
-}
+        {/* Product Detail   */}
+        {/* {this.state.products.map((product) => (
+          <Route
+            key={product.product_SKU}
+            path={`/${product.category_name}/${product.product_name}`}
+            element={<ProductDetail />}
+          ></Route>
+        ))} */}
+      </Routes>
+      <Footer />
+    </Router>
+  );
+};
 
 export default HomePage;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.Fragment>
-    <HomePage style={{ padding: "0px", margin: "0px" }}/>
+    <HomePage style={{ padding: "0px", margin: "0px" }} />
   </React.Fragment>
 );
 

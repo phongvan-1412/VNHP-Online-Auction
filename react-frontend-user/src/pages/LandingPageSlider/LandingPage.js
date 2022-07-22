@@ -15,18 +15,17 @@ class LandingPage extends Component {
     curStatus: false,
   };
   render() {
-    const { products, categories } = this.props;
 
     if (this.state.curStatus == false) {
       let tmpProduct = [];
 
-      products.forEach((product) => {
-        if (product.category_id == 15) {
-          console.log(product.category_id);
+      // products.forEach((product) => {
+      //   if (product.category_id == 15) {
+      //     console.log(product.category_id);
 
-          tmpProduct = [...tmpProduct, product];
-        }
-      });
+      //     tmpProduct = [...tmpProduct, product];
+      //   }
+      // });
       this.setState({
         currentProducts: tmpProduct,
       });
@@ -38,11 +37,11 @@ class LandingPage extends Component {
 
       this.setState({ currentProducts: [] });
 
-      products.forEach((product) => {
-        if (product.category_id == $("#data").data("categoryid")) {
-          tmpProduct = [...tmpProduct, product];
-        }
-      });
+      // products.forEach((product) => {
+      //   if (product.category_id == $("#data").data("categoryid")) {
+      //     tmpProduct = [...tmpProduct, product];
+      //   }
+      // });
       this.setState({
         currentProducts: tmpProduct,
       });
@@ -54,9 +53,9 @@ class LandingPage extends Component {
         <TopSlider style={{ padding: "0px", margin: "0px" }}/>
         <div className="col-md-1" style={{ padding: "0px", margin: "0px" }}></div>
         <div className="col-md-10" style={{ padding: "0px", margin: "0px" }}>
-          <LandingPageSlider1 products={products} />
-          <LandingPageSlider2 products={products} />
-          <LandingPageCategories categories={categories} />
+          <LandingPageSlider1 products={this.state.upComingProducts} />
+          <LandingPageSlider2 products={this.state.upComingProducts} />
+          <LandingPageCategories categories={this.state.upComingProducts} />
         </div>
         <div className="col-md-1" style={{ padding: "0px", margin: "0px" }}></div>
       </div>
