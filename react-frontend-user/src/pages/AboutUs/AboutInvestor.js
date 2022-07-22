@@ -118,7 +118,7 @@ class Aboutinvestor extends Component{
                                         Id={investor.Id}
                                         Width={investor.Width}
                                         Height={investor.Height}
-                                        Source={require(`../img/About/${investor.Source}`)}
+                                        Source={require(`../../img/About/${investor.Source}`)}
                                     />
                                 )
                             })}

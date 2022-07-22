@@ -6,27 +6,18 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./css/style-mobile.css";
-import "./css/style-tablet.css";
-import "./css/style-laptop.css";
-import "./css/nicepage.css";
-import "./css/home.css";
-import "./css/admin.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import Header from "./layout/Header/Header";
 import About from "./pages/AboutUs/About";
-import Contact from "./Contact/Contacts";
+import Contacts from "./pages/Contact/Contacts";
 import LandingPage from "./pages/LandingPageSlider/LandingPage";
 import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
 import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
 import Footer from "./layout/Footer";
 // import UserLogin from "./pages/User/UserLogin";
 
-import AddCategory from "./pages/Admin/AddCategory";
-import AddProduct from "./pages/Admin/AddProduct";
 // const headerBody1 = ReactDOM.createRoot(document.getElementById("headerBody1"));
 
 // function showTime() {
@@ -63,7 +54,7 @@ class HomePage extends Component {
     
     return (
       <Router>
-        <div id="data" hidden>{res1}</div>
+        <div id="data" hidden></div>
         <Header
           categories={this.state.categories}
         />
@@ -75,9 +66,7 @@ class HomePage extends Component {
           ></Route>
 
           <Route path="/about" element={<About />}></Route>
-          <Route path="/contactus" element={<Contact />}></Route>
-          <Route path="/addcategory" element={<AddCategory />}></Route>
-          <Route path="/addproduct" element={<AddProduct />}></Route>
+          <Route path="/contactus" element={<Contacts />}></Route>
           {/* <Route path="/login" element={<UserLogin />}></Route> */}
           {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 

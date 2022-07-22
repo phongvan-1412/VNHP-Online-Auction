@@ -36,6 +36,9 @@ class Header extends Component {
             Contact
           </Link>
 
+          {/* <Link to="#" replace className="needhelp">
+          Needhelp
+        </Link> */}
           <div
             style={{ height: "50px", marginTop: "57px" }}
             className="product"
@@ -54,19 +57,13 @@ class Header extends Component {
             </Link>
           </div>
 
-          <Link to="/addcategory" replace className="addcategory">
-            Add Category
-          </Link>
-
-          <Link to="/addproduct" replace className="addproduct">
-            Add Product
-          </Link>
           <Link to="/login" replace className="login">
             Login
           </Link>
-          {/* <Link to="#" replace className="needhelp">
-            Needhelp
-          </Link> */}
+
+          <Link to="/login" replace className="register">
+            Register
+          </Link>
 
           {/* {isCustomerLogin ? (
               <Link to="/customer" replace className="customer">
