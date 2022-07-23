@@ -1042,6 +1042,24 @@
         left: 10%;
         width: 500px;
     }
+    .about-story-wrapper .title2{
+        font-size: 15px;
+    }
+    .about-story-wrapper .title2{
+        font-size: 28px;
+    }
+    .about-story-headline{
+        font-size: 13px;
+    }
+    .about-story-content2{
+        font-size: 10px;
+    }
+    .about-story-content1-paragraph1{
+        font-size: 12px;
+    }
+    .about-story-content1-paragraph2{
+        font-size: 12px;
+    }
 }
 @media(max-width: 650px){
     .product-per-page{
@@ -1058,6 +1076,9 @@
         left: 8%;
         width: 450px;
     }
+    .about-founders{
+        margin-left: 140px;
+    }
 }  
 @media(max-width: 600px){
     .forget-password-form-wrapper{
@@ -1069,6 +1090,18 @@
     .forget-password-form-wrapper input{
         margin-bottom: 10px;
     }
+    .about-founders{
+        margin-left: 120px;
+    }
+    .about-story-content2{
+        font-size: 10px;
+    }
+    .about-story-content1-paragraph1{
+        font-size: 10px;
+    }
+    .about-story-content1-paragraph2{
+        font-size: 10px;
+    }
 } 
 @media(max-width: 500px){
     .menu .shopping{
@@ -1076,6 +1109,18 @@
     }
     .landingpage-slider .img1, .landingpage-slider .img4{
         margin-left: 40px;
+    }
+    .about-story-content2{
+        font-size: 8.5px;
+    }
+    .about-story-content1-paragraph1{
+        font-size: 8.5px;
+    }
+    .about-story-content1-paragraph2{
+        font-size: 8.5px;
+    }
+    .about-founders{
+        margin-left: 80px;
     }
     
 }

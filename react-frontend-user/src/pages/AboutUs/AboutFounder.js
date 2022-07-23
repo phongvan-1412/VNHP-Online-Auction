@@ -37,31 +37,37 @@ class AboutFounder extends Component {
 
   render() {
     return (
-      <div className="about-founders">
-        <div className="title1">Meet Our</div>
+      <div className="row about-founders-wrapper" style={{margin: "0px", padding:"0px"}}>
+        <div className="title1" style={{margin: "0px", padding:"0px"}}>Meet Our</div>
 
-        <div className="title2">FOUNDERS</div>
+        <div className="title2" style={{margin: "0px", padding:"0px"}}>FOUNDERS</div>
 
         <br />
         {this.state.founder.map((founder) => {
           return (
-              <div className="founders-info">
-                <div className="info-content">
+            <div className="col-xl-3 col-md-6 col-xs-1 about-founders" >
+              <div className="row founders-info" style={{margin: "0px", padding:"0px"}}>
+                <div className="col-md-1" style={{margin: "0px", padding:"0px"}}></div>
+                <div className="info-content" style={{margin: "0px", padding:"0px"}}>
                   <div className="name">
                     <Link to="">{founder.founder_name}</Link>
                   </div>
                   <div className="position">{founder.founder_position}</div>
                   <br />
                   <div className="content">{founder.founder_info}</div>
-                  <img
-                    src={require(`../../img/About/${founder.founder_img}`)}
-                    alt="Founder Image"
-                  />
+                  <Link to="#">
+                    <img
+                      src={require(`../../img/About/${founder.founder_img}`)}
+                      alt="Founder Image"
+                    />
+                  </Link>
                 </div>
               </div>
+            </div>
           );
         })}
       </div>
+      
     );
   }
 }

@@ -459,9 +459,6 @@
     position: relative !important;
     margin-top: 20px !important;
 }
-.send-massage{
-  
-}
 .send-massage .form{
     display: grid;
     grid-template-rows: 50px 300px 40px;
@@ -1034,17 +1031,106 @@
     .footer-container1-col1{
         display: none;
     }
+    .about-story-wrapper .title1{
+        font-size: 11px;
+    }
+    .about-story-wrapper .title2{
+        font-size: 13px;
+    }
+    .about-story-headline{
+        font-size: 10px;
+    }
+    .about-story-content2{
+        font-size: 7px;
+    }
+    .about-story-content1-paragraph1{
+        font-size: 7px;
+    }
+    .about-story-content1-paragraph2{
+        font-size: 7px;
+    }
+    .about-founders{
+        margin-left: 40px;
+    }
+    .about-register{
+        display: none;
+    }
+    .forget-password-wrapper .card{
+        width: 300px;
+        height: 180px;
+    }
+    .forget-password-form label{
+        font-size: 20px;
+    }
+    .forget-password-form input{
+        padding: 5px auto;
+    }
+    .forget-password-form button{
+        font-size: 10px;
+        padding: 5px 10px;
+    }
 }
 @media(max-width: 375px){  
     .menu .about{
         display: none;
     } 
-
+    .about-story-wrapper .title1{
+        font-size: 10px;
+    }
+    .about-story-wrapper .title2{
+        font-size: 11px;
+    }
+    .about-story-content2{
+        font-size: 6px;
+    }
+    .about-story-content1-paragraph1{
+        font-size: 6px;
+    }
+    .about-story-content1-paragraph2{
+        font-size: 6px;
+    }
+    .about-founders{
+        margin-left: 20px;
+    }
+    .forget-password-wrapper .card{
+        margin-left: 30px;
+        width: 250px;
+        height: 150px;
+    }
+    .forget-password-form label{
+        font-size: 15px;
+        margin-top: 20px;
+    }
+    .forget-password-form input{
+        padding: 5px auto;
+        font-size: 10px;
+    }
+    .forget-password-form button{
+        font-size: 8px;
+        padding: 5px 10px;
+    }
 }
 @media(max-width: 320px){   
     .menu .shopping{
         display: none;
     }      
+    .forget-password-wrapper .card{
+        margin-left: 25px;
+        width: 200px;
+        height: 120px;
+    }
+    .forget-password-form label{
+        font-size: 13px;
+        margin-top: 10px;
+    }
+    .forget-password-form input{
+        padding: 5px auto;
+        font-size: 8px;
+    }
+    .forget-password-form button{
+        font-size: 8px;
+        padding: 5px 10px;
+    }
 }
 @media(max-width: 280px){   
     .menu .register, .menu .login{
