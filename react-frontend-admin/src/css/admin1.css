@@ -1,0 +1,10 @@
+.collapse-item.admin_menu{
+    cursor: pointer;
+}
+.category_status{
+    cursor: pointer;
+}
+.edit_category{
+    cursor: pointer;
+    color: black;
+}
