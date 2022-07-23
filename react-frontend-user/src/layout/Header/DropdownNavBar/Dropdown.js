@@ -7,7 +7,7 @@ const Dropdown = () => {
     $("#data").data("productbycate", e.target.id);
   }
   const tmp = (
-    <ul className="services-submenu" style={{ position: "absolute" }}>
+    <ul >
       <div className="container">
         <div className="row submenu-name-wrapper" id="categories-dropdown" >
           
@@ -26,7 +26,6 @@ const Dropdown = () => {
           tmp.innerHTML = category.category_name;
           tmp.className = "col-3 category-name";
           document.getElementById("categories-dropdown").append(tmp);
-          return;
         });
       });
   }

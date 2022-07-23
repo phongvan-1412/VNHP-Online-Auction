@@ -1,22 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Link } from "react-router-dom";
-import axios from "axios";
 import { FaFacebook, FaInstagramSquare, FaTwitter } from "react-icons/fa";
 import Dropdown from "./DropdownNavBar/Dropdown";
 
-class Header extends Component {
-  state = {
-    drop: false,
-  };
-
-  render() {
-    const { categories} = this.props;
+const Header = () => {
     return (
       <div
         className="header-menu"
         style={{
           height: "100px",
-          display: "flex",
           justifyContent: "space-evenly",
         }}
       >
@@ -41,18 +33,13 @@ class Header extends Component {
         </Link> */}
           <div
             style={{ height: "100px", marginTop: "77px" }}
-            className="product"
-            onMouseEnter={() => this.setState({ drop: true })}
-            onMouseLeave={() => this.setState({ drop: false })}
+            className="product " 
           >
-            <Link to="#" replace>
+            
+            <Link to="#" id="menu-dropdown" replace>
               Product
-              <div>
-                {this.state.drop ? (
-                    <Dropdown
-                      categories={categories}
-                    />
-                  ) : null}
+              <div className="services-submenu" style={{ position: "absolute" }}>
+                <Dropdown />
               </div>
             </Link>
           </div>
@@ -89,5 +76,4 @@ class Header extends Component {
       </div>
     );
   }
-}
 export default Header;
