@@ -7,15 +7,22 @@ const Header = () => {
   const buttonLogOutClick = () => {
     localStorage.removeItem("customer_info");
     window.location.href = "http://localhost:3000/";
-  }
+  };
 
   let checkUser = false;
+  let userName = "";
   const isUserLogin = () => {
-    const tmp = JSON.parse(localStorage.getItem("customer_info"));
-    if(tmp != null) checkUser = true;
+    let tmp = {};
+    JSON.parse(localStorage.getItem("customer_info")).map((user) => {
+      tmp = user;
+    });
+    if (tmp != null) {
+      checkUser = true;
+      userName = tmp.customer_name;
+    }
   };
   isUserLogin();
-  
+
   return (
     <div
       className="header-menu"
@@ -56,9 +63,15 @@ const Header = () => {
         </div>
 
         {checkUser ? (
-          <Link to="/userinfo" replace className="userinfo" onClick={buttonLogOutClick}>
-            Log Out
-          </Link>
+          <div>
+            <Link to="/userprofile" replace className="userprofile">
+              {userName}
+            </Link>
+
+            <Link to="/" replace onClick={buttonLogOutClick}>
+              Log Out
+            </Link>
+          </div>
         ) : (
           <div>
             <Link to="/login" replace className="login">

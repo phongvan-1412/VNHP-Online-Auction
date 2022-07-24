@@ -18,7 +18,7 @@ import Footer from "./layout/Footer";
 import Login from "./pages/UserAction/Login";
 import Register from "./pages/UserAction/Register";
 import ForgetPassword from "./pages/UserAction/ForgetPassword";
-import UserInfo from "./pages/UserAction/UserInfo";
+import UserProfile from "./pages/UserAction/UserProfile";
 // const headerBody1 = ReactDOM.createRoot(document.getElementById("headerBody1"));
 
 // function showTime() {
@@ -52,7 +52,7 @@ const HomePage = () => {
         <Route path="/contactus" element={<Contact />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/userlogin" element={<UserInfo />}></Route>
+        <Route path="/userprofile" element={<UserProfile />}></Route>
         <Route path="/forgetpassword" element={<ForgetPassword style={{backgroundImage: "url(../../img/About/about2.jpg)"}}/>}></Route>
         {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
