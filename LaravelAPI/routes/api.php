@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductAPI;
 use App\Http\Controllers\BillApi;
 use App\Http\Controllers\CustomerApi;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -43,3 +44,7 @@ Route::post('/customerlogin',[CustomerApi::class, 'CustomerLogin']);
 
 // Route::get('/selectactiveblog',[BlogApi::class, 'SelectActiveBlog']);
 
+// ---------------------- ADMIN -------------------------//
+
+Route::get('/selectbill',[BillApi::class, 'SelectBill']);
+Route::post('/insertbill',[BillApi::class, 'InsertBill']);
