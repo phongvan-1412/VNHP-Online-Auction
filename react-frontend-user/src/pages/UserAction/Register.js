@@ -51,32 +51,6 @@ function Register() {
     );
   };
 
-  const onEmailBlur = () => {
-    const $result = $("#emailResult");
-    const email = $("#email").val();
-    $result.text("");
-    isEmailExists(email);
-
-    if (!email) {
-      $result.text("*Please enter your email");
-      $result.css("color", "red");
-    } else {
-      if (isValidEmail(email)) {
-        if (checkEmailExists > 0) {
-          $result.text(email + " already exists.");
-          $result.css("color", "red");
-        } else {
-          $result.text(email + " is valid.");
-          $result.css("color", "green");
-          checkValidEmail = true;
-        }
-      } else {
-        $result.text(email + " is not valid.");
-        $result.css("color", "red");
-      }
-    }
-    buttonRegisterSetter();
-  };
 
   const isValidPassword = (password) => {
     var validPassword = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;

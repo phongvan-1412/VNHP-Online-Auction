@@ -39,7 +39,7 @@ Route::post('/submitcart',[BillApi::class, 'InsertBill']);
 //CUSTOMER
 Route::post('/customerregister',[CustomerApi::class, 'CustomerRegister']);
 Route::post('/isemailexists',[CustomerApi::class, 'IsEmailExists']);
-Route::get('/customerlogin',[CustomerApi::class, 'CustomerLogin']);
+Route::post('/customerlogin',[CustomerApi::class, 'CustomerLogin']);
 
 // Route::get('/selectactiveblog',[BlogApi::class, 'SelectActiveBlog']);
 

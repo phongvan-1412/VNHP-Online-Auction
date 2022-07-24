@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import $ from "jquery";
+import axios from "axios";
 
 class Login extends Component {
   constructor(props) {
@@ -28,52 +29,50 @@ class Login extends Component {
       cssEase: "ease",
       easing: "linear",
     };
-    const validateEmail = (email) => {
-      return email.match(
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-    };
-    const validate = () => {
+
+    let checkValidEmail = 0;
+    const validateEmail = () => {
       const $result = $("#emailResult");
-      const email = $("#email").val();
+      const customer_email = $("#email").val();
+      const checkEmail = { customer_email };
       $result.text("");
 
-      if (!email) {
-        $result.text("*Please enter your email");
-        $result.css("color", "red");
+      axios
+        .post(`http://127.0.0.1:8000/api/isemailexists`, checkEmail)
+        .then(function (response) {
+          if (response.data > 0) {
+            $result.text(customer_email + " is valid.");
+            $result.css("color", "green");
+          } else {
+            $result.text(customer_email + " is not valid email.");
+            $result.css("color", "red");
+          }
+
+          checkValidEmail = response.data;
+          buttonLoginSetter();
+        });
+    };
+
+    const buttonLoginSetter = () => {
+      if (checkValidEmail) {
+        $("#btn-login").prop("disabled", false);
       } else {
-        if (validateEmail(email)) {
-          $result.text(email + " is valid.");
-          $result.css("color", "green");
-        } else {
-          $result.text(email + " is not valid.");
-          $result.css("color", "red");
-        }
+        $("#btn-login").prop("disabled", true);
       }
     };
 
-    const validatePassword = (password) => {
-      if (password.length <= 6) return false;
-      return true;
+    const buttonLoginOnClick = () => {
+      const customer_email = $("#email").val();
+      const customer_pwd = $("#password").val();
+      const customer = { customer_email, customer_pwd };
+
+      axios
+        .post(`http://127.0.0.1:8000/api/customerlogin`, customer)
+        .then((response) => {
+          console.log(response.data);
+        });
     };
 
-    const onEmailChange = () => {
-      validate();
-    };
-
-    const onPasswordChange = () => {
-      const $result = $("#passwordResult");
-      const password = $("#password").val();
-      $result.text("");
-
-      if (validatePassword(password)) {
-        $result.text("Password is valid.");
-        $result.css("color", "green");
-      } else {
-        $result.text("Password is not valid.");
-        $result.css("color", "red");
-      }
-    };
     return (
       <div className="row">
         <div className="col-2"></div>
@@ -86,7 +85,7 @@ class Login extends Component {
               type="text"
               className="form-control"
               id="email"
-              onBlur={onEmailChange}
+              onBlur={validateEmail}
             />
             <div id="emailResult"></div>
           </div>
@@ -94,13 +93,7 @@ class Login extends Component {
             <label htmlFor="exampleInputPassword1" className="">
               Password
             </label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              onBlur={onPasswordChange}
-            />
-            <div id="passwordResult"></div>
+            <input type="password" className="form-control" id="password" />
           </div>
 
           <div className="row login-form-group">
@@ -119,7 +112,12 @@ class Login extends Component {
               </p>
             </div>
             <div className="col-md-4 pt-1">
-              <button type="submit" className="btn btn-primary float-right">
+              <button
+                type="submit"
+                className="btn btn-primary float-right"
+                id="btn-login"
+                onClick={buttonLoginOnClick}
+              >
                 Login
               </button>
             </div>

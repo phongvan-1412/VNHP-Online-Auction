@@ -5,26 +5,41 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\DB;
+ use App\Models\Customer;
 class CustomerApi extends Controller
 {
-    public function CustomerLoginInfo()
+    public function CustomerLogin(Request $request)
     {
-        // $data = [
-        //     'customer_id'    => Session::get('customer_id'),
-        //     'customer_name'  => Session::get('customer_name'),
-        //     'customer_email' => Session::get('customer_email'),
-        //     'customer_pwd'   => Session::get('customer_pwd'),
-        //     'customer_contact' => Session::get('customer_contact'),
-        //     'customer_dob'   => Session::get('customer_dob'),
-        //     'customer_img_name' => Session::get('customer_img_name'),
-        //     'customer_address' => Session::get('customer_address'),
-        //     'status' => Session::get('status'),
-        //     'token' => Session::get('token'),
-        // ];
-
-        $customer_id =  Session::get('customer_id');
-        $user = DB::table('customer_account')->where('customer_id',$customer_id)->get();
-
+        $user = Customer::select()->where('customer_email', $request->customer_email)->get();
+        
         return $user;
+    }
+
+    public function CustomerRegister(Request $request)
+    {
+        $newCustomer = new Customer();
+        $newCustomer->customer_name =  $request->customer_name;
+        $newCustomer->customer_email = $request->customer_email;
+        $newCustomer->customer_pwd = md5($request->customer_pwd);
+        $newCustomer->customer_contact = $request->customer_contact;
+
+        $isExist = Customer::select()->where('customer_email',  $newCustomer->customer_email)->exists();
+
+        if(!$isExist)
+        {
+            $newCustomer->save();
+            return 1;
+        }
+       
+        return 0;
+    }
+
+    public function IsEmailExists(Request $request)
+    {
+        $isExist = Customer::where('customer_email', $request->customer_email)->exists();
+       
+        if($isExist)
+            return 1;
+        return 0;
     }
 }
