@@ -7,6 +7,8 @@ import DashBoard from "../components/Dashboard/DashBoard";
 import Bill from '../components/Bill/Bill'
 import "../css/admin1.css"
 import "../css/sb-admin-2.min.css"
+
+
 export const Layout = () => {
   return (
     <div id="wrapper">
