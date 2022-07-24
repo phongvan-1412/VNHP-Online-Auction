@@ -30,7 +30,7 @@ class TopSlider extends Component {
     };
     return (
       <div className="row page-content-panel landingpage-topslide-wrapper" style={{ padding: "0px", margin: "0px"}}>
-          <Slider ref={(c) => (this.slider = c)}{...settings} className="page-content landingpage-topslide-img-wrapper">
+          <Slider ref={(c) => (this.slider = c)}{...settings} className="page-content landingpage-topslide-img-wrapper" style={{ padding: "0px", margin: "0px"}}>
               <img
                 className="page-content landingpage-topslide-img"
                 src={require('../../img/LandingPage/landingpage_topslide.jpg')}
@@ -41,7 +41,7 @@ class TopSlider extends Component {
                 />
           </Slider>
 
-          <div className="landingpage-topslide-message-wrapper">
+          <div className="landingpage-topslide-message-wrapper" style={{ padding: "0px", margin: "0px"}}>
             <div className="landingpage-topslide-logo">
               <Link to="/"><img src={require('../../img/Header/logo.jpg')}/></Link>
             </div>

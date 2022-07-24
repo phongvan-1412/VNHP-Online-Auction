@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import Slider from "react-slick";
-import { GiNextButton, GiPreviousButton } from "react-icons/gi";
 import $ from "jquery";
+import { Link } from "react-router-dom";
 
-import SliderItem1 from "./SliderItem1";
+import { GiNextButton, GiPreviousButton } from "react-icons/gi";
 
-const LandingPageSlider1 = ({products}) => {
+const LandingPageSlider1 = () => {
   const ref = useRef({});
 
   const next = () => {
@@ -22,9 +22,11 @@ const LandingPageSlider1 = ({products}) => {
     speed: 350,
     slidesToShow: 5,
     slidesToScroll: 5,
+    vertical:false,
+    horizontal: true
   };
-  
-  return (
+
+  const slideItems = (
     <div className=" landingpage-slider slide-title">
       <div className="slide-title top-content">
         <h4>
@@ -32,15 +34,23 @@ const LandingPageSlider1 = ({products}) => {
         </h4>
       </div>
 
-      <Slider ref={ref} {...settings}>
-        {products.map((product) => (
-          <div className="product-grid-wrapper">
-            <SliderItem1
-              key={product.product_SKU}
-              product={product}
-            ></SliderItem1>
-          </div>
-        ))}
+      <Slider ref={ref} {...settings} >
+        <div id="product-grid-wrapper">
+          {/* <div id="product-grid">
+            <Link to="#" id="product-image"></Link>
+            <div id="category-name"></div>
+            <div id="product-name"></div>
+            <Link to="#" id="product-price"></Link>
+          </div> */}
+
+          {/* <div className="cart-icons">
+          <i
+            className="fa-solid fa-shopping-cart meta-cart"
+            style={{ cursor: "pointer" }}
+            // onClick={()=> {this.props.addProductToCart(product,1)}}
+          />
+        </div> */}
+        </div>
       </Slider>
 
       <div className="btn-click">
@@ -53,6 +63,41 @@ const LandingPageSlider1 = ({products}) => {
       </div>
     </div>
   );
+  function getData() {
+    fetch("http://127.0.0.1:8000/api/selectallproducts", { method: "GET" })
+      .then((res) => res.json())
+      .then((res) => {
+        res.map((products) => {
+          const tmp = document.createElement("div");
+          tmp.id = "product-grid-item" + products.product_id;
+          
+          const tmp_img = document.createElement("a");
+          tmp_img.innerHTML = products.product_thumbnail_img_name;
+          tmp_img.id = "product-image";
+          $("#product-grid-item" + products.product_id).append(tmp_img);
+
+          const tmp_categoryname = document.createElement("div");
+          tmp_categoryname.innerHTML = products.category_id;
+          tmp_categoryname.className = "category-name";
+          $("#product-grid" + products.product_id).append(tmp_categoryname);
+
+          const tmp_productname = document.createElement("div");
+          tmp_productname.innerHTML = products.product_name.replace(/-/g, " ");
+          tmp_productname.className = "product-name";
+          $("#product-grid" + products.product_id).append(tmp_productname);
+
+          const tmp_producprice = document.createElement("a");
+          tmp_producprice.innerHTML = products.product_start_price;
+          tmp_producprice.className = "product-price";
+          $("#product-grid" + products.product_id).append(tmp_producprice);
+
+          $("#product-grid-wrapper").append(tmp);
+        });
+      });
+  }
+  getData();
+
+  return slideItems;
 };
 
 export default LandingPageSlider1;
