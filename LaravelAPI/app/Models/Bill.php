@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Bill extends Model
 {
     use HasFactory;
-    public $bill_id;
-    public $bill_date;
-    public $total_payment;
-    public $customer_id;
-    public $emp_id;
-    public $payment_mode_id;
+    protected $table = 'bill';
+    protected $primaryKey = 'bill_id';
+    public $timestamps = false;
+    protected $fillable = [
+        'product_id',
+        'bill_date',
+        'bill_payment',
+        'customer_id',
+        'payment_mode_id',
+        'bill_status',
+    ];
 }
