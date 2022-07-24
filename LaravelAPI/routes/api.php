@@ -40,3 +40,4 @@ Route::post('/submitcart',[BillApi::class, 'InsertBill']);
 Route::get('/customerlogin',[CustomerApi::class, 'CustomerLoginInfo']);
 
 // Route::get('/selectactiveblog',[BlogApi::class, 'SelectActiveBlog']);
+

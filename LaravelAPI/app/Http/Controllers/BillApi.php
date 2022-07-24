@@ -50,7 +50,7 @@ class BillApi extends Controller
     
     public function SelectBill()
     {
-        $bills = DB::table('bill')->get();
+        $bills = Bill::select()->get();
         return $bills;
     }
 
