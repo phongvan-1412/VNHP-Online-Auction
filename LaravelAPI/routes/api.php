@@ -36,7 +36,9 @@ Route::get('/selectproductstop15', [ProductAPI::class, 'SelectProductsTop15ByCou
 Route::post('/submitcart',[BillApi::class, 'InsertBill']);
 
 
-//LOGIN
+//CUSTOMER
+Route::post('/customerregister',[CustomerApi::class, 'CustomerRegister']);
+Route::post('/isemailexists',[CustomerApi::class, 'IsEmailExists']);
 Route::get('/customerlogin',[CustomerApi::class, 'CustomerLoginInfo']);
 
 // Route::get('/selectactiveblog',[BlogApi::class, 'SelectActiveBlog']);
