@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryAPI;
 use App\Http\Controllers\ProductAPI;
 use App\Http\Controllers\BillApi;
 use App\Http\Controllers\CustomerApi;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -46,5 +47,8 @@ Route::get('/customerlogin',[CustomerApi::class, 'CustomerLogin']);
 
 // ---------------------- ADMIN -------------------------//
 
+// LOGIN
+Route::post('/login',[AdminController::class, 'Login']);
+// BILL
 Route::get('/selectbill',[BillApi::class, 'SelectBill']);
 Route::post('/insertbill',[BillApi::class, 'InsertBill']);
