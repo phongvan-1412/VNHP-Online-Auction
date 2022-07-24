@@ -43,13 +43,13 @@ const LandingPageSlider1 = () => {
             <Link to="#" id="product-price"></Link>
           </div> */}
 
-          {/* <div className="cart-icons">
+          <div className="cart-icons">
           <i
             className="fa-solid fa-shopping-cart meta-cart"
             style={{ cursor: "pointer" }}
             // onClick={()=> {this.props.addProductToCart(product,1)}}
           />
-        </div> */}
+        </div>
         </div>
       </Slider>
 
@@ -69,27 +69,31 @@ const LandingPageSlider1 = () => {
       .then((res) => {
         res.map((products) => {
           const tmp = document.createElement("div");
-          tmp.id = "product-grid-item" + products.product_id;
+            tmp.id = "product-grid" + products.product_id;
           
           const tmp_img = document.createElement("a");
-          tmp_img.innerHTML = products.product_thumbnail_img_name;
-          tmp_img.id = "product-image";
-          $("#product-grid-item" + products.product_id).append(tmp_img);
+            tmp_img.innerHTML = products.product_thumbnail_img_name;
+            tmp_img.id = "product-image";
+            $("#product-grid" + products.product_id).append(tmp_img);
 
           const tmp_categoryname = document.createElement("div");
-          tmp_categoryname.innerHTML = products.category_id;
-          tmp_categoryname.className = "category-name";
-          $("#product-grid" + products.product_id).append(tmp_categoryname);
+            tmp_categoryname.innerHTML = products.category_id;
+            tmp_categoryname.className = "category-name";
+            $("#product-grid" + products.product_id).append(tmp_categoryname);
 
           const tmp_productname = document.createElement("div");
-          tmp_productname.innerHTML = products.product_name.replace(/-/g, " ");
-          tmp_productname.className = "product-name";
-          $("#product-grid" + products.product_id).append(tmp_productname);
+            tmp_productname.innerHTML = products.product_name.replace(/-/g, " ");
+            tmp_productname.className = "product-name";
+            $("#product-grid" + products.product_id).append(tmp_productname);
 
           const tmp_producprice = document.createElement("a");
-          tmp_producprice.innerHTML = products.product_start_price;
-          tmp_producprice.className = "product-price";
-          $("#product-grid" + products.product_id).append(tmp_producprice);
+            tmp_producprice.innerHTML = products.product_start_price;
+            tmp_producprice.className = "product-price";
+            $("#product-grid" + products.product_id).append(tmp_producprice);
+
+          const tmp_icon = document.createElement("a");
+            tmp_icon.className = "fa-solid fa-shopping-cart meta-cart";
+            $("#product-grid" + products.product_id).append(tmp_icon);
 
           $("#product-grid-wrapper").append(tmp);
         });
