@@ -10,7 +10,7 @@ class CustomerApi extends Controller
 {
     public function CustomerLogin(Request $request)
     {
-        $user = Customer::select()->where('customer_email', $request->customer_email)->get();
+        $user = Customer::select()->where('customer_email', $request->customer_email)->where('customer_pwd', md5($request->customer_pwd))->get();
         
         return $user;
     }

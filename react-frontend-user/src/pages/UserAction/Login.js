@@ -69,8 +69,17 @@ class Login extends Component {
       axios
         .post(`http://127.0.0.1:8000/api/customerlogin`, customer)
         .then((response) => {
-          localStorage.setItem("customer_info", JSON.stringify(response.data));
-          window.location.href = "http://localhost:3000/";
+          if (response.data.length < 1) {
+            const $result = $("#loginResult");
+            $result.text("Wrong password.");
+            $result.css("color", "red");
+          } else {
+            localStorage.setItem(
+              "customer_info",
+              JSON.stringify(response.data)
+            );
+            window.location.href = "http://localhost:3000/";
+          }
         });
     };
 
@@ -95,6 +104,7 @@ class Login extends Component {
               Password
             </label>
             <input type="password" className="form-control" id="password" />
+            <div id="loginResult"></div>
           </div>
 
           <div className="row login-form-group">

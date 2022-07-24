@@ -13,10 +13,11 @@ const Header = () => {
   let userName = "";
   const isUserLogin = () => {
     let tmp = {};
-    JSON.parse(localStorage.getItem("customer_info")).map((user) => {
-      tmp = user;
-    });
-    if (tmp != null) {
+
+    if (localStorage.getItem("customer_info") != null) {
+      JSON.parse(localStorage.getItem("customer_info")).map((user) => {
+        tmp = user;
+      });
       checkUser = true;
       userName = tmp.customer_name;
     }
