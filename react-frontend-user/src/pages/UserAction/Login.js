@@ -69,7 +69,8 @@ class Login extends Component {
       axios
         .post(`http://127.0.0.1:8000/api/customerlogin`, customer)
         .then((response) => {
-          console.log(response.data);
+          localStorage.setItem("customer_info", JSON.stringify(response.data));
+          window.location.href = "http://localhost:3000/";
         });
     };
 
