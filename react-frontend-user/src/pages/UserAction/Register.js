@@ -1,12 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
+import axios from "axios";
 
 function Register() {
   function isValidName(name) {
     var validNamePattern = /^[A-Za-z\s]+$/;
     return !validNamePattern.test(name.trim());
   }
+
+  let checkValidFirstName = false;
+  let checkValidLastName = false;
+  let checkValidEmail = false;
+  let checkValidPassword = false;
+  let checkValidConfirmPassword = false;
+  let checkValidPhoneNumber = false;
+  let checkEmailExists = 0;
   const onNameBlur = (e) => {
     const $result = $("#" + e.target.name + "Result");
     const name = $("#" + e.target.name).val();
@@ -29,6 +38,8 @@ function Register() {
       } else {
         $result.text(name + " is valid.");
         $result.css("color", "green");
+        if (e.target.name == "firstname") checkValidFirstName = true;
+        if (e.target.name == "lastname") checkValidLastName = true;
       }
     }
     buttonRegisterSetter();
@@ -40,28 +51,31 @@ function Register() {
     );
   };
 
-  const validateEmail = () => {
+  const onEmailBlur = () => {
     const $result = $("#emailResult");
     const email = $("#email").val();
     $result.text("");
+    isEmailExists(email);
 
     if (!email) {
       $result.text("*Please enter your email");
       $result.css("color", "red");
     } else {
       if (isValidEmail(email)) {
-        $result.text(email + " is valid.");
-        $result.css("color", "green");
+        if (checkEmailExists > 0) {
+          $result.text(email + " already exists.");
+          $result.css("color", "red");
+        } else {
+          $result.text(email + " is valid.");
+          $result.css("color", "green");
+          checkValidEmail = true;
+        }
       } else {
         $result.text(email + " is not valid.");
         $result.css("color", "red");
       }
     }
     buttonRegisterSetter();
-  };
-
-  const onEmailBlur = () => {
-    validateEmail();
   };
 
   const isValidPassword = (password) => {
@@ -83,6 +97,7 @@ function Register() {
       if (isValidPassword(password)) {
         $result.text("Password is valid.");
         $result.css("color", "green");
+        checkValidPassword = true;
       } else {
         $result.text("Password is not valid.");
         $result.css("color", "red");
@@ -107,6 +122,7 @@ function Register() {
       if (isValidConfirmPassword(password)) {
         $result.text("Password is valid.");
         $result.css("color", "green");
+        checkValidConfirmPassword = true;
       } else {
         $result.text("Password is not valid.");
         $result.css("color", "red");
@@ -129,12 +145,13 @@ function Register() {
     const phoneNumber = $("#phonenumber").val();
     $result.text("");
     if (!phoneNumber) {
-      $result.text("Please enter your confirm password.");
+      $result.text("Please enter your phone number.");
       $result.css("color", "red");
     } else {
       if (isValidPhoneNumber(phoneNumber)) {
         $result.text("Phone Number is valid.");
         $result.css("color", "green");
+        checkValidPhoneNumber = true;
       } else {
         $result.text("Phone Number is not valid.");
         $result.css("color", "red");
@@ -146,22 +163,116 @@ function Register() {
 
   const isValidForm = () => {
     if (
-      isValidName($("#firstname").val()) ||
-      isValidName($("#lastname").val()) ||
-      isValidEmail($("#email").val()) ||
-      isValidPassword($("#password").val()) ||
-      isValidConfirmPassword($("#confirmpassword").val()) ||
-      isValidPhoneNumber($("#phonenumber").val())
+      checkValidFirstName &&
+      checkValidLastName &&
+      checkValidEmail &&
+      checkValidPassword &&
+      checkValidConfirmPassword &&
+      checkValidPhoneNumber
     )
-      return false;
-    return true;
+      return true;
+    return false;
   };
 
   const buttonRegisterSetter = () => {
-    let button = $("#btn-register");
-    if (isValidForm) button.prop("disabled", false);
-    else button.prop("disabled", true);
-    console.log(button)
+    if (isValidForm()) {
+      $("#btn-register").removeAttr("disabled");
+    } else {
+      $("#btn-register").prop("disabled", true);
+    }
+  };
+
+  const buttonRegisterOnClick = () => {
+    if (
+      !$("#firstname").val() == true ||
+      !$("#lastname").val() == true ||
+      !$("#email").val() == true ||
+      !$("#password").val() == true ||
+      !$("#confirmpassword").val() == true ||
+      !$("#phonenumber").val() == true
+    ) {
+      $("#firstnameResult").text("Please enter your first name");
+      $("#firstnameResult").css("color", "red");
+
+      $("#lastnameResult").text("Please enter your last name");
+      $("#lastnameResult").css("color", "red");
+
+      $("#emailResult").text("Please enter your email");
+      $("#emailResult").css("color", "red");
+
+      $("#passwordResult").text("Please enter your pasword");
+      $("#passwordResult").css("color", "red");
+
+      $("#confirmPasswordResult").text("Please enter your confirm password");
+      $("#confirmPasswordResult").css("color", "red");
+
+      $("#phonenumberResult").text("Please enter your password.");
+      $("#phonenumberResult").css("color", "red");
+
+      return;
+    }
+    const customer_name = $("#firstname").val() + " " + $("#lastname").val();
+    const customer_email = $("#email").val();
+    const customer_pwd = $("#password").val();
+    const customer_contact = $("#phonenumber").val();
+
+    const customer = {
+      customer_name,
+      customer_email,
+      customer_pwd,
+      customer_contact,
+    };
+
+    axios
+      .post(`http://127.0.0.1:8000/api/customerregister`, customer)
+      .then(function (response) {
+        if (response.data > 0) {
+          $("#firstname").text("");
+          $("#lastname").text("");
+          $("#email").text("");
+          $("#password").text("");
+          $("#confirmPassword").text("");
+          $("#phonenumber").text("");
+          
+          $("#registerResult").text("Register successfully.");
+          $("#registerResult").css("color", "green");
+        } else {
+          $("#registerResult").text("Register Fail.");
+          $("#registerResult").css("color", "red");
+        }
+      });
+  };
+
+  
+  const isEmailExists = () => {
+    const $result = $("#emailResult");
+    const customer_email = $("#email").val();
+    const checkEmail = {customer_email};
+    $result.text("");
+
+    axios
+      .post(`http://127.0.0.1:8000/api/isemailexists`, checkEmail)
+      .then(function (response) {
+        if (!customer_email) {
+          $result.text("*Please enter your email");
+          $result.css("color", "red");
+        } else {
+          if (isValidEmail(customer_email)) {
+            if (response.data > 0) {
+              $result.text(customer_email + " already exists.");
+              $result.css("color", "red");
+            } else {
+              $result.text(customer_email + " is valid.");
+              $result.css("color", "green");
+              checkValidEmail = true;
+            }
+          } else {
+            $result.text(customer_email + " is not valid email.");
+            $result.css("color", "red");
+          }
+        }
+        buttonRegisterSetter();
+      });
   };
 
   return (
@@ -173,6 +284,7 @@ function Register() {
         </div>
       </div>
       <div className="col-5">
+        <div id="registerResult"></div>
         <div className="card form-control form-register">
           <div className="">
             <p className="title">* First Name</p>
@@ -181,6 +293,7 @@ function Register() {
               id="firstname"
               name="firstname"
               className="form-control"
+              required
               onBlur={onNameBlur}
             />
             <div id="firstnameResult"></div>
@@ -191,6 +304,7 @@ function Register() {
               type="text"
               id="lastname"
               name="lastname"
+              required
               className="form-control"
               onBlur={onNameBlur}
             />
@@ -202,7 +316,8 @@ function Register() {
               type="text"
               id="email"
               className="form-control"
-              onBlur={onEmailBlur}
+              required
+              onBlur={isEmailExists}
             />
             <div id="emailResult"></div>
           </div>
@@ -212,6 +327,7 @@ function Register() {
               type="password"
               id="password"
               className="form-control"
+              required
               onBlur={onPasswordBlur}
             />
             <div id="passwordResult"></div>
@@ -222,6 +338,7 @@ function Register() {
               type="password"
               id="confirmpassword"
               className="form-control"
+              required
               onBlur={onConfirmPasswordBlur}
             />
             <div id="confirmPasswordResult"></div>
@@ -232,6 +349,7 @@ function Register() {
               type="text"
               id="phonenumber"
               className="form-control"
+              required
               onBlur={onPhoneNumberBlur}
             />
             <div id="phonenumberResult"></div>
@@ -264,12 +382,15 @@ function Register() {
           </p>
 
           <div className="mt-5 mb-2">
-            <input
-              name="register"
-              className="btn btn-primary"
+            <button
+              type="submit"
+              className="btn btn-primary float-right forget-password-form"
               id="btn-register"
-              value="SUBMIT"
-            />
+              onClick={buttonRegisterOnClick}
+              value="Register"
+            >
+              Register
+            </button>
           </div>
         </div>
       </div>
