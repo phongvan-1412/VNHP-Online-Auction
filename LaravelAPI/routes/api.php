@@ -33,6 +33,7 @@ Route::get('/selectproductsbycate', [ProductAPI::class, 'SelectProductsByCategor
 Route::get('/selectproductsbystartdate', [ProductAPI::class, 'SelectProductsByStartDate']);
 Route::get('/selectproductsbyenddate', [ProductAPI::class, 'SelectProductsByEndDate']);
 Route::get('/selectproductstop15', [ProductAPI::class, 'SelectProductsTop15ByCountCustomerId']);
+Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
 
 
 //BILL

@@ -17,16 +17,15 @@ class CategoryAPI extends Controller
     public function AddCategory(Request $request){
 
         $newCategory = new Category();
-        $newCustomer->customer_name =  $request->customer_name;
-        $newCustomer->customer_email = $request->customer_email;
-        $newCustomer->customer_pwd = md5($request->customer_pwd);
-        $newCustomer->customer_contact = $request->customer_contact;
+        $newCategory->category_name =  $request->category_name;
+        $newCategory->category_img_name = $request->category_img_name;
+       
 
-        $isExist = Customer::select()->where('customer_email',  $newCustomer->customer_email)->exists();
+        $isExist = Category::select()->where('category_name',  $newCategory->category_name)->exists();
 
         if(!$isExist)
         {
-            $newCustomer->save();
+            $newCategory->save();
             return 1;
         }
        
