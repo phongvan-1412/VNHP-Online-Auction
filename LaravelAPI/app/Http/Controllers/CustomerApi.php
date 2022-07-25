@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\DB;
  use App\Models\Customer;
+
 class CustomerApi extends Controller
 {
     public function CustomerLogin(Request $request)
@@ -41,5 +42,16 @@ class CustomerApi extends Controller
         if($isExist)
             return 1;
         return 0;
+    }
+
+    public function CustomerUpdateInfo(Request $request)
+    {
+
+        $product_img = $request->file('user_img_name');
+        $product_img_name = time().'-'.'product.'.$request->img_extension;
+        
+        $product_img->move(public_path('UserImage'), $product_img_name);
+
+        return $product_img;
     }
 }

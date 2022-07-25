@@ -503,7 +503,6 @@
 }
 /* ----------LANGDINGPAGE CATEGORIES---------- */
 .landingpage-category-wrapper{
-    margin-top: 100px;
     display: flex;
     align-items: center;
 }
@@ -528,6 +527,7 @@
     transform: scale(1.15,1.15);
 }
 .landingpage-category-headtext{
+    margin-top: 100px;
     margin-bottom: 20px;
     padding: 0px;
     font-size: 24px;
@@ -1164,6 +1164,15 @@
 .forget-password-form button:hover{
     background-color: red;
     color: white;
+}
+/* -----User-Profile----- */
+.img-user-account-profile{
+    width: 150px;
+    height: 150px;
+    object-fit: center;
+    object-position: center;
+    background-color: #0d6efd;
+    border-radius: 800px;
 }
 
 /* ---------------RESPONSIVE--------------- */
