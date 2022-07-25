@@ -38,6 +38,10 @@ class ProductAPI extends Controller
             order by count(a.customer_id)");
         return $tmp_products;
     }
+    // table
+    public function AddProductTable(){
+
+    }
     public function AddProduct(Request $request){
         $newProduct = new Product();
         $newProduct->product_name =  $request->product_name;

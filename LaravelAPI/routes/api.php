@@ -34,6 +34,8 @@ Route::get('/selectproductsbystartdate', [ProductAPI::class, 'SelectProductsBySt
 Route::get('/selectproductsbyenddate', [ProductAPI::class, 'SelectProductsByEndDate']);
 Route::get('/selectproductstop15', [ProductAPI::class, 'SelectProductsTop15ByCountCustomerId']);
 Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
+//AddProductTable
+Route::get('/addproducttable',[ProductAPI::class,'AddProductTable']);
 
 
 //BILL
@@ -56,4 +58,3 @@ Route::post('/login',[AdminController::class, 'Login']);
 // BILL
 Route::get('/selectbill',[BillApi::class, 'SelectBill']);
 Route::post('/insertbill',[BillApi::class, 'InsertBill']);
-
