@@ -22,8 +22,7 @@ export const Layout = () => {
                     <Routes>
                         <Route path='/' element={<Bill />}></Route>
                         <Route path='/addcategory' element={<AddCategory />}></Route>
-                        <Route path='/addproduct' element={<AddProduct />}></Route>
-                        <Route path='/addproducttable' element={<TableProduct />}></Route>                      
+                        <Route path='/addproduct' element={<TableProduct />}></Route>                      
                     </Routes>
                 </div>
             </div>
