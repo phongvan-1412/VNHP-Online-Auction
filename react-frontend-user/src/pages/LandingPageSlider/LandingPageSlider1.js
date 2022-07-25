@@ -34,9 +34,10 @@ const LandingPageSlider1 = () => {
       .then((res) => res.json())
       .then((res) => {
         res.map((products) => {
-            var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
+            var upcoming_auction = products.product_start_aution_day + " " + "15:37:25";
+            var countDownDate = new Date(upcoming_auction).getTime();
                 var slider1 = setInterval(function() {
-                  var now = new Date().getTime();
+                  var now = new Date();
                   var distance = countDownDate - now;
               
                   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -68,6 +69,7 @@ const LandingPageSlider1 = () => {
           // const tmp_wrapper = document.createElement("div");
           //   tmp_wrapper.className = "row product-grid"
           //   tmp.append(tmp_wrapper)
+                console.log(upcoming_auction)
           const tmp = document.createElement("div");
             tmp.id = "product-grid" + products.product_id;
             
