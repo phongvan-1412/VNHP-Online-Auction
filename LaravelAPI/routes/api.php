@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //CATEGORIES
 Route::get('/selectcategories',[CategoryAPI::class, 'SelectCategories']);
+Route::post('/addcategory',[CategoryAPI::class,'AddCaterogy']);
 
 //PRODUCTS
 Route::get('/selectallproducts',[ProductAPI::class, 'SelectProducts']);
@@ -52,3 +53,4 @@ Route::post('/login',[AdminController::class, 'Login']);
 // BILL
 Route::get('/selectbill',[BillApi::class, 'SelectBill']);
 Route::post('/insertbill',[BillApi::class, 'InsertBill']);
+

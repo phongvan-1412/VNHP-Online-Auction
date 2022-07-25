@@ -1,37 +1,9 @@
-button {
-    position: absolute;
-    top: 40px;
-    left: 50px;
+
+ .category-button {
+    color:darkblue;
+    background-color: aliceblue;
 }
-.row1 {
-    padding-top: 50px;
+.category-button:hover {
     
-}
-#admin-category-label {
-    color: darkblue;
-}
-
-.input1 {
-    box-shadow: 0 2px 2px #9cc1f8;
-}
-.label1 {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: darkblue;
-}
-.button1 {
-    position: absolute;
-    top: 450px;
-    left: 200px;
-    border-color: bisque;
-    color: darkblue;
-}
-.button1:hover {
     background-color: tomato;
-}
-.product2 {
-    padding-top: 50px;
-}
-.product3 {
-    padding-top: 50px;
-
 }
