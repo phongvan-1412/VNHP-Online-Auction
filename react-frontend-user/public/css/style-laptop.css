@@ -1165,6 +1165,13 @@
     background-color: red;
     color: white;
 }
+/* -----User-Profile----- */
+.img-user-account-profile{
+    width: 100%;
+    height: auto;
+    object-fit: center;
+    object-position: center;
+}
 
 /* ---------------RESPONSIVE--------------- */
 @media screen and (max-width: 2560px){
