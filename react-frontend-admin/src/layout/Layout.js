@@ -9,7 +9,7 @@ import AddCategory from '../form/AddCategory';
 import AddProduct from '../form/AddProduct';
 import "../css/admin1.css"
 import "../css/sb-admin-2.min.css"
-
+import TableProduct from '../form/TableProduct'
 
 export const Layout = () => {
   return (
@@ -23,8 +23,7 @@ export const Layout = () => {
                         <Route path='/' element={<Bill />}></Route>
                         <Route path='/addcategory' element={<AddCategory />}></Route>
                         <Route path='/addproduct' element={<AddProduct />}></Route>
-
-                        
+                        <Route path='/addproducttable' element={<TableProduct />}></Route>                      
                     </Routes>
                 </div>
             </div>

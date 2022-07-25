@@ -38,6 +38,16 @@ class MenuBar extends Component{
             id: "product",
             url: "addproduct"
         },
+        //table
+        {
+            title: "Product",
+            item : "Add Product",
+            icon: "fas fa-images",
+            dataTarget: "#product",
+            ariaControl: "product",
+            id: "producttable",
+            url: "addproducttable"
+        },
         {
             title: "Category",
             item: "All Category",

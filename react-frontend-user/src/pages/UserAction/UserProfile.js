@@ -46,7 +46,6 @@ function UserProfile() {
     reader.readAsDataURL(file);
 
     reader.onloadend = function () {
-      console.log(reader.result);
       $("#avatar-img").prop('src', reader.result);
     };
   }
