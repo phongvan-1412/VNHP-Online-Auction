@@ -70,7 +70,7 @@ const LandingPageSlider1 = () => {
             tmp.id = "product-grid" + products.product_id;
             
           const tmp_countdown = document.createElement("div");
-            tmp_countdown.class = "product-countdown";
+            tmp_countdown.id = products.product_id + products.product_name;
             tmp_countdown.innerHTML = slider1;
             tmp.append(tmp_countdown);
 
