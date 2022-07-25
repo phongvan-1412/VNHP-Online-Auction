@@ -502,23 +502,32 @@
 
 }
 /* ----------LANGDINGPAGE CATEGORIES---------- */
-.landingpage-category-item-wrapper{
+.landingpage-category-wrapper{
+    display: flex;
+    align-items: center;
+}
+#landingpage-category-grid{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-self: center;
 }
-.landingpage-category-item-wrapper>a{
+#landingpage-category-grid>a{
     position: relative;
     margin-right: 190px;
 }
-.landingpage-category-item-wrapper img{
+#landingpage-category-grid img{
+    position: relative;
     width: 300px;
     height: auto;
     object-fit: center;
     object-position: center;
     margin-bottom: 20px;
 }
+.landingpage-category-item-wrapper:hover img{
+    transform: scale(1.15,1.15);
+}
 .landingpage-category-headtext{
+    margin-top: 100px;
     margin-bottom: 20px;
     padding: 0px;
     font-size: 24px;

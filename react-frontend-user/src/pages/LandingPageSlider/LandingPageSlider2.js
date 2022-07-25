@@ -34,7 +34,8 @@ const LandingPageSlider2 = () => {
       .then((res) => res.json())
       .then((res) => {
         res.map((products) => {
-            var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
+            var hurry_auction = products.product_end_aution_day + " " + "5:00:00";
+            var countDownDate = new Date(hurry_auction).getTime();
                 var slider2 = setInterval(function() {
                   var now = new Date().getTime();
                   var distance = countDownDate - now;
