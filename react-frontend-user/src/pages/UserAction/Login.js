@@ -38,7 +38,7 @@ class Login extends Component {
       $result.text("");
 
       axios
-        .post(`http://127.0.0.1:8000/api/isemailexists`, checkEmail)
+        .post("http://127.0.0.1:8000/api/isemailexists", checkEmail)
         .then(function (response) {
           if (response.data > 0) {
             $result.text(customer_email + " is valid.");
@@ -97,14 +97,20 @@ class Login extends Component {
               id="email"
               onBlur={validateEmail}
             />
-            <div id="emailResult" className="small font-italic form-waring-text"></div>
+            <div
+              id="emailResult"
+              className="small font-italic form-waring-text"
+            ></div>
           </div>
           <div className="login-form-group">
             <label htmlFor="exampleInputPassword1" className="">
               Password
             </label>
             <input type="password" className="form-control" id="password" />
-            <div id="loginResult" className="small font-italic form-waring-text"></div>
+            <div
+              id="loginResult"
+              className="small font-italic form-waring-text"
+            ></div>
           </div>
 
           <div className="row login-form-group">

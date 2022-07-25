@@ -19,4 +19,7 @@
 .register-term .term-link{
     color: blue;
 }
-  
+/* user profile*/
+.user-account-profile{
+    padding: 30px;
+}
