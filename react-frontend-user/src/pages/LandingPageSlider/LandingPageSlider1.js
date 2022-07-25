@@ -34,7 +34,7 @@ const LandingPageSlider1 = () => {
       .then((res) => res.json())
       .then((res) => {
         res.map((products) => {
-            var upcoming_auction = products.product_start_aution_day + " " + "15:37:25";
+            var upcoming_auction = products.product_start_aution_day + " " + "24:00:00";
             var countDownDate = new Date(upcoming_auction).getTime();
                 var slider1 = setInterval(function() {
                   var now = new Date();
