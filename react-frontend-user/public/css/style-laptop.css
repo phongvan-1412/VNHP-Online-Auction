@@ -502,30 +502,21 @@
 
 }
 /* ----------LANGDINGPAGE CATEGORIES---------- */
-.landingpage-category-wrapper{
-    margin-top: 100px;
-    display: flex;
-    align-items: center;
-}
-#landingpage-category-grid{
+.landingpage-category-item-wrapper{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-self: center;
 }
-#landingpage-category-grid>a{
+.landingpage-category-item-wrapper>a{
     position: relative;
     margin-right: 190px;
 }
-#landingpage-category-grid img{
-    position: relative;
+.landingpage-category-item-wrapper img{
     width: 300px;
     height: auto;
     object-fit: center;
     object-position: center;
     margin-bottom: 20px;
-}
-.landingpage-category-item-wrapper:hover img{
-    transform: scale(1.15,1.15);
 }
 .landingpage-category-headtext{
     margin-bottom: 20px;

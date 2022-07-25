@@ -5,7 +5,7 @@ import TopSlider from "./TopSlider";
 import LandingPageSlider1 from "./LandingPageSlider1";
 import LandingPageSlider2 from "./LandingPageSlider2";
 import LandingPageSlider3 from "./LandingPageSlider3";
-import LandingPageCategories from "./LandingPageCategories";
+// import LandingPageCategories from "./LandingPageCategories";
 
 const LandingPage = () => {
   return (
@@ -16,7 +16,7 @@ const LandingPage = () => {
         <LandingPageSlider1 />
         <LandingPageSlider2 />
         <LandingPageSlider3 />
-        <LandingPageCategories />
+        {/* <LandingPageCategories /> */}
       </div>
       <div className="col-md-1" style={{ padding: "0px", margin: "0px" }}></div>
     </div>
