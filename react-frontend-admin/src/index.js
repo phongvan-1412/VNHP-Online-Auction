@@ -9,7 +9,7 @@ import LogIn from './components/LogIn/LogIn';
 const root = ReactDOM.createRoot(document.getElementById('page-top'));
 root.render(
   <BrowserRouter>
-    <LogIn />
+    <Layout />
   </BrowserRouter>
 );
 
