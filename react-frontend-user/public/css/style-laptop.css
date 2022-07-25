@@ -94,7 +94,7 @@
 #menu-dropdown .services-submenu{
     display: none;
 }
-#menu-dropdown:hover>.services-submenu{
+#menu-dropdown:hover .services-submenu{
     display: block;
     width: 800px;
     margin-top: 23px;
@@ -1164,6 +1164,17 @@
 .forget-password-form button:hover{
     background-color: red;
     color: white;
+}
+/* -----Login----- */
+.user-logged{
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.user-logged .userprofile, .user-logged .logout .user-login .login, .user-login .register{
+    margin: 0px 10px;
 }
 /* -----User-Profile----- */
 .img-user-account-profile{
