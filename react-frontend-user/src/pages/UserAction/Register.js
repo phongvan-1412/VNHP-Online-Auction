@@ -270,7 +270,7 @@ function Register() {
               required
               onBlur={onNameBlur}
             />
-            <div id="firstnameResult"></div>
+            <div id="firstnameResult" className="small font-italic form-waring-text"></div>
           </div>
           <div>
             <p className="title">* Last Name</p>
@@ -282,7 +282,7 @@ function Register() {
               className="form-control"
               onBlur={onNameBlur}
             />
-            <div id="lastnameResult"></div>
+            <div id="lastnameResult" className="small font-italic form-waring-text"></div>
           </div>
           <div>
             <p className="title">* Email</p>
@@ -293,7 +293,7 @@ function Register() {
               required
               onBlur={isEmailExists}
             />
-            <div id="emailResult"></div>
+            <div id="emailResult" className="small font-italic form-waring-text"></div>
           </div>
           <div>
             <p className="title">* Password</p>
@@ -304,7 +304,7 @@ function Register() {
               required
               onBlur={onPasswordBlur}
             />
-            <div id="passwordResult"></div>
+            <div id="passwordResult" className="small font-italic form-waring-text"></div>
           </div>
           <div>
             <p className="title">*Confirm Password</p>
@@ -315,7 +315,7 @@ function Register() {
               required
               onBlur={onConfirmPasswordBlur}
             />
-            <div id="confirmPasswordResult"></div>
+            <div id="confirmPasswordResult" className="small font-italic form-waring-text"></div>
           </div>
           <div>
             <p className="title">* Mobile Number</p>
@@ -326,7 +326,7 @@ function Register() {
               required
               onBlur={onPhoneNumberBlur}
             />
-            <div id="phonenumberResult"></div>
+            <div id="phonenumberResult" className="small font-italic form-waring-text"></div>
           </div>
 
           <span id="mostro">Don't have a date yet? Enter your best guess.</span>

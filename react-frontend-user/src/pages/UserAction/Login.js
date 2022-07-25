@@ -97,14 +97,14 @@ class Login extends Component {
               id="email"
               onBlur={validateEmail}
             />
-            <div id="emailResult"></div>
+            <div id="emailResult" className="small font-italic form-waring-text"></div>
           </div>
           <div className="login-form-group">
             <label htmlFor="exampleInputPassword1" className="">
               Password
             </label>
             <input type="password" className="form-control" id="password" />
-            <div id="loginResult"></div>
+            <div id="loginResult" className="small font-italic form-waring-text"></div>
           </div>
 
           <div className="row login-form-group">
