@@ -472,8 +472,12 @@
     font-size: 30px;
     padding: 4px;
 }
-.meta-cart:hover{
-    color: var(--iconHover);
+.meta-wishlist{
+    margin-left: 10px;
+    background-color: var(--iconHover);
+    color: var(--textColor);
+    font-size: 30px;
+    padding: 4px;
 }
 .btn-click{
     display: block;
