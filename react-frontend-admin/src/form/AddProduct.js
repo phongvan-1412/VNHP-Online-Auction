@@ -1,6 +1,6 @@
 import React from "react";
 import $ from "jquery";
-import url from "jquery"
+import axios from "axios";
 function AddProduct() {
   const productElement = () => {
        var current = new Date();
@@ -19,7 +19,7 @@ function AddProduct() {
 
     let index  = ($("#input-imgs-product").val()).indexOf(".");
     var product_name = ($("#input-product_name").val())
-    var category_name = ($("#input-category-name").val())
+    var category_id = ($("#input-category-name").val())
 
     var product_thumbnail_img_name = ((hanh)+($("#input-imgs-product").val()).substring(index, index + 5));
     var product_img_name1 = ((q)+($("#input-img1-product").val()).substring(index, index + 5));
@@ -33,14 +33,20 @@ function AddProduct() {
     var price2_product = ($("#input-price2-product").val())
     var quantity_product = ($("#input-quantity-product").val())
     var status_product = ($("#input-status-product").val())
-
-   let product ={product_name,category_name,product_thumbnail_img_name,product_img_name2 ,
+    var input_start_aution_product = ($("#input-start-aution-product").val())
+    var input_end_aution_product = ($("#input-end-aution-product").val())
+   let product ={product_name,category_id,product_thumbnail_img_name,product_img_name2 ,
     product_img_name3, product_img_name1,information_product, ingredients_product,
-    instruction_product,prices_product, price1_product,price2_product,quantity_product,status_product
+    instruction_product,prices_product, price1_product,price2_product,quantity_product,status_product,
+    input_start_aution_product,input_end_aution_product
   }
    
-   console.log(product)
-   console.log(product_thumbnail_img_name )
+    axios
+    .post(`http://127.0.0.1:8000/api/addproduct`, product)
+    .then(function (response) {
+      
+    });
+
   }
   return (
     <div>
@@ -69,7 +75,7 @@ function AddProduct() {
                     Category Name
                   </label>
                   <select>
-                    <option className="form-control " id="input-category-name">Category</option>
+                    <option className="form-control " id="input-category-id">Category</option>
                   </select>
                 </div>
                 <div className="col-md-6">
@@ -110,10 +116,17 @@ function AddProduct() {
               </div>
               <div className="row gx-3 mb-3">
                 <div className="col-md-6"></div>
-                <div className="col-md-3"> <label className="md-2">Start_Price</label>
+                <div className="col-md-3"> <label className="md-2">Start Price</label>
                   <input className="form-control " id="input-price1-product" /></div>
-                <div className="col-md-3"><label className="md-2 ">Aution_Price</label>
+                <div className="col-md-3"><label className="md-2 ">Aution Price</label>
                   <input className="form-control " id="input-price2-product" /></div>
+              </div>
+              <div className="row gx-3 mb-3">
+                <div className="col-md-6"></div>
+                <div className="col-md-3"> <label className="md-2">Start Aution Day</label>
+                  <input className="form-control " id="input-start-aution-product"  type="date" /></div>
+                <div className="col-md-3"><label className="md-2 ">End Aution Day</label>
+                  <input className="form-control " id="input-end-aution-product" type="date"/></div>
               </div>
               <div className="row gx-3 mb-3">
                 <div className="col-md-6"></div>
