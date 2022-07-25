@@ -18,7 +18,7 @@ export const Layout = () => {
                 <TopBar />
                 <div className="container-fluid">
                     <Routes>
-                        <Route path='/bill' element={<Bill />}></Route>
+                        <Route path='/' element={<Bill />}></Route>
                     </Routes>
                 </div>
             </div>
