@@ -9,23 +9,23 @@ const LandingPageSlider1 = () => {
     <div className=" landingpage-slider slide-title">
       <div className="landingpage-slider slide-title top-content">
         <h4>
-          <b>UP COMING PRODUCTS</b>
+          <b>UP COMING AUCTIONS</b>
         </h4>
       </div>
 
-      <div id="product-grid-wrapper">
+      <div id="product-grid-wrapper1">
         
       </div>
 
 
-      <div className="btn-click">
+      {/* <div className="btn-click">
         <button type="button" className="btn-previous">
           <GiPreviousButton />
         </button>
         <button type="button" className=" btn-next">
           <GiNextButton />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 
@@ -46,31 +46,33 @@ const LandingPageSlider1 = () => {
                   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                   if (
-                    document.getElementById(products.product_id + products.product_name) == null
+                    document.getElementById('slider1' + products.product_id + products.product_name) == null
                   )
                     return;
                   if (
-                    document.getElementById(products.product_id + products.product_name) ==
+                    document.getElementById('slider1' + products.product_id + products.product_name) ==
                       null ||
                     distance < 0
                   ) {
                     clearInterval(slider1);
-                    document.getElementById( 
+                    document.getElementById('slider1' +  
                       products.product_id + products.product_name
                     ).innerHTML = "EXPIRED";
                   }
                   // Display the result in the element with id
               
-                  document.getElementById( 
+                  document.getElementById('slider1' +  
                     products.product_id + products.product_name
                   ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
                 }, 1000);
-
+          // const tmp_wrapper = document.createElement("div");
+          //   tmp_wrapper.className = "row product-grid"
+          //   tmp.append(tmp_wrapper)
           const tmp = document.createElement("div");
             tmp.id = "product-grid" + products.product_id;
             
           const tmp_countdown = document.createElement("div");
-            tmp_countdown.id = products.product_id + products.product_name;
+            tmp_countdown.id ='slider1' +  products.product_id + products.product_name;
             tmp_countdown.innerHTML = slider1;
             tmp.append(tmp_countdown);
 
@@ -101,9 +103,9 @@ const LandingPageSlider1 = () => {
             tmp.append(tmp_icon);
 
 
-            tmp.className = "product-grid-item";
+            tmp.className = "col-lg-3 col-md-4 col-xs-2 product-grid-item";
             
-          $("#product-grid-wrapper").append(tmp);
+          $("#product-grid-wrapper1").append(tmp);
         });
       });
   }

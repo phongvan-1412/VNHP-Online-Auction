@@ -407,15 +407,17 @@
 .landingpage-slider{
     margin-top: 100px;
 }
-#product-grid-wrapper{
+#product-grid-wrapper1, #product-grid-wrapper2, #product-grid-wrapper3{
     display: flex;
-    justify-content: center;
+    justify-content: start;
     margin: 20px 0px;
     padding: 5px;
+    overflow-x: scroll;
+
 }
-/* #product-grid1:hover,#product-grid2:hover,#product-grid3:hover,#product-grid4:hover,#product-grid5:hover,#product-grid6:hover,#product-grid7:hover,#product-grid8:hover,#product-grid9:hover,#product-grid10:hover,#product-grid11:hover,#product-grid12:hover{
-    box-shadow: 1px 2px 2px 2px rgba(0,0,0,0.25);
-} */
+.product-grid-item{
+    width: 150px;
+}
 
 .product-grid-item:hover{
     box-shadow: 1px 2px 2px 2px rgba(0,0,0,0.25);
