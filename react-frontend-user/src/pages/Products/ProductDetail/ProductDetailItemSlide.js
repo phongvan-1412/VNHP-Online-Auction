@@ -11,13 +11,13 @@ class ProductDetailItemSlide extends Component {
       <div className="row product-detail-item-slide">
         <div className="col-md-6 product-detail-item slide-img">
           <Link
-            to={`/${product.category_name}/${product.product_name}`}
+            to={`/${product.category_id}/${product.product_name}`}
             replace
             className="product-name-item"
           >
             <img
               className="product-detail-item-slide product-img"
-              src={require(`../../../../../LaravelAPI/public/ProductImage/${product.product_img_name}`)}
+              // src={require(`../../../../../LaravelAPI/public/ProductImage/${product.product_img_name}`)}
             />
           </Link>
         </div>
@@ -25,11 +25,11 @@ class ProductDetailItemSlide extends Component {
         <div className="col-md-6 product-detail-item slide-content">
           <div className="product-name">
             <Link
-              to={`/${product.category_name}/${product.product_name}`}
+              to={`/${product.category_id}/${product.product_name}`}
               replace
               className="product-detail-item-name"
             >
-              {product.product_name.replace(/-/g, " ")}
+              {product.product_name}
             </Link>
           </div>
 

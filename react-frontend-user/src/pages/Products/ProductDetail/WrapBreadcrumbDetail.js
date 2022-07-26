@@ -17,16 +17,16 @@ const WrapBreadcrumbDetail = ({ product, category }) => {
         </li>
         <li className="item-link categoryName">
           <Link
-            to={`/${category.category_root_name}/${category.category_name}`}
+            to={`/${category.category_id}/${category.category_name}`}
             replace
             onClick={onClick}
             id={category.category_id}
           >
-            {product.category_name.replace(/-/g, " ")}
+            {product.category_name}
           </Link>
         </li>
         <li className="item-link">
-          <span>{product.product_name.replace(/-/g, " ")}</span>
+          <span>{product.product_name}</span>
         </li>
       </ul>
     </div>

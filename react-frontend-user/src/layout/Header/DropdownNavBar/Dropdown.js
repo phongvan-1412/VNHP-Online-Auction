@@ -2,35 +2,34 @@ import { Link } from "react-router-dom";
 import React, { Component } from "react";
 import $ from "jquery";
 
-class Dropdown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      categories: [],
-    };
-  }
+const Dropdown = ({categories}) => {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     categories: [],
+  //   };
+  // }
 
-  componentDidMount() {
-    fetch("http://127.0.0.1:8000/api/selectcategories", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        this.setState({ categories: response });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  // componentDidMount() {
+  //   fetch("http://127.0.0.1:8000/api/selectcategories", {
+  //     method: "GET",
+  //   })
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       this.setState({ categories: response });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
 
-    fetch("http://127.0.0.1:8000/api/selectcategories");
-  }
+  //   fetch("http://127.0.0.1:8000/api/selectcategories");
+  // }
 
-  render() {
     const element = (
       <ul className="services-submenu">
         <div className="container">
           <div className="row">
-            {this.state.categories.map((category) => {
+            {categories.map((category) => {
               return (
                 <div className="col-3" key={category.category_id}>
                   <div className="row submenu-name-wrapper">
@@ -55,5 +54,4 @@ class Dropdown extends React.Component {
 
     return element;
   }
-}
 export default Dropdown;

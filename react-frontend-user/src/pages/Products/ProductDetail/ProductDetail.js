@@ -4,38 +4,34 @@ import WrapBreadcrumbDetail from "./WrapBreadcrumbDetail";
 import SidebarSuggest from "./SidebarSuggest";
 import DisplayProductDetail from "./DisplayProductDetail";
 
-const ProductDetail = () => {
-  const products = $("#data").data("products");
-  const product_id = $("#data").data("productid");
-  const categories = $("#data").data("categories");
-//   console.log(products);
-//   console.log(product_id);
-//   console.log(categories);
-  let currentProduct = [];
-  products.forEach(product => {
-    if(product.product_id === product_id)
-    {
-        currentProduct = product;
-    }
-  });
+const ProductDetail = ({product,products,categories}) => {
+  // const products = $("#data").data("products");
+  // const product_id = $("#data").data("productid");
+  // const categories = $("#data").data("categories");
 
-  let suggestProducts = [];
-  products.forEach(product => {
-    if(product.category_id === currentProduct.category_id)
-    {
-        suggestProducts = [...suggestProducts,product];
-    }
-  });
+  // let currentProduct = [];
+  // products.forEach(product => {
+  //   if(product.product_id === product_id)
+  //   {
+  //       currentProduct = product;
+  //   }
+  // });
+
+  // let suggestProducts = [];
+  // products.forEach(product => {
+  //   if(product.category_id === currentProduct.category_id)
+  //   {
+  //       suggestProducts = [...suggestProducts,product];
+  //   }
+  // });
 
   let currentCategory = [];
   categories.forEach(category =>{
-    if(category.category_id === currentProduct.category_id)
+    if(category.category_id === product.category_id)
     {
         currentCategory = category;
     }
   })
-
-  
 
   return (
     <div className="row">
@@ -43,11 +39,11 @@ const ProductDetail = () => {
         className="col-lg-9 col-md-9 product-detail"
         style={{ padding: "0px", margin: "0px" }}
       >
-        <WrapBreadcrumbDetail product={currentProduct} category={currentCategory}/>
-        <DisplayProductDetail product={currentProduct}/>
+        <WrapBreadcrumbDetail product={products} category={currentCategory}/>
+        <DisplayProductDetail product={products}/>
       </div>
       <div className="col-lg-3 col-md-3 col-sm-12">
-        <SidebarSuggest products={suggestProducts}/>
+        <SidebarSuggest products={products}/>
       </div>
     </div>
   );

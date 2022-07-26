@@ -58,7 +58,7 @@ class HomePage extends Component {
     return (
       <div>
         <div id="data" hidden></div>
-        <Header />
+        <Header categories={this.state.categories}/>
         <Routes>
           {/* Home  */}
           <Route path="/" element={<LandingPage products={this.state.products} categories={this.state.categories}/>}></Route>
@@ -86,7 +86,7 @@ class HomePage extends Component {
             <Route
               key={category.category_id}
               path={`/${category.category_name}`}
-              element={<ProductByCategory  />}
+              element={<ProductByCategory products={this.state.products}category={category}/>}
             ></Route>
           ))}
 
@@ -94,8 +94,8 @@ class HomePage extends Component {
           {this.state.products.map((product) => (
             <Route
               key={product.product_SKU}
-              path={`/${product.category_name}/${product.product_name}`}
-              element={<ProductDetail />}
+              path={`/${product.category_id}/${product.product_name}`}
+              element={<ProductDetail products={this.state.products} categories={this.state.categories} product={product}/>}
             ></Route>
           ))}
         </Routes>

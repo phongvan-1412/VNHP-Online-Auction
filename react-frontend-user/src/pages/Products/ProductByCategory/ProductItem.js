@@ -12,7 +12,7 @@ const ProductItem = ({ product }) => {
     <div className="product-grid">
       <div>
         <Link
-          to={`/${product.category_name}/${product.product_name}`}
+          to={`/${product.category_id}/${product.product_name}`}
           replace
           className="product-name-item"
           onClick={onProductClicked}
@@ -31,7 +31,7 @@ const ProductItem = ({ product }) => {
 
       <div className="product-name">
         <Link
-          to={`/${product.category_name}/${product.product_name}`}
+          to={`/${product.category_id}/${product.product_name}`}
           name={product.product_id}
           replace
           className="product-name-item"

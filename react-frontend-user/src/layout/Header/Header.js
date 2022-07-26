@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Link } from "react-router-dom";
 import { FaFacebook, FaInstagramSquare, FaTwitter } from "react-icons/fa";
 import Dropdown from "./DropdownNavBar/Dropdown";
 
-const Header = () => {
+const Header = ({categories}) => {
   const buttonLogOutClick = () => {
     localStorage.removeItem("customer_info");
     window.location.href = "http://localhost:3000/";
@@ -58,7 +58,7 @@ const Header = () => {
           <Link to="#" id="menu-dropdown" replace>
             Product
             <div className="services-submenu" style={{ position: "absolute" }}>
-              <Dropdown />
+              <Dropdown categories={categories}/>
             </div>
           </Link>
         </div>
@@ -85,23 +85,14 @@ const Header = () => {
           </div>
         )}
 
-        {/* {isCustomerLogin ? (
-              <Link to="/customer" replace className="customer">
-                Customer
-              </Link>
-            ) : (
-              <div>
-                <a href="http://127.0.0.1:8000/register">Register</a>
-                <a href="http://127.0.0.1:8000/login">Login</a>
-              </div>
-            )} */}
-
         <a href="https://www.facebook.com/" className="meta-facebook">
           <FaFacebook />
         </a>
+        
         <a href="https://www.instagram.com/?hl=en" className="meta-instagram">
           <FaInstagramSquare />
         </a>
+
         <a href="https://twitter.com/" className="meta-twitter">
           <FaTwitter />
         </a>

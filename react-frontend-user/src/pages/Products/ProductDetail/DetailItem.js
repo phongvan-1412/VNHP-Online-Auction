@@ -7,20 +7,20 @@ function DetailItem({ product }) {
   
   return (
     <div className="row">
-      <div id={product.product_id + product.product_name} style={{marginLeft:'200px'}}></div>
+      <div style={{marginLeft:'200px'}}></div>
 
-      <div id={product.product_name}></div>
+      <div></div>
 
       <div className="col-md-6 product-detail-img-wrapper">
         <img
           className="product-detail-img"
-          src={require(`../../../../../LaravelAPI/public/ProductImage/${product.product_img_name}`)}
+          // src={require(`../../../../../LaravelAPI/public/ProductImage/${product.product_img_name}`)}
         />
       </div>
 
       <div className="col-md-6 product-detail-info-wrapper">
         <div className="product-detail-product-name">
-          <h1>{product.product_name.replace(/-/g, " ")}</h1>
+          <h1>{product.product_name}</h1>
         </div>
 
         <div className="product-detail-info-price">
