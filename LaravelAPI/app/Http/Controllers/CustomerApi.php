@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
 use Mail;
 use Str;
+use Redirect;
 
 class CustomerApi extends Controller
 {
@@ -52,20 +53,20 @@ class CustomerApi extends Controller
 
     public function CustomerUpdateInfo(Request $request)
     {
-
         $product_img = $request->file('user_img_name');
         $product_img_name = time().'-'.'product.'.$request->img_extension;
-        
         $product_img->move(public_path('UserImage'), $product_img_name);
 
         return $product_img;
     }
 
-    public function CustomerActivedEmail(Customer $customer, $token){
-        if($customer->token == $token){
-            $customer->update(['status'=>1]);
-            return redirect('/login')->with('succ-msg','Verify successfully');
+    public function CustomerActivedEmail($customer_id, $customer_token){
+        $tmpCustomer = Customer::select()->where('customer_id',$customer_id)->where('customer_token',$customer_token)->update(['customer_status'=>1]);
+        
+        if($tmpCustomer > 0)
+        {
+            $url = "http://localhost:3000/login";
+            return Redirect::intended($url);
         }
     }
-
 }
