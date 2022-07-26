@@ -81,7 +81,7 @@ class MenuBar extends Component{
                 <hr className="sidebar-divider my-0"/>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to="#">
+                    <Link className="nav-link" to="/">
                         <i className="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </Link>
