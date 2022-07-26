@@ -37,7 +37,7 @@ export const AddBill = () => {
         .then(function(response){
             if(response.data == 1){
                 $('#msg').html("Add bill successfully").addClass("text-success").removeClass("text-danger");
-                // $('#bill-records').append(<row/>)
+                // $('#bill-recordcds').append(<row/>)
             }else{
                 $('#msg').html("Fail to add").addClass("text-danger").removeClass("text-success");
             }
