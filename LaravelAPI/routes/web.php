@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/actived/{customer}/{token}',[Signupin::class, 'CustomerActivedEmail'])->name('customer.actived');
