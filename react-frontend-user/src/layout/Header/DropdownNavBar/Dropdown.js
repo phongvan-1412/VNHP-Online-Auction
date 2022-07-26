@@ -21,13 +21,15 @@ const Dropdown = () => {
       .then((response) => {
         response.map((category) => {
           const tmp = document.createElement("a");
-          tmp.innerHTML = category.category_name;
-          tmp.className = "col-3 category-name";
-          tmp.onclick = (e) => {window.location.href = `http://localhost:3000/category/${category.category_name}`} ;
+            tmp.innerHTML = category.category_name;
+            tmp.className = "col-3 category-name";
+            tmp.onclick = (e) => {window.location.href = `http://localhost:3000/category/${category.category_name}`} ;
 
           $("#categories-dropdown").append(tmp);
         });
       });
+
+      fetch("http://127.0.0.1:8000/api/selectcategories")
   }
   getData();
 
