@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomerApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/actived/{customer}/{token}',[Signupin::class, 'CustomerActivedEmail'])->name('customer.actived');
+Route::get('/actived/{customer_id}/{customer_token}',[CustomerApi::class, 'CustomerActivedEmail'])->name('customer.actived');

@@ -23,11 +23,21 @@ export const AddBill = () => {
             payment_mode_id,
             bill_status
         }
+        const row = (<tr>
+                        <td></td>
+                        <td>{bill.product_id}</td>
+                        <td>{bill.bill_date}</td>
+                        <td>{bill.bill_payment}</td>
+                        <td>{bill.customer_id}</td>
+                        <td>{bill.payment_mode_id}</td>
+                        <td>{bill.bill_status}</td>
+                    </tr>)
         // console.log(bill_status);
         axios.post("http://127.0.0.1:8000/api/insertbill", bill)
         .then(function(response){
             if(response.data == 1){
                 $('#msg').html("Add bill successfully").addClass("text-success").removeClass("text-danger");
+                // $('#bill-records').append(<row/>)
             }else{
                 $('#msg').html("Fail to add").addClass("text-danger").removeClass("text-success");
             }

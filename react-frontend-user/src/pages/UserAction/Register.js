@@ -16,7 +16,7 @@ function Register() {
   let checkValidConfirmPassword = false;
   let checkValidPhoneNumber = false;
   let checkEmailExists = 0;
-  
+
   const onNameBlur = (e) => {
     const $result = $("#" + e.target.name + "Result");
     const name = $("#" + e.target.name).val();
@@ -248,6 +248,8 @@ function Register() {
         buttonRegisterSetter();
       });
   };
+
+  console.log($("#data").data('categories'));
 
   return (
     <div className="row">
