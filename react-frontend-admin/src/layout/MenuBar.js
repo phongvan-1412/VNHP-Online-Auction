@@ -36,7 +36,7 @@ class MenuBar extends Component{
             dataTarget: "#product",
             ariaControl: "product",
             id: "product",
-            url: "addproduct"
+            url: "/addproduct"
         },
         
         {
@@ -46,7 +46,7 @@ class MenuBar extends Component{
             dataTarget: "#category",
             ariaControl: "category",
             id: "category",
-            url: "addcategory"
+            url: "/addcategory"
         },
         {
             title: "Payment",
@@ -64,7 +64,7 @@ class MenuBar extends Component{
             dataTarget: "#bill",
             ariaControl: "bill",
             id: "bill",
-            url: "#"
+            url: "/bill"
         }
     ]  
     render(){

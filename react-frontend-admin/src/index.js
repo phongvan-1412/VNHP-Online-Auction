@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import LogIn from './components/LogIn/LogIn';
 
 
-const root = ReactDOM.createRoot(document.getElementById('page-top'));
+const root = 
 root.render(
   <BrowserRouter>
     <Layout />

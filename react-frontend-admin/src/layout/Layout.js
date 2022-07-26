@@ -9,7 +9,7 @@ import "../css/admin1.css"
 import "../css/sb-admin-2.min.css"
 import TableProduct from '../form/TableProduct'
 import TableCategory from '../form/TableCategory'
-
+import BarChart from '../components/BarChart/BarChart'
 export const Layout = () => {
   return (
     <div id="wrapper">
@@ -19,9 +19,11 @@ export const Layout = () => {
                 <TopBar />
                 <div className="container-fluid">
                     <Routes>
-                        <Route path='/' element={<Bill />}></Route>
+                        <Route path='/' element={<BarChart />}></Route>
                         <Route path='/addcategory' element={<TableCategory />}></Route>
-                        <Route path='/addproduct' element={<TableProduct />}></Route>       
+                        <Route path='/addproduct' element={<TableProduct />}></Route>    
+                        <Route path='/bill' element={<Bill />}></Route>       
+
                     </Routes>
                 </div>
             </div>
