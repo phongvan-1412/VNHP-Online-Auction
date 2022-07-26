@@ -19,7 +19,7 @@ class Customer extends Model
         'customer_dob',
         'customer_img_name',
         'customer_address',
-        'status',
-        'token'
+        'customer_status',
+        'customer_token'
     ];
 }

@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //CATEGORIES
 Route::get('/selectcategories',[CategoryAPI::class, 'SelectCategories']);
 Route::post('/addcategory',[CategoryAPI::class,'AddCaterogy']);
+Route::get('/addcategorytable',[CategoryAPI::class,'AddCategoryTable']);
 
 //PRODUCTS
 Route::get('/selectallproducts',[ProductAPI::class, 'SelectProducts']);
@@ -34,7 +35,6 @@ Route::get('/selectproductsbystartdate', [ProductAPI::class, 'SelectProductsBySt
 Route::get('/selectproductsbyenddate', [ProductAPI::class, 'SelectProductsByEndDate']);
 Route::get('/selectproductstop15', [ProductAPI::class, 'SelectProductsTop15ByCountCustomerId']);
 Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
-//AddProductTable
 Route::get('/addproducttable',[ProductAPI::class,'AddProductTable']);
 
 

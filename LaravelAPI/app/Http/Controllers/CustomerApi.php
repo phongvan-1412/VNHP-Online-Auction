@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\DB;
- use App\Models\Customer;
+use App\Models\Customer;
+use Mail;
+use Str;
 
 class CustomerApi extends Controller
 {
@@ -23,12 +25,16 @@ class CustomerApi extends Controller
         $newCustomer->customer_email = $request->customer_email;
         $newCustomer->customer_pwd = md5($request->customer_pwd);
         $newCustomer->customer_contact = $request->customer_contact;
-
+        $newCustomer->customer_token = strtoupper(Str::random(10));
         $isExist = Customer::select()->where('customer_email',  $newCustomer->customer_email)->exists();
 
         if(!$isExist)
         {
             $newCustomer->save();
+            Mail::send('emailValidateEmail', compact('newCustomer'), function($email) use($newCustomer){
+                $email->subject('VNHP Aution - Verify account');
+                $email->to($newCustomer->customer_email, $newCustomer->customer_name);
+            });
             return 1;
         }
        

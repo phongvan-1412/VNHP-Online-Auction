@@ -15,12 +15,16 @@ class CategoryAPI extends Controller
         return $categories;
     }
     public function AddCategory(Request $request){
-
         $newCategory = new Category();
         $newCategory->category_name =  $request->category_name;
-        $newCategory->category_img_name = $request->category_img_name;
-       
 
+        $category_img = $request->file('user_img_name');
+        $newCategory->category_img_name = time().'-'.'category.'. $request->img_extension;
+        $category_img->move(public_path('CategoryImg'),  time().'-'.'category.'.$request->img_extension);
+
+       
+       
+       
         $isExist = Category::select()->where('category_name',  $newCategory->category_name)->exists();
 
         if(!$isExist)
@@ -32,4 +36,9 @@ class CategoryAPI extends Controller
         return 0;         
             
     }
+    // table add category
+    public function AddCategoryTable(){
+
+    }
+
 }

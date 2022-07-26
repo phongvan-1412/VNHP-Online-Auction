@@ -25,7 +25,7 @@ function Register() {
       $result.text("Please enter your name");
       $result.css("color", "red");
     } else {
-      if (name.length < 4) {
+      if (name.length < 2) {
         $result.text(
           e.target.name.charAt(0).toUpperCase() +
             e.target.name.slice(1) +
@@ -50,7 +50,6 @@ function Register() {
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
   };
-
 
   const isValidPassword = (password) => {
     var validPassword = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
@@ -200,6 +199,7 @@ function Register() {
     axios
       .post(`http://127.0.0.1:8000/api/customerregister`, customer)
       .then(function (response) {
+        console.log(response.data)
         if (response.data > 0) {
           $("#firstname").text("");
           $("#lastname").text("");
@@ -208,7 +208,7 @@ function Register() {
           $("#confirmPassword").text("");
           $("#phonenumber").text("");
           
-          $("#registerResult").text("Register successfully.");
+          $("#registerResult").text("Register successfully. Please check your email.");
           $("#registerResult").css("color", "green");
         } else {
           $("#registerResult").text("Register Fail.");
@@ -217,7 +217,6 @@ function Register() {
       });
   };
 
-  
   const isEmailExists = () => {
     const $result = $("#emailResult");
     const customer_email = $("#email").val();
@@ -258,10 +257,10 @@ function Register() {
         </div>
       </div>
       <div className="col-5">
-        <div id="registerResult"></div>
+        <h4 id="registerResult" style={{position:"absolute"}}></h4>
         <div className="card form-control form-register">
-          <div className="">
-            <p className="title">* First Name</p>
+          <div className="register-form-control">
+            <label>* First Name</label>
             <input
               type="text"
               id="firstname"
@@ -272,8 +271,8 @@ function Register() {
             />
             <div id="firstnameResult" className="small font-italic form-waring-text"></div>
           </div>
-          <div>
-            <p className="title">* Last Name</p>
+          <div className="register-form-control">
+            <label>* Last Name</label>
             <input
               type="text"
               id="lastname"
@@ -284,8 +283,8 @@ function Register() {
             />
             <div id="lastnameResult" className="small font-italic form-waring-text"></div>
           </div>
-          <div>
-            <p className="title">* Email</p>
+          <div className="register-form-control">
+            <label>* Email</label>
             <input
               type="text"
               id="email"
@@ -295,8 +294,8 @@ function Register() {
             />
             <div id="emailResult" className="small font-italic form-waring-text"></div>
           </div>
-          <div>
-            <p className="title">* Password</p>
+          <div className="register-form-control">
+            <label>* Password</label>
             <input
               type="password"
               id="password"
@@ -306,8 +305,8 @@ function Register() {
             />
             <div id="passwordResult" className="small font-italic form-waring-text"></div>
           </div>
-          <div>
-            <p className="title">*Confirm Password</p>
+          <div className="register-form-control">
+            <label>*Confirm Password</label>
             <input
               type="password"
               id="confirmpassword"
@@ -317,8 +316,8 @@ function Register() {
             />
             <div id="confirmPasswordResult" className="small font-italic form-waring-text"></div>
           </div>
-          <div>
-            <p className="title">* Mobile Number</p>
+          <div className="register-form-control">
+            <label>* Mobile Number</label>
             <input
               type="text"
               id="phonenumber"
