@@ -15,15 +15,12 @@ function AddCategory() {
 
     const img_extension = name.substr(index, index + 4);
     let formData = new FormData();
-    formData.append("user_img_name", file);
+    formData.set("user_img_name", file);
     formData.set("img_extension", img_extension);
     formData.set("category_name",category_name);
-
-
    
-
     axios
-      .post(`http://127.0.0.1:8000/api/addcategory`, formData)
+      .post("http://127.0.0.1:8000/api/addcategory", formData)
       .then(function (response) {
         if (response.data>0)
         {
