@@ -93,13 +93,17 @@
     display: none;
 }
 /* ----------HEADER-CATEGORY DROP DOWN---------- */
+#menu-dropdown {
+    padding: 50px 0px;
+}
 #menu-dropdown .services-submenu{
     display: none;
 }
 #menu-dropdown:hover .services-submenu{
-    display: block;
+    display: inline-flex;
     width: 800px;
-    margin-top: 23px;
+    margin-left: -50px;
+    margin-top: 62px;
     align-items: center;
     background-color:whitesmoke;
     box-shadow: 1px 2px 2px 2px rgba(0,0,0,0.25);
@@ -417,7 +421,7 @@
     display: flex;
     width: calc(100% - 2 * var(--slider-padding));
     transform: translateX(calc(var(--slider-index) * -100%));
-    color: red;
+    transition: 350ms;
 }
 #product-grid-wrapper2, #product-grid-wrapper3{
     display: flex;
