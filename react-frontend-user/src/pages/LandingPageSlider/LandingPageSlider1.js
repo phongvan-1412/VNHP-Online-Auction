@@ -1,7 +1,4 @@
 import $ from "jquery";
-import { Link } from "react-router-dom";
-
-import { GiNextButton, GiPreviousButton } from "react-icons/gi";
 
 const LandingPageSlider1 = () => {
 
@@ -12,23 +9,52 @@ const LandingPageSlider1 = () => {
           <b>UP COMING AUCTIONS</b>
         </h4>
       </div>
+      
+      <div id="sliders">
+        <button className="handle left-handle">&#8249;</button>
+        <div id="product-grid-wrapper1">
 
-      <div id="product-grid-wrapper1">
-        
+        </div>
+        <button className="handle right-handle">&#x203A;</button>
       </div>
+      
 
-
-      {/* <div className="btn-click">
-        <button type="button" className="btn-previous">
-          <GiPreviousButton />
-        </button>
-        <button type="button" className=" btn-next">
-          <GiNextButton />
-        </button>
-      </div> */}
     </div>
   );
+  document.addEventListener("click", e => {
+    let handle;
+    if (e.target.matches(".handle")) {
+      handle = e.target;
+    }else{
+      handle = e.target.closest(".handle")
+    }
+    if (handle != null){
+      onHandleClick(handle)
+    }
+  })
 
+  let index = 0;
+  function onHandleClick(handle){
+    
+    let sliderIndex = $(':root').css("--slider-index")
+    
+    if (handle.classList.contains("left-handle")){
+      if(--sliderIndex < 0){
+        $(':root').css('--slider-index', 0);
+      }else{
+        $(':root').css('--slider-index', sliderIndex);
+      }
+      
+    }
+    if (handle.classList.contains("right-handle")){
+      if(++sliderIndex > index/5){
+        $(':root').css('--slider-index', 0);
+      }else{
+        $(':root').css('--slider-index', sliderIndex);
+
+      }
+    }
+  }
   function getData() {
     fetch("http://127.0.0.1:8000/api/selectallproducts", { method: "GET" })
       .then((res) => res.json())
@@ -66,10 +92,7 @@ const LandingPageSlider1 = () => {
                     products.product_id + products.product_name
                   ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
                 }, 1000);
-          // const tmp_wrapper = document.createElement("div");
-          //   tmp_wrapper.className = "row product-grid"
-          //   tmp.append(tmp_wrapper)
-                console.log(upcoming_auction)
+          
           const tmp = document.createElement("div");
             tmp.id = "product-grid" + products.product_id;
             
@@ -105,13 +128,15 @@ const LandingPageSlider1 = () => {
             tmp.append(tmp_icon);
 
 
-            tmp.className = "col-lg-3 col-md-4 col-xs-2 product-grid-item";
+            tmp.className = "product-grid-item";
             
           $("#product-grid-wrapper1").append(tmp);
         });
+        index = $(".product-grid-item").length;
       });
   }
   getData();
+  
 
   return slideItems;
 };

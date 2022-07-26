@@ -5,8 +5,6 @@ import { TopBar } from './TopBar'
 import { Routes, Route } from "react-router-dom"
 import DashBoard from "../components/Dashboard/DashBoard";
 import Bill from '../components/Bill/Bill'
-import AddCategory from '../form/AddCategory';
-import AddProduct from '../form/AddProduct';
 import "../css/admin1.css"
 import "../css/sb-admin-2.min.css"
 import TableProduct from '../form/TableProduct'

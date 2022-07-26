@@ -60,4 +60,12 @@ class CustomerApi extends Controller
 
         return $product_img;
     }
+
+    public function CustomerActivedEmail(Customer $customer, $token){
+        if($customer->token == $token){
+            $customer->update(['status'=>1]);
+            return redirect('/login')->with('succ-msg','Verify successfully');
+        }
+    }
+
 }

@@ -31,7 +31,7 @@ function UserProfile() {
     const img_extension = name.substr(tmp, tmp + 4);
 
     let formData = new FormData();
-    formData.append("user_img_name", file);
+    formData.set("user_img_name", file);
     formData.set("img_extension", img_extension);
 
     axios
