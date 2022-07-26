@@ -52,7 +52,7 @@ const Header = () => {
           Needhelp
         </Link> */}
         <div
-          style={{ height: "100px", marginTop: "77px" }}
+          style={{ height: "100px", marginTop: "77px"}}
           className="product "
         >
           <Link to="#" id="menu-dropdown" replace>
