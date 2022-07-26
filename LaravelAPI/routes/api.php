@@ -36,7 +36,8 @@ Route::get('/selectproductstop15', [ProductAPI::class, 'SelectProductsTop15ByCou
 Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
 //AddProductTable
 Route::get('/addproducttable',[ProductAPI::class,'AddProductTable']);
-
+//AddCategory
+Route::get('/addcategorytable',[CategoryAPI::class,'AddCategoryTable']);
 
 //BILL
 Route::post('/submitcart',[BillApi::class, 'InsertBill']);

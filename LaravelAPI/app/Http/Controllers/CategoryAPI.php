@@ -32,4 +32,9 @@ class CategoryAPI extends Controller
         return 0;         
             
     }
+    // table add category
+    public function AddCategoryTable(){
+        
+    }
+
 }
