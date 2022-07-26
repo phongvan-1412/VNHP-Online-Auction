@@ -20,13 +20,13 @@ const ProductItem = ({ product }) => {
           <img
             className="product-item-content product-img"
             name={product.product_id}
-            src={require(`../../../../../LaravelAPI/public/ProductImage/${product.product_img_name}`)}
+            // src={require(`../../../../../LaravelAPI/public/ProductImage/${product.product_img_name}`)}
           />
         </Link>
       </div>
 
       <div className="category-name">
-        {product.category_name.replace(/-/g, " ")}
+        {product.category_name}
       </div>
 
       <div className="product-name">
@@ -37,7 +37,7 @@ const ProductItem = ({ product }) => {
           className="product-name-item"
           onClick={onProductClicked}
         >
-          {product.product_name.replace(/-/g, " ")}
+          {product.product_name}
         </Link>
       </div>
 
