@@ -52,7 +52,7 @@ class Bill extends Component{
                 {this.state.ProductData.map((p,index) => {
                   return(
                     <tr>
-                      <td></td>
+                      <td key={index}></td>
                       <td>{p.product_id}</td>
                       <td>{p.bill_date}</td>
                       <td>{p.bill_payment}</td>

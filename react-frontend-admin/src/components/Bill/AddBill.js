@@ -12,7 +12,7 @@ export const AddBill = () => {
         const payment_mode_id = $('#payment_mode_id').val();
 
         let bill_status = 0;
-        if($('#bill_status').val() === "on"){
+        if($('#bill_status').val() == "on"){
             bill_status = 1;
         }
         const bill = {
@@ -22,29 +22,27 @@ export const AddBill = () => {
             customer_id,
             payment_mode_id,
             bill_status
-        }
-        const row = (<tr>
-                        <td></td>
-                        <td>{bill.product_id}</td>
-                        <td>{bill.bill_date}</td>
-                        <td>{bill.bill_payment}</td>
-                        <td>{bill.customer_id}</td>
-                        <td>{bill.payment_mode_id}</td>
-                        <td>{bill.bill_status}</td>
-                    </tr>)
+        };
+        // const row = (<tr>
+        //                 <td></td>
+        //                 <td>{bill.product_id}</td>
+        //                 <td>{bill.bill_date}</td>
+        //                 <td>{bill.bill_payment}</td>
+        //                 <td>{bill.customer_id}</td>
+        //                 <td>{bill.payment_mode_id}</td>
+        //                 <td>{bill.bill_status}</td>
+        //             </tr>)
         // console.log(bill_status);
-        axios.post("http://127.0.0.1:8000/api/insertbill", bill)
-        .then(function(response){
+    axios.post("http://127.0.0.1:8000/api/insertbill",bill).then(function(response){
             if(response.data == 1){
                 $('#msg').html("Add bill successfully").addClass("text-success").removeClass("text-danger");
-                // $('#bill-recordcds').append(<row/>)
             }else{
                 $('#msg').html("Fail to add").addClass("text-danger").removeClass("text-success");
             }
         })
     }
   return (
-    <div id="con-close-modal" className="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style={{display: "none"}}>
+    <div id="con-close-modal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style={{display: "none"}}>
         <div className="modal-dialog">
             <div className="modal-content">
                 <div>

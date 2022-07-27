@@ -7,6 +7,7 @@ use App\Models\NameSetting as Name;
 use App\Models\Bill;
 use App\Models\BillDetail;
 use App\Models\Product;
+use App\Models\Customer;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\DB;
@@ -51,10 +52,21 @@ class BillApi extends Controller
     public function SelectBill()
     {
         $bills = Bill::select()->get();
+        // $bills = DB::delete("delete from bill");
+        // $bills = DB::table('bill');
+        //     ->join('product', 'product.product_id','=','bill.product_id')
+        //     ->join('customer_account','customer_account.customer_id','=','bill.customer_id')
+        //     ->get();
         return $bills;
     }
+    public function RevenueEachMonth(){
+        return DB::select("Select month(convert(datetime, bill_date, 103)) as months, sum(bill_payment) as revenuses
+                            from bill where month(convert(datetime, bill_date, 103)) = ? group by month(convert(datetime, bill_date, 103))",[7]);
+        
 
-    public function InsertBill(request $request){
+    }
+
+    public function InsertBill(Request $request){
         $bill = new Bill();
         $bill->product_id = $request->product_id;
         $bill->bill_date = $request->bill_date;
@@ -65,23 +77,6 @@ class BillApi extends Controller
         $bill->save();
         return 1;
     }
-    // public function SelectBillDetail()
-    // {
-    //     $bill_details = DB::table('bill_detail')->get();
-    //     return $bill_details;
-    // }
 
-    // public function ProductCollection($arr)
-    // {
-    //     $collection = collect();
 
-    //     foreach($arr as $category)
-    //     {
-    //         $newCategory = new Product();
-    //         $newCategory = $category;
-    //         $collection->add($newCategory);
-    //         }
-
-    //     return $collection;
-    // }
 }
