@@ -33,6 +33,7 @@ import UserProfile from "./pages/UserAction/UserProfile";
 // }
 
 // setInterval(showTime, 1000);
+// localStorage.removeItem("customer_info");
 
 class HomePage extends Component {
   state = {

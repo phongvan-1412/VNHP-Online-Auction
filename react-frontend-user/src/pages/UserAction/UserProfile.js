@@ -2,51 +2,57 @@ import React from "react";
 import $ from "jquery";
 import axios from "axios";
 
-function UserProfile() {
-  const isUserLogin = () => {
-    let tmp = {};
-    JSON.parse(localStorage.getItem("customer_info")).map((user) => {
-      tmp = user;
-    });
-    $("#fullname").val(tmp.customer_name);
-    $("#fullname").prop("disabled", true);
-    $("#email").val(tmp.customer_email);
-    $("#address").val(tmp.customer_address);
-    $("#address").prop("disabled", true);
-    $("#phonenumber").val(tmp.customer_contact);
-    $("#phonenumber").prop("disabled", true);
-    $("#dateofbirth").val(tmp.customer_dob);
-    $("#dateofbirth").prop("disabled", true);
-  };
-
-  isUserLogin();
-
+function UserProfile({ userinfo, updateUserLogin }) {
   const changePassword = () => {};
 
   const saveChanges = () => {
-    const file = $("#user_img_name").prop("files")[0];
-    const name = file.name;
-    const tmp = name.indexOf(".");
+    const $result = $("#avatar-img-result");
 
-    const img_extension = name.substr(tmp, tmp + 4);
+    if ($("#user-avatar-img").prop("files")[0] == null) {
+      $result.text("Please choose your avatar.");
+      $result.css("color", "red");
+      return;
+    }
+    const customerImage = $("#user-avatar-img").prop("files")[0];
+    const customerImageName = customerImage.name;
+    const index = customerImageName.indexOf(".");
+    const img_extension = customerImageName.substr(index, index + 4);
+
+    const customer_name = $("#fullname").val();
+    const customer_email = $("#email").val();
+    const customer_address = $("#address").val();
+    const customer_contact = $("#contact").val();
+    const customer_dob = $("#dateofbirth").val();
 
     let formData = new FormData();
-    formData.set("user_img_name", file);
+    formData.set("user_avatar_image", customerImage);
     formData.set("img_extension", img_extension);
+    formData.set("customer_name", customer_name);
+    formData.set("customer_email", customer_email);
+    formData.set("customer_address", customer_address);
+    formData.set("customer_contact", customer_contact);
+    formData.set("customer_dob", customer_dob);
 
     axios
       .post(`http://127.0.0.1:8000/api/customerupdateinfo`, formData)
       .then(function (response) {
+        if (response.data == 0) {
+          console.log("false");
+        } else {
+          localStorage.removeItem("customer_info");
+          localStorage.setItem("customer_info", JSON.stringify(response.data));
+          updateUserLogin();
+        }
       });
   };
 
   function onAvatarChange() {
-    const file = $("#user_img_name").prop("files")[0];
+    const file = $("#user-avatar-img").prop("files")[0];
     let reader = new FileReader();
     reader.readAsDataURL(file);
 
     reader.onloadend = function () {
-      $("#avatar-img").prop('src', reader.result);
+      $("#avatar-img").prop("src", reader.result);
     };
   }
   return (
@@ -60,18 +66,14 @@ function UserProfile() {
             <img
               className="img-user-account-profile rounded-circle mb-2"
               id="avatar-img"
-              src={require(`../../img/Footer/image-1.jpg`)}
+              src={require(`../../../../LaravelAPI/public/UserImage/${userinfo.customer_img_name}`)}
             />
             <div className="small font-italic text-muted mb-4">
               JPG or PNG no larger than 5 MB
             </div>
-            <input
-              type="file"
-              id="user_img_name"
-              data-name="user_img_name"
-              onChange={onAvatarChange}
-            />
-            <div className="card mt-3">
+            <input type="file" id="user-avatar-img" onChange={onAvatarChange} />
+            <div id="avatar-img-result"></div>
+            <div className="card mt-3 change-password">
               <button
                 className="btn btn-primary"
                 id="changepwd"
@@ -92,29 +94,49 @@ function UserProfile() {
                 <label className="small mb-1" htmlFor="fullname">
                   Full name
                 </label>
-                <input className="form-control" id="fullname" type="text" />
+                <input
+                  className="form-control"
+                  id="fullname"
+                  type="text"
+                  placeholder={userinfo.customer_name}
+                />
               </div>
 
               <div className="mb-3">
                 <label className="small mb-1" htmlFor="email">
                   Email address
                 </label>
-                <input className="form-control" id="email" disabled />
+                <input
+                  className="form-control"
+                  id="email"
+                  disabled
+                  value={userinfo.customer_email}
+                />
               </div>
 
               <div className="mb-3">
                 <label className="small mb-1" htmlFor="address">
                   Address
                 </label>
-                <input className="form-control" id="address" type="text" />
+                <input
+                  className="form-control"
+                  id="address"
+                  type="text"
+                  placeholder={userinfo.customer_address}
+                />
               </div>
 
               <div className="row gx-3 mb-3">
                 <div className="col-md-6">
-                  <label className="small mb-1" htmlFor="phonenumber">
+                  <label className="small mb-1" htmlFor="contact">
                     Phone number
                   </label>
-                  <input className="form-control" id="phonenumber" type="tel" />
+                  <input
+                    className="form-control"
+                    id="contact"
+                    type="tel"
+                    placeholder={userinfo.customer_contact}
+                  />
                 </div>
                 <div className="col-md-6">
                   <label className="small mb-1" htmlFor="dateofbirth">
@@ -124,7 +146,7 @@ function UserProfile() {
                     className="form-control"
                     id="dateofbirth"
                     type="date"
-                    placeholder="Enter your birthday"
+                    placeholder={userinfo.customer_dob}
                   />
                 </div>
               </div>

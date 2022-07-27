@@ -9,7 +9,7 @@ use App\Models\Customer;
 use Mail;
 use Str;
 use Redirect;
-
+use File;
 class CustomerApi extends Controller
 {
     public function CustomerLogin(Request $request)
@@ -82,11 +82,39 @@ class CustomerApi extends Controller
 
     public function CustomerUpdateInfo(Request $request)
     {
-        $product_img = $request->file('user_img_name');
-        $product_img_name = time().'-'.'product.'.$request->img_extension;
-        $product_img->move(public_path('UserImage'), $product_img_name);
+        $customer = Customer::select()->where('customer_email',$request->customer_email)->get();
+        $tmp = new Customer();
 
-        return $product_img;
+        foreach($customer as $cus)
+        {
+            $tmp = $cus;
+        }
+
+        if($tmp->customer_img_name != 'default_account_image.jpg')
+        {
+            File::delete(public_path('UserImage/'.$tmp->customer_img_name));
+        }
+
+        if(count($customer) > 0)
+        {
+            Customer::select()->where('customer_email',$request->customer_email)
+                                            ->update(['customer_name'=>$request->customer_name,
+                                                    'customer_address'=>$request->customer_address,
+                                                    'customer_contact'=>$request->customer_contact,
+                                                    'customer_dob'=>$request->customer_dob,
+                                                    'customer_img_name'=>time().'-'.'user.'. $request->img_extension]);
+            $customer_avatar = $request->file('user_avatar_image');
+            $customer_avatar->move(public_path('UserImage'), time().'-'.'user.'. $request->img_extension);
+            $tmpCustomer = Customer::select()->where('customer_email',$request->customer_email)->get();
+
+            foreach($tmpCustomer as $cus)
+            {
+                $tmp = $cus;
+            }
+            return $tmpCustomer;
+        }
+
+        return 0;
     }
 
     public function CustomerActivedEmail($customer_id, $customer_token){

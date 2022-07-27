@@ -153,7 +153,6 @@ function Register() {
     } else {
       $("#btn-register").prop("disabled", true);
     }
-    console.log(isValidForm());
   };
 
   const isEmailExists = () => {
