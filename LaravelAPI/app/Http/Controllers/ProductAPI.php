@@ -51,13 +51,13 @@ class ProductAPI extends Controller
         $newProduct->product_thumbnail_img_name = time().'-'.'product.'.$request->img_extension;
 
         $product_img_name1 = $request->file('product_img_name1');
-        $newProduct->product_img_name1 = time().'-'.'product.'.$request->img_extension1;
+        $newProduct->product_img_name1 = time().'-'.'product1.'.$request->img_extension1;
 
         $product_img_name2 = $request->file('product_img_name2');
-        $newProduct->product_img_name2 =  time().'-'.'product.'.$request->img_extension2;
+        $newProduct->product_img_name2 =  time().'-'.'product2.'.$request->img_extension2;
 
         $product_img_name3 = $request->file('product_img_name3');
-        $newProduct->product_img_name3 = time().'-'.'product.'. $request->img_extension3;
+        $newProduct->product_img_name3 = time().'-'.'product3.'. $request->img_extension3;
 
         $newProduct->product_information =  $request->product_information;
         $newProduct->product_ingredients =  $request->product_ingredients;

@@ -13,24 +13,26 @@ function AddProduct() {
     const name2 = input_img2_product.name;
     const name3 = input_img3_product.name;
 
-    const index = name.indexOf(".");
+    const index = name.lastIndexOf(".");
     const img_extension = name.substr(index, index + 4);
 
-    const index1 = name1.indexOf(".");
+    const index1 = name1.lastIndexOf(".");
     const img_extension1 = name1.substr(index1, index1 + 4);
 
-    const index2 = name2.indexOf(".");
+    const index2 = name2.lastIndexOf(".");
     const img_extension2 = name2.substr(index2, index2 + 4);
 
-    const index3 = name3.indexOf(".");
+    const index3 = name3.lastIndexOf(".");
     const img_extension3 = name3.substr(index3, index3 + 4);
+
+    console.log(index)
+    console.log(img_extension)
 
     const product_name = $("#input-product_name").val().replace(/ /g,"-");
     const category_name = $("#input-category-id").val();
     const start_price = $("#input-price1-product").val();
     const start_aution_day = $("#input-start-aution-product").val();
     const end_aution_day = $("#input-end-aution-product").val();
-    const status = $("#input-status-product").val();
     const information = $("#input-information-product").val();
     const ingredients = $("#input-ingredients-product").val();
     const instruction_use = $("#input-instruction_use-product").val();
