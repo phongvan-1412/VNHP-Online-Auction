@@ -37,10 +37,8 @@ Route::get('/selectproductstop15', [ProductAPI::class, 'SelectProductsTop15ByCou
 Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
 Route::get('/addproducttable',[ProductAPI::class,'AddProductTable']);
 
-
 //BILL
 Route::post('/submitcart',[BillApi::class, 'InsertBill']);
-
 
 //CUSTOMER
 Route::post('/customerregister',[CustomerApi::class, 'CustomerRegister']);

@@ -25,45 +25,38 @@ function AddProduct() {
     const index3 = name3.indexOf(".");
     const img_extension3 = name3.substr(index3, index3 + 4);
 
-    const product_name = $("#input-product_name").val();
+    const product_name = $("#input-product_name").val().replace(/ /g,"-");
     const category_name = $("#input-category-id").val();
     const start_price = $("#input-price1-product").val();
-    const aution_price = $("#input-price2-product").val();
     const start_aution_day = $("#input-start-aution-product").val();
-    const end_autio_day = $("#input-end-aution-product").val();
+    const end_aution_day = $("#input-end-aution-product").val();
     const status = $("#input-status-product").val();
     const information = $("#input-information-product").val();
     const ingredients = $("#input-ingredients-product").val();
     const instruction_use = $("#input-instruction_use-product").val();
     const instruction_store = $("#input-instruction_store-product").val();
 
-
     let formData = new FormData();
-    formData.set("product_thumbnail_img",img_extension);
-    formData.set("product_img_name1",img_extension1);
-    formData.set("product_img_name2",img_extension2);
-    formData.set("product_img_name3",img_extension3);
+    formData.set("product_thumbnail_img",input_imgs_product);
+    formData.set("product_img_name1",input_img1_product);
+    formData.set("product_img_name2",input_img2_product);
+    formData.set("product_img_name3",input_img3_product);
+    formData.set("img_extension",img_extension);
+    formData.set("img_extension1",img_extension1);
+    formData.set("img_extension2",img_extension2);
+    formData.set("img_extension3",img_extension3);
     formData.set("product_name",product_name);
     formData.set("category_id",category_name);
     formData.set("product_start_price", start_price);
-    formData.set("product_aution_price",aution_price);
     formData.set("product_start_aution_day", start_aution_day);
-    formData.set("product_end_autio_day",end_autio_day);
-    formData.set("product_status", status);
+    formData.set("product_end_autio_day",end_aution_day);
     formData.set("product_information",information);
     formData.set("product_ingredients",ingredients);
     formData.set("product_instruction_use",instruction_use);
     formData.set("product_instruction_store",instruction_store);
 
-
-
-
-
-
-
-   
     axios
-    .post(`http://127.0.0.1:8000/api/addproduct`, )
+    .post(`http://127.0.0.1:8000/api/addproduct`, formData)
     .then(function (response) {
       if (response.data>0)
       {
@@ -94,7 +87,7 @@ function AddProduct() {
                 <div className="form-group">
                   <label className="control-label" htmlFor="id">Category Name</label>
                   <select  className="form-control " >
-                    <option id="input-category-id">Category</option>
+                    <option id="input-category-id">{1}</option>
                   </select>
                 </div>
               </div>
@@ -179,7 +172,7 @@ function AddProduct() {
               <div className="col-md-6">
                 <div className="form-group">
                   <label className="control-label" htmlFor="id">Instruction store</label>
-                  <textarea className="form-control " id="input-instructionuse_store-product" />
+                  <textarea className="form-control " id="input-instruction_store-product" />
                 </div>
               </div>
             </div>

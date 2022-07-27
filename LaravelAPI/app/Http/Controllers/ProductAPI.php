@@ -46,27 +46,26 @@ class ProductAPI extends Controller
         $newProduct = new Product();
         $newProduct->product_name =  $request->product_name;
         $newProduct->category_id =  $request->category_id;
+
         $product_thumbnail_img = $request->file('product_thumbnail_img');
-        $newProduct->product_thumnail_img_name = time().'-'.'product.'. $request->img_extension;
+        $newProduct->product_thumbnail_img_name = time().'-'.'product.'.$request->img_extension;
+
         $product_img_name1 = $request->file('product_img_name1');
-        $newProduct->product_img1_name = time().'-'.'product.'. $request->img_extension1;
+        $newProduct->product_img_name1 = time().'-'.'product.'.$request->img_extension1;
+
         $product_img_name2 = $request->file('product_img_name2');
-        $newProduct->product_img2_name =  time().'-'.'product.'. $request->img_extension2;
+        $newProduct->product_img_name2 =  time().'-'.'product.'.$request->img_extension2;
+
         $product_img_name3 = $request->file('product_img_name3');
-        $newProduct->product_img3_name = time().'-'.'product.'.  $request->img_extension3;
+        $newProduct->product_img_name3 = time().'-'.'product.'. $request->img_extension3;
 
-        $newProduct->product_information =  $request->information;
-        $newProduct->product_ingredients =  $request->ingredients;
-        $newProduct->product_instruction_store =  $request->instruction_store;
-        $newProduct->product_instruction_use =  $request->instruction_use;
-        $newProduct->product_price_aution =  $request->aution_price ;
-        $newProduct->product_price_start =  $request->start_price;
-        $newProduct->product_start_aution_day=  $request->start_aution_day;
-        $newProduct->product_end_aution_day=  $request->end_aution_day;
-
-
-
-
+        $newProduct->product_information =  $request->product_information;
+        $newProduct->product_ingredients =  $request->product_ingredients;
+        $newProduct->product_instruction_store =  $request->product_instruction_store;
+        $newProduct->product_instruction_use =  $request->product_instruction_use;
+        $newProduct->product_start_price =  $request->product_start_price;
+        $newProduct->product_start_aution_day=  $request->product_start_aution_day;
+        $newProduct->product_end_aution_day=  $request->product_end_aution_day;
 
         $isExist = Product::select()->where('product_name',$newProduct->product_name)->exists();
 
@@ -83,6 +82,5 @@ class ProductAPI extends Controller
         }
        
         return 0;         
-            
     }
 }
