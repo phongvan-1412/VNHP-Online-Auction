@@ -2,27 +2,37 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Link } from "react-router-dom";
 import { FaFacebook, FaInstagramSquare, FaTwitter } from "react-icons/fa";
 import Dropdown from "./DropdownNavBar/Dropdown";
+import axios from "axios";
 
-const Header = ({categories}) => {
-  const buttonLogOutClick = () => {
-    localStorage.removeItem("customer_info");
-    window.location.href = "http://localhost:3000/";
-  };
-
+const Header = ({ categories }) => {
   let checkUser = false;
   let userName = "";
-  const isUserLogin = () => {
-    let tmp = {};
+  let customer = {};
 
-    if (localStorage.getItem("customer_info") != null) {
-      JSON.parse(localStorage.getItem("customer_info")).map((user) => {
-        tmp = user;
-      });
+  const isUserLogin = () => {
+    if (localStorage.getItem("customer_info") == null) return;
+    else {
+      customer = JSON.parse(localStorage.getItem("customer_info"));
       checkUser = true;
-      userName = tmp.customer_name;
+      userName = customer.customer_name;
     }
   };
   isUserLogin();
+
+  const buttonLogOutClick = () => {
+    const customer_id = customer.customer_id;
+    axios
+      .post(`http://127.0.0.1:8000/api/customerlogout`, {customer_id})
+      .then(function (response) {
+        if (response.data > 0) {
+          localStorage.removeItem("customer_info");
+          window.location.href = "http://localhost:3000/";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div
@@ -52,20 +62,20 @@ const Header = ({categories}) => {
           Needhelp
         </Link> */}
         <div
-          style={{ height: "100px", marginTop: "77px"}}
+          style={{ height: "100px", marginTop: "77px" }}
           className="product "
         >
           <Link to="#" id="menu-dropdown" replace>
             Product
             <div className="services-submenu" style={{ position: "absolute" }}>
-              <Dropdown categories={categories}/>
+              <Dropdown categories={categories} />
             </div>
           </Link>
         </div>
 
         {checkUser ? (
           <div>
-            <Link to="/userprofile" replace className="userprofile">
+            <Link to="/userprofile" replace>
               {userName}
             </Link>
 
@@ -88,7 +98,7 @@ const Header = ({categories}) => {
         <a href="https://www.facebook.com/" className="meta-facebook">
           <FaFacebook />
         </a>
-        
+
         <a href="https://www.instagram.com/?hl=en" className="meta-instagram">
           <FaInstagramSquare />
         </a>

@@ -33,6 +33,19 @@ class CustomerApi extends Controller
         return 0;
     }
 
+    public function CustomerLogOut(Request $request)
+    {
+        $user = Customer::select()->where('customer_id', $request->customer_id)->get();
+        
+        if(count($user) > 0)
+        {
+            Customer::select()->where('customer_id', $request->customer_id)->update(['customer_login_status'=>0]);
+            return 1;
+        }
+        return 0;
+    }
+    
+
     public function CustomerRegister(Request $request)
     {
         $newCustomer = new Customer();

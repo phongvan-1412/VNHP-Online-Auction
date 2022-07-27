@@ -46,6 +46,7 @@ Route::post('/submitcart',[BillApi::class, 'InsertBill']);
 Route::post('/customerregister',[CustomerApi::class, 'CustomerRegister']);
 Route::post('/isemailexists',[CustomerApi::class, 'IsEmailExists']);
 Route::post('/customerlogin',[CustomerApi::class, 'CustomerLogin']);
+Route::post('/customerlogout',[CustomerApi::class, 'CustomerLogOut']);
 Route::post('/customerupdateinfo',[CustomerApi::class, 'CustomerUpdateInfo']);
 Route::get('/customerinfo',[CustomerApi::class, 'CustomerInfo']);
 
