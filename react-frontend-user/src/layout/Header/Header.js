@@ -22,7 +22,7 @@ const Header = ({ categories }) => {
   const buttonLogOutClick = () => {
     const customer_id = customer.customer_id;
     axios
-      .post(`http://127.0.0.1:8000/api/customerlogout`, {customer_id})
+      .post(`http://127.0.0.1:8000/api/customerlogout`, { customer_id })
       .then(function (response) {
         if (response.data > 0) {
           localStorage.removeItem("customer_info");

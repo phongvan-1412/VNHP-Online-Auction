@@ -4,7 +4,6 @@ import axios from "axios";
 
 function UserProfile({ userinfo, updateUserLogin }) {
   const changePassword = () => {};
-
   const saveChanges = () => {
     const $result = $("#avatar-img-result");
 
@@ -39,9 +38,11 @@ function UserProfile({ userinfo, updateUserLogin }) {
         if (response.data == 0) {
           console.log("false");
         } else {
-          localStorage.removeItem("customer_info");
+          console.log(localStorage.getItem("customer_info"));
+          // localStorage.removeItem("customer_info");
           localStorage.setItem("customer_info", JSON.stringify(response.data));
           updateUserLogin();
+          window.location.href = "http://localhost:3000";
         }
       });
   };
@@ -66,7 +67,7 @@ function UserProfile({ userinfo, updateUserLogin }) {
             <img
               className="img-user-account-profile rounded-circle mb-2"
               id="avatar-img"
-              src={require(`../../../../LaravelAPI/public/UserImage/${userinfo.customer_img_name}`)}
+              // src={require(`../../../../LaravelAPI/public/UserImage/${userinfo.customer_img_name}`)}
             />
             <div className="small font-italic text-muted mb-4">
               JPG or PNG no larger than 5 MB

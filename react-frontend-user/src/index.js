@@ -40,6 +40,7 @@ class HomePage extends Component {
     products: [],
     categories: [],
     customers: [],
+    userinfo: {},
   };
 
   componentDidMount() {
@@ -69,9 +70,24 @@ class HomePage extends Component {
       .catch((err) => {
         console.log(err);
       });
+    this.setState({
+      userinfo: JSON.parse(localStorage.getItem("customer_info")),
+    });
   }
 
   render() {
+    const customerLogin = () => {
+      this.setState({
+        userinfo: JSON.parse(localStorage.getItem("customer_info")),
+      });
+    };
+
+    const customerLogOut = () => {
+      this.setState({
+        userinfo: {},
+      });
+    };
+
     return (
       <div>
         <div id="data" hidden></div>
@@ -92,11 +108,14 @@ class HomePage extends Component {
           <Route path="/contactus" element={<Contact />}></Route>
 
           {/* UserAction  */}
-          <Route path="/login" element={<Login />}></Route>
+          <Route
+            path="/login"
+            element={<Login customerLogin={customerLogin} />}
+          ></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route
             path="/userprofile"
-            element={<UserProfile userinfo={this.state.userinfo} />}
+            element={<UserProfile userinfo={this.state.userinfo} updateUserLogin={customerLogin}/>}
           ></Route>
           <Route
             path="/forgetpassword"

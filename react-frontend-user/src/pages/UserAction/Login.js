@@ -17,7 +17,7 @@ class Login extends Component {
     this.slider.slickPrev();
   }
   render() {
-    const {updateUserLogin} = this.props;
+    const {customerLogin} = this.props;
     const settings = {
       dots: false,
       infinite: true,
@@ -97,7 +97,7 @@ class Login extends Component {
               "customer_info",
               JSON.stringify(response.data)
             );
-            // updateUserLogin();
+            customerLogin();
             setInterval(showTime, 5000);
           }
         })
