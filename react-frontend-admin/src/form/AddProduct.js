@@ -119,7 +119,10 @@ function AddProduct() {
                 </div>
               </div>
               <div className="col-md-6">
-                
+                <div className="form-group">
+                  <label className="control-label">Start Aution Day</label>
+                  <input className="form-control " id="input-start-aution-product"  type="date" />
+                </div>
               </div>
             </div>
             <div className="row">
@@ -131,8 +134,8 @@ function AddProduct() {
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label className="control-label">Start Aution Day</label>
-                  <input className="form-control " id="input-start-aution-product"  type="date" />
+                  <label className="control-label">End Aution Day</label>
+                  <input className="form-control " id="input-end-aution-product" type="date"/>
                 </div>
               </div>
             </div>
@@ -145,17 +148,6 @@ function AddProduct() {
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label className="control-label">End Aution Day</label>
-                  <input className="form-control " id="input-end-aution-product" type="date"/>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
                   <label className="control-label" htmlFor="id">Status</label>
                   <label className="switch">
                     <input name="category_status" type="checkbox" id="input-status-product"/>
@@ -164,6 +156,7 @@ function AddProduct() {
                 </div>
               </div>
             </div>
+            
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
