@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Header from "./layout/Header/Header";
 import About from "./pages/AboutUs/About";
 import Contact from "./pages/Contact/Contact";
-import LandingPage from './pages/LandingPageSlider/LandingPage';
+import LandingPage from "./pages/LandingPageSlider/LandingPage";
 import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
 import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
 import Footer from "./layout/Footer";
@@ -38,7 +38,7 @@ class HomePage extends Component {
   state = {
     products: [],
     categories: [],
-    userinfo: [],
+    customers: [],
   };
 
   componentDidMount() {
@@ -46,11 +46,27 @@ class HomePage extends Component {
       .then((products) => products.json())
       .then((products) => {
         this.setState({ products: products });
+      })
+      .catch((err) => {
+        console.log(err);
       });
+
     fetch("http://127.0.0.1:8000/api/selectcategories", { method: "GET" })
       .then((categories) => categories.json())
       .then((categories) => {
         this.setState({ categories: categories });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    fetch("http://127.0.0.1:8000/api/customerinfo", { method: "GET" })
+      .then((customers) => customers.json())
+      .then((customers) => {
+        this.setState({ customers: customers });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -58,10 +74,18 @@ class HomePage extends Component {
     return (
       <div>
         <div id="data" hidden></div>
-        <Header categories={this.state.categories}/>
+        <Header categories={this.state.categories} />
         <Routes>
           {/* Home  */}
-          <Route path="/" element={<LandingPage products={this.state.products} categories={this.state.categories}/>}></Route>
+          <Route
+            path="/"
+            element={
+              <LandingPage
+                products={this.state.products}
+                categories={this.state.categories}
+              />
+            }
+          ></Route>
 
           <Route path="/about" element={<About />}></Route>
           <Route path="/contactus" element={<Contact />}></Route>
@@ -69,7 +93,10 @@ class HomePage extends Component {
           {/* UserAction  */}
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
-          <Route path="/userprofile" element={<UserProfile userinfo={this.state.userinfo}/>}></Route>
+          <Route
+            path="/userprofile"
+            element={<UserProfile userinfo={this.state.userinfo} />}
+          ></Route>
           <Route
             path="/forgetpassword"
             element={
@@ -86,7 +113,12 @@ class HomePage extends Component {
             <Route
               key={category.category_id}
               path={`/${category.category_name}`}
-              element={<ProductByCategory products={this.state.products}category={category}/>}
+              element={
+                <ProductByCategory
+                  products={this.state.products}
+                  category={category}
+                />
+              }
             ></Route>
           ))}
 
@@ -95,7 +127,13 @@ class HomePage extends Component {
             <Route
               key={product.product_SKU}
               path={`/${product.category_id}/${product.product_name}`}
-              element={<ProductDetail products={this.state.products} categories={this.state.categories} product={product}/>}
+              element={
+                <ProductDetail
+                  products={this.state.products}
+                  categories={this.state.categories}
+                  product={product}
+                />
+              }
             ></Route>
           ))}
         </Routes>

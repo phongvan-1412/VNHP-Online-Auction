@@ -15,7 +15,6 @@ function Register() {
   let checkValidPassword = false;
   let checkValidConfirmPassword = false;
   let checkValidPhoneNumber = false;
-  let checkEmailExists = 0;
 
   const onNameBlur = (e) => {
     const $result = $("#" + e.target.name + "Result");
@@ -154,7 +153,43 @@ function Register() {
     } else {
       $("#btn-register").prop("disabled", true);
     }
+    console.log(isValidForm());
   };
+
+  const isEmailExists = () => {
+    const $result = $("#emailResult");
+    const customer_email = $("#email").val();
+    const checkEmail = { customer_email };
+    $result.text("");
+
+    axios
+      .post(`http://127.0.0.1:8000/api/isemailexists`, checkEmail)
+      .then(function (response) {
+        if (!customer_email) {
+          $result.text("*Please enter your email");
+          $result.css("color", "red");
+        } else {
+          if (isValidEmail(customer_email)) {
+            if (response.data > 0) {
+              $result.text(customer_email + " already exists.");
+              $result.css("color", "red");
+            } else {
+              $result.text(customer_email + " is valid.");
+              $result.css("color", "green");
+              checkValidEmail = true;
+            }
+          } else {
+            $result.text(customer_email + " is not valid email.");
+            $result.css("color", "red");
+          }
+        }
+        buttonRegisterSetter();
+      });
+  };
+
+  function showTime() {
+    window.location.href = "http://localhost:3000/login";
+  }
 
   const buttonRegisterOnClick = () => {
     if (
@@ -185,6 +220,12 @@ function Register() {
 
       return;
     }
+
+    // let customer_ip = {};
+    // $.getJSON("https://api.db-ip.com/v2/free/self", function (data) {
+    //   customer_ip = data.ipAddress;
+    // });
+
     const customer_name = $("#firstname").val() + " " + $("#lastname").val();
     const customer_email = $("#email").val();
     const customer_pwd = $("#password").val();
@@ -195,12 +236,12 @@ function Register() {
       customer_email,
       customer_pwd,
       customer_contact,
+      // customer_ip,
     };
 
     axios
       .post(`http://127.0.0.1:8000/api/customerregister`, customer)
       .then(function (response) {
-        console.log(response.data)
         if (response.data > 0) {
           $("#firstname").text("");
           $("#lastname").text("");
@@ -208,48 +249,18 @@ function Register() {
           $("#password").text("");
           $("#confirmPassword").text("");
           $("#phonenumber").text("");
-          
-          $("#registerResult").text("Register successfully. Please check your email.");
+
+          $("#registerResult").text(
+            "Register successfully. Please check your email.Redirecting to login."
+          );
           $("#registerResult").css("color", "green");
+          setInterval(showTime, 5000);
         } else {
           $("#registerResult").text("Register Fail.");
           $("#registerResult").css("color", "red");
         }
       });
   };
-
-  const isEmailExists = () => {
-    const $result = $("#emailResult");
-    const customer_email = $("#email").val();
-    const checkEmail = {customer_email};
-    $result.text("");
-
-    axios
-      .post(`http://127.0.0.1:8000/api/isemailexists`, checkEmail)
-      .then(function (response) {
-        if (!customer_email) {
-          $result.text("*Please enter your email");
-          $result.css("color", "red");
-        } else {
-          if (isValidEmail(customer_email)) {
-            if (response.data > 0) {
-              $result.text(customer_email + " already exists.");
-              $result.css("color", "red");
-            } else {
-              $result.text(customer_email + " is valid.");
-              $result.css("color", "green");
-              checkValidEmail = true;
-            }
-          } else {
-            $result.text(customer_email + " is not valid email.");
-            $result.css("color", "red");
-          }
-        }
-        buttonRegisterSetter();
-      });
-  };
-
-  console.log($("#data").data('categories'));
 
   return (
     <div className="row">
@@ -260,7 +271,7 @@ function Register() {
         </div>
       </div>
       <div className="col-5">
-        <h4 id="registerResult" style={{position:"absolute"}}></h4>
+        <h5 id="registerResult" style={{ position: "absolute" }}></h5>
         <div className="card form-control form-register">
           <div className="register-form-control">
             <label>* First Name</label>
@@ -272,7 +283,10 @@ function Register() {
               required
               onBlur={onNameBlur}
             />
-            <div id="firstnameResult" className="small font-italic form-waring-text"></div>
+            <div
+              id="firstnameResult"
+              className="small font-italic form-waring-text"
+            ></div>
           </div>
           <div className="register-form-control">
             <label>* Last Name</label>
@@ -284,7 +298,10 @@ function Register() {
               className="form-control"
               onBlur={onNameBlur}
             />
-            <div id="lastnameResult" className="small font-italic form-waring-text"></div>
+            <div
+              id="lastnameResult"
+              className="small font-italic form-waring-text"
+            ></div>
           </div>
           <div className="register-form-control">
             <label>* Email</label>
@@ -295,7 +312,10 @@ function Register() {
               required
               onBlur={isEmailExists}
             />
-            <div id="emailResult" className="small font-italic form-waring-text"></div>
+            <div
+              id="emailResult"
+              className="small font-italic form-waring-text"
+            ></div>
           </div>
           <div className="register-form-control">
             <label>* Password</label>
@@ -306,7 +326,10 @@ function Register() {
               required
               onBlur={onPasswordBlur}
             />
-            <div id="passwordResult" className="small font-italic form-waring-text"></div>
+            <div
+              id="passwordResult"
+              className="small font-italic form-waring-text"
+            ></div>
           </div>
           <div className="register-form-control">
             <label>*Confirm Password</label>
@@ -317,7 +340,10 @@ function Register() {
               required
               onBlur={onConfirmPasswordBlur}
             />
-            <div id="confirmPasswordResult" className="small font-italic form-waring-text"></div>
+            <div
+              id="confirmPasswordResult"
+              className="small font-italic form-waring-text"
+            ></div>
           </div>
           <div className="register-form-control">
             <label>* Mobile Number</label>
@@ -328,7 +354,10 @@ function Register() {
               required
               onBlur={onPhoneNumberBlur}
             />
-            <div id="phonenumberResult" className="small font-italic form-waring-text"></div>
+            <div
+              id="phonenumberResult"
+              className="small font-italic form-waring-text"
+            ></div>
           </div>
 
           <span id="mostro">Don't have a date yet? Enter your best guess.</span>

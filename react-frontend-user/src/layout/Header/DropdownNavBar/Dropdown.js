@@ -3,27 +3,6 @@ import React, { Component } from "react";
 import $ from "jquery";
 
 const Dropdown = ({categories}) => {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     categories: [],
-  //   };
-  // }
-
-  // componentDidMount() {
-  //   fetch("http://127.0.0.1:8000/api/selectcategories", {
-  //     method: "GET",
-  //   })
-  //     .then((response) => response.json())
-  //     .then((response) => {
-  //       this.setState({ categories: response });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-
-  //   fetch("http://127.0.0.1:8000/api/selectcategories");
-  // }
 
     const element = (
       <ul className="services-submenu">

@@ -14,9 +14,23 @@ class CustomerApi extends Controller
 {
     public function CustomerLogin(Request $request)
     {
-        $user = Customer::select()->where('customer_email', $request->customer_email)->where('customer_pwd', md5($request->customer_pwd))->get();
+        $users = Customer::select()->where('customer_email', $request->customer_email)->where('customer_pwd', md5($request->customer_pwd))->get();
+        $tmpUser = new Customer();
         
-        return $user;
+        foreach($users as $user)
+        {
+            $tmpUser = $user;
+        }
+
+        if($tmpUser->customer_status < 1){
+             return 2;
+        }
+        else{
+            Customer::select()->where('customer_email', $request->customer_email)->where('customer_pwd', md5($request->customer_pwd))->update(['customer_login_status'=>1]);
+            return $tmpUser;
+        }
+
+        return 0;
     }
 
     public function CustomerRegister(Request $request)
@@ -27,6 +41,8 @@ class CustomerApi extends Controller
         $newCustomer->customer_pwd = md5($request->customer_pwd);
         $newCustomer->customer_contact = $request->customer_contact;
         $newCustomer->customer_token = strtoupper(Str::random(10));
+        // $newCustomer->customer_ip = $request->customer_ip;
+
         $isExist = Customer::select()->where('customer_email',  $newCustomer->customer_email)->exists();
 
         if(!$isExist)
@@ -68,5 +84,9 @@ class CustomerApi extends Controller
             $url = "http://localhost:3000/login";
             return Redirect::intended($url);
         }
+    }
+    public function CustomerInfo()
+    {
+        return Customer::select()->get();
     }
 }

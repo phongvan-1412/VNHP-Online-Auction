@@ -31,6 +31,7 @@ class Login extends Component {
     };
 
     let checkValidEmail = 0;
+
     const validateEmail = () => {
       const $result = $("#emailResult");
       const customer_email = $("#email").val();
@@ -61,28 +62,61 @@ class Login extends Component {
       }
     };
 
+    function showTime() {
+      window.location.href = "http://localhost:3000";
+    }
     const buttonLoginOnClick = () => {
+      if (!$("#email").val() == true || !$("#password").val() == true) {
+        $("#emailResult").text("Please enter your email");
+        $("#emailResult").css("color", "red");
+
+        $("#loginResult").text("Please enter your pasword");
+        $("#loginResult").css("color", "red");
+        return;
+      }
       const customer_email = $("#email").val();
       const customer_pwd = $("#password").val();
+      const $result = $("#loginResult");
+
       const customer = { customer_email, customer_pwd };
 
       axios
         .post(`http://127.0.0.1:8000/api/customerlogin`, customer)
         .then((response) => {
-          if (response.data.length < 1) {
-            const $result = $("#loginResult");
-            $result.text("Wrong password.");
+          if (response.data > 1) {
+            $result.text("Please check your validate email.");
+            $result.css("color", "red");
+          } else if (response.data.length < 1) {
+            $result.text("Please check your pasword");
             $result.css("color", "red");
           } else {
+            $result.text("Login successfully. Redirect to Home");
+            $result.css("color", "green");
             localStorage.setItem(
               "customer_info",
               JSON.stringify(response.data)
             );
-            window.location.href = "http://localhost:3000/";
+            setInterval(showTime, 5000);
           }
+        })
+        .catch((err) => {
+          console.log(err);
         });
     };
 
+    const checkPassword = () => {
+      const $result = $("#loginResult");
+
+      if (!$("#password").val()) {
+        $result.text("Please enter your pasword.");
+        $result.css("color", "red");
+      } else if ($("#password").val().length < 6) {
+        $result.text("Password too short.");
+        $result.css("color", "red");
+      } else {
+        $result.text("");
+      }
+    };
     return (
       <div className="row">
         <div className="col-2"></div>
@@ -106,7 +140,12 @@ class Login extends Component {
             <label htmlFor="exampleInputPassword1" className="">
               Password
             </label>
-            <input type="password" className="form-control" id="password" />
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              onBlur={checkPassword}
+            />
             <div
               id="loginResult"
               className="small font-italic form-waring-text"
