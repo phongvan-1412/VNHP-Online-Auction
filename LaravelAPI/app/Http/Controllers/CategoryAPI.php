@@ -17,7 +17,7 @@ class CategoryAPI extends Controller
     public function AddCategory(Request $request){
         $newCategory = new Category();
         $newCategory->category_name =  $request->category_name;
-        $category_img = $request->file('user_img_name');
+        $category_img = $request->file('category_img');
         $newCategory->category_img_name = time().'-'.'category.'. $request->img_extension;
 
         $isExist = Category::select()->where('category_name',  $request->category_name)->exists();

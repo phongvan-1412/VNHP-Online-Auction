@@ -3,50 +3,74 @@ import $ from "jquery";
 import axios from "axios";
 function AddProduct() {
   const productElement = () => {
-       var current = new Date();
-    
-      let text = current.toLocaleDateString()+current.toLocaleTimeString();
-      
-      let result = text.replace("/", "");
-      let h = result.replace("/", "");
-      let n = h.replace(":", "");
-      let g = n.replace(":", "");
-      let p = g.replace("PM", "");
-      let a = p.replace("AM","")
-      let hanh = a.replace(" ","_thumbnail")
-      let q = a.replace(" ","-img_name1")
-      let r = a.replace(" ","-img_name2")
-      let i = a.replace(" ","-img_name3")
-console.log(result)
-    let index  = ($("#input-imgs-product").val()).indexOf(".");
-    var product_name = ($("#input-product_name").val())
-    var category_id = ($("#input-category-id").val())
+       
+    const input_imgs_product = $("#input-imgs-product").prop("files")[0];
+    const input_img1_product = $("#input-img1-product").prop("files")[0];
+    const input_img2_product= $("#input-img2-product").prop("files")[0];
+    const input_img3_product= $("#input-img3-product").prop("files")[0];
+    const name = input_imgs_product.name;
+    const name1 = input_img1_product.name;
+    const name2 = input_img2_product.name;
+    const name3 = input_img3_product.name;
 
-    var product_thumbnail_img_name = ((hanh)+($("#input-imgs-product").val()).substring(index, index + 5));
-    var product_img_name1 = ((q)+($("#input-img1-product").val()).substring(index, index + 5));
-    var product_img_name2 = ((r)+($("#input-img2-product").val()).substring(index, index + 5));
-    var product_img_name3 = ((i)+($("#input-img3-product").val()).substring(index, index + 5));
-    var information_product = ($("#input-information-product").val())
-    var ingredients_product= ($("#input-ingredients-product").val())
-    var instruction_product =($("#input-instructionuse-product").val())
-    var instruction_product =($("#input-instructionstore-product").val())
-    var prices_product = ($("#input-prices-product").val())
-    var price1_product = ($("#input-price1-product").val())
-    var price2_product = ($("#input-price2-product").val())
-    var quantity_product = ($("#input-quantity-product").val())
-    var status_product = ($("#input-status-product").val())
-    var input_start_aution_product = ($("#input-start-aution-product").val())
-    var input_end_aution_product = ($("#input-end-aution-product").val())
-   let product ={product_name,category_id,product_thumbnail_img_name,product_img_name2 ,
-    product_img_name3, product_img_name1,information_product, ingredients_product,
-    instruction_product,prices_product, price1_product,price2_product,quantity_product,status_product,
-    input_start_aution_product,input_end_aution_product
-  }
+    const index = name.indexOf(".");
+    const img_extension = name.substr(index, index + 4);
+
+    const index1 = name1.indexOf(".");
+    const img_extension1 = name1.substr(index1, index1 + 4);
+
+    const index2 = name2.indexOf(".");
+    const img_extension2 = name2.substr(index2, index2 + 4);
+
+    const index3 = name3.indexOf(".");
+    const img_extension3 = name3.substr(index3, index3 + 4);
+
+    const product_name = $("#input-product_name").val();
+    const category_name = $("#input-category-id").val();
+    const start_price = $("#input-price1-product").val();
+    const aution_price = $("#input-price2-product").val();
+    const start_aution_day = $("#input-start-aution-product").val();
+    const end_autio_day = $("#input-end-aution-product").val();
+    const status = $("#input-status-product").val();
+    const information = $("#input-information-product").val();
+    const ingredients = $("#input-ingredients-product").val();
+    const instruction_use = $("#input-instruction_use-product").val();
+    const instruction_store = $("#input-instruction_store-product").val();
+
+
+    let formData = new FormData();
+    formData.set("product_thumbnail_img",img_extension);
+    formData.set("product_img_name1",img_extension1);
+    formData.set("product_img_name2",img_extension2);
+    formData.set("product_img_name3",img_extension3);
+    formData.set("product_name",product_name);
+    formData.set("category_id",category_name);
+    formData.set("product_start_price", start_price);
+    formData.set("product_aution_price",aution_price);
+    formData.set("product_start_aution_day", start_aution_day);
+    formData.set("product_end_autio_day",end_autio_day);
+    formData.set("product_status", status);
+    formData.set("product_information",information);
+    formData.set("product_ingredients",ingredients);
+    formData.set("product_instruction_use",instruction_use);
+    formData.set("product_instruction_store",instruction_store);
+
+
+
+
+
+
+
    
     axios
-    .post(`http://127.0.0.1:8000/api/addproduct`, product)
+    .post(`http://127.0.0.1:8000/api/addproduct`, )
     .then(function (response) {
-      
+      if (response.data>0)
+      {
+        console.log('success')
+      }else{
+        console.log('false')
+      }
     });
 
   }
@@ -95,10 +119,7 @@ console.log(result)
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label">Aution Price</label>
-                  <input className="form-control " id="input-price2-product" />
-                </div>
+                
               </div>
             </div>
             <div className="row">
@@ -131,10 +152,7 @@ console.log(result)
             </div>
             <div className="row">
               <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label" htmlFor="id">Price</label>
-                  <input type="text" className="form-control" id="input-prices-product" />
-                </div>
+                
               </div>
               <div className="col-md-6">
                 <div className="form-group">
@@ -162,13 +180,13 @@ console.log(result)
               <div className="col-md-6">
                 <div className="form-group">
                   <label className="control-label" htmlFor="id">Instruction use</label>
-                  <textarea className="form-control " id="input-instructionuse-product" />
+                  <textarea className="form-control " id="input-instruction_use-product" />
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group">
                   <label className="control-label" htmlFor="id">Instruction store</label>
-                  <textarea className="form-control " id="input-instructionusestore-product" />
+                  <textarea className="form-control " id="input-instructionuse_store-product" />
                 </div>
               </div>
             </div>

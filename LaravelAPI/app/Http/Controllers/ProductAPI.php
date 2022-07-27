@@ -46,18 +46,23 @@ class ProductAPI extends Controller
         $newProduct = new Product();
         $newProduct->product_name =  $request->product_name;
         $newProduct->category_id =  $request->category_id;
-        $newProduct->product_thumnail_img_name =  $request->product_thumnail_img_name;
-        $newProduct->product_img1_name =  $request->product_img1_name;
-        $newProduct->product_img2_name =  $request->product_img2_name;
-        $newProduct->product_img3_name =  $request->product_img3_name;
-        $newProduct->product_information =  $request->product_information;
-        $newProduct->product_ingredients =  $request->product_ingredients;
-        $newProduct->product_instruction_store =  $request->product_instruction_store;
-        $newProduct->product_instruction_use =  $request->product_instruction_use;
-        $newProduct->product_price_aution =  $request->product_price_per_un ;
-        $newProduct->product_price_start =  $request->product_price_start;
-        $newProduct->product_start_aution_day=  $request->product_start_aution_day;
-        $newProduct->product_end_aution_day=  $request->product_end_aution_day;
+        $product_thumbnail_img = $request->file('product_thumbnail_img');
+        $newProduct->product_thumnail_img_name = time().'-'.'product.'. $request->img_extension;
+        $product_img_name1 = $request->file('product_img_name1');
+        $newProduct->product_img1_name = time().'-'.'product.'. $request->img_extension1;
+        $product_img_name2 = $request->file('product_img_name2');
+        $newProduct->product_img2_name =  time().'-'.'product.'. $request->img_extension2;
+        $product_img_name3 = $request->file('product_img_name3');
+        $newProduct->product_img3_name = time().'-'.'product.'.  $request->img_extension3;
+
+        $newProduct->product_information =  $request->information;
+        $newProduct->product_ingredients =  $request->ingredients;
+        $newProduct->product_instruction_store =  $request->instruction_store;
+        $newProduct->product_instruction_use =  $request->instruction_use;
+        $newProduct->product_price_aution =  $request->aution_price ;
+        $newProduct->product_price_start =  $request->start_price;
+        $newProduct->product_start_aution_day=  $request->start_aution_day;
+        $newProduct->product_end_aution_day=  $request->end_aution_day;
 
 
 
@@ -68,6 +73,12 @@ class ProductAPI extends Controller
         if(!$isExist)
         {
             $newProduct->save();
+            
+            $product_thumbnail_img->move(public_path('ProductImg'), time().'-'.'product.'.$request->img_extension);
+            $product_img_name1->move(public_path('ProductImg'),  time().'-'.'product.'.$request->img_extension1);
+            $product_img_name2->move(public_path('ProductImg'),  time().'-'.'product.'.$request->img_extension2);
+            $product_img_name3->move(public_path('ProductImg'),  time().'-'.'product.'.$request->img_extension3);
+
             return 1;
         }
        

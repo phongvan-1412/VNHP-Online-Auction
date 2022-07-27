@@ -8,14 +8,14 @@ function AddCategory() {
     console.log($("#button-delete-category"))
   }
   const element = () => {
-    const file = $("#input-img-category").prop("files")[0];
-    const name = file.name;
+    const category_img= $("#input-img-category").prop("files")[0];
+    const name =  category_img.name;
     const index = name.indexOf(".");
     const category_name = $("#input-add-category").val().replace(/ /g, "-");
 
     const img_extension = name.substr(index, index + 4);
     let formData = new FormData();
-    formData.set("user_img_name", file);
+    formData.set("category_img",  category_img);
     formData.set("img_extension", img_extension);
     formData.set("category_name",category_name);
    
