@@ -78,72 +78,21 @@ class HomePage extends Component {
     return (
       <div>
         <div id="data" hidden></div>
-<<<<<<< HEAD
+
           {/* Header  */}
           <Header categories={this.state.categories} />
-=======
-        <Header
-          categories={this.state.categories}
-          userinfo={this.state.userinfo}
-        />
-        <Routes>
-          {/* Home  */}
-          <Route
-            path="/"
-            element={
-              <LandingPage
-                products={this.state.products}
-                categories={this.state.categories}
-              />
-            }
-          ></Route>
->>>>>>> c4db119f386812613d1aa6034c0149386b7e7963
 
           <Routes>
             <Route path="/about" element={<About />}></Route>
             <Route path="/contactus" element={<Contact />}></Route>
 
-<<<<<<< HEAD
+
             {/* UserAction  */}
-            <Route path="/login" element={
-              <Login customerLogin={customerLogin} />}>
-            </Route>
-            
+            <Route path="/login" element={<Login customerLogin={customerLogin} />}></Route>
             <Route path="/register" element={<Register />}></Route>
-=======
-          {/* UserAction  */}
-          <Route
-            path="/login"
-            element={<Login customerLogin={customerLogin} />}
-          ></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route
-            path="/userprofile"
-            element={
-              <UserProfile
-                userinfo={this.state.userinfo}
-                updateUserLogin={customerLogin}
-              />
-            }
-          ></Route>
-          <Route
-            path="/forgetpassword"
-            element={
-              <ForgetPassword
-                style={{ backgroundImage: "url(../../img/About/about2.jpg)" }}
-                userinfo={this.state.userinfo}
-              />
-            }
-          ></Route>
-          {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
->>>>>>> c4db119f386812613d1aa6034c0149386b7e7963
-
-            <Route path="/userprofile" element={
-              <UserProfile userinfo={this.state.userinfo} updateUserLogin={customerLogin}/>}>
-            </Route>
-
-            <Route path="/forgetpassword"  element={ 
-              <ForgetPassword style={{ backgroundImage: "url(../../img/About/about2.jpg)" }}  userinfo={this.state.userinfo}/>}>
+            <Route path="/userprofile" element={<UserProfile userinfo={this.state.userinfo} updateUserLogin={customerLogin} />}></Route>
+            <Route path="/forgetpassword" element={
+              <ForgetPassword style={{ backgroundImage: "url(../../img/About/about2.jpg)" }} userinfo={this.state.userinfo} />}>
             </Route>
             {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
