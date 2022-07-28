@@ -96,7 +96,7 @@ export const AddBill = () => {
                         <div className="modal-footer">
                             <div id="msg"></div>
                             <button className="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                            <input type="submit" className="btn btn-info waves-effect waves-light" onClick={Create} value="Create"/>
+                            <input type="submit" className="btn btn-info waves-effect waves-light"  onClick={Create} value="Create"/>
                         </div>
                     </div>
                 </div>

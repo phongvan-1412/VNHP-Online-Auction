@@ -111,7 +111,7 @@ class CustomerApi extends Controller
             {
                 $tmp = $cus;
             }
-            return $tmpCustomer;
+            return $tmp;
         }
 
         return 0;

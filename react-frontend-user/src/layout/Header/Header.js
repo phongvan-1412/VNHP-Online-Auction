@@ -10,18 +10,12 @@ const Header = ({ userinfo, categories }) => {
   let customer = {};
 
   const isUserLogin = () => {
-    // if (localStorage.getItem("customer_info") == null) return;
-    // else {
-    //   customer = JSON.parse(localStorage.getItem("customer_info"));
-    //   checkUser = true;
-    //   userName = customer.customer_name;
-    // }
-    if (userinfo != {} && userinfo != null) {
-      customer = userinfo;
+    if (localStorage.getItem("customer_info") == null) return;
+    else {
+      customer = JSON.parse(localStorage.getItem("customer_info"));
       checkUser = true;
       userName = customer.customer_name;
     }
-    console.log(userinfo)
   };
   isUserLogin();
 

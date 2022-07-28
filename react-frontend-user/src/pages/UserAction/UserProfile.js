@@ -2,8 +2,9 @@ import React from "react";
 import $ from "jquery";
 import axios from "axios";
 
-function UserProfile({ userinfo, updateUserLogin }) {
+function UserProfile({ userinfo, updateUserLogin,reRender }) {
   const changePassword = () => {};
+
   const saveChanges = () => {
     const $result = $("#avatar-img-result");
 
@@ -38,10 +39,8 @@ function UserProfile({ userinfo, updateUserLogin }) {
         if (response.data == 0) {
           console.log("false");
         } else {
-          console.log(localStorage.getItem("customer_info"));
           localStorage.removeItem("customer_info");
           localStorage.setItem("customer_info", JSON.stringify(response.data));
-          console.log(localStorage.getItem("customer_info"))
           updateUserLogin();
           window.location.href = "http://localhost:3000";
         }
@@ -57,6 +56,8 @@ function UserProfile({ userinfo, updateUserLogin }) {
       $("#avatar-img").prop("src", reader.result);
     };
   }
+
+  $('#dateofbirth').val(userinfo.customer_dob);
   return (
     <div className="container">
       <div className="row user-account-profile">

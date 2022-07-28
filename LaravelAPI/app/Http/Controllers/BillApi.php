@@ -59,11 +59,10 @@ class BillApi extends Controller
         //     ->get();
         return $bills;
     }
+    
     public function RevenueEachMonth(){
-        return DB::select("Select month(convert(datetime, bill_date, 103)) as months, sum(bill_payment) as revenuses
-                            from bill where month(convert(datetime, bill_date, 103)) = ? group by month(convert(datetime, bill_date, 103))",[7]);
-        
-
+        return DB::select("Select month(convert(datetime, bill_date, 120)) as months, sum(bill_payment) as revenues
+                            from bill where year(convert(datetime, bill_date, 120)) = ? group by month(convert(datetime, bill_date, 120))",[2022]);
     }
 
     public function InsertBill(Request $request){
