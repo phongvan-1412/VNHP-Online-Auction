@@ -4,9 +4,14 @@ import axios from "axios";
 import ChangePassword from "./ChangePassword";
 import EditProfile from "./EditProfile";
 
-function UserProfile({ userinfo, updateUserLogin, reRender }) {
+function UserProfile({ userinfo, updateUserLogin }) {
+  let currentUserInfo = userinfo;
   if (performance.navigation.type === 1) {
-    window.location.href = "http://localhost:3000";
+    if (localStorage.getItem("customer_info") == null) {
+      window.location.href = "http://localhost:3000/login";
+    } else {
+      currentUserInfo = JSON.parse(localStorage.getItem("customer_info"));
+    }
   }
 
   const changePassword = () => {};
@@ -63,7 +68,6 @@ function UserProfile({ userinfo, updateUserLogin, reRender }) {
     };
   }
 
-  $("#dateofbirth").val(userinfo.customer_dob);
   return (
     <div className="container">
       <div className="row user-account-profile">
@@ -75,7 +79,7 @@ function UserProfile({ userinfo, updateUserLogin, reRender }) {
             <img
               className="img-user-account-profile rounded-circle mb-2"
               id="avatar-img"
-              src={require(`../../../../LaravelAPI/public/UserImage/${userinfo.customer_img_name}`)}
+              src={require(`../../../../LaravelAPI/public/UserImage/${currentUserInfo.customer_img_name}`)}
             />
             <div className="small font-italic text-muted mb-4">
               JPG or PNG no larger than 5 MB
@@ -108,7 +112,8 @@ function UserProfile({ userinfo, updateUserLogin, reRender }) {
                   className="form-control"
                   id="fullname"
                   type="text"
-                  placeholder={userinfo.customer_name}
+                  disabled
+                  value={currentUserInfo.customer_name}
                 />
               </div>
 
@@ -120,7 +125,7 @@ function UserProfile({ userinfo, updateUserLogin, reRender }) {
                   className="form-control"
                   id="email"
                   disabled
-                  value={userinfo.customer_email}
+                  value={currentUserInfo.customer_email}
                 />
               </div>
 
@@ -132,7 +137,8 @@ function UserProfile({ userinfo, updateUserLogin, reRender }) {
                   className="form-control"
                   id="address"
                   type="text"
-                  placeholder={userinfo.customer_address}
+                  disabled
+                  value={currentUserInfo.customer_address}
                 />
               </div>
 
@@ -145,7 +151,8 @@ function UserProfile({ userinfo, updateUserLogin, reRender }) {
                     className="form-control"
                     id="contact"
                     type="tel"
-                    placeholder={userinfo.customer_contact}
+                    disabled
+                    value={currentUserInfo.customer_contact}
                   />
                 </div>
                 <div className="col-md-6">
@@ -156,7 +163,8 @@ function UserProfile({ userinfo, updateUserLogin, reRender }) {
                     className="form-control"
                     id="dateofbirth"
                     type="date"
-                    placeholder={userinfo.customer_dob}
+                    disabled
+                    value={currentUserInfo.customer_dob}
                   />
                 </div>
               </div>

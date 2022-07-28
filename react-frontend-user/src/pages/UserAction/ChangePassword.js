@@ -14,7 +14,7 @@ function ChangePassword() {
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save change</button>
+            <button type="submit" className="btn btn-primary float-right forget-password-form">Save change</button>
         </div>
         </div>
     </div>
