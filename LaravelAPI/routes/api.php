@@ -46,6 +46,8 @@ Route::post('/isemailexists',[CustomerApi::class, 'IsEmailExists']);
 Route::post('/customerlogin',[CustomerApi::class, 'CustomerLogin']);
 Route::post('/customerlogout',[CustomerApi::class, 'CustomerLogOut']);
 Route::post('/customerupdateinfo',[CustomerApi::class, 'CustomerUpdateInfo']);
+Route::post('/customerchangeavatar',[CustomerApi::class, 'CustomerChangeAvatar']);
+
 Route::get('/customerinfo',[CustomerApi::class, 'CustomerInfo']);
 
 // Route::get('/selectactiveblog',[BlogApi::class, 'SelectActiveBlog']);
