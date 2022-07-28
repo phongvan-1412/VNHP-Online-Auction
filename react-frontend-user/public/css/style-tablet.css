@@ -1079,6 +1079,15 @@
     .about-founders{
         margin-left: 140px;
     }
+    .landingpage-topslide-img{
+        height: 300px;
+    }
+    .landingpage-topslide-text > .split-text{
+        font-size: 2.5rem;
+    }
+    .landingpage-topslide-text:hover  .split-text::after{
+        bottom: 21%;
+    }
 }  
 @media(max-width: 600px){
     .forget-password-form-wrapper{
@@ -1102,6 +1111,10 @@
     .about-story-content1-paragraph2{
         font-size: 10px;
     }
+    .landingpage-topslide-text:hover::before {
+        width: 95%;
+        left: 3%;
+    }
 } 
 @media(max-width: 500px){
     .menu .shopping{
@@ -1122,5 +1135,10 @@
     .about-founders{
         margin-left: 80px;
     }
-    
+    .landingpage-topslide-text > .split-text{
+        font-size: 2rem;
+    }
+    .landingpage-topslide-text:hover  .split-text::after{
+        bottom: 25%;
+    }
 }

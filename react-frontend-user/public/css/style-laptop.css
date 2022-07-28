@@ -1441,6 +1441,12 @@
     .about-story-content1-paragraph2{
         font-size: 18px;
     }
+    .landingpage-topslide-img{
+        height: 400px;
+    }
+    .landingpage-topslide-text > .split-text{
+        font-size: 4rem;
+    }
 }
 @media screen and (max-width: 850px){
     .menu .contact{
@@ -1477,7 +1483,15 @@
         margin-left: 20px;
         margin-right: -20px;
     }
-    
+    .landingpage-topslide-img{
+        height: 380px;
+    }
+    .landingpage-topslide-text > .split-text{
+        font-size: 3.5rem;
+    }
+    .landingpage-topslide-text:hover  .split-text::after{
+        bottom: 18%;
+    }
 }
 @media screen and (max-width: 768px){
     .logo{
@@ -1525,5 +1539,11 @@
     }
     .about-founders{
         margin-left: 170px;
+    }
+    .landingpage-topslide-img{
+        height: 350px;
+    }
+    .landingpage-topslide-text > .split-text{
+        font-size: 3rem;
     }
 }
