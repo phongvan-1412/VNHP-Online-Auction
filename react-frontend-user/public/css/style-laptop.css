@@ -52,11 +52,91 @@
     margin: 0px;
     z-index: 3;
 }
-.logo{
-    width: 55px;
-    height: 55px;
-    margin-left: 20px;
-    border-radius: 1000px;
+.icon-text{
+    position: relative;
+    text-align: center;
+}
+.icon-text:hover{
+    width: 150px;
+    background-color: var(--textColor);
+    border-radius: 5px;
+    transition: background-color 350ms ease-in-out;
+}
+.icon-text:hover::before {
+    position: absolute;
+    z-index: 5;
+    left: 10%;
+    top: 50%;
+    transform: translateY(50%);
+    content: "";
+    width: 80%;
+    height: 3px;
+    background-color: var(--iconHover);
+    border-radius: 20px;
+    transform: scale(0);
+    animation: scale 200ms ease-in-out forwards;
+}
+.icon-text > .icon-split-text{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 5px;
+    line-height: 1;
+    color: var(--textColor);
+}
+.icon-text:hover  .icon-split-text{
+    color: transparent;
+}
+.icon-text:hover  .icon-split-text::before,
+.icon-text:hover  .icon-split-text::after{
+    position: absolute;
+    content: attr(data-text);
+    height: .5em;
+    overflow: hidden;
+    left: 0;
+    right: 0;
+    color: var(--iconHover);
+}
+.icon-text:hover  .icon-split-text::before{
+    animation: skew 250ms ease-in-out forwards;
+}
+.icon-text:hover  .icon-split-text::after{
+    bottom: 24%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    transform: skewX(15deg);
+    animation: skew 250ms ease-in-out forwards;
+    color: var(--textColor);
+}
+.icon-footer-text{
+    position: absolute;
+    color: var(--textColor);
+    font-size: 6px;
+    letter-spacing: .8px;
+    bottom: 10px;
+    left: 80px;
+}
+.icon-text:hover .icon-footer-text{
+    color: var(--footerBackground);
+}
+@keyframes skew{
+    100%{
+        transform: skewX(15deg);
+        color: var(--iconHover);
+
+    }
+}
+@keyframes scale{
+    100%{
+        transform: scale(1);
+        color: var(--textColor);
+    }
 }
 .menu a{
     text-decoration: none;
