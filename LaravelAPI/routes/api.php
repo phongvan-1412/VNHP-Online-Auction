@@ -47,6 +47,8 @@ Route::post('/customerlogin',[CustomerApi::class, 'CustomerLogin']);
 Route::post('/customerlogout',[CustomerApi::class, 'CustomerLogOut']);
 Route::post('/customerupdateinfo',[CustomerApi::class, 'CustomerUpdateInfo']);
 Route::post('/customerchangeavatar',[CustomerApi::class, 'CustomerChangeAvatar']);
+Route::post('/customerchangepassword',[CustomerApi::class, 'CustomerChangePassword']);
+
 
 Route::get('/customerinfo',[CustomerApi::class, 'CustomerInfo']);
 
