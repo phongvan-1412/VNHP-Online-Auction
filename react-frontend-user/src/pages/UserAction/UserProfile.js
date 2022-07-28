@@ -1,7 +1,7 @@
 import React from "react";
 import $ from "jquery";
 import axios from "axios";
-
+import ChangePassword from "./ChangePassword";
 function UserProfile({ userinfo, updateUserLogin,reRender }) {
   const changePassword = () => {};
 
@@ -77,13 +77,13 @@ function UserProfile({ userinfo, updateUserLogin,reRender }) {
             <input type="file" id="user-avatar-img" onChange={onAvatarChange} />
             <div id="avatar-img-result"></div>
             <div className="card mt-3 change-password">
-              <button
-                className="btn btn-primary"
-                id="changepwd"
-                onClick={changePassword}
-              >
-                Change Password
-              </button>
+            <button
+              className="btn btn-success"
+              data-toggle="modal"
+              data-target="#con-close-modal"
+            >
+              Change Password
+            </button>
             </div>
           </div>
         </div>
@@ -164,6 +164,7 @@ function UserProfile({ userinfo, updateUserLogin,reRender }) {
           </div>
         </div>
       </div>
+      <ChangePassword />
     </div>
   );
 }
