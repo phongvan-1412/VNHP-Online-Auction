@@ -34,8 +34,8 @@ class TopSlider extends Component {
           <img className="landingpage-topslide-img" src={require(`../../img/LandingPage/landingpage_topslide1.jpg`)} />
         </Slider>
 
-        <ul className="landingpage-topslide-message-wrapper list">
-          <li className="landingpage-topslide-text list-item" >
+        <ul className="landingpage-topslide-message-wrapper">
+          <li className="landingpage-topslide-text">
             <span className="split-text" data-text="VNHP ONLINE AUCTION">VNHP ONLINE AUCTION</span>
           </li>
         </ul>

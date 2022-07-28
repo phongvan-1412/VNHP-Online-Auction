@@ -49,8 +49,9 @@ const Header = ({ userinfo, categories }) => {
       }}
     >
       <header className="menu">
-        <Link to="/" replace>
-          <img src={require("../../img/Header/logo.jpg")} className="logo" />
+        <Link to="/" className="icon-text" style={{margin: "0px", padding: "0px"}}replace>
+          <span className="icon-split-text" data-text="VNHP">VNHP</span>
+          <span className="icon-footer-text">@ONLINE AUCTION</span>
         </Link>
 
         <Link to="/about" replace className="about">
