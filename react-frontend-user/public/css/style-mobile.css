@@ -1159,5 +1159,15 @@
     .menu .register, .menu .login{
         display: none;
     } 
-    
+    .landingpage-topslide-text > .split-text{
+        font-size: .5rem;
+    }
+    .landingpage-topslide-text:hover  .split-text::after{
+        bottom: 40%;
+    }
+    .landingpage-topslide-text:hover::before {
+        height: 1px;
+        width: 88%;
+        left: 5%;
+    }
 }
