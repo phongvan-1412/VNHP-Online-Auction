@@ -4,43 +4,22 @@ import $ from "jquery";
 
 const LandingPageCategories = ({categories}) => {
     const showCategory = (
-        <div className="row landingpage-category-wrapper" style={{display:"flex", alignItems: "center", margin:"0px"}}>
-            <b className="landingpage-category-headtext">CATEGORIES</b>
+        <div className="row landingpage-category-wrapper" style={{padding: "0px", margin:"0px"}}>
+            <b className="landingpage-category-headtext" style={{padding: "0px", margin:"0px"}}>CATEGORIES</b>
             <hr />
-            <div id="landingpage-category-grid" style={{padding: "0px"}}>
-                
-            </div>  
+            <div className="landingpage-category-grid" style={{padding: "0px"}}>
+                {categories.map((category) => {
+                    return(
+                        <Link to={`/category/${category.category_name}`} >
+                            <img className="landingpage-category-img" src={require(`../../../../LaravelAPI/public/CategoryImg/${category.category_img_name}`)}/>
+                            <Link to={`/category/${category.category_name}`} className ="landingpage-category-item-name">{category.category_name.replace(/-/g, " ")}</Link>
+                        </Link>
+                    )
+                })}    
+            </div>
         </div>        
     );
 
-    // function getData() {
-    //     fetch("http://127.0.0.1:8000/api/selectcategories", { method: "GET" })
-    //       .then((res) => res.json())
-    //       .then((res) => {
-    //         res.map((category) => {
-                
-    //             const tmp = document.createElement("a");
-    //                 tmp.id = "category-grid" + category.category_id; 
-
-    //             const tmp_img = document.createElement("img");
-    //                 tmp_img.src = require('../../img/LandingPage/Fine Art.jpg');
-    //                 tmp.append(tmp_img);
-
-    //             const tmp_imgname_link = document.createElement("a");
-    //                 tmp_imgname_link.className = "landingpage-category-item-name";
-    //                 tmp_imgname_link.id = category.category_name.replace(/-/g, " ");
-    //                 tmp_imgname_link.innerHTML = category.category_name.replace(/-/g, " ");
-    //                 tmp_imgname_link.onclick = (e) => {window.location.href = `http://localhost:3000/category/${category.category_name}`} ;
-    //                 tmp.append(tmp_imgname_link);
-                    
-    //              tmp.className = "landingpage-category-item-wrapper";
-
-    //             $("#landingpage-category-grid").append(tmp);
-                
-    //         })
-    //       }
-    // )}
-    // getData();
     return showCategory;
 }
 
