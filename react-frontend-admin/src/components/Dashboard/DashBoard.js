@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import BarChart from "../Chart/BarChart";
-import { LineChart } from "../Chart/LineChart";
+import LineChart from "../Chart/LineChart";
 class DashBoard extends Component{
     render(){
         return(
-                <div className="row">
-                    <div className="col-md-6">
-                        <BarChart />
-                        <strong className="text-center">Revenue from 8/2021 - 7/2022</strong>
-                    </div>
-                    <div className="col-md-6">
-                        <LineChart />
-                        <strong className="text-center">Sales from 8/2021 - 7/2022</strong>
-                    </div>
+            <div className="row">
+                <div className="col-md-6 col-sm-12">
+                    <h3 className="text-center">REVENUE 2021</h3>
+                    <BarChart />
                 </div>
+                <div className="col-md-6">
+                    <h3 className="text-center">REVENUE 2018 - 2022</h3>
+                    <LineChart />
+                </div>
+            </div>
         )
     }
 }

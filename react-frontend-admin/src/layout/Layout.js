@@ -17,13 +17,15 @@ export const Layout = () => {
         <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
                 <TopBar />
-                <div className="container-fluid">
-                    <Routes>
-                        <Route path='/' element={<DashBoard />}></Route>
-                        <Route path='/addcategory' element={<TableCategory />}></Route>
-                        <Route path='/addproduct' element={<TableProduct />}></Route>    
-                        <Route path='/bill' element={<Bill />}></Route>       
-                    </Routes>
+                <div className="card-body">
+                    <div className="card-body"> 
+                        <Routes>
+                            <Route path='/' element={<DashBoard />}></Route>
+                            <Route path='/addcategory' element={<TableCategory />}></Route>
+                            <Route path='/addproduct' element={<TableProduct />}></Route>    
+                            <Route path='/bill' element={<Bill />}></Route>       
+                        </Routes>
+                    </div>
                 </div>
             </div>
             <Footer />

@@ -43,28 +43,32 @@ class BillApi extends Controller
     //         $newBill->price_per_unit = $newProduct['product_price_per_unit'];
     //         $newBill->bill_detail_total_payment = $newProduct['product_price_per_unit'] * $newProduct['product_quantity'];
 
-    //         DB::insert('insert into bill_detail (bill_id, product_id,bill_detail_quantity,price_per_unit,bill_detail_total_payment) 
-    //                     values (?, ?,?,?,?)', 
+    //         DB::insert('insert into bill_detail (bill_id, product_id,bill_detail_quantity,price_per_unit,bill_detail_total_payment)
+    //                     values (?, ?,?,?,?)',
     //                     [$newBill->bill_id, $newBill->product_id,$newBill->bill_detail_quantity,$newBill->price_per_unit,$newBill->bill_detail_total_payment]);
     //     }
     // }
-    
+
     public function SelectBill()
     {
         $bills = Bill::select()->get();
-        // $bills = DB::delete("delete from bill");
+        // $bills = DB::delete("delete from bill where bill_payment = 1257000000");
         // $bills = DB::table('bill');
         //     ->join('product', 'product.product_id','=','bill.product_id')
         //     ->join('customer_account','customer_account.customer_id','=','bill.customer_id')
         //     ->get();
         return $bills;
     }
-    
+
     public function RevenueEachMonth(){
         return DB::select("Select month(convert(datetime, bill_date, 120)) as months, sum(bill_payment) as revenues
                             from bill where year(convert(datetime, bill_date, 120)) = ? group by month(convert(datetime, bill_date, 120))",[2022]);
     }
 
+    public function RevenueEachYear(){
+        return DB::select("Select year(convert(datetime, bill_date, 120)) as years, sum(bill_payment) as revenues
+                            from bill where year(convert(datetime, bill_date, 120)) between ? and ? group by year(convert(datetime, bill_date, 120))",[2018,2022]);
+    }
     public function InsertBill(Request $request){
         $bill = new Bill();
         $bill->product_id = $request->product_id;

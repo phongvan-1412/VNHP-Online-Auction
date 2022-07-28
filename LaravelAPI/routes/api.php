@@ -57,4 +57,7 @@ Route::post('/login',[AdminController::class, 'Login']);
 // BILL
 Route::get('/selectbill',[BillApi::class, 'SelectBill']);
 Route::post('/insertbill',[BillApi::class, 'InsertBill']);
+
+//CHART
 Route::get('/revenueeachmonth', [BillApi::class, 'RevenueEachMonth']);
+Route::get('/revenueeachyear', [BillApi::class, 'RevenueEachYear']);
