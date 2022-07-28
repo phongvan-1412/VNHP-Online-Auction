@@ -1,5 +1,5 @@
 import React from "react";
-
+import $ from "jquery";
 function ForgetPassword() {
   return (
     <div className="row forget-password-wrapper"  style={{margin: "0px", padding:"0px"}}>
