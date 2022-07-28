@@ -21,20 +21,24 @@ class TopSlider extends Component {
       dots: false,
       infinite: true,
       autoplay: true,
-      autoplaySpeed :3000,
+      autoplaySpeed :2000,
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: true,
       fade: true,
     };
     return (
-      <div className="landingpage-topslide-wrapper">
-        <div>
-          <Slider ref={(c) => (this.slider = c)}{...settings} className="landingpage-topslide-img">
-            <img src={require("../../img/LandingPage/landingpage_topslide.jpg")} />
-            <img src={require(`../../img/LandingPage/landingpage_topslide1.jpg`)} />
-          </Slider>
-        </div>
+      <div className="landingpage-topslide-wrapper" style={{margin: "0px", padding: "0px"}}>
+        <Slider ref={(c) => (this.slider = c)}{...settings} >
+          <img className="landingpage-topslide-img" src={require("../../img/LandingPage/landingpage_topslide.jpg")} />
+          <img className="landingpage-topslide-img" src={require(`../../img/LandingPage/landingpage_topslide1.jpg`)} />
+        </Slider>
+
+        <ul className="landingpage-topslide-message-wrapper list">
+          <li className="landingpage-topslide-text list-item" >
+            <span className="split-text" data-text="VNHP ONLINE AUCTION">VNHP ONLINE AUCTION</span>
+          </li>
+        </ul>
       </div>
     );
   }

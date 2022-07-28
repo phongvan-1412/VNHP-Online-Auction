@@ -91,73 +91,49 @@ class HomePage extends Component {
     return (
       <div>
         <div id="data" hidden></div>
-        <Header categories={this.state.categories} />
-        <Routes>
-          {/* Home  */}
-          <Route
-            path="/"
-            element={
-              <LandingPage
-                products={this.state.products}
-                categories={this.state.categories}
-              />
-            }
-          ></Route>
+          {/* Header  */}
+          <Header categories={this.state.categories} />
 
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/contactus" element={<Contact />}></Route>
+          <Routes>
+            <Route path="/about" element={<About />}></Route>
+            <Route path="/contactus" element={<Contact />}></Route>
 
-          {/* UserAction  */}
-          <Route
-            path="/login"
-            element={<Login customerLogin={customerLogin} />}
-          ></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route
-            path="/userprofile"
-            element={<UserProfile userinfo={this.state.userinfo} updateUserLogin={customerLogin}/>}
-          ></Route>
-          <Route
-            path="/forgetpassword"
-            element={
-              <ForgetPassword
-                style={{ backgroundImage: "url(../../img/About/about2.jpg)" }}
-                userinfo={this.state.userinfo}
-              />
-            }
-          ></Route>
-          {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
+            {/* UserAction  */}
+            <Route path="/login" element={
+              <Login customerLogin={customerLogin} />}>
+            </Route>
+            
+            <Route path="/register" element={<Register />}></Route>
 
-          {/* Product */}
-          {this.state.categories.map((category) => (
-            <Route
-              key={category.category_id}
-              path={`/${category.category_name}`}
-              element={
-                <ProductByCategory
-                  products={this.state.products}
-                  category={category}
-                />
-              }
-            ></Route>
-          ))}
+            <Route path="/userprofile" element={
+              <UserProfile userinfo={this.state.userinfo} updateUserLogin={customerLogin}/>}>
+            </Route>
 
-          {/* Product Detail   */}
-          {this.state.products.map((product) => (
-            <Route
-              key={product.product_SKU}
-              path={`/${product.category_id}/${product.product_name}`}
-              element={
-                <ProductDetail
-                  products={this.state.products}
-                  categories={this.state.categories}
-                  product={product}
-                />
-              }
-            ></Route>
-          ))}
-        </Routes>
-        <Footer />
+            <Route path="/forgetpassword"  element={ 
+              <ForgetPassword style={{ backgroundImage: "url(../../img/About/about2.jpg)" }}  userinfo={this.state.userinfo}/>}>
+            </Route>
+            {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
+
+            {/* LandingPage  */}
+            <Route  path="/" element={<LandingPage products={this.state.products} categories={this.state.categories} />}></Route>
+
+            {/* Product */}
+            {this.state.categories.map((category) => (
+              <Route key={category.category_id} path={`/category/${category.category_name}`} element={
+                  <ProductByCategory products={this.state.products} category={category}/>}>
+              </Route>
+            ))}
+
+            {/* Product Detail   */}
+            {this.state.products.map((product) => (
+              <Route key={product.product_SKU} path={`/${product.category_id}/${product.product_name}`} element={
+                  <ProductDetail products={this.state.products} categories={this.state.categories} product={product}/>}>
+              </Route>
+            ))}
+          </Routes>
+
+          {/* Footer  */}
+          <Footer />
       </div>
     );
   }

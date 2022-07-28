@@ -31,6 +31,7 @@
     --border: 1px solid rgba(0,0,0,0.25);
     --selectBorder: 1px solid #C4C4C4;
     --slider-index: 0;
+    --line-height: 1.5;
     
 }
 /* ---------------LAYOUT--------------- */
@@ -377,48 +378,102 @@
 }
 /* ---------------LANDINGPAGE--------------- */
 /* ----------TOP-SLIDER---------- */
-.slick-slider .slick-list{
-    width: 100%;
-}
 .landingpage-topslide-wrapper{
     position: relative;
     align-self: center;
 }
 .landingpage-topslide-img{
     width: 100%;
-    height: 300px;
+    height: 450px;
     object-fit: center;
     object-position: center;
-    opacity: 0.8;
-    filter: blur(1px)
 }
 .landingpage-topslide-message-wrapper{
-    height: 50px;
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
+    width: max-content;
+    padding: 0px;
+    margin: 0 auto;
     z-index: 2;
-    bottom: 23%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    cursor: pointer;
 }
-.landingpage-topslide-logo a img{
-    width: 85px;
-    height: 85px;
-    border-radius: 1000px;
+.landingpage-topslide-text:hover::before {
+    position: absolute;
+    z-index: 4;
+    background-color: rgba(0,0,0,0.25);
+    left: 0;
+    top: 50%;
+    transform: translateY(50%);
+    content: "";
+    width: 100%;
+    height: 3px;
+    background-color: var(--iconHover);
+    border-radius: 20px;
+    transform: scale(0);
+    animation: scale 200ms ease-in-out forwards;
 }
-.landingpage-topslide-quote{
-    padding: 10px;
-    background-color: rgba(0,0,0,0.35);
-    color: white;
+.landingpage-topslide-text > .split-text{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 4.5rem;
+    font-weight: bold;
+    letter-spacing: 5px;
+    line-height: 1;
+    color: var(--textColor);
+}
+.landingpage-topslide-text:hover  .split-text{
+    color: transparent;
 }
 
+.landingpage-topslide-text:hover  .split-text::before,
+.landingpage-topslide-text:hover  .split-text::after{
+    position: absolute;
+    content: attr(data-text);
+    height: .5em;
+    overflow: hidden;
+    left: 0;
+    right: 0;
+    color: var(--iconHover);
+}
+.landingpage-topslide-text:hover  .split-text::before{
+    animation: skew 250ms ease-in-out forwards;
+}
+.landingpage-topslide-text:hover  .split-text::after{
+    bottom: 15%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    transform: skewX(15deg);
+    animation: skew 250ms ease-in-out forwards;
+}
+
+@keyframes skew{
+    100%{
+        transform: skewX(15deg);
+        color: rgba(0, 0, 0, 0.65);
+    }
+}
+@keyframes scale{
+    100%{
+        transform: scale(1);
+    }
+}
 /* ----------LANDINGPAGE-SLIDER---------- */
 .landingpage-slider{
     margin-top: 100px;
 }
 #sliders{
     display: flex;
-    overflow: hidden;
 }
 #product-grid-wrapper1{
     display: flex;
