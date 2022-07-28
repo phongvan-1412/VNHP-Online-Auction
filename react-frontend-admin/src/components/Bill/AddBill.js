@@ -42,7 +42,7 @@ export const AddBill = () => {
         })
     }
   return (
-    <div id="con-close-modal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="con-close-modal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
         <div className="modal-dialog">
             <div className="modal-content">
                 <div>

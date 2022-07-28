@@ -2,26 +2,23 @@ import React from "react";
 
 function ChangePassword() {
   return (
-    <div id="con-close-modal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-            <div className="modal-content">
-                <div>
-                    <div className="modal-header">
-                        <h4 className="modal-title">Change Password </h4>
-                        <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <div className="modal-body p-4">
-                     
-                    </div>
-                    <div className="modal-footer">
-                        <div id="msg"></div>
-                        <button className="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                        <input type="submit" className="btn btn-info waves-effect waves-light" value="Create"/>
-                    </div>
-                </div>
-            </div>
+    <div class="modal fade" id="changepassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Change Password</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-    </div>        
+        <div class="modal-body">
+            ...
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save change</button>
+        </div>
+        </div>
+    </div>
+    </div>     
   );
 }
 export default ChangePassword;
