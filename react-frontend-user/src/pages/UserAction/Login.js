@@ -17,7 +17,7 @@ class Login extends Component {
     this.slider.slickPrev();
   }
   render() {
-    const {customerLogin} = this.props;
+    const { customerLogin } = this.props;
     const settings = {
       dots: false,
       infinite: true,
@@ -49,7 +49,6 @@ class Login extends Component {
             $result.text(customer_email + " is not valid email.");
             $result.css("color", "red");
           }
-
           checkValidEmail = response.data;
           buttonLoginSetter();
         });

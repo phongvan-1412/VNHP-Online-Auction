@@ -72,7 +72,6 @@ class HomePage extends Component {
       this.setState({
         userinfo: JSON.parse(localStorage.getItem("customer_info")),
       });
-      console.log(this.state.userinfo)
     };
 
     return (
