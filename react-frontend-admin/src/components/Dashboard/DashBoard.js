@@ -5,11 +5,11 @@ class DashBoard extends Component{
     render(){
         return(
             <div className="row">
-                <div className="col-md-6 col-sm-12">
+                <div className="col-md-6 col-sm-12 border bg-white">
                     <h3 className="text-center">REVENUE 2021</h3>
                     <BarChart />
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-6 col-sm-12 border bg-white">
                     <h3 className="text-center">REVENUE 2018 - 2022</h3>
                     <LineChart />
                 </div>
