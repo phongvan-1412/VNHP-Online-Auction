@@ -6,7 +6,7 @@ class BarChart extends Component{
   constructor(props) { 
     super(props); 
     this.state = { 
-      ProductData: [], 
+      RevenuesData: [], 
     }} 
   componentDidMount() {
     fetch("http://127.0.0.1:8000/api/revenueeachmonth", {
@@ -14,8 +14,13 @@ class BarChart extends Component{
     })
       .then((response) => response.json())
       .then((response) => {
+          let Arr = []
+          response.forEach(res => {
+            Arr = [...Arr, res.revenues]
+          })
+      
           this.setState({
-            ProductData: response
+            RevenuesData: Arr
           }); 
         })
         .catch(err => {
@@ -23,7 +28,7 @@ class BarChart extends Component{
         })
       };
   render(){
-    const labels = ["January", "February", "March", "April", "May", "June","July","August","September","October","November","December"];
+    const labels = ["January", "February", "March", "April", "May", "June","July","August"];
     const data = {
       labels: labels,
       datasets: [
@@ -33,13 +38,7 @@ class BarChart extends Component{
           backgroundColor: 'rgba(255, 99, 132, 0.5)',
           borderColor: 'rgb(255, 99, 132)',
           borderWidth: 1,
-          data: [
-            this.state.ProductData.map((p) => {
-              return(
-                p.revenues
-              )
-            })
-          ],
+          data: this.state.RevenuesData
         }
       ],
     };
