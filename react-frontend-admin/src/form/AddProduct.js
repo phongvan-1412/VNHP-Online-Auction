@@ -25,8 +25,7 @@ function AddProduct() {
     const index3 = name3.lastIndexOf(".");
     const img_extension3 = name3.substr(index3, index3 + 4);
 
-    console.log(index)
-    console.log(img_extension)
+   
 
     const product_name = $("#input-product_name").val().replace(/ /g,"-");
     const category_name = $("#input-category-id").val();
