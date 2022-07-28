@@ -41,9 +41,7 @@ const LandingPageSlider1 = ({products}) => {
           <Slider ref={ref} {...settings}>
             {products.map((product) => (
             <div className="product-grid-wrapper" key={product.product_id}>
-               <ProductItem 
-               product={product}
-             ></ProductItem>
+               <ProductItem product={product}></ProductItem>
             </div>
             ))}
           </Slider>
@@ -52,6 +50,7 @@ const LandingPageSlider1 = ({products}) => {
             <button type="button" className="btn-previous" onClick={previous}>
               <GiPreviousButton />
             </button>
+            
             <button type="button" className=" btn-next" onClick={next}>
               <GiNextButton />
             </button>

@@ -73,10 +73,10 @@ class ProductAPI extends Controller
         {
             $newProduct->save();
             
-            $product_thumbnail_img->move(public_path('ProductImg'), time().'-'.'product.'.$request->img_extension);
-            $product_img_name1->move(public_path('ProductImg'),  time().'-'.'product.'.$request->img_extension1);
-            $product_img_name2->move(public_path('ProductImg'),  time().'-'.'product.'.$request->img_extension2);
-            $product_img_name3->move(public_path('ProductImg'),  time().'-'.'product.'.$request->img_extension3);
+            $product_thumbnail_img->move(public_path('ProductImg'), time().'-'.'product'.$request->img_extension);
+            $product_img_name1->move(public_path('ProductImg'),  time().'-'.'product'.$request->img_extension1);
+            $product_img_name2->move(public_path('ProductImg'),  time().'-'.'product'.$request->img_extension2);
+            $product_img_name3->move(public_path('ProductImg'),  time().'-'.'product'.$request->img_extension3);
 
             return 1;
         }
