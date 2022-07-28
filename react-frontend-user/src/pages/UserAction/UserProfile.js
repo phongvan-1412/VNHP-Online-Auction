@@ -39,8 +39,9 @@ function UserProfile({ userinfo, updateUserLogin }) {
           console.log("false");
         } else {
           console.log(localStorage.getItem("customer_info"));
-          // localStorage.removeItem("customer_info");
+          localStorage.removeItem("customer_info");
           localStorage.setItem("customer_info", JSON.stringify(response.data));
+          console.log(localStorage.getItem("customer_info"))
           updateUserLogin();
           window.location.href = "http://localhost:3000";
         }
@@ -67,7 +68,7 @@ function UserProfile({ userinfo, updateUserLogin }) {
             <img
               className="img-user-account-profile rounded-circle mb-2"
               id="avatar-img"
-              // src={require(`../../../../LaravelAPI/public/UserImage/${userinfo.customer_img_name}`)}
+              src={require(`../../../../LaravelAPI/public/UserImage/${userinfo.customer_img_name}`)}
             />
             <div className="small font-italic text-muted mb-4">
               JPG or PNG no larger than 5 MB

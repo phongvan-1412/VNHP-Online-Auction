@@ -4,18 +4,24 @@ import { FaFacebook, FaInstagramSquare, FaTwitter } from "react-icons/fa";
 import Dropdown from "./DropdownNavBar/Dropdown";
 import axios from "axios";
 
-const Header = ({ categories }) => {
+const Header = ({ userinfo, categories }) => {
   let checkUser = false;
   let userName = "";
   let customer = {};
 
   const isUserLogin = () => {
-    if (localStorage.getItem("customer_info") == null) return;
-    else {
-      customer = JSON.parse(localStorage.getItem("customer_info"));
+    // if (localStorage.getItem("customer_info") == null) return;
+    // else {
+    //   customer = JSON.parse(localStorage.getItem("customer_info"));
+    //   checkUser = true;
+    //   userName = customer.customer_name;
+    // }
+    if (userinfo != {} && userinfo != null) {
+      customer = userinfo;
       checkUser = true;
       userName = customer.customer_name;
     }
+    console.log(userinfo)
   };
   isUserLogin();
 

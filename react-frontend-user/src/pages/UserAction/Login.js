@@ -98,7 +98,7 @@ class Login extends Component {
               JSON.stringify(response.data)
             );
             customerLogin();
-            setInterval(showTime, 5000);
+            setInterval(showTime, 3000);
           }
         })
         .catch((err) => {

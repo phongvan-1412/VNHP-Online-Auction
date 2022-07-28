@@ -62,14 +62,6 @@ class HomePage extends Component {
         console.log(err);
       });
 
-    fetch("http://127.0.0.1:8000/api/customerinfo", { method: "GET" })
-      .then((customers) => customers.json())
-      .then((customers) => {
-        this.setState({ customers: customers });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
     this.setState({
       userinfo: JSON.parse(localStorage.getItem("customer_info")),
     });
@@ -80,18 +72,16 @@ class HomePage extends Component {
       this.setState({
         userinfo: JSON.parse(localStorage.getItem("customer_info")),
       });
-    };
-
-    const customerLogOut = () => {
-      this.setState({
-        userinfo: {},
-      });
+      console.log(this.state.userinfo)
     };
 
     return (
       <div>
         <div id="data" hidden></div>
-        <Header categories={this.state.categories} />
+        <Header
+          categories={this.state.categories}
+          userinfo={this.state.userinfo}
+        />
         <Routes>
           {/* Home  */}
           <Route
@@ -115,7 +105,12 @@ class HomePage extends Component {
           <Route path="/register" element={<Register />}></Route>
           <Route
             path="/userprofile"
-            element={<UserProfile userinfo={this.state.userinfo} updateUserLogin={customerLogin}/>}
+            element={
+              <UserProfile
+                userinfo={this.state.userinfo}
+                updateUserLogin={customerLogin}
+              />
+            }
           ></Route>
           <Route
             path="/forgetpassword"
