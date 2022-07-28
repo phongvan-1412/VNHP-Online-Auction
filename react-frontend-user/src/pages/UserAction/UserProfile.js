@@ -4,7 +4,11 @@ import axios from "axios";
 import ChangePassword from "./ChangePassword";
 import EditProfile from "./EditProfile";
 
-function UserProfile({ userinfo, updateUserLogin,reRender }) {
+function UserProfile({ userinfo, updateUserLogin, reRender }) {
+  if (performance.navigation.type === 1) {
+    window.location.href = "http://localhost:3000";
+  }
+
   const changePassword = () => {};
 
   const saveChanges = () => {
@@ -59,7 +63,7 @@ function UserProfile({ userinfo, updateUserLogin,reRender }) {
     };
   }
 
-  $('#dateofbirth').val(userinfo.customer_dob);
+  $("#dateofbirth").val(userinfo.customer_dob);
   return (
     <div className="container">
       <div className="row user-account-profile">
@@ -79,13 +83,14 @@ function UserProfile({ userinfo, updateUserLogin,reRender }) {
             <input type="file" id="user-avatar-img" onChange={onAvatarChange} />
             <div id="avatar-img-result"></div>
             <div className="card mt-3 change-password">
-            <button 
-              type="button" 
-              class="btn btn-success" 
-              data-bs-toggle="modal" 
-              data-bs-target="#changepassword">
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#changepassword"
+              >
                 Change Password
-            </button>
+              </button>
             </div>
           </div>
         </div>
@@ -155,14 +160,14 @@ function UserProfile({ userinfo, updateUserLogin,reRender }) {
                   />
                 </div>
               </div>
-             
-              <button 
-                type="button" 
-                class="btn btn-success" 
-                data-bs-toggle="modal" 
+
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-toggle="modal"
                 data-bs-target="#editprofile"
               >
-                Edit          
+                Edit
               </button>
             </div>
           </div>

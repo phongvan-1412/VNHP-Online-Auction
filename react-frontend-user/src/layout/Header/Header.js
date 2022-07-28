@@ -34,6 +34,7 @@ const Header = ({ userinfo, categories }) => {
       });
   };
 
+ 
   return (
     <div
       className="header-menu"

@@ -82,6 +82,7 @@ class HomePage extends Component {
           <Header categories={this.state.categories} />
 
           <Routes>
+            <Route path="/*/reload" component={null}/>
             <Route path="/about" element={<About />}></Route>
             <Route path="/contactus" element={<Contact />}></Route>
 
