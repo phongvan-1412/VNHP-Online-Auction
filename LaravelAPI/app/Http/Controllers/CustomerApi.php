@@ -83,17 +83,6 @@ class CustomerApi extends Controller
     public function CustomerUpdateInfo(Request $request)
     {
         $customer = Customer::select()->where('customer_email',$request->customer_email)->get();
-        $tmp = new Customer();
-
-        foreach($customer as $cus)
-        {
-            $tmp = $cus;
-        }
-
-        if($tmp->customer_img_name != 'default_account_image.jpg')
-        {
-            File::delete(public_path('UserImage/'.$tmp->customer_img_name));
-        }
 
         if(count($customer) > 0)
         {
@@ -102,11 +91,10 @@ class CustomerApi extends Controller
                                                     'customer_address'=>$request->customer_address,
                                                     'customer_contact'=>$request->customer_contact,
                                                     'customer_dob'=>$request->customer_dob,
-                                                    'customer_img_name'=>time().'-'.'user.'. $request->img_extension]);
-            $customer_avatar = $request->file('user_avatar_image');
-            $customer_avatar->move(public_path('UserImage'), time().'-'.'user.'. $request->img_extension);
+                                                    'customer_img_name'=>$request->customer_img_name]);
             $tmpCustomer = Customer::select()->where('customer_email',$request->customer_email)->get();
 
+            $tmp = new Customer();
             foreach($tmpCustomer as $cus)
             {
                 $tmp = $cus;
@@ -126,8 +114,46 @@ class CustomerApi extends Controller
             return Redirect::intended($url);
         }
     }
+
     public function CustomerInfo()
     {
         return Customer::select()->get();
     }
+
+    public function CustomerChangeAvatar(Request $request)
+    {
+        $customer = Customer::select()->where('customer_email',$request->customer_email)->get();
+        $tmp = new Customer();
+
+        if(count($customer) > 0)
+        {
+            foreach($customer as $cus)
+            {
+                $tmp = $cus;
+            }
+            if($tmp->customer_img_name != 'default_account_image.jpg')
+            {
+                File::delete(public_path('UserImage/'.$tmp->customer_img_name));
+            }
+
+            Customer::select()->where('customer_email',$request->customer_email)
+                                            ->update(['customer_name'=>$request->customer_name,
+                                            'customer_address'=>$request->customer_address,
+                                            'customer_contact'=>$request->customer_contact,
+                                            'customer_dob'=>$request->customer_dob,
+                                            'customer_img_name'=>time().'-'.'user'.$request->img_extension]);
+            $customer_avatar = $request->file('user_avatar_image');
+            $customer_avatar->move(public_path('UserImage'), time().'-'.'user'.$request->img_extension);
+            $tmpCustomer = Customer::select()->where('customer_email',$request->customer_email)->get();
+
+            foreach($tmpCustomer as $cus)
+            {
+                $tmp = $cus;
+            }
+            return $tmp;
+        }
+
+        return 0;
+    }
+    
 }

@@ -14,9 +14,18 @@ function UserProfile({ userinfo, updateUserLogin }) {
     }
   }
 
-  const changePassword = () => {};
+  function onAvatarChange() {
+    $("#avatar-img-result").text("");
+    const file = $("#user-avatar-img").prop("files")[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
 
-  const saveChanges = () => {
+    reader.onloadend = function () {
+      $("#avatar-img").prop("src", reader.result);
+    };
+  }
+
+  const onUpdateUserAvatar = () => {
     const $result = $("#avatar-img-result");
 
     if ($("#user-avatar-img").prop("files")[0] == null) {
@@ -28,46 +37,37 @@ function UserProfile({ userinfo, updateUserLogin }) {
     const customerImageName = customerImage.name;
     const index = customerImageName.indexOf(".");
     const img_extension = customerImageName.substr(index, index + 4);
-
-    const customer_name = $("#fullname").val();
     const customer_email = $("#email").val();
+    const customer_name = $("#fullname").val();
     const customer_address = $("#address").val();
     const customer_contact = $("#contact").val();
     const customer_dob = $("#dateofbirth").val();
-
+    
     let formData = new FormData();
     formData.set("user_avatar_image", customerImage);
     formData.set("img_extension", img_extension);
-    formData.set("customer_name", customer_name);
     formData.set("customer_email", customer_email);
+    formData.set("customer_name", customer_name);
     formData.set("customer_address", customer_address);
     formData.set("customer_contact", customer_contact);
     formData.set("customer_dob", customer_dob);
 
     axios
-      .post(`http://127.0.0.1:8000/api/customerupdateinfo`, formData)
+      .post(`http://127.0.0.1:8000/api/customerchangeavatar`, formData)
       .then(function (response) {
         if (response.data == 0) {
-          console.log("false");
+          $result.text("Change avatar fail.");
+          $result.css("color", "red");
         } else {
           localStorage.removeItem("customer_info");
           localStorage.setItem("customer_info", JSON.stringify(response.data));
           updateUserLogin();
-          window.location.href = "http://localhost:3000";
+          $result.text("Change avatar successfully.");
+          $result.css("color", "green");
+          // window.location.href = "http://localhost:3000/userprofile";
         }
       });
   };
-
-  function onAvatarChange() {
-    const file = $("#user-avatar-img").prop("files")[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onloadend = function () {
-      $("#avatar-img").prop("src", reader.result);
-    };
-  }
-
   return (
     <div className="container">
       <div className="row user-account-profile">
@@ -81,11 +81,16 @@ function UserProfile({ userinfo, updateUserLogin }) {
               id="avatar-img"
               src={require(`../../../../LaravelAPI/public/UserImage/${currentUserInfo.customer_img_name}`)}
             />
-            <div className="small font-italic text-muted mb-4">
+            {/* <div className="small font-italic text-muted mb-4">
               JPG or PNG no larger than 5 MB
-            </div>
-            <input type="file" id="user-avatar-img" onChange={onAvatarChange} />
+            </div> */}
             <div id="avatar-img-result"></div>
+
+            <input type="file" id="user-avatar-img" onChange={onAvatarChange} />
+            <button class="btn btn-success" onClick={onUpdateUserAvatar}>
+              Change Avatar
+            </button>
+
             <div className="card mt-3 change-password">
               <button
                 type="button"
@@ -182,7 +187,10 @@ function UserProfile({ userinfo, updateUserLogin }) {
         </div>
       </div>
       <ChangePassword />
-      <EditProfile />
+      <EditProfile
+        currentUserInfo={currentUserInfo}
+        updateUserLogin={updateUserLogin}
+      />
     </div>
   );
 }
