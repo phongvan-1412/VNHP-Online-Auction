@@ -377,6 +377,9 @@
 }
 /* ---------------LANDINGPAGE--------------- */
 /* ----------TOP-SLIDER---------- */
+.slick-slider .slick-list{
+    width: 100%;
+}
 .landingpage-topslide-wrapper{
     position: relative;
     align-self: center;

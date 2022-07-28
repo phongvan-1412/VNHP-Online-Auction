@@ -28,35 +28,12 @@ class TopSlider extends Component {
       fade: true,
     };
     return (
-      <div className="row page-content-panel landingpage-slider">
+      <div className="landingpage-topslide-wrapper">
         <div>
-          <button
-            type="button"
-            className="slick-prev"
-            onClick={this.previous}
-          >
-            Previous
-          </button>
-        </div>
-        <div>
-          <Slider ref={(c) => (this.slider = c)}{...settings}>
-            <img
-              className="page-content row-panel-img"
-              src={require("../../img/LandingPage/landingpage_topslide.jpg")}
-              />
-            <img
-              className="page-content row-panel-img"
-              src={require(`../../img/LandingPage/landingpage_topslide1.jpg`)}
-              />
+          <Slider ref={(c) => (this.slider = c)}{...settings} className="landingpage-topslide-img">
+            <img src={require("../../img/LandingPage/landingpage_topslide.jpg")} />
+            <img src={require(`../../img/LandingPage/landingpage_topslide1.jpg`)} />
           </Slider>
-        </div>
-        <div>
-          <button
-            type="button"
-            className="slick-next"
-            onClick={this.next}>
-            Next
-          </button>
         </div>
       </div>
     );
