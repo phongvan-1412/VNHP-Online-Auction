@@ -42,7 +42,7 @@ function UserProfile({ userinfo, updateUserLogin }) {
     const customer_address = $("#address").val();
     const customer_contact = $("#contact").val();
     const customer_dob = $("#dateofbirth").val();
-    
+
     let formData = new FormData();
     formData.set("user_avatar_image", customerImage);
     formData.set("img_extension", img_extension);
@@ -64,7 +64,6 @@ function UserProfile({ userinfo, updateUserLogin }) {
           updateUserLogin();
           $result.text("Change avatar successfully.");
           $result.css("color", "green");
-          // window.location.href = "http://localhost:3000/userprofile";
         }
       });
   };
@@ -87,14 +86,14 @@ function UserProfile({ userinfo, updateUserLogin }) {
             <div id="avatar-img-result"></div>
 
             <input type="file" id="user-avatar-img" onChange={onAvatarChange} />
-            <button class="btn btn-success" onClick={onUpdateUserAvatar}>
+            <button className="btn btn-success" onClick={onUpdateUserAvatar}>
               Change Avatar
             </button>
 
             <div className="card mt-3 change-password">
               <button
                 type="button"
-                class="btn btn-success"
+                className="btn btn-success"
                 data-bs-toggle="modal"
                 data-bs-target="#changepassword"
               >
@@ -176,7 +175,7 @@ function UserProfile({ userinfo, updateUserLogin }) {
 
               <button
                 type="button"
-                class="btn btn-success"
+                className="btn btn-success"
                 data-bs-toggle="modal"
                 data-bs-target="#editprofile"
               >
@@ -186,7 +185,10 @@ function UserProfile({ userinfo, updateUserLogin }) {
           </div>
         </div>
       </div>
-      <ChangePassword />
+      <ChangePassword
+        currentUserInfo={currentUserInfo}
+        updateUserLogin={updateUserLogin}
+      />
       <EditProfile
         currentUserInfo={currentUserInfo}
         updateUserLogin={updateUserLogin}

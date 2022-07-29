@@ -24,7 +24,7 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
       .post(`http://127.0.0.1:8000/api/customerupdateinfo`, formData)
       .then(function (response) {
         if (response.data == 0) {
-          console.log("false");
+          alert('Something wrong in server');
         } else {
           localStorage.removeItem("customer_info");
           localStorage.setItem("customer_info", JSON.stringify(response.data));
@@ -36,28 +36,26 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
 
   return (
     <div
-      class="modal fade"
+      className="modal fade"
       id="editprofile"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="staticBackdropLabel">
+      <div className="modal-dialog modal-lg">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h4 className="modal-title" id="staticBackdropLabel">
               Edit {currentUserInfo.customer_name} Profile
             </h4>
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div className="modal-body">
             <div className="card-body">
               <div className="mb-3">
                 <label className="small mb-1" htmlFor="fullname">
@@ -105,17 +103,17 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
               </div>
             </div>
           </div>
-          <div class="modal-footer">
+          <div className="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              className="btn btn-secondary"
               data-bs-dismiss="modal"
             >
               Close
             </button>
             <button
               type="button"
-              class="btn btn-primary"
+              className="btn btn-primary"
               onClick={saveChangeProfile}
             >
               Save change

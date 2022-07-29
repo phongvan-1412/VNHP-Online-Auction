@@ -14,7 +14,7 @@ class CustomerApi extends Controller
 {
     public function CustomerLogin(Request $request)
     {
-        $users = Customer::select()->where('customer_email', $request->customer_email)->where('customer_pwd', md5($request->customer_pwd))->get();
+        $users = Customer::select()->where('customer_email', $request->customer_email)->get();
         $tmpUser = new Customer();
         
         foreach($users as $user)
@@ -25,12 +25,17 @@ class CustomerApi extends Controller
         if($tmpUser->customer_status < 1){
              return 2;
         }
-        else{
-            Customer::select()->where('customer_email', $request->customer_email)->where('customer_pwd', md5($request->customer_pwd))->update(['customer_login_status'=>1]);
-            return $tmpUser;
-        }
 
-        return 0;
+        else{
+            if($tmpUser->customer_pwd != md5($request->customer_pwd))
+            {
+                return 0;
+            }
+            else{
+                Customer::select()->where('customer_email', $request->customer_email)->where('customer_pwd', md5($request->customer_pwd))->update(['customer_login_status'=>1]);
+                return $tmpUser;
+            }
+        }
     }
 
     public function CustomerLogOut(Request $request)
@@ -155,5 +160,46 @@ class CustomerApi extends Controller
 
         return 0;
     }
-    
+
+    public function CustomerChangePassword(Request $request)
+    {
+        $customer = Customer::select()->where('customer_email',$request->customer_email)->where('customer_pwd',md5($request->customer_pwd))->get();
+
+        $tmp = new Customer();
+        foreach($customer as $cus)
+        {
+            $tmp = $cus;
+        }
+
+        if(count($customer) > 0)
+        {
+            Customer::select()->where('customer_email',$tmp->customer_email)
+                                            ->update(['customer_name'=>$tmp->customer_name,
+                                                    'customer_address'=>$tmp->customer_address,
+                                                    'customer_pwd'=>md5($request->new_password),
+                                                    'customer_contact'=>$tmp->customer_contact,
+                                                    'customer_dob'=>$tmp->customer_dob,
+                                                    'customer_img_name'=>$tmp->customer_img_name]);
+            $tmpCustomer = Customer::select()->where('customer_email',$tmp->customer_email)->get();
+
+            foreach($tmpCustomer as $cus)
+            {
+                $tmp = $cus;
+            }
+            return $tmp;
+        }
+        return 0;
+    }
+
+    public function CustomerCheckPassword(Request $request)
+    {
+        $customer = Customer::select()->where('customer_email',$request->customer_email)->where('customer_pwd',md5($request->customer_pwd))->get();
+
+        if(count($customer) > 0)
+        {
+            return 1;
+            
+        }
+        return 0;
+    }
 }

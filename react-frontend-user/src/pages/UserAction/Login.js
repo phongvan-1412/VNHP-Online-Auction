@@ -83,10 +83,10 @@ class Login extends Component {
       axios
         .post(`http://127.0.0.1:8000/api/customerlogin`, customer)
         .then((response) => {
-          if (response.data > 1) {
+          if (response.data == 2) {
             $result.text("Please check your validate email.");
             $result.css("color", "red");
-          } else if (response.data.length < 1) {
+          } else if (response.data == 0) {
             $result.text("Please check your pasword");
             $result.css("color", "red");
           } else {
