@@ -18,7 +18,6 @@ class BarChart extends Component{
           response.forEach(res => {
             Arr = [...Arr, res.revenues]
           })
-      
           this.setState({
             RevenuesData: Arr
           }); 
@@ -44,7 +43,16 @@ class BarChart extends Component{
     };
 
     return (
-      <Bar data={data} />
+      <div className="col-xl-6 col-lg-6">
+        <div className="card shadow mb-4">
+            <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 className="m-0 font-weight-bold text-primary">REVENUE 2021</h6>
+            </div>
+            <div className="card-body">
+              <Bar data={data} />
+            </div>
+        </div>
+      </div>
     );
   }
 };
