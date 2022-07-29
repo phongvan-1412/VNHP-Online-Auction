@@ -88,12 +88,12 @@ function AddProduct() {
                 <div className="form-group">
                   <label className="control-label" htmlFor="id">Category Name</label>
                   <select  className="form-control " >
-                    <option id="input-category-id">{1017}</option>
-                    <option id="input-category-id">{1018}</option>
-                    <option id="input-category-id">{1019}</option>
-                    <option id="input-category-id">{1020}</option>
-                    <option id="input-category-id">{1021}</option>
-                    <option id="input-category-id">{1022}</option>
+                    <option id="input-category-id">{1023}</option>
+                    <option id="input-category-id">{1024}</option>
+                    <option id="input-category-id">{1025}</option>
+                    <option id="input-category-id">{1026}</option>
+                    <option id="input-category-id">{1027}</option>
+                    <option id="input-category-id">{1028}</option>
 
                   </select>
                 </div>
