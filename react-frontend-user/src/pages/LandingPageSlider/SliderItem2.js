@@ -58,18 +58,16 @@ var x = setInterval(function() {
   return (
     <div className="product-grid">
       <div id={product.product_id + product.product_name}></div>
-      <div>
-        <Link
-          to={`/${product.category_id}/${product.product_name.replace(/-/g, " ")}`}
-          replace
-          className="product-name-item"
-          onClick={onProductClicked}
-        >
-          <img className="product-item-content product-img" name={product.product_id}
-            // src={require(`../../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
-            />
-        </Link>
-      </div>
+      <Link
+        to={`/${product.category_id}/${product.product_name.replace(/-/g, " ")}`}
+        replace
+        className="product-name-item"
+        onClick={onProductClicked}
+      >
+        <img className="product-item-content product-img" name={product.product_id}
+          // src={require(`../../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
+          />
+      </Link>
 
       <div className="category-name">
         {product.category_name}
