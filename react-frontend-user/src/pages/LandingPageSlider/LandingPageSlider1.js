@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GiNextButton, GiPreviousButton} from 'react-icons/gi'
 
-import ProductItem from "../../pages/Products/ProductByCategory/ProductItem";
+import SliderItem1 from "./SliderItem1";
 
 const LandingPageSlider1 = ({products}) => {
   const ref = useRef({})
@@ -42,7 +42,7 @@ const LandingPageSlider1 = ({products}) => {
           <Slider ref={ref} {...settings}>
             {products.map((product) => (
             <div className="product-grid-wrapper" key={product.product_id}>
-               <ProductItem product={product}></ProductItem>
+               <SliderItem1 product={product}></SliderItem1>
             </div>
             ))}
           </Slider>
