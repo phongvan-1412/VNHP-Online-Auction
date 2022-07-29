@@ -27,10 +27,11 @@ const LandingPageSlider1 = ({products}) => {
   const horizontalTab = (index) => { 
     setHorizontalState(index.target.value);
   };
-  
+
     return (
         <div className=" landingpage-slider slide-title">
           <div className="slide-title top-content">
+            <div id="timer"></div>
             <h4>
               <b>UPCOMING AUCTIONS</b>
             </h4>
@@ -50,7 +51,7 @@ const LandingPageSlider1 = ({products}) => {
             <button type="button" className="btn-previous" onClick={previous}>
               <GiPreviousButton />
             </button>
-            
+
             <button type="button" className=" btn-next" onClick={next}>
               <GiNextButton />
             </button>

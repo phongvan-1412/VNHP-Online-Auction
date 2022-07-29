@@ -598,8 +598,12 @@
 .product-name{
     width: 150px;
     height: 20px;
+    text-transform: uppercase;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+.product-name-item:focus{
+    cursor: pointer;
 }
 .product-image{
     text-decoration: none;
@@ -608,9 +612,7 @@
     font-weight: 600;
     height: 16px;
 }
-.product-name-item:focus{
-    cursor: pointer;
-}
+
 .product-price{
     margin: 5px 0px;
     font-size: 19px;
@@ -661,6 +663,7 @@
 .landingpage-category-grid{
     display: grid;
     grid-template-columns: repeat(3,1fr);
+    gap: 5em;
     align-items: center;
 }
 .landingpage-category-headtext{
@@ -671,20 +674,21 @@
 }
 .landingpage-category-grid img{
     position: relative;
-    width: 300px;
-    height: auto;
+    width: 400px;
+    height: 300px;
     object-fit: center;
     object-position: center;
     margin-bottom: 20px;
+}
+img .landingpage-category-img{
+    margin: 0px;
 }
 .landingpage-category-img:hover{
     transform: scale(1.1);
 }
 .landingpage-category-item-name{
-    position: absolute;
-    bottom: 50px;
-    left: 20px;
-    transform: translate(-25%, -25%);
+    position: relative;
+    /* left: -50px; */
     padding: 10px 10px;
     background-color: rgba(0,0,0,0.25);
     font-size: 13px;
