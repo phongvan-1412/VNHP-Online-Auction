@@ -90,7 +90,7 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
     } else {
       result.text("Date of birth is valid.");
       result.css("color", "green");
-      checkValidContact = true;
+      checkValidDob = true;
     }
     buttonSaveChanngeProfileSetter();
   };
@@ -101,6 +101,7 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
     } else {
       $("#btn-save-change").prop("disabled",true);
     }
+    console.log(checkValidFullName && checkValidContact && checkValidDob)
   };
 
   const saveChangeProfile = () => {
