@@ -12,7 +12,9 @@ const LandingPageCategories = ({categories}) => {
                     return(
                         <Link to={`/category/${category.category_name}`} className="row landingpage-category-item-wrapper">
                             <img className="landingpage-category-img" src={require(`../../../../LaravelAPI/public/CategoryImg/${category.category_img_name}`)}/>
-                            <Link to={`/category/${category.category_name}`} className ="landingpage-category-item-name">{category.category_name.replace(/-/g, " ")}</Link>
+                            <div className ="landingpage-category-name-wrapper">
+                                <Link to={`/category/${category.category_name}`} className ="landingpage-category-name">{category.category_name.replace(/-/g, " ")}</Link>
+                            </div>
                         </Link>
                     )
                 })}    
