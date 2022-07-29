@@ -93,7 +93,7 @@ return [
 
     'from' => [
         'address' => 'vnhpgrocery.aptech@gmail.com',
-        'name' => 'VNHP Grocery',
+        'name' => 'VNHP Aution',
     ],
 
     /*

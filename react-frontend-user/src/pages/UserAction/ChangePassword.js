@@ -69,6 +69,7 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
         result.text("Password is valid.");
         result.css("color", "green");
         checkValidNewPassword = true;
+        onNewConfirmPasswordBlur();
       } else {
         result.text(
           "Password is too short. Please enter more than 6 character"
@@ -156,6 +157,7 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
       .post(`http://127.0.0.1:8000/api/customerchangepassword`, customer)
       .then(function (response) {
         if (response.data == 0) {
+          $("#btn-change-password").data("dismiss", "");
           alert("Something wrong in server");
         } else {
           localStorage.removeItem("customer_info");
@@ -165,19 +167,21 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
             "Change password successfully.Please relog to update your password"
           );
           $("#change-password-result").css("color", "green");
+
+          $("#customer-old-password").val("");
+          $("#customer-old-password-result").text("");
+          $("#customer-new-password").val("");
+          $("#customer-new-password-result").text("");
+          $("#customer-confirm-new-password").val("");
+          $("#customer-confirm-new-password-result").text("");
           // window.location.href = "http://localhost:3000/userprofile";
         }
       });
   };
 
-  // const resetChangePasswordForm = () => {
-  //   $("#customer-old-password").text("");
-  //   $("#customer-old-password-result").text("");
-  //   $("#customer-new-password").text("");
-  //   $("#customer-new-password-result").text("");
-  //   $("#customer-confirm-new-password").text("");
-  //   $("#customer-confirm-new-password-result").text("");
-  // };
+  const onSuccsess = () => {
+    $("#btn-change-password").data("bs-dismiss", "modal");
+  };
 
   return (
     <div
@@ -186,7 +190,6 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
       tabIndex="-1"
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
-      // onClick={resetChangePasswordForm}
     >
       <div className="modal-dialog">
         <div className="modal-content">
@@ -199,7 +202,6 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              // onClick={resetChangePasswordForm}
             ></button>
           </div>
           <div id="change-password-result"></div>
@@ -269,7 +271,6 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
               type="button"
               className="btn btn-secondary change-password-form"
               data-bs-dismiss="modal"
-              // onClick={resetChangePasswordForm}
             >
               Close
             </button>
@@ -277,6 +278,7 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
               type="submit"
               className="btn btn-primary float-right change-password-form"
               id="btn-change-password"
+              data-bs-dismiss=""
               onClick={onButtonChangePasswordClick}
             >
               Save change

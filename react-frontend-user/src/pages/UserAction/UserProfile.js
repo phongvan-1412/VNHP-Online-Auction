@@ -26,11 +26,11 @@ function UserProfile({ userinfo, updateUserLogin }) {
   }
 
   const onUpdateUserAvatar = () => {
-    const $result = $("#avatar-img-result");
+    const result = $("#avatar-img-result");
 
     if ($("#user-avatar-img").prop("files")[0] == null) {
-      $result.text("Please choose your avatar.");
-      $result.css("color", "red");
+      result.text("Please choose your avatar.");
+      result.css("color", "red");
       return;
     }
     const customerImage = $("#user-avatar-img").prop("files")[0];
@@ -56,14 +56,14 @@ function UserProfile({ userinfo, updateUserLogin }) {
       .post(`http://127.0.0.1:8000/api/customerchangeavatar`, formData)
       .then(function (response) {
         if (response.data == 0) {
-          $result.text("Change avatar fail.");
-          $result.css("color", "red");
+          result.text("Change avatar fail.");
+          result.css("color", "red");
         } else {
           localStorage.removeItem("customer_info");
           localStorage.setItem("customer_info", JSON.stringify(response.data));
           updateUserLogin();
-          $result.text("Change avatar successfully.");
-          $result.css("color", "green");
+          result.text("Change avatar successfully.");
+          result.css("color", "green");
         }
       });
   };

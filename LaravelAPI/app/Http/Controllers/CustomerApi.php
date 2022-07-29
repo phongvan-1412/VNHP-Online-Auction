@@ -202,4 +202,40 @@ class CustomerApi extends Controller
         }
         return 0;
     }
+
+    public function CustomerForgetPassword(Request $request)
+    {
+        $currentCustomer = Customer::select()->where('customer_email',$request->customer_email)->get();
+
+        $tmp = new Customer();
+        foreach($currentCustomer as $cus)
+        {
+            $tmp = $cus;
+        }
+
+        if(count($currentCustomer) > 0)
+        {
+            $newPassword = strtoupper(Str::random(10));
+            Customer::select()->where('customer_email',$tmp->customer_email)
+                                            ->update(['customer_name'=>$tmp->customer_name,
+                                                    'customer_address'=>$tmp->customer_address,
+                                                    'customer_pwd'=>md5($newPassword),
+                                                    'customer_contact'=>$tmp->customer_contact,
+                                                    'customer_dob'=>$tmp->customer_dob,
+                                                    'customer_img_name'=>$tmp->customer_img_name]);
+
+            $customer = Customer::select()->where('customer_email',$tmp->customer_email)->first();
+            $customer->customer_pwd = $newPassword;
+            Mail::send('emailForgetPassword', compact('customer'), function($email) use($customer){
+                $email->subject('VNHP Aution - Reset password');
+                $email->to($customer->customer_email, $customer->customer_name,$customer->customer_pwd);
+            });
+            return 1;
+        }
+        return 0;
+    }
+
+    public function CustomerForgetPasswordView(){
+        return view('emailForgetPassword');
+    }
 }
