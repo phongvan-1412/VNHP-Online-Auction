@@ -24,7 +24,7 @@ const ProductItem = ({ product }) => {
       </div>
 
       <div className="category-name">
-        {product.category_name}
+        {product.category_id}
       </div>
 
       <div className="product-name">
