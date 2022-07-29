@@ -99,9 +99,8 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
     if (checkValidFullName && checkValidContact && checkValidDob) {
       $("#btn-save-change").removeAttr("disabled");
     } else {
-      $("#btn-save-change").prop("disabled",true);
+      $("#btn-save-change").prop("disabled", true);
     }
-    console.log(checkValidFullName && checkValidContact && checkValidDob)
   };
 
   const saveChangeProfile = () => {
@@ -111,11 +110,7 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
     const customer_contact = $("#editcontact").val();
     const customer_dob = $("#editdateofbirth").val();
 
-    if (
-      !customer_name ||
-      !customer_contact ||
-      !customer_dob
-    ) {
+    if (!customer_name || !customer_contact || !customer_dob) {
       $("#fullname-check-result").text("Please enter your first name");
       $("#fullname-check-result").css("color", "red");
 
@@ -140,11 +135,16 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
       .post(`http://127.0.0.1:8000/api/customerupdateinfo`, formData)
       .then(function (response) {
         if (response.data == 0) {
-          alert("Something wrong in server");
+          $("#change-profile-result").text(
+            "Something wrong.Update infomation fail."
+          );
+          $("#change-profile-result").css("color", "red");
         } else {
           localStorage.removeItem("customer_info");
           localStorage.setItem("customer_info", JSON.stringify(response.data));
           updateUserLogin();
+          $("#change-profile-result").text("Update infomation successfully.");
+          $("#change-profile-result").css("color", "green");
 
           customer_name.val("");
           customer_address.val("");
@@ -156,6 +156,25 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
       });
   };
 
+  const resetForm = () => {
+    $("#editfullname").val("");
+    $("#fullname-check-result").text("");
+
+    $("#editcontact").val("");
+    $("#check-phonenumber-result").text("");
+
+    $("#editdateofbirth").val("");
+    $("#check-dob-result").text("");
+
+    $("#change-profile-result").text("");
+  };
+
+  const test = () => {
+    $("#mymodal").on("hidden.bs.modal", function (e) {
+      resetForm();
+    });
+  };
+
   return (
     <div
       className="modal fade"
@@ -163,99 +182,110 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
       tabIndex="-1"
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
+      onClick={test}
     >
-      <div className="modal-dialog modal-lg">
-        <div className="modal-content">
-          <div className="modal-header">
+      <div className="modal-dialog modal-lg" id="mymodal">
+        <div className="modal-content bg-dark">
+          <div className="modal-header edit-profile-form-header">
             <h4 className="modal-title" id="staticBackdropLabel">
-              Edit {currentUserInfo.customer_name} Profile
+              <b className="title">EDIT {currentUserInfo.customer_name} PROFILE</b>
             </h4>
             <button
               type="button"
               className="btn-close"
+              id="btn-close-edit-profile"
               data-bs-dismiss="modal"
               aria-label="Close"
+              onClick={resetForm}
             ></button>
           </div>
-          <div className="modal-body">
-            <div className="card-body">
-              <div className="mb-3">
-                <label className="small mb-1" htmlFor="fullname">
-                  Full name
-                </label>
-                <input
-                  className="form-control"
-                  id="editfullname"
-                  type="text"
-                  onBlur={onFullNameBlur}
-                />
-                <div id="fullname-check-result"></div>
-              </div>
-
-              <div className="mb-3">
-                <label className="small mb-1" htmlFor="email">
-                  Email address
-                </label>
-                <input
-                  className="form-control"
-                  id="editemail"
-                  disabled
-                  value={currentUserInfo.customer_email}
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="small mb-1" htmlFor="address">
-                  Address
-                </label>
-                <input className="form-control" id="editaddress" type="text" />
-              </div>
-
-              <div className="row gx-3 mb-3">
-                <div className="col-md-6">
-                  <label className="small mb-1" htmlFor="contact">
-                    Phone number
+          <form id="form2">
+            <div className="modal-body">
+              <div className="card-body">
+                <div id="change-profile-result"></div>
+                <div className="mb-3 edit-profile-form-input">
+                  <label className="small mb-1 edit-profile-form" htmlFor="fullname">
+                    <b>FULL NAME</b>
                   </label>
                   <input
                     className="form-control"
-                    id="editcontact"
-                    type="tel"
-                    onBlur={onContactBlur}
+                    id="editfullname"
+                    type="text"
+                    onBlur={onFullNameBlur}
                   />
-                  <div id="check-phonenumber-result"></div>
+                  <div id="fullname-check-result"></div>
                 </div>
-                <div className="col-md-6">
-                  <label className="small mb-1" htmlFor="dateofbirth">
-                    Birthday
+
+                <div className="mb-3 edit-profile-form-input">
+                  <label className="small mb-1 edit-profile-form" htmlFor="email">
+                    <b>EMAIL ADDRESS</b>
                   </label>
                   <input
                     className="form-control"
-                    id="editdateofbirth"
-                    type="date"
-                    onBlur={onDobBlur}
+                    id="editemail"
+                    disabled
+                    value={currentUserInfo.customer_email}
                   />
-                  <div id="check-dob-result"></div>
+                </div>
+
+                <div className="mb-3 edit-profile-form-input">
+                  <label className="small mb-1 edit-profile-form" htmlFor="address">
+                    <b>ADDRESS</b>
+                  </label>
+                  <input
+                    className="form-control"
+                    id="editaddress"
+                    type="text"
+                  />
+                </div>
+
+                <div className="row gx-3 mb-3 edit-profile-form-input">
+                  <div className="col-md-6">
+                    <label className="small mb-1 edit-profile-form" htmlFor="contact">
+                      <b>PHONE NUMBER</b>
+                    </label>
+                    <input
+                      className="form-control"
+                      id="editcontact"
+                      type="tel"
+                      onBlur={onContactBlur}
+                    />
+                    <div id="check-phonenumber-result"></div>
+                  </div>
+                  <div className="col-md-6 edit-profile-form-input">
+                    <label className="small mb-1 edit-profile-form" htmlFor="dateofbirth">
+                      <b>BIRTHDAY</b>
+                    </label>
+                    <input
+                      className="form-control"
+                      id="editdateofbirth"
+                      type="date"
+                      onBlur={onDobBlur}
+                    />
+                    <div id="check-dob-result"></div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              id="btn-save-change"
-              onClick={saveChangeProfile}
-            >
-              Save change
-            </button>
-          </div>
+            <div className="modal-footer edit-profile-form-btn">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+                onClick={resetForm}
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                id="btn-save-change"
+                onClick={saveChangeProfile}
+              >
+                Save change
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

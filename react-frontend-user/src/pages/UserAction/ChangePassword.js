@@ -185,17 +185,17 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
 
   return (
     <div
-      className="modal fade"
+      className="modal fade "
       id="changepassword"
       tabIndex="-1"
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog">
-        <div className="modal-content">
+      <div className="modal-dialog ">
+        <div className="modal-content bg-dark change-password-body">
           <div className="modal-header">
             <h5 className="modal-title" id="staticBackdropLabel">
-              Change Password
+              <b id="title">CHANGE PASSWORD</b>
             </h5>
             <button
               type="button"
@@ -206,36 +206,36 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
           </div>
           <div id="change-password-result"></div>
 
-          <div className="modal-body">
-            <div className="row ">
+          <div className="modal-body change-password-form-group">
+            <div className="row">
               <input
                 hidden
                 defaultValue={currentUserInfo.customer_email}
                 id="customer-email"
               />
-              <div className="col-md-12 form-group change-password-form">
+              <div className="col-md-12 change-password-form">
                 <label
                   htmlFor="exampleInputEmail1"
                   className=" text-center change-password-form"
                 >
-                  Old password
+                  <b id="title">OLD PASSWORD</b>
                 </label>
                 <input
                   type="text"
-                  className="form-control change-password-form"
+                  className="form-control change-password-input change-password-form"
                   id="customer-old-password"
                   placeholder="Your old password"
                   onBlur={onCheckPassword}
                 />
+                <div id="customer-old-password-result"></div>
               </div>
-              <div id="customer-old-password-result"></div>
 
-              <div className="col-md-12 form-group change-password-form">
+              <div className="col-md-12 change-password-form">
                 <label
                   htmlFor="exampleInputEmail1"
                   className=" text-center change-password-form"
                 >
-                  New password
+                  <b id="title">NEW PASSWORD</b>
                 </label>
                 <input
                   type="text"
@@ -244,15 +244,15 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
                   placeholder="Your new password"
                   onBlur={onNewPasswordBlur}
                 />
+                <div id="customer-new-password-result"></div>
               </div>
-              <div id="customer-new-password-result"></div>
 
-              <div className="col-md-12 form-group change-password-form">
+              <div className="col-md-12 change-password-form">
                 <label
                   htmlFor="exampleInputEmail1"
                   className=" text-center change-password-form"
                 >
-                  Confirm new password
+                  <b id="title">CONFIRM NEW PASSWORD</b>
                 </label>
                 <input
                   type="text"
@@ -261,27 +261,28 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
                   placeholder="Your confirm new password"
                   onBlur={onNewConfirmPasswordBlur}
                 />
+                <div id="customer-confirm-new-password-result"></div>
               </div>
-              <div id="customer-confirm-new-password-result"></div>
             </div>
           </div>
 
           <div className="modal-footer">
             <button
               type="button"
-              className="btn btn-secondary change-password-form"
+              className="btn change-password-form"
+              id="btn-change-password-close"
               data-bs-dismiss="modal"
             >
-              Close
+              <b>CLOSE</b>
             </button>
             <button
               type="submit"
-              className="btn btn-primary float-right change-password-form"
+              className="btn float-right change-password-form"
               id="btn-change-password"
               data-bs-dismiss=""
               onClick={onButtonChangePasswordClick}
             >
-              Save change
+              <b>SAVE CHANGE</b>
             </button>
           </div>
         </div>

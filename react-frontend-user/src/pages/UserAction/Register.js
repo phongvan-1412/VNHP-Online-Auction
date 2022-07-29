@@ -42,7 +42,6 @@ function Register() {
         if (e.target.name == "lastname") checkValidLastName = true;
       }
     }
-    buttonRegisterSetter();
   };
 
   const isValidEmail = (email) => {
@@ -71,12 +70,12 @@ function Register() {
         $result.text("Password is valid.");
         $result.css("color", "green");
         checkValidPassword = true;
+        onConfirmPasswordBlur();
       } else {
         $result.text("Password is not valid.");
         $result.css("color", "red");
       }
     }
-    buttonRegisterSetter();
   };
 
   const isValidConfirmPassword = (password) => {
@@ -101,7 +100,6 @@ function Register() {
         $result.css("color", "red");
       }
     }
-    buttonRegisterSetter();
   };
 
   const isValidPhoneNumber = (phoneNumber) => {
@@ -129,29 +127,6 @@ function Register() {
         $result.text("Phone Number is not valid.");
         $result.css("color", "red");
       }
-    }
-
-    buttonRegisterSetter();
-  };
-
-  const isValidForm = () => {
-    if (
-      checkValidFirstName &&
-      checkValidLastName &&
-      checkValidEmail &&
-      checkValidPassword &&
-      checkValidConfirmPassword &&
-      checkValidPhoneNumber
-    )
-      return true;
-    return false;
-  };
-
-  const buttonRegisterSetter = () => {
-    if (isValidForm()) {
-      $("#btn-register").removeAttr("disabled");
-    } else {
-      $("#btn-register").prop("disabled", true);
     }
   };
 
@@ -182,7 +157,6 @@ function Register() {
             $result.css("color", "red");
           }
         }
-        buttonRegisterSetter();
       });
   };
 
@@ -192,11 +166,11 @@ function Register() {
 
   const buttonRegisterOnClick = () => {
     if (
-      !$("#firstname").val() ||
-      !$("#lastname").val() ||
-      !$("#email").val() ||
-      !$("#password").val() ||
-      !$("#confirmpassword").val() ||
+      !$("#firstname").val() &&
+      !$("#lastname").val() &&
+      !$("#email").val() &&
+      !$("#confirmpassword").val() &&
+      !$("#phonenumber").val() &&
       !$("#phonenumber").val()
     ) {
       $("#firstnameResult").text("Please enter your first name");
@@ -205,7 +179,7 @@ function Register() {
       $("#lastnameResult").text("Please enter your last name");
       $("#lastnameResult").css("color", "red");
 
-      $("#emailResult").text("Please enter your email");
+      $("#emailResult").text("Please enter your pasword");
       $("#emailResult").css("color", "red");
 
       $("#passwordResult").text("Please enter your pasword");
@@ -216,7 +190,47 @@ function Register() {
 
       $("#phonenumberResult").text("Please enter your password.");
       $("#phonenumberResult").css("color", "red");
+      return;
+    }
 
+    if (!$("#firstname").val()) {
+      $("#firstnameResult").text("Please enter your first name");
+      $("#firstnameResult").css("color", "red");
+      return;
+    }
+
+    if (!$("#lastname").val()) {
+      $("#lastnameResult").text("Please enter your last name");
+      $("#lastnameResult").css("color", "red");
+      return;
+    }
+
+    if (!$("#email").val()) {
+      $("#emailResult").text("Please enter your pasword");
+      $("#emailResult").css("color", "red");
+      return;
+    }
+
+    if (!$("#confirmpassword").val()) {
+      $("#confirmPasswordResult").text("Please enter your confirm password");
+      $("#confirmPasswordResult").css("color", "red");
+      return;
+    }
+
+    if (!$("#phonenumber").val()) {
+      $("#phonenumberResult").text("Please enter your password.");
+      $("#phonenumberResult").css("color", "red");
+      return;
+    }
+
+    if (
+      checkValidFirstName ||
+      checkValidLastName ||
+      checkValidEmail ||
+      checkValidPassword ||
+      checkValidConfirmPassword ||
+      checkValidPhoneNumber
+    ) {
       return;
     }
 
@@ -237,11 +251,22 @@ function Register() {
       .then(function (response) {
         if (response.data > 0) {
           $("#firstname").text("");
+          $("#firstnameResult").text("");
+
           $("#lastname").text("");
+          $("#lastnameResult").text("");
+
           $("#email").text("");
+          $("#emailResult").text("");
+
           $("#password").text("");
+          $("#passwordResult").text("");
+
           $("#confirmPassword").text("");
+          $("#confirmPasswordResult").text("");
+
           $("#phonenumber").text("");
+          $("#phonenumberResult").text("");
 
           $("#registerResult").text(
             "Register successfully. Please check your email.Redirecting to login."
@@ -249,6 +274,24 @@ function Register() {
           $("#registerResult").css("color", "green");
           setInterval(showTime, 5000);
         } else {
+          $("#firstname").text("");
+          $("#firstnameResult").text("");
+
+          $("#lastname").text("");
+          $("#lastnameResult").text("");
+
+          $("#email").text("");
+          $("#emailResult").text("");
+
+          $("#password").text("");
+          $("#passwordResult").text("");
+
+          $("#confirmPassword").text("");
+          $("#confirmPasswordResult").text("");
+
+          $("#phonenumber").text("");
+          $("#phonenumberResult").text("");
+
           $("#registerResult").text("Register Fail.");
           $("#registerResult").css("color", "red");
         }
@@ -257,13 +300,16 @@ function Register() {
 
   return (
     <div className="row">
-      <div className="col-1"></div>
-      <div className="col-5">
-        <div className="card">
-          <img src={require("../../img/Footer/image-9.jpg")} />
+      <div className="col-lg-1 col-md-1 col-xs-1"></div>
+      <div className="col-lg-5 col-md-5 col-xs-2">
+        <div className="register-img-form">
+          <img
+            id="register-img"
+            src={require("../../img/Footer/image-9.jpg")}
+          />
         </div>
       </div>
-      <div className="col-5">
+      <div className="col-lg-5 col-md-5 col-xs-6">
         <h5 id="registerResult" style={{ position: "absolute" }}></h5>
         <div className="card form-control form-register">
           <div className="register-form-control">
@@ -296,7 +342,7 @@ function Register() {
               className="small font-italic form-waring-text"
             ></div>
           </div>
-          <div className="register-form-control">
+          <div className="register-form-control ">
             <label>* Email</label>
             <input
               type="text"
@@ -355,21 +401,21 @@ function Register() {
 
           <span id="mostro">Don't have a date yet? Enter your best guess.</span>
           <br />
-          <span className="mos">* required field</span>
+          <span id="mos">* required field</span>
           <br />
 
           <p id="mostro1" className="register-term">
             By clicking Submit, I agree that the information I provide to
             David’s Bridal will be used to create an account and will be subject
-            to the David’s Bridal
+            to the David’s Bridal{" "}
             <Link
               to="#"
               className="term-link"
               style={{ textDecoration: "underline" }}
             >
               Terms and Conditions
-            </Link>
-            and
+            </Link>{" "}
+            and{" "}
             <Link
               to="#"
               className="term-link"
@@ -379,15 +425,15 @@ function Register() {
             </Link>
           </p>
 
-          <div className="mt-5 mb-2">
+          <div className="mt-5 mb-2 btn-register-group">
             <button
               type="submit"
-              className="btn btn-primary float-right forget-password-form"
+              className="forget-password-form"
               id="btn-register"
               onClick={buttonRegisterOnClick}
               value="Register"
             >
-              Register
+              <b>REGISTER</b>
             </button>
           </div>
         </div>

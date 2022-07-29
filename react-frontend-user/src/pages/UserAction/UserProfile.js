@@ -6,6 +6,20 @@ import EditProfile from "./EditProfile";
 
 function UserProfile({ userinfo, updateUserLogin }) {
   let currentUserInfo = userinfo;
+  $(document).keypress(function (e) {
+    if (
+      e.which == 13 &&
+      window.location.href === "http://localhost:3000/userprofile"
+    ) {
+      console.log(1);
+      if (localStorage.getItem("customer_info") == null) {
+        window.location.href = "http://localhost:3000/login";
+      } else {
+        currentUserInfo = JSON.parse(localStorage.getItem("customer_info"));
+      }
+    }
+  });
+
   if (performance.navigation.type === 1) {
     if (localStorage.getItem("customer_info") == null) {
       window.location.href = "http://localhost:3000/login";
@@ -72,9 +86,9 @@ function UserProfile({ userinfo, updateUserLogin }) {
       <div className="row user-account-profile">
         <div className="card col-4 mb-2 mb-xl-0">
           <div className="card-header">
-            <h4>Profile Picture</h4>
+            <h4><b>PROFILE PICTURE</b></h4>
           </div>
-          <div className="card-body text-center">
+          <div className="card-body text-center profile-img-form">
             <img
               className="img-user-account-profile rounded-circle mb-2"
               id="avatar-img"
@@ -84,33 +98,33 @@ function UserProfile({ userinfo, updateUserLogin }) {
               JPG or PNG no larger than 5 MB
             </div> */}
             <div id="avatar-img-result"></div>
-
+            <i class="fa-solid fa-images-user" id="user-profile-image"></i>
             <input type="file" id="user-avatar-img" onChange={onAvatarChange} />
-            <button className="btn btn-success" onClick={onUpdateUserAvatar}>
-              Change Avatar
+            <button className="btn btn-success btn-change-avatar" onClick={onUpdateUserAvatar}>
+               <b>CHANGE AVATAR</b>
             </button>
 
-            <div className="card mt-3 change-password">
+            <div className="">
               <button
                 type="button"
-                className="btn btn-success"
+                className="btn btn-success btn-change-password"
                 data-bs-toggle="modal"
                 data-bs-target="#changepassword"
               >
-                Change Password
+                <b>CHANGE PASSWORD</b>
               </button>
             </div>
           </div>
         </div>
         <div className="col-8" id="account-detail">
-          <div className="card mb-4">
+          <div className="card mb-4" id="account-detail-body">
             <div className="card-header">
-              <h4>Account Details</h4>
+              <h4><b>ACCOUNT DETAILS</b></h4>
             </div>
-            <div className="card-body">
+            <div className="card-body user-profile-body">
               <div className="mb-3">
                 <label className="small mb-1" htmlFor="fullname">
-                  Full name
+                  <b>FULL NAME</b>
                 </label>
                 <input
                   className="form-control"
@@ -123,7 +137,7 @@ function UserProfile({ userinfo, updateUserLogin }) {
 
               <div className="mb-3">
                 <label className="small mb-1" htmlFor="email">
-                  Email address
+                  <b>EMAIL ADDRESS</b>
                 </label>
                 <input
                   className="form-control"
@@ -135,7 +149,7 @@ function UserProfile({ userinfo, updateUserLogin }) {
 
               <div className="mb-3">
                 <label className="small mb-1" htmlFor="address">
-                  Address
+                  <b>ADDRESS</b>
                 </label>
                 <input
                   className="form-control"
@@ -149,7 +163,7 @@ function UserProfile({ userinfo, updateUserLogin }) {
               <div className="row gx-3 mb-3">
                 <div className="col-md-6">
                   <label className="small mb-1" htmlFor="contact">
-                    Phone number
+                    <b>PHONE NUMBER</b>
                   </label>
                   <input
                     className="form-control"
@@ -161,7 +175,7 @@ function UserProfile({ userinfo, updateUserLogin }) {
                 </div>
                 <div className="col-md-6">
                   <label className="small mb-1" htmlFor="dateofbirth">
-                    Birthday
+                    <b>BIRTHDAY</b>
                   </label>
                   <input
                     className="form-control"
@@ -175,11 +189,11 @@ function UserProfile({ userinfo, updateUserLogin }) {
 
               <button
                 type="button"
-                className="btn btn-success"
+                className="btn btn-success btn-edit"
                 data-bs-toggle="modal"
                 data-bs-target="#editprofile"
               >
-                Edit
+                <b>EDIT</b>
               </button>
             </div>
           </div>

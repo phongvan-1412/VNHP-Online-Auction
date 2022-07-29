@@ -25,7 +25,7 @@ class Login extends Component {
       autoplaySpeed: 3000,
       slidesToShow: 1,
       slidesToScroll: 1,
-      arrows: true,
+      arrows: false,
       fade: true,
       cssEase: "ease",
       easing: "linear",
@@ -121,7 +121,7 @@ class Login extends Component {
     return (
       <div className="row">
         <div className="col-2"></div>
-        <div className="col-4 login-form">
+        <div className="card col-4 login-form">
           <div className="login-form-group">
             <label htmlFor="exampleInputEmail1" className="">
               Email
@@ -161,21 +161,21 @@ class Login extends Component {
                 </Link>
               </p>
               <br />
-              <p>
+              <p id="dont-have-account">
                 Don't have an account?{" "}
                 <Link to="/register" className="login-link" replace>
                   Sign up.
                 </Link>
               </p>
             </div>
-            <div className="col-md-4 pt-1">
+            <div className="col-md-4 pt-1 btn-login-group">
               <button
                 type="submit"
-                className="btn btn-primary float-right"
+                className="btn float-right"
                 id="btn-login"
                 onClick={buttonLoginOnClick}
               >
-                Login
+                <b>LOGIN</b> 
               </button>
             </div>
           </div>

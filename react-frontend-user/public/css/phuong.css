@@ -1,3 +1,7 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
  /* all form */
  .form-waring-text{
     position: absolute;
@@ -5,16 +9,91 @@
  /* login form */
 .login-form{
     margin-top: 20px;
+    margin-bottom: 20px;
+    height: 350px;
+    background-color: var(--footerBackground);
 }
 .login-form-group{
     padding: 10px;
 }
+.login-form-group label{
+    color: var(--textColor);
+}
+.link-group #dont-have-account{
+    color: var(--textColor);
+}
+.btn-login-group #btn-login{
+    background-color: var(--textColor);
+}
+.btn-login-group #btn-login:hover{
+    background-color: var(--iconHover);
+    color: var(--textColor);
+}
+#btn-login b{
+    font-size: 15px;
+}
 .link-group p .login-link{
     color: blue;
 }
+.page-content{
+    margin-top: 3px;
+    height: 350px;
+}
+
  /* register form */
- .form-register{
+ .register-img-form #register-img{
     margin-top: 40px;
+    margin-bottom: 40px;
+    height: 810px;
+    width: 600px;
+ }
+ .form-register{
+    padding: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background-color: var(--footerBackground);
+ }
+ .register-form-control label{
+    color: var(--textColor);
+ }
+ .register-term {
+    color: var(--textColor);
+ }
+ #mostro{
+    color: var(--textColor);
+ }
+ #mos{
+    color: var(--textColor);
+ }
+ .btn-register-group>#btn-register{
+    background-color: var(--tableColor);
+    height: 35px;
+    width: 100px;
+    border: 20px;
+    border-radius: 6px;
+   cursor: pointer;
+   outline: none;
+   font-size: 16px;
+   -webkit-transform: translate(0);
+   transform: translate(0);
+   box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438);
+   -webkit-transition: box-shadow 0.25s;
+   transition: box-shadow 0.25s;
+ }
+ .btn-register-group>#btn-register:hover{
+    /* background-color: var(--iconHover); */
+    color: var(--textColor);
+    background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+    background-position: 100% 0;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
+    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+ }
+ 
+ #btn-register b{
+    font-size: 14px;
  }
 .register-term .term-link{
     color: blue;
@@ -26,8 +105,115 @@
 .user-account-profile{
     padding: 30px;
 }
+.profile-img-form #avatar-img-result{
+    position: absolute;
+    left: 30%;
+}
 
+.profile-img-form #user-avatar-img{
+    margin-top: 70px;
+}
+.profile-img-form .btn-change-avatar{
+    margin-top: 20px;
+    background-color: var(--footerBackground);
+}
+.profile-img-form .btn-change-avatar:hover{
+    margin-top: 20px;
+    background-color: var(--iconHover);
+}
+.profile-img-form .btn-change-password{
+    margin-top: 20px;
+    width: 300px;
+    background-color: var(--footerBackground);
+}
+.profile-img-form .btn-change-password:hover{
+    margin-top: 20px;
+    background-color: var(--iconHover);
+}
+
+.user-profile-body .btn-edit{
+    background-color: var(--footerBackground);
+}
+.user-profile-body .btn-edit:hover{
+    background-color: var(--iconHover);
+}
 /* change password*/
+.change-password-body .change-password-form-group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .change-password-form{
-    margin: 5px;
+    margin: 8px;
+}
+#staticBackdropLabel #title{
+    color :var(--textColor)
+}
+.change-password-form label b{
+    color :var(--textColor);
+    font-size: 14px;
+}
+.change-password-form label {
+    margin-bottom: -10px;
+}
+.change-password-form input{
+    width: 450px;
+}
+#customer-old-password-result{
+    position: absolute;
+    left: 5%;
+    margin-top: -5px;
+}
+#customer-new-password-result{
+    position: absolute;
+    left: 5%;
+    margin-top: -5px;
+}
+#customer-confirm-new-password-result{
+    position: absolute;
+    left: 5%;
+    margin-top: -5px;
+}
+.change-password-form-group{
+    margin-bottom: 10px;
+}
+#btn-change-password-close{
+    background-color: var(--categoryNameColor);
+}
+#btn-change-password-close>b{
+    color :var(--textColor);
+}
+#btn-change-password{
+    background-color: var(--categoryNameColor);
+}
+#btn-change-password b{
+    color :var(--textColor);
+}
+/* edit form*/
+#edit-profile-body{
+    background-color: var(--categoryNameColor);
+}
+#staticBackdropLabel .title{
+    color :var(--textColor);
+}
+.edit-profile-form b{
+    color :var(--textColor);
+}
+#fullname-check-result{
+    position: absolute;
+}
+#check-phonenumber-result{
+    position: absolute;
+}
+#check-dob-result{
+    position: absolute;
+}
+.edit-profile-form-input{
+    padding-bottom: 10px;
+}
+#form2 .edit-profile-form-btn{
+    margin-top: -20px;
+}
+#btn-save-change{
+    background-color: var(--categoryNameColor);
 }
