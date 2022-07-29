@@ -90,16 +90,13 @@ var x = setInterval(function() {
       </div>
 
       <div className="product-price">
-        ${parseInt(product.product_start_price).toLocaleString()}
+        <span className="product-price-headtext">Start Price:</span>
+        <span className="product-price-value">${parseInt(product.product_start_price).toLocaleString()}</span>
       </div>
 
       <div className="cart-icons">
-        <FaShoppingCart
-          className="meta-cart"
-          style={{ cursor: "pointer" }}
-          // onClick={()=> {this.props.addProductToCart(product,1)}}
-        />
         <FaHeart className="meta-wishlist" style={{ cursor: "pointer" }} />
+        <Link to="#" className="btn-view">View</Link>
       </div>
     </div>
   );
