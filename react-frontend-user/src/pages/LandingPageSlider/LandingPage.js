@@ -7,7 +7,7 @@ import TopSlider from "./TopSlider";
 
 class LandingPage extends Component {
   render() {
-    const { products, categories} = this.props;
+    const { products, categories } = this.props;
 
     return (
       <div className="row" style={{padding: '0px', margin: '0px'}}>

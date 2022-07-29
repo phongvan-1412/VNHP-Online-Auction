@@ -665,6 +665,7 @@
     grid-template-columns: repeat(3,1fr);
     gap: 5em;
     align-items: center;
+    margin-bottom: 100px;
 }
 .landingpage-category-headtext{
     margin-top: 100px;
@@ -692,10 +693,10 @@
 }
 .landingpage-category-name{
     position: absolute;
-    bottom: 50%;
+    bottom: 140px;
     padding: 10px 10px;
     background-color: rgba(0,0,0,0.25);
-    font-size: 13px;
+    font-size: 18px;
     font-weight: bold;
     text-decoration: none;
     text-transform: uppercase;
