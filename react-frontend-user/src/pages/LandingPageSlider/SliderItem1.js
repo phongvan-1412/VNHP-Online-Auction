@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaShoppingCart, FaHeart } from "react-icons/fa";
+import {  FaHeart } from "react-icons/fa";
 import $ from "jquery";
 
 const SliderItem1 = ({ product }) => {
@@ -58,17 +58,18 @@ var x = setInterval(function() {
   return (
     <div className="product-grid">
       <div id={product.product_id + product.product_name}></div>
-      <Link
-        to={`/${product.category_id}/${product.product_name.replace(/-/g, " ")}`}
-        replace
-        className="product-name-item"
-        onClick={onProductClicked}
-      >
-        <img className="product-item-content product-img" name={product.product_id}
-          // src={require(`../../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
-          />
-      </Link>
-
+      <div>
+        <Link
+          to={`/${product.category_id}/${product.product_name.replace(/-/g, " ")}`}
+          replace
+          className="product-img"
+          onClick={onProductClicked}
+        >
+          <img name={product.product_id}
+            src={require(`../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
+            />
+        </Link>
+      </div>
       <div className="category-name">
         {product.category_name}
       </div>
