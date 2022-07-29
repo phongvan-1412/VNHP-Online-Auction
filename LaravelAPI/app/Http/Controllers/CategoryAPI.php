@@ -18,14 +18,14 @@ class CategoryAPI extends Controller
         $newCategory = new Category();
         $newCategory->category_name =  $request->category_name;
         $category_img = $request->file('category_img');
-        $newCategory->category_img_name = time().'-'.'category.'. $request->img_extension;
+        $newCategory->category_img_name = time().'-'.'category'. $request->img_extension;
 
         $isExist = Category::select()->where('category_name',  $request->category_name)->exists();
 
         if(!$isExist)
         {
             $newCategory->save();
-            $category_img->move(public_path('CategoryImg'),  time().'-'.'category.'.$request->img_extension);
+            $category_img->move(public_path('CategoryImg'),  time().'-'.'category'.$request->img_extension);
             return 1;
         }
        
