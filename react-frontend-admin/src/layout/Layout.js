@@ -9,6 +9,7 @@ import TableProduct from '../form/TableProduct';
 import TableCategory from '../form/TableCategory';
 import "../css/admin1.css";
 import "../css/sb-admin-2.min.css";
+import "../css/dataTables.bootstrap4.css";
 
 export const Layout = () => {
   return (

@@ -26,45 +26,54 @@ class Bill extends Component{
 
       render(){
         return(
-            <div className="container">
-              <div className="float-right mb-3">
+            <div className="container-fluid">
                 <button
-                  className="btn btn-success"
+                  className="btn btn-success mb-3 "
                   data-toggle="modal"
                   data-target="#con-close-modal"
                 >
                   Add new
                 </button>
-              </div>
-              <table className="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Payment code</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody id="bill-records">
-                {this.state.ProductData.map((p,index) => {
-                  return(
-                    <tr>
-                      <td key={index}></td>
-                      <td>{p.product_id}</td>
-                      <td>{p.bill_date}</td>
-                      <td>{p.bill_payment}</td>
-                      <td>{p.customer_id}</td>
-                      <td>{p.payment_mode_id}</td>
-                      <td>{p.bill_status}</td>
-                    </tr>
-                  )
+             
+              <div className="card shadow mb-4">
+                <div className="card-header py-3">
+                  <h6 className="m-0 font-weight-bold text-primary">Bill</h6>
+                </div>
+                <div className="card-body">
+                  <div className="table-responsive">
+                    <table className="table table-striped" id="dataTable" style={{width: "100%"}} cellPadding="0">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Product</th>
+                          <th>Date</th>
+                          <th>Total</th>
+                          <th>Customer</th>
+                          <th>Payment code</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
 
-                })}
-                </tbody>
-              </table>
+                      <tbody id="bill-records">
+                        {this.state.ProductData.map((p,index) => {
+                          let i = 1
+                          return(
+                            <tr>
+                              <td key={index}>{i++}</td>
+                              <td>{p.product_id}</td>
+                              <td>{p.bill_date}</td>
+                              <td>{p.bill_payment}</td>
+                              <td>{p.customer_id}</td>
+                              <td>{p.payment_mode_id}</td>
+                              <td>{p.bill_status}</td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>    
               <AddBill />
             </div>
         )  
