@@ -43,7 +43,16 @@ class LineChart extends Component{
       ],
     };
     return (
-      <Line data={data}/>
+      <div className="col-xl-6 col-lg-6">
+          <div className="card shadow mb-4">
+              <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 className="m-0 font-weight-bold text-primary">REVENUE 2018 - 2022</h6>
+              </div>
+              <div className="card-body">
+                <Line data={data}/>
+              </div>
+          </div>
+      </div>
     )
   }
 };
