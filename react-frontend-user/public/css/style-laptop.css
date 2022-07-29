@@ -680,15 +680,19 @@
     object-position: center;
     margin-bottom: 20px;
 }
-img .landingpage-category-img{
-    margin: 0px;
-}
 .landingpage-category-img:hover{
     transform: scale(1.1);
 }
-.landingpage-category-item-name{
+.landingpage-category-name-wrapper{
     position: relative;
-    /* left: -50px; */
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.landingpage-category-name{
+    position: absolute;
+    bottom: 50%;
     padding: 10px 10px;
     background-color: rgba(0,0,0,0.25);
     font-size: 13px;
