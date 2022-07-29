@@ -39,10 +39,10 @@ const LandingPageSlider3 = ({products}) => {
 
           <Slider ref={ref} {...settings}>
             {products.map((product) => (
-               <ProductItem 
+               <SliderItem3
                key={product.product_SKU}
                product={product}
-             ></ProductItem>
+             ></SliderItem3>
             ))}
           </Slider>
           

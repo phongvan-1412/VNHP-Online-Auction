@@ -42,7 +42,7 @@ const LandingPageSlider1 = ({products}) => {
           <Slider ref={ref} {...settings}>
             {products.map((product) => (
             <div className="product-grid-wrapper" key={product.product_id}>
-               <ProductItem product={product}></ProductItem>
+               <SliderItem1 product={product}></SliderItem1>
             </div>
             ))}
           </Slider>
