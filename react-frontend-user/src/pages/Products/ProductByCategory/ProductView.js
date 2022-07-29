@@ -14,16 +14,16 @@ const ProductView = ({ product }) => {
     <div className="product-grid-wrapper col-xl-3 col-md-4 col-xs-6"
     onMouseEnter={() => setProductQV(true)} 
     onMouseLeave={() => setProductQV(false)}>
-      {/* {productQV ? (
-        <div style={{ position: "absolute", marginTop: "160px" }}>
+      {productQV ? (
+        <div style={{ position: "absolute" }}>
           <div
-            style={{ background: "red", textAlign: "center", width: "160px" }}
+            style={{ background: "red", textAlign: "center", width: "200px" }}
           >
             <button onClick={() => setProductShow(true)}>Quick View</button>
           </div>
         </div>
-      ) : null} */}
-      {/* {productShow ? (
+      ) : null}
+      {productShow ? (
         <div>
           <div
             style={{
@@ -58,7 +58,7 @@ const ProductView = ({ product }) => {
             <button onClick={onCLick}>close</button>
           </div>
         </div>
-      ) : null} */}
+      ) : null}
       <ProductItem product={product}/>
     </div>
   );

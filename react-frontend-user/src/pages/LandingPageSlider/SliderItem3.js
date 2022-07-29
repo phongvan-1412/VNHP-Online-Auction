@@ -56,7 +56,7 @@ var x = setInterval(function() {
     }
   }, 1000);
   return (
-    <div className="product-grid-slider">
+    <div className="product-grid">
       <div id={product.product_id + product.product_name}></div>
       <Link
         to={`/${product.category_id}/${product.product_name.replace(/-/g, " ")}`}

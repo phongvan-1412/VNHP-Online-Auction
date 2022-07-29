@@ -553,11 +553,18 @@
     margin-top: 100px;
 }
 .product-grid-wrapper{
+    display: flex;
+    justify-content: center;
+    align-self: center;
     margin: 0px;
-    
 }
-.product-grid-slider{
-    position: relative;
+.product-grid{
+    margin-bottom: 20px;
+}
+.product-grid:hover{
+    width: 200px;
+    box-shadow: 1px 3px 3px 1px rgba(0,0,0,0.25);
+    transition: 350ms;
 }
 .top-content{
     display: flex;
@@ -618,6 +625,7 @@
     align-items: center;
 }
 .btn-view{
+    margin-top: 30px;
     cursor: pointer;
     padding: 4px;
     background-color: black;
@@ -631,6 +639,7 @@
 .meta-wishlist{
     width: 25px;
     height: 25px;
+    margin-top: 30px;
     margin-left: 30px;
     padding: 4px;
     cursor: pointer;

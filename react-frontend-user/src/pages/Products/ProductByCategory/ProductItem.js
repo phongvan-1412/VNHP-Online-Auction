@@ -14,11 +14,11 @@ const ProductItem = ({ product }) => {
         <Link
           to={`/${product.category_id}/${product.product_name.replace(/-/g, " ")}`}
           replace
-          className="product-name-item"
+          className="product-img"
           onClick={onProductClicked}
         >
-          <img className="product-item-content product-img" name={product.product_id}
-            // src={require(`../../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
+          <img name={product.product_id}
+            src={require(`../../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
             />
         </Link>
       </div>

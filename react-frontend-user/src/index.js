@@ -7,18 +7,23 @@ import { BrowserRouter, Router, Routes, Route } from "react-router-dom";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+//Header
 import Header from "./layout/Header/Header";
+//Side Pages
 import About from "./pages/AboutUs/About";
 import Contact from "./pages/Contact/Contact";
+//Product
 import LandingPage from "./pages/LandingPageSlider/LandingPage";
 import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
 import ProductDetail from "./pages/Products/ProductDetail/ProductDetail";
-import Footer from "./layout/Footer";
+// UserAction
 import Login from "./pages/UserAction/Login";
 import Register from "./pages/UserAction/Register";
 import ForgetPassword from "./pages/UserAction/ForgetPassword";
 import UserProfile from "./pages/UserAction/UserProfile";
+//Footer
+import Footer from "./layout/Footer";
+
 
 // const headerBody1 = ReactDOM.createRoot(document.getElementById("headerBody1"));
 

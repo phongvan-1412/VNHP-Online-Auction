@@ -4,10 +4,6 @@ import $ from "jquery";
 import ProductView from "./ProductView";
 
 const Products = ({products,category}) => {
-  // let category_id = $("#data").data("productbycate");
-  // let products = $("#data").data("products");
-  // let categories = $("#data").data("categories");
-  // let categoriesroot = $("#data").data("categoriesroot");
 
   // get current category
   // let cate = [];
@@ -26,14 +22,6 @@ const Products = ({products,category}) => {
   //     }
   //   });
   // }
-
-  // get subCate
-  // let subCate = [];
-  // categories.forEach((cate) => {
-  //   if (cate.category_root == category_id) {
-  //     subCate = [...subCate, cate];
-  //   }
-  // });
 
   // get products
   // let currentProducts = [];
@@ -91,9 +79,7 @@ const Products = ({products,category}) => {
                     replace
                     onClick={onClick}
                   >
-                    {/* <span className="categoryRoot-link1" > */}
-                    {category.category_name.replace("-", " ")}
-                    {/* </span> */}
+                    {category.category_name.replace(/-/g, " ")}
                   </Link>
                 </li>
               </ul>
