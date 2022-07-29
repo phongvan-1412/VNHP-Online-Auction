@@ -4,11 +4,11 @@ import $ from "jquery";
 import ProductView from "./ProductView";
 
 const Products = ({products,category}) => {
-  let currentProducts = [];
+  let totalProducts = [];
 
   products.forEach((product) => {
-    if (product.category_id == category.category_id) {
-      currentProducts = [...currentProducts, product];
+    if (product.category_id === category.category_id) {
+      totalProducts = [...totalProducts, product];
     }
   });
 
@@ -16,15 +16,20 @@ const Products = ({products,category}) => {
     $("#data").data("productbycate", e.target.name);
   }
 
-  const productsPerPage = 8;
+  const productsPerPage = 12;
   const currentPage = 1;
 
-  const paginate = (pageNumber) => currentPage = pageNumber;
-  let pageNumbers = [];
+  const indexOfLastPage = currentPage * productsPerPage;
+  const indexOfFirstPage = indexOfLastPage - productsPerPage;
+  const currentProducts = totalProducts.slice(indexOfFirstPage, indexOfLastPage);
 
-  for (let i = 1; i <= Math.ceil(currentProducts.length / productsPerPage); i++) {
+  let pageNumbers = [];
+  console.log(currentProducts.length)
+  for (let i = 1; i <= Math.ceil(totalProducts.length / productsPerPage); i++) {
     pageNumbers.push(i);
   }
+
+  const paginate = (pageNumber) => currentPage = pageNumber;
 
   return (
     <div className="container">
@@ -62,9 +67,9 @@ const Products = ({products,category}) => {
 
             <div className="col-md-9">
               <div className="row" style={{ marginTop: "-20px" }}>
-                {products.map((product) => {
+                {currentProducts.map((product) => {
                   return (
-                    <ProductView key={product.product_SKU} product={product} />
+                    <ProductView key={product.product_id} product={product} />
                   );
                 })}
               </div>
@@ -82,11 +87,7 @@ const Products = ({products,category}) => {
             <ul className="pagination">
               {pageNumbers.map((number) => (
                 <li key={number} className="page-item">
-                  <Link
-                    to="#"
-                    className="page-link"
-                    onClick={() => paginate(number)}
-                  >
+                  <Link to="#" className="page-link" onClick={() => paginate(number)}>
                     {number}
                   </Link>
                 </li>
