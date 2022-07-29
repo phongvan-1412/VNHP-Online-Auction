@@ -192,12 +192,12 @@ function Register() {
 
   const buttonRegisterOnClick = () => {
     if (
-      !$("#firstname").val() == true ||
-      !$("#lastname").val() == true ||
-      !$("#email").val() == true ||
-      !$("#password").val() == true ||
-      !$("#confirmpassword").val() == true ||
-      !$("#phonenumber").val() == true
+      !$("#firstname").val() ||
+      !$("#lastname").val() ||
+      !$("#email").val() ||
+      !$("#password").val() ||
+      !$("#confirmpassword").val() ||
+      !$("#phonenumber").val()
     ) {
       $("#firstnameResult").text("Please enter your first name");
       $("#firstnameResult").css("color", "red");
@@ -220,11 +220,6 @@ function Register() {
       return;
     }
 
-    // let customer_ip = {};
-    // $.getJSON("https://api.db-ip.com/v2/free/self", function (data) {
-    //   customer_ip = data.ipAddress;
-    // });
-
     const customer_name = $("#firstname").val() + " " + $("#lastname").val();
     const customer_email = $("#email").val();
     const customer_pwd = $("#password").val();
@@ -235,7 +230,6 @@ function Register() {
       customer_email,
       customer_pwd,
       customer_contact,
-      // customer_ip,
     };
 
     axios
