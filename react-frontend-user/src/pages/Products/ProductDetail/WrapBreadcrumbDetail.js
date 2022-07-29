@@ -22,11 +22,11 @@ const WrapBreadcrumbDetail = ({ product, category }) => {
             onClick={onClick}
             id={category.category_id}
           >
-            {product.category_name}
+            {category.category_name}
           </Link>
         </li>
         <li className="item-link">
-          <span>{product.product_name}</span>
+          <span>{product.product_name.replace(/-/g, " ")}</span>
         </li>
       </ul>
     </div>
