@@ -76,9 +76,12 @@
    font-size: 16px;
    -webkit-transform: translate(0);
    transform: translate(0);
-   box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438);
+   /* box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438); */
    -webkit-transition: box-shadow 0.25s;
    transition: box-shadow 0.25s;
+   text-align: center;
+   text-decoration: none;
+   overflow: hidden;
  }
  .btn-register-group>#btn-register:hover{
     /* background-color: var(--iconHover); */
@@ -91,7 +94,49 @@
     background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
     box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
  }
- 
+ .btn-register-group>#btn-register b{
+    cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+ }
+ .btn-register-group>#btn-register b:after{
+    content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+ }
+
+ .btn-register-group>#btn-register:hover b {
+    padding-right: 25px;
+  }
+  
+  .btn-register-group>#btn-register:hover b:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  .btn-register-group>#btn-register:after {
+    content: "";
+    border-radius: 50px;
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 150%;
+    padding-left: 250%;
+    margin-left: -50px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 0.8s
+  }
+  .btn-register-group>#btn-register:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+  }
  #btn-register b{
     font-size: 14px;
  }
