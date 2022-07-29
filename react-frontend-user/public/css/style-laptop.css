@@ -628,7 +628,7 @@
     font-size: 30px;
     padding: 4px;
 }
-.handle{
+/* .handle{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -654,7 +654,7 @@
 .right-handle{
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-}
+} */
 /* ----------LANGDINGPAGE CATEGORIES---------- */
 .landingpage-category-wrapper{
     display: flex;
