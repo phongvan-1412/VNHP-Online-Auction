@@ -8,12 +8,18 @@ class Products extends Component {
     currentPage: 1
   }
   render(){
-    const { products, category } = this.props;
+    const { products, category, categories } = this.props;
     let totalProducts = [];
-
     products.forEach((product) => {
       if (product.category_id === category.category_id) {
         totalProducts = [...totalProducts, product];
+      }
+    });
+
+    let categoryItems = [];
+    categories.forEach((currentCates) => {
+      if (currentCates.category_id !== category.category_id) {
+        categoryItems = [...categoryItems, currentCates];
       }
     });
   
@@ -55,7 +61,16 @@ class Products extends Component {
                   <div className="widget mercado-widget filter-widget brand-widget">
                     <h2 className="widget-title">CATEGORY</h2>
                     <div className="widget-content">
-
+                      <ul className="list-style vertical-list list-limited" data-show="6">
+                        {categoryItems.map((item) =>{
+                          return(
+                            <li className="list-item">
+                              <Link className="filter-link" to={`/category/${item.category_name}`}><i class="fa-solid fa-crown"></i> {item.category_name.replace(/-/g, " ")}</Link>
+                              <span className="count">({item.product_quantity})</span>
+                            </li>
+                          )
+                        })}
+                      </ul>
                     </div>
                   </div>
                 </div>
