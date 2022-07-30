@@ -38,10 +38,7 @@ class ProductAPI extends Controller
             order by count(a.customer_id)");
         return $tmp_products;
     }
-    // table
-    public function AddProductTable(){
-
-    }
+    
     public function AddProduct(Request $request){
         $newProduct = new Product();
         $newProduct->product_name =  $request->product_name;
@@ -82,5 +79,10 @@ class ProductAPI extends Controller
         }
        
         return 0;         
+    }
+    // table
+    public function AddProductTable(){
+        $getProduct = Product::select()->get();
+        return ( $getProduct);
     }
 }

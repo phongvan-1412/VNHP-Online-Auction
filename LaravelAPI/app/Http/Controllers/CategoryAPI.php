@@ -34,10 +34,15 @@ class CategoryAPI extends Controller
             return 1;
         }
        
-        return 0;         
+        return 0;  
+
+        
     }
+
     // table add category
     public function AddCategoryTable(){
+        $getcategory = Category::select()->get();
+        return $getcategory;
 
     }
 
