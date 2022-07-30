@@ -34,7 +34,6 @@ const Header = ({ userinfo, categories }) => {
       });
   };
 
- 
   return (
     <div
       className="header-menu"
@@ -44,8 +43,15 @@ const Header = ({ userinfo, categories }) => {
       }}
     >
       <header className="menu">
-        <Link to="/" className="icon-text" style={{margin: "0px", padding: "0px"}}replace>
-          <span className="icon-split-text" data-text="VNHP">VNHP</span>
+        <Link
+          to="/"
+          className="icon-text"
+          style={{ margin: "0px", padding: "0px" }}
+          replace
+        >
+          <span className="icon-split-text" data-text="VNHP">
+            VNHP
+          </span>
           <span className="icon-footer-text">@ONLINE AUCTION</span>
         </Link>
 
@@ -63,25 +69,21 @@ const Header = ({ userinfo, categories }) => {
         {/* <Link to="#" replace className="needhelp">
           Needhelp
         </Link> */}
-        <div
-          style={{ height: "100px", marginTop: "77px" }}
-          className="product "
-        >
-          <Link to="#" id="menu-dropdown" replace>
-            Product
+
+        <Link to="#" className="product" replace style={{ height: "50px"}}>
+          Product
             <div className="services-submenu" style={{ position: "absolute" }}>
               <Dropdown categories={categories} />
-            </div>
-          </Link>
-        </div>
+          </div>
+        </Link>
 
         {checkUser ? (
           <div>
-            <Link to="/userprofile" replace>
+            <Link to="/userprofile" className="userprofile" replace>
               {userName}
             </Link>
 
-            <Link to="/" replace onClick={buttonLogOutClick}>
+            <Link to="/" replace className="logout" onClick={buttonLogOutClick}>
               Log Out
             </Link>
           </div>
@@ -90,8 +92,7 @@ const Header = ({ userinfo, categories }) => {
             <Link to="/login" replace className="login">
               Login
             </Link>
-
-            <Link to="/register" replace className="register">
+            <Link to="/register" replace id="register-link">
               Register
             </Link>
           </div>

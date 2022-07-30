@@ -52,6 +52,164 @@
     margin: 0px;
     z-index: 3;
 }
+.menu .about{
+    position: relative;
+	padding: 1rem 0 0.5rem;
+	margin: 0 1.5rem;
+	color: white;
+	text-decoration: none;
+}
+.menu .about::after{
+    content: '';
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		transform: translateX(-50%) scaleX(0);
+		transform-origin: 50% 50%;
+		width: 100%;
+		height: 1px;
+		background-color: rgba(255,255,255,0.8);
+		transition: transform 250ms;
+}
+.menu .about:hover::after{
+    transform: translateX(-50%) scaleX(1);
+}
+
+.menu .contact{
+    position: relative;
+	padding: 1rem 0 0.5rem;
+	margin: 0 1.5rem;
+	color: white;
+	text-decoration: none;
+}
+.menu .contact::after{
+    content: '';
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		transform: translateX(-50%) scaleX(0);
+		transform-origin: 50% 50%;
+		width: 100%;
+		height: 1px;
+		background-color: rgba(255,255,255,0.8);
+		transition: transform 250ms;
+}
+.menu .contact:hover::after{
+    transform: translateX(-50%) scaleX(1);
+}
+.menu .product{
+    position: relative;
+	padding: 1rem 0 0.5rem;
+	margin: 0 1.5rem;
+	color: white;
+	text-decoration: none;
+}
+.menu .product::after{
+    content: '';
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	transform: translateX(-50%) scaleX(0);
+	transform-origin: 50% 50%;
+	width: 100%;
+	height: 1px;
+	background-color: rgba(255,255,255,0.8);
+	transition: transform 250ms;
+}
+.menu .product:hover::after{
+    transform: translateX(-50%) scaleX(1);
+}
+.menu .userprofile{
+    position: relative;
+	padding: 1rem 0 0.5rem;
+	margin: 0 1.5rem;
+	color: white;
+	text-decoration: none;
+}
+.menu .userprofile::after{
+    content: '';
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		transform: translateX(-50%) scaleX(0);
+		transform-origin: 50% 50%;
+		width: 100%;
+		height: 1px;
+		background-color: rgba(255,255,255,0.8);
+		transition: transform 250ms;
+}
+.menu .userprofile:hover::after{
+    transform: translateX(-50%) scaleX(1);
+}
+.menu .logout{
+    position: relative;
+	padding: 1rem 0 0.5rem;
+	margin: 0 1.5rem;
+	color: white;
+	text-decoration: none;
+}
+.menu .logout::after{
+    content: '';
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		transform: translateX(-50%) scaleX(0);
+		transform-origin: 50% 50%;
+		width: 100%;
+		height: 1px;
+		background-color: rgba(255,255,255,0.8);
+		transition: transform 250ms;
+}
+.menu .logout:hover::after{
+    transform: translateX(-50%) scaleX(1);
+}
+.menu #register-link{
+    position: relative;
+	padding: 1rem 0 0.5rem;
+	margin: 0 1.5rem;
+	color: white;
+	text-decoration: none;
+}
+.menu #register-link::after{
+    content: '';
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		transform: translateX(-50%) scaleX(0);
+		transform-origin: 50% 50%;
+		width: 100%;
+		height: 1px;
+		background-color: rgba(255,255,255,0.8);
+		transition: transform 250ms;
+}
+.menu #register-link:hover::after{
+    transform: translateX(-50%) scaleX(1);
+}
+.menu #register-link:hover{
+    color: var(--iconHover);
+}
+.menu .login{
+    position: relative;
+	padding: 1rem 0 0.5rem;
+	margin: 0 1.5rem;
+	color: white;
+	text-decoration: none;
+}
+.menu .login::after{
+    content: '';
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		transform: translateX(-50%) scaleX(0);
+		transform-origin: 50% 50%;
+		width: 100%;
+		height: 1px;
+		background-color: rgba(255,255,255,0.8);
+		transition: transform 250ms;
+}
+.menu .login:hover::after{
+    transform: translateX(-50%) scaleX(1);
+}
 .icon-text{
     position: relative;
     text-align: center;
@@ -174,13 +332,11 @@
     display: none;
 }
 /* ----------HEADER-CATEGORY DROP DOWN---------- */
-#menu-dropdown {
-    padding: 50px 0px;
-}
-#menu-dropdown .services-submenu{
+
+.product .services-submenu{
     display: none;
 }
-#menu-dropdown:hover .services-submenu{
+.product:hover .services-submenu{
     display: inline-flex;
     width: 800px;
     margin-left: -50px;
@@ -208,7 +364,9 @@
 .submenu-name-wrapper>.category-name{
     color: black;
 }
-
+.services-submenu{
+    height: 50px;
+}
 /* ----------QUICK VIEW CART----------
 .quick-view-cart{
     background: white;

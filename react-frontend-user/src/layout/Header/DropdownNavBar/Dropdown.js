@@ -5,8 +5,8 @@ import $ from "jquery";
 const Dropdown = ({categories}) => {
 
     const element = (
-      <ul className="services-submenu">
-        <div className="container">
+      // <ul>
+        // <div className="container">
           <div className="row">
             {categories.map((category) => {
               return (
@@ -19,7 +19,7 @@ const Dropdown = ({categories}) => {
                         name={category.category_name}
                         // onClick={onClick}
                       >
-                        {category.category_name.replace("-", " ")}
+                        {category.category_name.replace(/-/g," ")}
                       </Link>
                     </div>
                   </div>
@@ -27,8 +27,8 @@ const Dropdown = ({categories}) => {
               );
             })}
           </div>
-        </div>
-      </ul>
+        // </div>
+      // </ul>
     );
 
     return element;
