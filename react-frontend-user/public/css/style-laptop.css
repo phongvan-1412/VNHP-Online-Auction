@@ -788,23 +788,30 @@
     align-items: center;
 }
 .btn-view{
+    width: 50px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 30px;
-    cursor: pointer;
     padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
     background-color: black;
     color: var(--textColor);
-    font-size: 11px;
+    text-transform: uppercase;
+    font-size: 9px;
     font-weight: bold;
 }
 .btn-view:hover{
     color: var(--iconHover);
 }
 .meta-wishlist{
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
     margin-top: 30px;
-    margin-left: 30px;
-    padding: 4px;
+    padding: 5px;
     cursor: pointer;
     background-color: var(--iconHover);
     color: var(--textColor);

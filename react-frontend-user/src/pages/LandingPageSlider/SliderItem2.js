@@ -92,7 +92,7 @@ var x = setInterval(function() {
 
         <div className="cart-icons">
           <FaHeart className="meta-wishlist" style={{ cursor: "pointer" }} />
-          <Link to="#" className="btn-view">View</Link>
+          <Link to={`/${product.category_id}/${product.product_name}`} className="btn-view">View</Link>
         </div>
       </div>
       
