@@ -59,7 +59,7 @@ var x = setInterval(function() {
     <div className="product-grid">
       <div id={product.product_id + product.product_name}></div>
       <Link
-        to={`/${product.category_id}/${product.product_name.replace(/-/g, " ")}`}
+        to={`/${product.category_id}/${product.product_name}`}
         replace
         className="product-img"
         onClick={onProductClicked}

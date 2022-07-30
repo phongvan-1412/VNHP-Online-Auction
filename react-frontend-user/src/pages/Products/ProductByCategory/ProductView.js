@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProductItem from "./ProductItem";
 import DetailItem from "../ProductDetail/DetailItem";
 
-const ProductView = ({ product }) => {
+const ProductView = ({ product, categories}) => {
   const [productQV, setProductQV] = useState(false);
   const [productShow, setProductShow] = useState(false);
 
@@ -59,7 +59,7 @@ const ProductView = ({ product }) => {
           </div>
         </div>
       ) : null}
-      <ProductItem product={product}/>
+      <ProductItem product={product} categories={categories}/>
     </div>
   );
 };
