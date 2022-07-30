@@ -107,7 +107,7 @@ class HomePage extends Component {
             {/* Product */}
             {this.state.categories.map((category) => (
               <Route key={category.category_id} path={`/category/${category.category_name}`} element={
-                  <ProductByCategory products={this.state.products} category={category}/>}>
+                  <ProductByCategory products={this.state.products} category={category} categories={this.state.categories}/>}>
               </Route>
             ))}
 

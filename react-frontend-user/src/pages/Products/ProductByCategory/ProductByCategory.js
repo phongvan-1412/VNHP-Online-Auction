@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Products from "./Products";
 
-const ProductByCategory = ({products, category }) => {
+const ProductByCategory = ({products, category, categories }) => {
   return (
-    <Products products={products} category={category} />
+    <Products products={products} category={category} categories={categories}/>
   );
 };
 
