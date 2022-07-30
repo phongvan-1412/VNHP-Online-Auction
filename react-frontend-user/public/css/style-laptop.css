@@ -788,7 +788,7 @@
     align-items: center;
 }
 .btn-view{
-    width: 50px;
+    width: 60px;
     height: 25px;
     display: flex;
     justify-content: center;
@@ -804,7 +804,7 @@
     font-weight: bold;
 }
 .btn-view:hover{
-    color: var(--iconHover);
+    color: var(--buttonColor);
 }
 .meta-wishlist{
     width: 30px;
