@@ -70,3 +70,4 @@ Route::post('/insertbill',[BillApi::class, 'InsertBill']);
 //CHART
 Route::get('/revenueeachmonth', [BillApi::class, 'RevenueEachMonth']);
 Route::get('/revenueeachyear', [BillApi::class, 'RevenueEachYear']);
+Route::get('/toployalcustomer', [BillApi::class, 'TopLoyalCustomer']);

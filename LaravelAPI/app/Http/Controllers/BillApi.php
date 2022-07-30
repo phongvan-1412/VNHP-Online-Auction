@@ -80,6 +80,12 @@ class BillApi extends Controller
         $bill->save();
         return 1;
     }
-
+    public function TopLoyalCustomer(){
+        return  DB::select("Select top 5 c.customer_img_name,
+        c.customer_name, customer_contact, sum(b.bill_payment) as total_spending
+        from customer_account c join bill b on (b.customer_id = c.customer_id)
+        group by c.customer_name,c.customer_img_name,
+         customer_contact order by total_spending desc");
+    }
 
 }

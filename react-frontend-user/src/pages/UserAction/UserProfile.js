@@ -14,20 +14,7 @@ class UserProfile extends Component {
   render() {
     const { userinfo, updateUserLogin } = this.props;
     let currentUserInfo = userinfo;
-    $(document).keypress(function (e) {
-      if (
-        e.which == 13 &&
-        window.location.href === "http://localhost:3000/userprofile"
-      ) {
-        console.log(1);
-        if (localStorage.getItem("customer_info") == null) {
-          window.location.href = "http://localhost:3000/login";
-        } else {
-          currentUserInfo = JSON.parse(localStorage.getItem("customer_info"));
-        }
-      }
-    });
-
+    
     if (performance.navigation.type === 1) {
       if (localStorage.getItem("customer_info") == null) {
         window.location.href = "http://localhost:3000/login";
@@ -35,6 +22,11 @@ class UserProfile extends Component {
         currentUserInfo = JSON.parse(localStorage.getItem("customer_info"));
       }
     }
+
+    if (currentUserInfo.customer_img_name == null) {
+      window.location.href = "http://localhost:3000";
+    }
+
     function onAvatarChange() {
       $("#avatar-img-result").text("");
       const file = $("#user-avatar-img").prop("files")[0];
@@ -91,7 +83,7 @@ class UserProfile extends Component {
           }
         });
     };
-
+    
     return (
       <div className="container">
         <div className="row user-account-profile">

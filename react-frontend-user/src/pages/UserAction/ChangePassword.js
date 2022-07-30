@@ -104,7 +104,7 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
 
   const resetFrom = () => {
     $("#change-password-result").text("");
-    
+
     $("#customer-old-password").val("");
     $("#customer-old-password-result").text("");
 
@@ -184,10 +184,7 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
         }
       });
   };
-
-  const onSuccsess = () => {
-    $("#btn-save-change-pasword").data("bs-dismiss", "modal");
-  };
+ 
 
   return (
     <div
@@ -198,7 +195,10 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
       aria-hidden="true"
     >
       <div className="modal-dialog ">
-        <div className="modal-content bg-dark change-password-body">
+        <div
+          className="modal-content bg-dark change-password-body"
+          id="change-password-body"
+        >
           <div className="modal-header">
             <h5 className="modal-title" id="staticBackdropLabel">
               <b id="title">CHANGE PASSWORD</b>

@@ -171,11 +171,7 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
     $("#change-profile-result").text("");
   };
 
-  const test = () => {
-    $("#mymodal").on("hidden.bs.modal", function (e) {
-      resetForm();
-    });
-  };
+ 
 
   return (
     <div
@@ -184,7 +180,6 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
       tabIndex="-1"
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
-      onClick={test}
     >
       <div className="modal-dialog modal-lg" id="mymodal">
         <div className="modal-content bg-dark">
