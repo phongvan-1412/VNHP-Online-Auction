@@ -120,8 +120,8 @@ class Login extends Component {
     };
     return (
       <div className="row">
-        <div className="col-2"></div>
-        <div className="card col-4 login-form">
+        <div className="col-xl-2 col-lg-2"></div>
+        <div className="col-xl-4 col-lg-4 col-md-6 card login-form">
           <div className="login-form-group">
             <label htmlFor="exampleInputEmail1" className="">
               Email
@@ -180,7 +180,7 @@ class Login extends Component {
             </div>
           </div>
         </div>
-        <div className="col-md-4 pt-3">
+        <div className="col-xl-4 col-lg-4 col-md-6 pt-3">
           <Slider ref={(c) => (this.slider = c)} {...settings}>
             <img
               className="page-content row-panel-img"
@@ -196,7 +196,6 @@ class Login extends Component {
             />
           </Slider>
         </div>
-        <div className="col-2"></div>
       </div>
     );
   }

@@ -299,17 +299,14 @@ function Register() {
   };
 
   return (
-    <div className="row">
-      <div className="col-lg-1 col-md-1 col-xs-1"></div>
-      <div className="col-lg-5 col-md-5 col-xs-2">
-        <div className="register-img-form">
-          <img
-            id="register-img"
-            src={require("../../img/Footer/image-9.jpg")}
-          />
-        </div>
-      </div>
-      <div className="col-lg-5 col-md-5 col-xs-6">
+    <div className="row register-form-group">
+      <div className="col-xl-1 col-lg-1"></div>
+      <img
+        className="col-xl-5 col-lg-4 col-md-4 register-img-form"
+        id="register-img"
+        src={require("../../img/Footer/image-9.jpg")}
+      />
+      <div className="col-xl-5 col-lg-6 col-md-8">
         <h5 id="registerResult" style={{ position: "absolute" }}></h5>
         <div className="card form-control form-register">
           <div className="register-form-control">

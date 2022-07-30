@@ -41,11 +41,10 @@
 }
 
  /* register form */
- .register-img-form #register-img{
+ .register-form-group #register-img{
     margin-top: 40px;
     margin-bottom: 40px;
     height: 810px;
-    width: 600px;
  }
  .form-register{
     padding: 20px;
@@ -157,16 +156,31 @@
 .user-account-profile{
     padding: 30px;
 }
-.profile-img-form #avatar-img-result{
-    position: absolute;
-    left: 30%;
-}
 
+.profile-img-form>.img-user-account-profile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .profile-img-form #user-avatar-img{
-    margin-top: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+#user-avatar-img-wraper #avatar-img-result{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile-img-form #user-avatar-img-wraper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .profile-img-form .btn-change-avatar{
     margin-top: 20px;
+    width: 200px;
     background-color: var(--footerBackground);
 }
 .profile-img-form .btn-change-avatar:hover{
