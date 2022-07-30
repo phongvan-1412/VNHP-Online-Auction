@@ -31,73 +31,75 @@ class Login extends Component {
       easing: "linear",
     };
 
-    let checkValidEmail = 0;
-
     const validateEmail = () => {
-      const $result = $("#emailResult");
+      const result = $("#emailResult");
       const customer_email = $("#email").val();
       const checkEmail = { customer_email };
-      $result.text("");
+      result.text("");
 
       axios
         .post("http://127.0.0.1:8000/api/isemailexists", checkEmail)
         .then(function (response) {
           if (response.data > 0) {
-            $result.text(customer_email + " is valid.");
-            $result.css("color", "green");
+            result.text(customer_email + " is valid.");
+            result.css("color", "green");
           } else {
-            $result.text(customer_email + " is not valid email.");
-            $result.css("color", "red");
+            result.text(customer_email + " is not valid email.");
+            result.css("color", "red");
           }
-          checkValidEmail = response.data;
-          buttonLoginSetter();
         });
     };
 
-    const buttonLoginSetter = () => {
-      if (checkValidEmail) {
-        $("#btn-login").prop("disabled", false);
-      } else {
-        $("#btn-login").prop("disabled", true);
-      }
-    };
-
-    function showTime() {
+    function returnHome() {
       window.location.href = "http://localhost:3000";
     }
     const buttonLoginOnClick = () => {
-      if (!$("#email").val() == true || !$("#password").val() == true) {
-        $("#emailResult").text("Please enter your email");
-        $("#emailResult").css("color", "red");
-
-        $("#loginResult").text("Please enter your pasword");
-        $("#loginResult").css("color", "red");
-        return;
-      }
       const customer_email = $("#email").val();
       const customer_pwd = $("#password").val();
-      const $result = $("#loginResult");
+      const emailResult = $("#emailResult");
+      const passwordResult = $("#loginResult");
 
+      if (!customer_email && !customer_pwd) {
+        emailResult.text("Please enter your email");
+        emailResult.css("color", "red");
+
+        passwordResult.text("Please enter your pasword");
+        passwordResult.css("color", "red");
+        return;
+      }
+
+      if (!customer_email) {
+        emailResult.text("Please enter your email");
+        emailResult.css("color", "red");
+        return;
+      }
+      if (!customer_pwd) {
+        passwordResult.text("Please enter your pasword");
+        passwordResult.css("color", "red");
+        return;
+      }
+
+      
       const customer = { customer_email, customer_pwd };
 
       axios
         .post(`http://127.0.0.1:8000/api/customerlogin`, customer)
         .then((response) => {
           if (response.data == 2) {
-            $result.text("Please check your validate email.");
-            $result.css("color", "red");
+            passwordResult.text("Please check your validate email.");
+            passwordResult.css("color", "red");
           } else if (response.data == 0) {
-            $result.text("Please check your pasword");
-            $result.css("color", "red");
+            passwordResult.text("Please check your pasword");
+            passwordResult.css("color", "red");
           } else {
-            $result.text("Login successfully. Redirect to Home");
-            $result.css("color", "green");
+            passwordResult.text("Login successfully. Redirect to Home");
+            passwordResult.css("color", "green");
             localStorage.setItem(
               "customer_info",
               JSON.stringify(response.data)
             );
             customerLogin();
-            setInterval(showTime, 3000);
+            setInterval(returnHome, 3000);
           }
         })
         .catch((err) => {
@@ -106,16 +108,16 @@ class Login extends Component {
     };
 
     const checkPassword = () => {
-      const $result = $("#loginResult");
+      const result = $("#loginResult");
 
       if (!$("#password").val()) {
-        $result.text("Please enter your pasword.");
-        $result.css("color", "red");
+        result.text("Please enter your pasword.");
+        result.css("color", "red");
       } else if ($("#password").val().length < 6) {
-        $result.text("Password too short.");
-        $result.css("color", "red");
+        result.text("Password too short.");
+        result.css("color", "red");
       } else {
-        $result.text("");
+        result.text("");
       }
     };
     return (
@@ -170,12 +172,11 @@ class Login extends Component {
             </div>
             <div className="col-md-4 pt-1 btn-login-group">
               <button
-                type="submit"
                 className="btn float-right"
                 id="btn-login"
                 onClick={buttonLoginOnClick}
               >
-                <b>LOGIN</b> 
+                <b>LOGIN</b>
               </button>
             </div>
           </div>

@@ -3,6 +3,7 @@ import $ from "jquery";
 import axios from "axios";
 
 function ForgetPassword() {
+  let isValidEmail = true;
   const checkEmail = () => {
     const customer_email = $("#customer-email").val();
     const result = $("#check-customer-email-result");
@@ -12,11 +13,11 @@ function ForgetPassword() {
         if (response.data == 0) {
           result.text("Email " + customer_email + " is not exists.");
           result.css("color", "red");
-          $("#btn-reset-password").prop("disabled", true);
+          isValidEmail = false;
         } else {
           result.text("Email " + customer_email + " is exists.");
           result.css("color", "green");
-          $("#btn-reset-password").prop("disabled", false);
+          isValidEmail = true;
         }
       });
   };
@@ -31,11 +32,18 @@ function ForgetPassword() {
       return;
     }
 
+    if (isValidEmail == false) {
+      result.text("Please check your email.");
+      result.css("color", "red");
+      return;
+    }
     axios
-      .post(`http://127.0.0.1:8000/api/customerforgetpassword`, { customer_email })
+      .post(`http://127.0.0.1:8000/api/customerforgetpassword`, {
+        customer_email,
+      })
       .then(function (response) {
         if (response.data == 0) {
-          result.text("Something wrong in server.");
+          result.text("Please check your email.");
           result.css("color", "red");
         } else {
           result.text(
@@ -81,7 +89,7 @@ function ForgetPassword() {
             data-dismiss=""
             onClick={resetButtonPasswordClick}
           >
-            Reset password
+            <b>RESET PASSWORD</b>
           </button>
         </div>
       </div>

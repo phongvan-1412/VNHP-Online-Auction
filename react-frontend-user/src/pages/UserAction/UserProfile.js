@@ -81,6 +81,7 @@ function UserProfile({ userinfo, updateUserLogin }) {
         }
       });
   };
+
   return (
     <div className="container">
       <div className="row user-account-profile">
@@ -116,19 +117,19 @@ function UserProfile({ userinfo, updateUserLogin }) {
                   />
                 </div>
 
-                <div>
+                <div >
                   <button
-                    className="btn btn-success btn-change-avatar"
+                    id="btn-change-avatar"
                     onClick={onUpdateUserAvatar}
                   >
                     <b>CHANGE AVATAR</b>
                   </button>
                 </div>
 
-                <div className="">
+                <div >
                   <button
                     type="button"
-                    className="btn btn-success btn-change-password"
+                    id="btn-change-password"
                     data-bs-toggle="modal"
                     data-bs-target="#changepassword"
                   >
@@ -139,8 +140,8 @@ function UserProfile({ userinfo, updateUserLogin }) {
             </div>
           </div>
         </div>
-        <div className="col-xl-8 col-lg-12 col-md-12" id="account-detail">
-          <div className="mb-4 card" id="account-detail-body">
+        <div className=" col-xl-8 col-lg-12 col-md-12" id="account-detail">
+          <div className="card" id="account-detail-body">
             <div className="card-header">
               <h4>
                 <b>ACCOUNT DETAILS</b>
@@ -214,7 +215,7 @@ function UserProfile({ userinfo, updateUserLogin }) {
 
               <button
                 type="button"
-                className="btn btn-success btn-edit"
+                id="btn-edit"
                 data-bs-toggle="modal"
                 data-bs-target="#editprofile"
               >

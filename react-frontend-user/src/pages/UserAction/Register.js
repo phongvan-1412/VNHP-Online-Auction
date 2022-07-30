@@ -302,18 +302,11 @@ function Register() {
     <div className="row register-form-group">
       <div className="col-xl-1 col-lg-1"></div>
       <div className="col-xl-5 col-lg-4 col-md-4 register-img-form">
-        <img
-          id="register-img"
-          src={require("../../img/Footer/image-9.jpg")}
-        />
-        <img
-          id="overlay"
-          src={require("../../img/Footer/image-8.jpg")}
-        />
+        <img id="register-img" src={require("../../img/Footer/image-9.jpg")} />
+        <img id="overlay" src={require("../../img/Footer/image-8.jpg")} />
       </div>
 
       <div className="col-xl-5 col-lg-6 col-md-8">
-        <h5 id="registerResult" style={{ position: "absolute" }}></h5>
         <div className="card form-control form-register">
           <div className="register-form-control">
             <label>* First Name</label>
@@ -408,9 +401,9 @@ function Register() {
           <br />
 
           <p id="mostro1" className="register-term">
-            By clicking Submit, I agree that the information I provide to
-            David’s Bridal will be used to create an account and will be subject
-            to the David’s Bridal{" "}
+            By clicking Register, I agree that the information I provide to
+            VNHP Aution will be used to create an account and will be subject
+            to the VNHP Aution{" "}
             <Link
               to="#"
               className="term-link"
@@ -429,6 +422,10 @@ function Register() {
           </p>
 
           <div className="mt-5 mb-2 btn-register-group">
+            <div
+              id="registerResult"
+              style={{ position: "absolute", marginTop: "-30px" }}
+            ></div>
             <button
               type="submit"
               className="forget-password-form"

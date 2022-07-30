@@ -36,7 +36,6 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
           result.text("Password is valid.");
           result.css("color", "green");
           checkValidOldPassword = true;
-          buttonChangePasswordSetter();
         } else {
           result.text("Please check your password.");
           result.css("color", "red");
@@ -77,7 +76,6 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
         result.css("color", "red");
       }
     }
-    buttonChangePasswordSetter();
   };
 
   const isValidNewConfirmPassword = (password) => {
@@ -90,7 +88,7 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
     const password = $("#customer-confirm-new-password").val();
     result.text("");
     if (!password) {
-      result.text("Please enter your confirm password.");
+      result.text("Please enter your confirm new password.");
       result.css("color", "red");
     } else {
       if (isValidNewConfirmPassword(password)) {
@@ -102,19 +100,19 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
         result.css("color", "red");
       }
     }
-    buttonChangePasswordSetter();
   };
 
-  const buttonChangePasswordSetter = () => {
-    if (
-      checkValidNewPassword &&
-      checkValidConfirmPassword &&
-      checkValidOldPassword
-    ) {
-      $("#btn-register").removeAttr("disabled");
-    } else {
-      $("#btn-register").prop("disabled", true);
-    }
+  const resetFrom = () => {
+    $("#change-password-result").text("");
+    
+    $("#customer-old-password").val("");
+    $("#customer-old-password-result").text("");
+
+    $("#customer-new-password").val("");
+    $("#customer-new-password-result").text("");
+
+    $("#customer-confirm-new-password").val("");
+    $("#customer-confirm-new-password-result").text("");
   };
 
   const onButtonChangePasswordClick = () => {
@@ -147,6 +145,14 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
       return;
     }
 
+    if (
+      checkValidNewPassword == false ||
+      checkValidConfirmPassword == false ||
+      checkValidOldPassword == false
+    ) {
+      return;
+    }
+
     const customer = {
       customer_email,
       customer_pwd,
@@ -157,7 +163,7 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
       .post(`http://127.0.0.1:8000/api/customerchangepassword`, customer)
       .then(function (response) {
         if (response.data == 0) {
-          $("#btn-change-password").data("dismiss", "");
+          $("#btn-save-change-pasword").data("dismiss", "");
           alert("Something wrong in server");
         } else {
           localStorage.removeItem("customer_info");
@@ -180,7 +186,7 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
   };
 
   const onSuccsess = () => {
-    $("#btn-change-password").data("bs-dismiss", "modal");
+    $("#btn-save-change-pasword").data("bs-dismiss", "modal");
   };
 
   return (
@@ -200,8 +206,10 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
             <button
               type="button"
               className="btn-close"
+              id="btn-close-popup-change-password"
               data-bs-dismiss="modal"
               aria-label="Close"
+              onClick={resetFrom}
             ></button>
           </div>
           <div id="change-password-result"></div>
@@ -270,15 +278,16 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
             <button
               type="button"
               className="btn change-password-form"
-              id="btn-change-password-close"
+              id="btn-cancel-save-change-pasword"
               data-bs-dismiss="modal"
+              onClick={resetFrom}
             >
               <b>CLOSE</b>
             </button>
             <button
               type="submit"
               className="btn float-right change-password-form"
-              id="btn-change-password"
+              id="btn-save-change-pasword"
               data-bs-dismiss=""
               onClick={onButtonChangePasswordClick}
             >

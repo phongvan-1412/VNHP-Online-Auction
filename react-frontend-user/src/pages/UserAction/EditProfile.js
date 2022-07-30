@@ -157,6 +157,8 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
   };
 
   const resetForm = () => {
+    $("#change-profile-result").text("");
+
     $("#editfullname").val("");
     $("#fullname-check-result").text("");
 
@@ -188,7 +190,9 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
         <div className="modal-content bg-dark">
           <div className="modal-header edit-profile-form-header">
             <h4 className="modal-title" id="staticBackdropLabel">
-              <b className="title">EDIT {currentUserInfo.customer_name} PROFILE</b>
+              <b className="title">
+                EDIT {currentUserInfo.customer_name} PROFILE
+              </b>
             </h4>
             <button
               type="button"
@@ -204,7 +208,10 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
               <div className="card-body">
                 <div id="change-profile-result"></div>
                 <div className="mb-3 edit-profile-form-input">
-                  <label className="small mb-1 edit-profile-form" htmlFor="fullname">
+                  <label
+                    className="small mb-1 edit-profile-form"
+                    htmlFor="fullname"
+                  >
                     <b>FULL NAME</b>
                   </label>
                   <input
@@ -217,7 +224,10 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
                 </div>
 
                 <div className="mb-3 edit-profile-form-input">
-                  <label className="small mb-1 edit-profile-form" htmlFor="email">
+                  <label
+                    className="small mb-1 edit-profile-form"
+                    htmlFor="email"
+                  >
                     <b>EMAIL ADDRESS</b>
                   </label>
                   <input
@@ -229,7 +239,10 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
                 </div>
 
                 <div className="mb-3 edit-profile-form-input">
-                  <label className="small mb-1 edit-profile-form" htmlFor="address">
+                  <label
+                    className="small mb-1 edit-profile-form"
+                    htmlFor="address"
+                  >
                     <b>ADDRESS</b>
                   </label>
                   <input
@@ -241,7 +254,10 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
 
                 <div className="row gx-3 mb-3 edit-profile-form-input">
                   <div className="col-md-6">
-                    <label className="small mb-1 edit-profile-form" htmlFor="contact">
+                    <label
+                      className="small mb-1 edit-profile-form"
+                      htmlFor="contact"
+                    >
                       <b>PHONE NUMBER</b>
                     </label>
                     <input
@@ -253,7 +269,10 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
                     <div id="check-phonenumber-result"></div>
                   </div>
                   <div className="col-md-6 edit-profile-form-input">
-                    <label className="small mb-1 edit-profile-form" htmlFor="dateofbirth">
+                    <label
+                      className="small mb-1 edit-profile-form"
+                      htmlFor="dateofbirth"
+                    >
                       <b>BIRTHDAY</b>
                     </label>
                     <input
@@ -267,22 +286,21 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
                 </div>
               </div>
             </div>
-            <div className="modal-footer edit-profile-form-btn">
+            <div className="modal-footer edit-profile-form-input">
               <button
                 type="button"
-                className="btn btn-secondary"
+                id="btn-close-edit-popup"
                 data-bs-dismiss="modal"
                 onClick={resetForm}
               >
-                Close
+                <b>CLOSE</b>
               </button>
               <button
                 type="button"
-                className="btn btn-primary"
-                id="btn-save-change"
+                id="btn-save-change-edit"
                 onClick={saveChangeProfile}
               >
-                Save change
+                <b>SAVE CHANGE</b>
               </button>
             </div>
           </form>
