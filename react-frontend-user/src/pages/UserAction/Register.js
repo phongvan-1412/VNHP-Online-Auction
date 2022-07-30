@@ -301,11 +301,17 @@ function Register() {
   return (
     <div className="row register-form-group">
       <div className="col-xl-1 col-lg-1"></div>
-      <img
-        className="col-xl-5 col-lg-4 col-md-4 register-img-form"
-        id="register-img"
-        src={require("../../img/Footer/image-9.jpg")}
-      />
+      <div className="col-xl-5 col-lg-4 col-md-4 register-img-form">
+        <img
+          id="register-img"
+          src={require("../../img/Footer/image-9.jpg")}
+        />
+        <img
+          id="overlay"
+          src={require("../../img/Footer/image-8.jpg")}
+        />
+      </div>
+
       <div className="col-xl-5 col-lg-6 col-md-8">
         <h5 id="registerResult" style={{ position: "absolute" }}></h5>
         <div className="card form-control form-register">
