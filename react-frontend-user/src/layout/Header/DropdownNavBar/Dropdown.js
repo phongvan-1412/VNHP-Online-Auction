@@ -7,11 +7,11 @@ const Dropdown = ({categories}) => {
     const element = (
       // <ul>
         // <div className="container">
-          <div className="row">
+          <div className="row submenu-name-wrapper">
             {categories.map((category) => {
               return (
                 <div className="col-3" key={category.category_id}>
-                  <div className="row submenu-name-wrapper">
+                  {/* <div className="row submenu-name-wrapper"> */}
                     <div className="col-12 " key={category.category_id}>
                       <Link
                         className="submenu-name"
@@ -19,11 +19,11 @@ const Dropdown = ({categories}) => {
                         name={category.category_name}
                         // onClick={onClick}
                       >
-                        {category.category_name.replace(/-/g," ")}
+                        {category.category_name.replace(/-/g, " ")}
                       </Link>
                     </div>
                   </div>
-                </div>
+                // </div>
               );
             })}
           </div>
