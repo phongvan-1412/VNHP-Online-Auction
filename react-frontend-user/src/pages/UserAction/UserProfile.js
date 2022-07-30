@@ -239,6 +239,12 @@ class UserProfile extends Component {
           >
             <b>BILL HISTORY</b>
           </button>
+          <button
+            id={this.state.viewIndex == 3 ? "btn-fade-in" : "btn-fade-out"}
+            onClick={() => this.setState({ viewIndex: 3 })}
+          >
+            <b>NEW BILL</b>
+          </button>
         </div>
 
         <hr id="user-profile-hr" />
@@ -257,6 +263,13 @@ class UserProfile extends Component {
           >
             <UserBillHistory />
           </div>
+          <div
+            className={
+              this.state.viewIndex == 3 ? "popup-fade-in" : "popup-fade-out"
+            }
+          >
+            <UserNewBill />
+          </div>
         </div>
         <ChangePassword
           currentUserInfo={currentUserInfo}
@@ -270,4 +283,5 @@ class UserProfile extends Component {
     );
   }
 }
+import UserNewBill from "./UserNewBill";
 export default UserProfile;

@@ -32,7 +32,7 @@ function UserAutionHistory() {
                 <tr>
                   <th>No</th>
                   <th>Product</th>
-                  <th>Aution bid</th>
+                  <th>Aution Bid Price</th>
                   <th>Date</th>
                   <th>Action</th>
                 </tr>

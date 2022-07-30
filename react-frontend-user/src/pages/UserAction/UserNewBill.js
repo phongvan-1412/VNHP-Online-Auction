@@ -1,6 +1,6 @@
 import React from "react";
 
-function UserBillHistory() {
+function UserNewBill() {
   function Search() {
     var value = $("#search").val().toLowerCase();
     $("#bill-records tr").filter(function () {
@@ -11,7 +11,7 @@ function UserBillHistory() {
     <div className="container">
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <h4 className="m-0 font-weight-bold">Bill History</h4>
+          <h4 className="m-0 font-weight-bold">New bill</h4>
         </div>
         <div className="card-body">
           <input
@@ -31,12 +31,10 @@ function UserBillHistory() {
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Bill id</th>
-                  <th>Payment Id</th>
-                  <th>Total Payment</th>
-                  <th>Payment Type</th>
                   <th>Product Name</th>
-                  <th>Pay Day</th>
+                  <th>Total Payment</th>
+                  <th>Aution Day</th>
+                  <th>Pay Now</th>
                 </tr>
               </thead>
               {/* <tfoot>
@@ -72,5 +70,4 @@ function UserBillHistory() {
     </div>
   );
 }
-
-export default UserBillHistory;
+export default UserNewBill;
