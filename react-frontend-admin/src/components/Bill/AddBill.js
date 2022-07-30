@@ -74,8 +74,21 @@ export const AddBill = () => {
                             </div>
                             <div className="col-md-6">
                                 <div className="form-group">
-                                    <label htmlFor="field-1" className="control-label">Cutomer</label>
-                                    <input type="text" className="form-control" id="customer_id" />
+                                <label className="control-label" htmlFor="id">Customer </label>
+                                    <select id='customer_id' className="form-control " >
+                                        <option>{4}</option>
+                                        <option>{5}</option>
+                                        <option>{6}</option>
+                                        <option>{7}</option>
+                                        <option>{8}</option>
+                                        <option>{9}</option>
+                                        <option>{10}</option>
+                                        <option>{11}</option>
+                                        <option>{12}</option>
+                                        <option>{13}</option>
+                                        <option>{14}</option>
+                                        <option>{15}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

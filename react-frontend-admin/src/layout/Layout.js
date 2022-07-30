@@ -7,10 +7,10 @@ import DashBoard from "../components/Dashboard/DashBoard";
 import Bill from '../components/Bill/Bill';
 import TableProduct from '../form/TableProduct';
 import TableCategory from '../form/TableCategory';
+import AdminProfile from "../components/Profile/AdminProfile";
 import "../css/admin1.css";
 import "../css/sb-admin-2.min.css";
 import "../css/dataTables.bootstrap4.css";
-import AdminProfile from "../components/Profile/AdminProfile";
 
 export const Layout = () => {
   return (
