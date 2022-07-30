@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 
-class ProductDetailItemSlide extends Component {
-  render() {
-    const { product } = this.props;
+const ProductDetailItemSlide = ({ product }) => {
     return (
       <div className="row product-detail-item-slide">
         <div className="col-md-6 product-detail-item slide-img">
@@ -17,7 +15,7 @@ class ProductDetailItemSlide extends Component {
           >
             <img
               className="product-detail-item-slide product-img"
-              // src={require(`../../../../../LaravelAPI/public/ProductImage/${product.product_img_name}`)}
+              src={require(`../../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
             />
           </Link>
         </div>
@@ -33,15 +31,10 @@ class ProductDetailItemSlide extends Component {
             </Link>
           </div>
 
-          <div className="product-price">{product.product_price_per_unit}đ</div>
+          <div className="sidebar-suggest-product-price">$ {product.product_start_price}</div>
         </div>
       </div>
     );
   }
-}
-//   ProductDetailItemSlide.propTypes = {
-//     product: PropTypes.object.isRequired,
-//     addProductToCart: PropTypes.func.isRequired,
-//   };
 
 export default ProductDetailItemSlide;

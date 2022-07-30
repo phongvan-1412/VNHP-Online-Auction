@@ -4,30 +4,23 @@ import WrapBreadcrumbDetail from "./WrapBreadcrumbDetail";
 import SidebarSuggest from "./SidebarSuggest";
 import DisplayProductDetail from "./DisplayProductDetail";
 
-const ProductDetail = ({product,products,categories}) => {
+const ProductDetail = ({ product, products, categories }) => {
   // const products = $("#data").data("products");
   // const product_id = $("#data").data("productid");
   // const categories = $("#data").data("categories");
 
-  let currentProduct = [];
-  products.forEach(item => {
-    if(item.product_id === product.product_id)
-    {
-        currentProduct = product;
-    }
-  });
-
   let suggestProducts = [];
   products.forEach(product => {
-    if(product.category_id === currentProduct.category_id)
+    if(product.category_id === product.category_id)
     {
         suggestProducts = [...suggestProducts,product];
     }
   });
 
+  console.log(suggestProducts)
   let currentCategory = [];
   categories.forEach(category =>{
-    if(category.category_id === currentProduct.category_id)
+    if(category.category_id === product.category_id)
     {
         currentCategory = category;
     }
@@ -35,18 +28,18 @@ const ProductDetail = ({product,products,categories}) => {
 
   return (
     <div className="row">
-      <div className="col-md-1"></div>
+      <div className="col-md-1" style={{padding: "0px", margin: "0px"}}></div>
       <div
         className="col-lg-7 col-md-7 product-detail"
         style={{ padding: "0px", margin: "0px" }}
       >
-        <WrapBreadcrumbDetail product={currentProduct} category={currentCategory}/>
-        <DisplayProductDetail product={products}/>
+        <WrapBreadcrumbDetail product={product} category={currentCategory}/>
+        <DisplayProductDetail product={product}/>
       </div>
-      <div className="col-lg-3 col-md-3 col-sm-12">
-        <SidebarSuggest products={products}/>
+      <div className="col-lg-3 col-md-3 col-sm-12" style={{padding: "0px", margin: "0px"}}>
+        <SidebarSuggest products={products} style={{padding: "0px", margin: "0px"}}/>
       </div>
-      <div className="col-md-1"></div>
+      <div className="col-md-1" style={{padding: "0px", margin: "0px"}}></div>
     </div>
   );
 };

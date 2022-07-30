@@ -65,7 +65,7 @@ class Products extends Component {
                         {categoryItems.map((item) =>{
                           return(
                             <li className="list-item">
-                              <Link className="filter-link" to={`/category/${item.category_name}`}><i class="fa-solid fa-crown"></i> {item.category_name.replace(/-/g, " ")}</Link>
+                              <Link className="filter-link" to={`/category/${item.category_name}`}><i className="fa-solid fa-crown"></i> {item.category_name.replace(/-/g, " ")}</Link>
                               <span className="count">({item.product_quantity})</span>
                             </li>
                           )

@@ -6,26 +6,14 @@ const DisplayProductDetail = ({ product }) => {
   let verticalState = 1;
   const verticalTab = () => {};
   return (
-    <div
-      className="container product-detail-display"
-      style={{ margin: "0px", padding: "0px" }}
-    >
-      <div
-        className="product-detail-item-wrapper"
-        style={{ margin: "0px", padding: "0px" }}
-      >
-        <div
-          className="container mb-5 product-detail-item-info"
-          style={{ margin: "0px", padding: "0px" }}
-        >
-          <DetailItem product={product} />
+    <div className="container product-detail-display" style={{ margin: "0px", padding: "0px" }}>
+      <div className="product-detail-item-wrapper" style={{ margin: "0px", padding: "0px" }}>
+        <div className="container mb-5 product-detail-item-info" style={{ margin: "0px", padding: "0px" }}>
+          <DetailItem key={product.product_id} product={product} />
         </div>
 
-        <div
-          className="container mb-5 product-detail-item-more-info"
-          style={{ margin: "0px", padding: "0px" }}
-        >
-          <div className="card-box">
+        <div className="container mb-5 product-detail-item-more-info" style={{ margin: "0px", padding: "0px" }}>
+          {/* <div className="card-box">
             <div className="row">
               <div
                 className="col-sm-3"
@@ -154,7 +142,7 @@ const DisplayProductDetail = ({ product }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

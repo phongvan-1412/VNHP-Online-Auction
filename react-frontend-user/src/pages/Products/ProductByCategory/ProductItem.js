@@ -9,7 +9,6 @@ const ProductItem = ({ product }) => {
     $("#data").data("productid", e.target.name);
   };
   
-  
   return (
     <div className="product-grid">
       <div>
