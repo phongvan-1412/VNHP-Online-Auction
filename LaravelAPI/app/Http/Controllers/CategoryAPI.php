@@ -11,7 +11,12 @@ class CategoryAPI extends Controller
 {
     public function SelectCategories()
     {
-        $categories = DB::select("select * from category");
+        $categories = DB::select("select count(p.product_id) as product_quantity, c.category_id, c.category_name, c.category_status, c.category_img_name 
+        from category c 
+        join product p on (c.category_id = p.category_id) 
+        where c.category_status=1 
+        group by c.category_id,c.category_name, c.category_status, c.category_img_name 
+        order by c.category_name");
         return $categories;
     }
     public function AddCategory(Request $request){
