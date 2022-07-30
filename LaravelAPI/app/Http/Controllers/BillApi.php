@@ -51,12 +51,12 @@ class BillApi extends Controller
 
     public function SelectBill()
     {
-        $bills = Bill::select()->get();
+        // $bills = Bill::select()->get();
         // $bills = DB::delete("delete from bill where bill_payment = 1257000000");
-        // $bills = DB::table('bill');
-        //     ->join('product', 'product.product_id','=','bill.product_id')
-        //     ->join('customer_account','customer_account.customer_id','=','bill.customer_id')
-        //     ->get();
+        $bills = DB::table('bill')
+            ->join('product', 'product.product_id','=','bill.product_id')
+            ->join('customer_account','customer_account.customer_id','=','bill.customer_id')
+            ->get();
         return $bills;
     }
 
