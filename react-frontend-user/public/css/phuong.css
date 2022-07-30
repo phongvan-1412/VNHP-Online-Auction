@@ -14,7 +14,7 @@
     background-color: var(--footerBackground);
 }
 .login-form-group{
-    padding: 10px;
+    padding: 25px;
 }
 .login-form-group label{
     color: var(--textColor);
@@ -116,7 +116,7 @@
  /* register form */
  .register-form-group .register-img-form #overlay{
     position: absolute;
-    height: 869px;
+    height: 845px;
     width: 600px;
     border-radius: 5px;
     margin-top: 40px;
@@ -132,7 +132,7 @@
     margin-top: 40px;
     margin-bottom: 40px;
     border-radius: 5px;
-    height: 869px;
+    height: 845px;
     width: 600px;
     display: flex;
     opacity: 1;

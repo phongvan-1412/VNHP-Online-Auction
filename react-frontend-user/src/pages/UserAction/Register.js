@@ -395,7 +395,7 @@ function Register() {
             ></div>
           </div>
 
-          <span id="mostro">Don't have a date yet? Enter your best guess.</span>
+          {/* <span id="mostro">Don't have a date yet? Enter your best guess.</span> */}
           <br />
           <span id="mos">* required field</span>
           <br />

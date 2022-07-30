@@ -159,7 +159,7 @@ class Login extends Component {
             <div className="col-md-8 link-group">
               <p>
                 <Link to="/forgetpassword" className="login-link" replace>
-                  Forgot password
+                  Forgot password ?
                 </Link>
               </p>
               <br />
