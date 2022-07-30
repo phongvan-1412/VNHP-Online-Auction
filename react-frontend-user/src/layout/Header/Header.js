@@ -70,16 +70,18 @@ const Header = ({ userinfo, categories }) => {
           Needhelp
         </Link> */}
 
-        <Link to="#" className="product" replace style={{ height: "50px"}}>
+        <Link to="#" className="product" replace>
           Product
-            <div className="services-submenu" style={{ position: "absolute" }}>
+          <div id="services-submenu-wraper" style={{ height: "50px" }}>
+            <div className="services-submenu">
               <Dropdown categories={categories} />
+            </div>
           </div>
         </Link>
 
         {checkUser ? (
           <div>
-            <Link to="/userprofile" className="userprofile" replace>
+            <Link to="/userprofile" className="userprofile" replace style={{marginRight:"70px"}}>
               {userName}
             </Link>
 
@@ -89,12 +91,12 @@ const Header = ({ userinfo, categories }) => {
           </div>
         ) : (
           <div>
-            <Link to="/login" replace className="login">
-              Login
-            </Link>
-            <Link to="/register" replace id="register-link">
-              Register
-            </Link>
+              <Link to="/login" replace className="login" style={{marginRight:"70px"}}>
+                Login
+              </Link>
+              <Link to="/register" replace className="register-link">
+                Register
+              </Link>
           </div>
         )}
 

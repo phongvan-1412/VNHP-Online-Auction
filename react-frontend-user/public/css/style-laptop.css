@@ -98,6 +98,7 @@
     transform: translateX(-50%) scaleX(1);
 }
 .menu .product{
+    height: 50px;
     position: relative;
 	padding: 1rem 0 0.5rem;
 	margin: 0 1.5rem;
@@ -163,29 +164,29 @@
 .menu .logout:hover::after{
     transform: translateX(-50%) scaleX(1);
 }
-.menu #register-link{
+.menu .register-link{
     position: relative;
 	padding: 1rem 0 0.5rem;
 	margin: 0 1.5rem;
 	color: white;
 	text-decoration: none;
 }
-.menu #register-link::after{
+.menu .register-link::after{
     content: '';
-		position: absolute;
-		left: 50%;
-		bottom: 0;
-		transform: translateX(-50%) scaleX(0);
-		transform-origin: 50% 50%;
-		width: 100%;
-		height: 1px;
-		background-color: rgba(255,255,255,0.8);
-		transition: transform 250ms;
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	transform: translateX(-50%) scaleX(0);
+	transform-origin: 50% 50%;
+	width: 100%;
+	height: 1px;
+	background-color: rgba(255,255,255,0.8);
+	transition: transform 250ms;
 }
-.menu #register-link:hover::after{
+.menu .register-link:hover::after{
     transform: translateX(-50%) scaleX(1);
 }
-.menu #register-link:hover{
+.menu .register-link:hover{
     color: var(--iconHover);
 }
 .menu .login{
@@ -332,15 +333,19 @@
     display: none;
 }
 /* ----------HEADER-CATEGORY DROP DOWN---------- */
-
+#services-submenu-wraper .services-submenu{
+    position: absolute;
+    height: 100px;
+    width: 900px;
+}
 .product .services-submenu{
     display: none;
 }
 .product:hover .services-submenu{
     display: inline-flex;
     width: 800px;
-    margin-left: -50px;
-    margin-top: 62px;
+    margin-left: -350px;
+    margin-top: 35px;
     align-items: center;
     background-color:whitesmoke;
     box-shadow: 1px 2px 2px 2px rgba(0,0,0,0.25);
