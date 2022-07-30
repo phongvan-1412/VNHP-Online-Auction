@@ -4,15 +4,17 @@ import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import $ from "jquery";
 
 const ProductItem = ({ product }) => {
+
   const onProductClicked = (e) => {
     $("#data").data("productid", e.target.name);
   };
+  
   
   return (
     <div className="product-grid">
       <div>
         <Link
-          to={`/${product.category_id}/${product.product_name.replace(/-/g, " ")}`}
+          to={`/${product.category_id}/${product.product_name}`}
           replace
           className="product-img"
           onClick={onProductClicked}
@@ -23,16 +25,15 @@ const ProductItem = ({ product }) => {
         </Link>
       </div>
 
-      <div className="category-name">
+      {/* <div className="category-name">
         {product.category_id}
-      </div>
+      </div> */}
 
       <div className="product-name">
         <Link
           to={`/${product.category_id}/${product.product_name}`}
           name={product.product_id}
           replace
-          className="product-name-item"
           onClick={onProductClicked}
         >
           {product.product_name.replace(/-/g, " ")}

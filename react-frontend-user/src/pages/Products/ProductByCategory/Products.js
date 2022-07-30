@@ -55,7 +55,7 @@ class Products extends Component {
   
             <div className="row">
               {/* sidebar-filter  */}
-              <div className="col-md-3 sidebar-filter">
+              <div className="col-md-2 sidebar-filter">
                 <div className="product-filter-container">
                   <div className="filter-title">Filter Products By</div>
                   <div className="widget mercado-widget filter-widget brand-widget">
@@ -77,11 +77,11 @@ class Products extends Component {
               </div>
               {/* display-products  */}
   
-              <div className="col-md-9">
-                <div className="row" style={{ marginTop: "-20px" }}>
+              <div className="col-md-10">
+                <div className="row">
                   {currentProducts.map((product) => {
                     return (
-                      <ProductView key={product.product_id} product={product} />
+                      <ProductView key={product.product_id} product={product}/>
                     );
                   })}
                 </div>
@@ -91,11 +91,11 @@ class Products extends Component {
           
           <div className="row" style={{ padding: "0px", margin: "0px" }}>
             <div
-              className="col-md-3"
+              className="col-md-2"
               style={{ padding: "0px", margin: "0px" }}
             ></div>
   
-            <div className="col-md-9" style={{ padding: "0px", margin: "0px" }}>
+            <div className="col-md-10" style={{ padding: "0px", margin: "0px" }}>
               <ul className="pagination">
                 {pageNumbers.map((number) => (
                   <li key={number} className="page-item">
