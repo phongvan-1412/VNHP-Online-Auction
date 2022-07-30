@@ -116,8 +116,8 @@
  /* register form */
  .register-form-group .register-img-form #overlay{
     position: absolute;
-    height: 847px;
-    width: 750px;
+    height: 869px;
+    width: 600px;
     border-radius: 5px;
     margin-top: 40px;
     margin-bottom: 40px;
@@ -125,20 +125,23 @@
     -o-transition: all .5s ease-in-out;
     -webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
+    display: none;
  }
 
  .register-form-group .register-img-form #register-img{
     margin-top: 40px;
     margin-bottom: 40px;
     border-radius: 5px;
-    height: 847px;
-    width: 750px;
+    height: 869px;
+    width: 600px;
     display: flex;
     opacity: 1;
  }
+
  .register-img-form:hover #register-img{
     display: none;
  }
+
  .register-img-form:hover #overlay{
     display:inline-flex;
     opacity: 1;
