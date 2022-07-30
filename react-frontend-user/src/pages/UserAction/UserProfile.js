@@ -3,6 +3,8 @@ import $ from "jquery";
 import axios from "axios";
 import ChangePassword from "./ChangePassword";
 import EditProfile from "./EditProfile";
+import UserAutionHistory from "./UserAutionHistory";
+import UserBillHistory from "./UserBillHistory";
 
 class UserProfile extends Component {
   state = [{ viewIndex: 1 }];
@@ -89,7 +91,7 @@ class UserProfile extends Component {
           }
         });
     };
-   
+
     return (
       <div className="container">
         <div className="row user-account-profile">
@@ -248,22 +250,20 @@ class UserProfile extends Component {
         </div>
 
         <hr id="user-profile-hr" />
-        <div>
+        <div className="container">
           <div
             className={
               this.state.viewIndex == 1 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            <b>AUTION HISTORY</b>
-            <div id="aution-history-table"></div>
+            <UserAutionHistory />
           </div>
           <div
             className={
               this.state.viewIndex == 2 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            <b>BILL HISTORY</b>
-            <div id="bill-history-table"></div>
+            <UserBillHistory />
           </div>
         </div>
         <ChangePassword
