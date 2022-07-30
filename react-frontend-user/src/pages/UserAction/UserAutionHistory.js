@@ -30,13 +30,11 @@ function UserAutionHistory() {
             >
               <thead>
                 <tr>
-                  <th>#</th>
+                  <th>No</th>
                   <th>Product</th>
+                  <th>Aution bid</th>
                   <th>Date</th>
-                  <th>Total</th>
-                  <th>Customer</th>
-                  <th>Payment code</th>
-                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               {/* <tfoot>
