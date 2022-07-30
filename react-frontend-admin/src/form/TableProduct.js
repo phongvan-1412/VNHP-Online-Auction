@@ -12,18 +12,23 @@ function TableProduct() {
         });
     }
     return(
-    <div className="container">
-        <div className="float-right mb-3">
-            <button
-            className="btn btn-success"
+        <div className="container-fluid">
+        <button
+            className="btn btn-success mb-3 "
             data-toggle="modal"
             data-target=".bd-example-modal-lg"
-            >
+        >
             Add new
-            </button>
-        </div>
-        <table className="table table-striped">
-            <thead>
+        </button>
+
+        <div className="card shadow mb-4">
+            <div className="card-header py-3">
+                <h6 className="m-0 font-weight-bold text-primary">Product</h6>
+            </div>
+            <div className="card-body">
+                <div className="table-responsive">
+                    <table className="table table-striped" id="dataTable" style={{ width: "100%" }} cellPadding="0">
+                    <thead>
                 <tr>
                     <th>#</th>
                     <th>Product Name</th>
@@ -36,15 +41,30 @@ function TableProduct() {
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody>
 
-            </tbody>
-        </table>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         <AddProduct />
     </div>
-    );
+)
+    
+    
+} 
 
-    
-    
-}
 export default TableProduct;
