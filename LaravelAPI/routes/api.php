@@ -53,7 +53,9 @@ Route::post('/customerchangepassword',[CustomerApi::class, 'CustomerChangePasswo
 Route::post('/customercheckpassword',[CustomerApi::class, 'CustomerCheckPassword']);
 Route::post('/customerforgetpassword',[CustomerApi::class, 'CustomerForgetPassword']);
 
-
+Route::get('/customerautionhistory',[CustomerApi::class, 'CustomerAutionHistory']);
+Route::get('/customerbillhistory',[CustomerApi::class, 'CustomerBillHistory']);
+Route::get('/customernewbill',[CustomerApi::class, 'CustomerNewBill']);
 
 Route::get('/customerinfo',[CustomerApi::class, 'CustomerInfo']);
 
