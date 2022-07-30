@@ -1481,29 +1481,7 @@
     padding: 0px 50px;
     background-color: #212529;
 }
-.forget-password-form-wrapper label{
-    margin: 30px 0px 15px 0px;
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    color: white;
-}
-.forget-password-form-wrapper input{
-    margin-bottom: 50px;
-}
-.forget-password-form button{
-    margin: 6px 0px;
-    background-color: white;
-    color: #212529;
-    font-size: 13px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-.forget-password-form button:hover{
-    background-color: red;
-    color: white;
-}
+
 /* -----Login----- */
 .user-logged{
     margin: 0px;
