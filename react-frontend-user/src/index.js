@@ -158,9 +158,7 @@ class HomePage extends Component {
               }
             ></Route>
           ))}
-        </Routes>
 
-<<<<<<< HEAD
             {/* Product Detail   */}
             {this.state.products.map((product) => (
               <Route key={product.product_id} path={`/${product.category_id}/${product.product_name}`} element={
@@ -169,12 +167,8 @@ class HomePage extends Component {
             ))}
           </Routes>
 
-          {/* Footer  */}
-          <Footer />
-=======
         {/* Footer  */}
         <Footer />
->>>>>>> d2b06de4fce565865de3b79a05df5866991f11a0
       </div>
     );
   }
