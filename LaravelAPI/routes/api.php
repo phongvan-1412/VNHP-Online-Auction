@@ -68,6 +68,9 @@ Route::get('/customerinfo',[CustomerApi::class, 'CustomerInfo']);
 
 // LOGIN
 Route::post('/login',[AdminController::class, 'Login']);
+Route::post('/logout', [AdminController::class, 'Logout']);
+Route::get('/getaccount',[AdminController::class, 'Getaccount']);
+
 // BILL
 Route::get('/selectbill',[BillApi::class, 'SelectBill']);
 Route::post('/insertbill',[BillApi::class, 'InsertBill']);

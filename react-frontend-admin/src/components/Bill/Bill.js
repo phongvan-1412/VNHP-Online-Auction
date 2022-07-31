@@ -10,7 +10,7 @@ class Bill extends Component{
       ProductData: [], 
     }} 
   componentDidMount() {
-    fetch("http://127.0.0.1:8000/api/getaccount", {
+    fetch("http://127.0.0.1:8000/api/selectbill", {
       method: "GET",
     })
       .then((response) => response.json())

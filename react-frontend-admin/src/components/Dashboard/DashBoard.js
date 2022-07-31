@@ -7,6 +7,13 @@ import LoyalCustomer from "./LoyalCustomer/LoyalCustomer";
 
 class DashBoard extends Component{
     render(){
+        const isAdminLogin = () => {
+            if (localStorage.getItem("admin_info") == null){
+              window.location.href = "http://localhost:3000/login";
+            }
+          };
+          
+          isAdminLogin();
         return(
             <>
                 <div className="d-sm-flex align-items-center justify-content-between mb-4">

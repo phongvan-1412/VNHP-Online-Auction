@@ -1,7 +1,37 @@
 import { Link } from "react-router-dom"
 import React from 'react'
+import axios from "axios";
 
- function TopBar() {
+ const TopBar = () => {
+    //  let adminName = "";
+     let admin = {};
+  
+    const isAdminLogin = () => {
+      if (localStorage.getItem("admin_info") == null){
+        window.location.href = "http://localhost:3000/login";
+      }else {
+        admin = JSON.parse(localStorage.getItem("admin_info"));
+        // adminName = admin.emp_name;
+      }
+    };
+    isAdminLogin();
+    console.log(JSON.parse(localStorage.getItem("admin_info")));
+
+    const LogOut = () => {
+        const emp_id = admin.emp_id;
+        axios
+          .post(`http://127.0.0.1:8000/api/logout`, { emp_id })
+          .then(function (response) {
+            if (response.data > 0) {
+              localStorage.removeItem("admin_info");
+              window.location.href = "http://localhost:3000/login";
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+    
   return (
       <nav className="navbar navbar-expand navbar-light bg-white topbar mb-0 static-top shadow">
 
@@ -40,10 +70,10 @@ import React from 'react'
                         Profile
                     </Link>
                     <div className="dropdown-divider"></div>
-                    <Link className="dropdown-item" to="/logout">
+                    <button className="dropdown-item" onClick={LogOut}>
                         <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout
-                    </Link>
+                    </button>
                 </div>
             </li>
         </ul>

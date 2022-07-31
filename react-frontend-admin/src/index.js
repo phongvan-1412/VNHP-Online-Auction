@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('page-top'))
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path='*' element={<Layout />}></Route>
+      <Route path='/*'  element={<Layout />}></Route>
       <Route path='/login' element={<LogIn />}></Route>
     </Routes>
   </BrowserRouter>

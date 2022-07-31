@@ -18,9 +18,9 @@ class LogIn extends Component{
             .then(function(response){
                 if(response.data == 0){
                     $('#msg').text('Wrong email or password').addClass('text-danger'); 
-                }else if(response.data.length > 0){
+                }else{
                     localStorage.setItem(
-                        "admin",
+                        "admin_info",
                         JSON.stringify(response.data)
                     );
                     setInterval(returnDashboard, 3000);
@@ -72,4 +72,5 @@ class LogIn extends Component{
         )
     }
 }
+
 export default LogIn    

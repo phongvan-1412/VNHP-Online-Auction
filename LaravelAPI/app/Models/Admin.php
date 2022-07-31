@@ -12,6 +12,7 @@ class Admin extends Model
     protected $primaryKey = 'emp_id';
     public $timestamps = false;
     protected $fillable = [
+        // 'emp_id',
         'emp_name',
         'emp_email',
         'emp_pwd',

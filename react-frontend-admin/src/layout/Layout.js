@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import React from 'react';
+import React, { Component } from 'react';
 import Footer from './Footer';
 import MenuBar from './MenuBar';
 import TopBar from './TopBar';
@@ -12,26 +12,30 @@ import "../css/admin1.css";
 import "../css/sb-admin-2.min.css";
 import "../css/dataTables.bootstrap4.css";
 
-export const Layout = () => {
-  return (
-    <div id="wrapper">
-        <MenuBar/>
-        <div id="content-wrapper" className="d-flex flex-column">
-            <div id="content">
-                <TopBar />
-                <div className="card-body">
-                  <Routes>
-                      <Route path='/' element={<DashBoard />}></Route>
-                      <Route path='/addcategory' element={<TableCategory />}></Route>
-                      <Route path='/addproduct' element={<TableProduct />}></Route>    
-                      <Route path='/bill' element={<Bill />}></Route> 
-                      <Route path='/adminprofile' element={<AdminProfile />}></Route> 
-                  </Routes>
-                </div>
-            </div>
-            <Footer />
-        </div>
-    </div>
+export class Layout extends Component{
+  render(){
 
-  )
+    return (
+      <div id="wrapper">
+          <MenuBar/>
+          <div id="content-wrapper" className="d-flex flex-column">
+              <div id="content">
+                  <TopBar />
+                  <div className="card-body">
+                    <Routes>
+                        <Route path='/' element={<DashBoard />}></Route>
+                        <Route path='/addcategory' element={<TableCategory />}></Route>
+                        <Route path='/addproduct' element={<TableProduct />}></Route>    
+                        <Route path='/bill' element={<Bill />}></Route> 
+                        <Route path='/adminprofile' element={<AdminProfile />}></Route> 
+                    </Routes>
+                  </div>
+              </div>
+              <Footer />
+          </div>
+      </div>
+  
+    )
+  }
+
 }

@@ -12,18 +12,42 @@ class AdminController extends Controller
         $admin = Admin::select()->where('emp_email',$request->email)
                                 ->where('emp_pwd',$request->pwd)
                                 ->get();
+        $tmpAdmin = new Admin;
+
+        foreach($admin as $ad){
+            $tmpAdmin = $ad;
+        }
         if(count($admin)>0){
             Admin::where('emp_email',$request->email)
             ->where('emp_pwd',$request->pwd)
             ->update(['emp_login_status' => 1]);
-            return $admin;
+            return $tmpAdmin;
         }else{
             return 0;
         }
     }
 
+
+    public function Logout(Request $request)
+    {
+        $admin = Admin::select()->where('emp_id', $request->emp_id)->get();
+        
+        if(count($admin) > 0)
+        {
+            Admin::where('emp_id', $request->emp_id)->update(['emp_login_status'=>0]);
+            return 1;
+        }
+        return 0;
+    }
+
     public function Getaccount(){
-        return Admin::select()->where('emp_email','nhan@gmail.com')
-        ->where('emp_pwd','123123')->get();
+         
+        $admin = Admin::select()->where('emp_email','nhan@gmail.com')->where('emp_pwd','123123')->get();
+        
+        $tmpAdmin = new Admin;
+        foreach($admin as $ad){
+            $tmpAdmin = $ad;
+        }
+        return $tmpAdmin;
     }
 }
