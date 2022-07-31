@@ -29,7 +29,7 @@ Route::post('/addcategory',[CategoryAPI::class,'AddCategory']);
 Route::get('/addcategorytable',[CategoryAPI::class,'AddCategoryTable']);
 Route::get('/addcategorytable',[CategoryAPI::class,'AddCategoryTable']);
 
-Route::get('/checkexistscategory',[CategoryAPI::class,'CheckExistsCategory']);
+Route::post('/checkexistscategory',[CategoryAPI::class,'CheckExistsCategory']);
 
 //PRODUCTS
 Route::get('/selectallproducts',[ProductAPI::class, 'SelectProducts']);
