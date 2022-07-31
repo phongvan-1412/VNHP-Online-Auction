@@ -65,14 +65,19 @@ class Category extends Component {
                 <tbody>
                   {this.state.CategoryData.map((h, index) => {
                     const change = () => {
-                      const changeproduct = h.category_name;
-                      console.log(changeproduct);
+                      const changecategory = h.category_name;
+                      console.log(changecategory);
                     };
                     return (
                       <tr>
                         <td key={index}>{i++} </td>
-                        <td>{h.category_img_name}</td>
-                        <td>{h.category_name}</td>
+                        <td>
+                         
+                          <img className="imgcategory" style={{width:"100px", height:"100px"}}
+                            src={require(`../../../LaravelAPI/public/CategoryImg/${h.category_img_name}`)}
+                          />
+                        </td>
+                        <td>{h.category_name.replace(/-/g,' ')}</td>
                         <td>
                           <input type="checkbox" />
                         </td>
@@ -81,12 +86,13 @@ class Category extends Component {
                           <div className="btn-group">
                             <button
                               type="button"
-                              className="btn btn-secondary mr-1"
+                              className="btn btn-dark mr-1"
                               data-toggle="modal"
                               data-target="#con-close-modal1"
                               id="btn-edit-category"
                               value={h.category_name}
                               onClick={onClick}
+                              style={{color:"white"}}
                             >
                               Edit
                             </button>
