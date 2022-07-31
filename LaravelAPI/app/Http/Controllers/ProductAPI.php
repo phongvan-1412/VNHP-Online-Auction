@@ -85,4 +85,16 @@ class ProductAPI extends Controller
         $getProduct = Product::select()->get();
         return ( $getProduct);
     }
+
+    public function CheckExistsProduct(Request $request)
+    {
+        $products = Product::select()->where('product_name',$request->product_name)->get();
+
+        if(count($products) > 0)
+        {
+            return 1;
+        }
+        return 0;
+    }
+    
 }
