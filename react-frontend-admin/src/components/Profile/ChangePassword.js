@@ -24,7 +24,7 @@ function ChangePassword() {
             <div className="card-body">
             <div>
                 <div className="mb-3">
-                    <label className="small mb-1" for="currentpwd">
+                    <label className="small mb-1" htmlFor="currentpwd">
                         Current Password
                     </label>
                     <input
@@ -35,7 +35,7 @@ function ChangePassword() {
                     />
                 </div>
                 <div className="mb-3">
-                    <label className="small mb-1" for="newpwd">
+                    <label className="small mb-1" htmlFor="newpwd">
                         New Password
                     </label>
                     <input
@@ -47,7 +47,7 @@ function ChangePassword() {
                     />
                 </div>
                 <div className=" mb-3">
-                    <label className="small mb-1" labelFor="confirmpwd">
+                    <label className="small mb-1" htmlFor="confirmpwd">
                         Confirm New Password
                     </label>
                     <input

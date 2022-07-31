@@ -5,6 +5,15 @@ import "../../css/profile.css"
 
 class AdminProfile extends Component{
     render(){ 
+        const {admininfo} = this.props;
+        let currentAdminInfo = admininfo;
+        if (performance.navigation.type === 1) {
+          if (localStorage.getItem("admin_info") == null) {
+            window.location.href = "http://localhost:3000/login";
+          } else {
+            currentAdminInfo = JSON.parse(localStorage.getItem("admin_info"));
+          }
+        }
         var check = true;
         const ChangePwd = () =>{
             if(check){
@@ -29,11 +38,8 @@ class AdminProfile extends Component{
                         <div className="card-body text-center">
                         <img
                             className="img-account-profile rounded-circle mb-2"
-                            src=""
+                            src={require(`../../../../LaravelAPI/public/AdminImage/${currentAdminInfo.emp_img_name}`)}
                         />
-                        <div className="small font-italic text-muted mb-4">
-                            JPG or PNG no larger than 5 MB
-                        </div>
                         <input type="file" name="avatar" />
                         <div className="card mt-3">
                             <span 
@@ -53,7 +59,7 @@ class AdminProfile extends Component{
                         <div className="card-header">Account Details</div>
                         <div className="card-body">
                         <div className="mb-3">
-                            <label className="small mb-1" for="position">
+                            <label className="small mb-1" htmlFor="position">
                             Rank
                             </label>
                             <input
@@ -66,20 +72,8 @@ class AdminProfile extends Component{
                             />
                         </div>
 
-                        <div className="mb-3" hidden>
-                            <label className="small mb-1" for="email">
-                            Hidden Email
-                            </label>
-                            <input
-                            className="form-control"
-                            id="email"
-                            name="email"
-                            type="email"
-                            value=""
-                            />
-                        </div>
                         <div className="mb-3">
-                            <label className="small mb-1" for="fullname">
+                            <label className="small mb-1" htmlFor="fullname">
                             Full name
                             </label>
                             <input
@@ -87,33 +81,36 @@ class AdminProfile extends Component{
                             id="fullname"
                             name="fullname"
                             type="text"
-                            placeholder="Enter your fullname"
-                            value=""
+                            value={admininfo.emp_name}
                             />
                         </div>
 
                         <div className="mb-3">
-                            <label className="small mb-1" for="address">
+                            <label className="small mb-1" htmlFor="address">
                             Address
                             </label>
                             <input
-                            className="form-control"
-                            id="address"
-                            name="address"
-                            type="text"
-                            placeholder="Enter your address"
-                            value=""
+                                className="form-control"
+                                id="address"
+                                name="address"
+                                type="text"
+                                value={admininfo.emp_address}
                             />
                         </div>
                         <div className="mb-3">
-                            <label className="small mb-1" for="email">
+                            <label className="small mb-1" htmlFor="email">
                             Email address
                             </label>
-                            <input className="form-control" id="email" value="" disabled />
+                            <input 
+                                className="form-control" 
+                                id="email"
+                                value={admininfo.emp_email}
+                                disabled 
+                            />
                         </div>
                         <div className="row gx-3 mb-3">
                             <div className="col-md-6">
-                            <label className="small mb-1" for="phonenumber">
+                            <label className="small mb-1" htmlFor="phonenumber">
                                 Phone number
                             </label>
                             <input
@@ -121,11 +118,11 @@ class AdminProfile extends Component{
                                 id="phonenumber"
                                 name="phonenumber"
                                 type="tel"
-                                value=""
+                                value={admininfo.emp_contact}
                             />
                             </div>
                             <div className="col-md-6">
-                            <label className="small mb-1" for="dateofbirth">
+                            <label className="small mb-1" htmlFor="dateofbirth">
                                 Birthday
                             </label>
                             <input
@@ -134,7 +131,7 @@ class AdminProfile extends Component{
                                 type="date"
                                 name="dateofbirth"
                                 placeholder="Enter your birthday"
-                                value=""
+                                value={admininfo.emp_dob}
                             />
                             </div>
                         </div>

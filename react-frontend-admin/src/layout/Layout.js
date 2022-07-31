@@ -13,8 +13,15 @@ import "../css/sb-admin-2.min.css";
 import "../css/dataTables.bootstrap4.css";
 
 export class Layout extends Component{
+  state = {
+    admininfo:   {}
+  }
+  componentDidMount(){
+    this.setState({
+      admininfo: JSON.parse(localStorage.getItem("admin_info"))
+    })
+  }
   render(){
-
     return (
       <div id="wrapper">
           <MenuBar/>
@@ -27,7 +34,12 @@ export class Layout extends Component{
                         <Route path='/addcategory' element={<TableCategory />}></Route>
                         <Route path='/addproduct' element={<TableProduct />}></Route>    
                         <Route path='/bill' element={<Bill />}></Route> 
-                        <Route path='/adminprofile' element={<AdminProfile />}></Route> 
+                        <Route path='/adminprofile' element={
+                            <AdminProfile 
+                              admininfo={this.state.admininfo}
+                            />
+                        }>
+                        </Route> 
                     </Routes>
                   </div>
               </div>
