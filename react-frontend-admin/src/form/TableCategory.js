@@ -65,8 +65,8 @@ class Category extends Component {
                 <tbody>
                   {this.state.CategoryData.map((h, index) => {
                     const change = () => {
-                      const changeproduct = h.category_name;
-                      console.log(changeproduct);
+                      const changecategory = h.category_name;
+                      console.log(changecategory);
                     };
                     return (
                       <tr>
