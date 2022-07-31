@@ -33,6 +33,9 @@
     .about-story-content1-paragraph2{
         font-size: 12px;
     }
+    .landingpage-category-name-wrapper{
+        bottom: 105px;
+    }
 }
 @media(max-width: 650px){
     .product-per-page{
@@ -60,6 +63,8 @@
     }
     .landingpage-topslide-text:hover  .split-text::after{
         bottom: 21%;
+    }.landingpage-category-grid{
+        gap: 2rem;
     }
 }  
 @media(max-width: 600px){
@@ -88,7 +93,27 @@
         width: 95%;
         left: 3%;
     }
+    .landingpage-category-name-wrapper{
+        bottom: 105px;
+    }
+    .landingpage-category-name{
+        width: 173px;
+        height: 173px;
+        background-color: rgba(255, 255, 255, .6);
+        font-size: 11px;
+    }
 } 
+@media(max-width: 550px) {
+    .landingpage-category-name-wrapper{
+        bottom: 98px;
+    }
+    .landingpage-category-name{
+        width: 156px;
+        height: 156px;
+        background-color: rgba(255, 255, 255, .6);
+        font-size: 11px;
+    }
+}
 @media(max-width: 500px){
     .menu .shopping{
         display: none;
@@ -113,5 +138,17 @@
     }
     .landingpage-topslide-text:hover  .split-text::after{
         bottom: 25%;
+    }
+    .landingpage-category-grid{
+        gap: 1rem;
+    }
+    .landingpage-category-name-wrapper{
+        bottom: 95px;
+    }
+    .landingpage-category-name{
+        width: 156px;
+        height: 156px;
+        background-color: rgba(255, 255, 255, .6);
+        font-size: 11px;
     }
 }

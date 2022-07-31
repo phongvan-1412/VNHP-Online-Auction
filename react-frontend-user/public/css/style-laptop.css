@@ -871,25 +871,32 @@
     align-items: center;
     margin-bottom: 100px;
 }
+.landingpage-category-img img,
+.landingpage-category-grid .landingpage-category-name-wrapper a{
+    transition: 200ms ease-in-out;
+}
 .landingpage-category-headtext{
     margin-top: 100px;
     margin-bottom: 20px;
     padding: 0px;
     font-size: 24px;
 }
-.landingpage-category-grid img{
+.landingpage-category-img img{
     position: relative;
-    width: 400px;
-    height: 300px;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1/1;
     object-fit: center;
     object-position: center;
     margin-bottom: 20px;
 }
-.landingpage-category-img:hover{
+.landingpage-category-img img:hover{
+    filter: blur(5px);
     transform: scale(1.1);
 }
 .landingpage-category-name-wrapper{
     position: relative;
+    bottom: 205px;
     padding: 0px;
     display: flex;
     align-items: center;
@@ -897,17 +904,25 @@
 }
 .landingpage-category-name{
     position: absolute;
-    bottom: 140px;
-    padding: 10px 10px;
-    background-color: rgba(0,0,0,0.25);
-    font-size: 18px;
+    padding: 10px;
+    width: 368px;
+    height: 374px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, .6);
+    font-size: 25px;
     font-weight: bold;
     text-decoration: none;
     text-transform: uppercase;
-    color: var(--textColor);
+    opacity: 0;
+    transition: opacity 250ms;
+    transform: translateY(20px);
 }
 .landingpage-category-name:hover{
-    color: var(--iconHover)
+    color: black;
+    opacity: 1;
+    transform: translateY(0);
 }
 /* --------------------PAGES-------------------- */
 /* ---------------ABOUT--------------- */
@@ -1554,7 +1569,15 @@
 
 }
 @media screen and (max-width: 1400px){
-
+    .landingpage-category-name-wrapper{
+        bottom: 185px;
+    }
+    .landingpage-category-name{
+        width: 330px;
+        height: 330px;
+        background-color: rgba(255, 255, 255, .6);
+        font-size: 25px;
+    }
 }
 @media screen and (max-width: 1350px){
 
@@ -1568,6 +1591,15 @@
     }
     .about-story-content1-paragraph2{
         font-size: 23px;
+    }
+    .landingpage-category-name-wrapper{
+        bottom: 173px;
+    }
+    .landingpage-category-name{
+        width: 303px;
+        height: 303px;
+        background-color: rgba(255, 255, 255, .6);
+        font-size: 20px;
     }
 }
 @media screen and (max-width: 1250px){
@@ -1609,6 +1641,9 @@
     .about-story-content1-paragraph2{
         font-size: 23px;
     }
+    .landingpage-category-name-wrapper{
+        bottom: 165px;
+    }
 }
 @media screen and (max-width: 1100px){
     .footer-container1-col1, .footer-container1-col2, .footer-container1-col3{
@@ -1646,6 +1681,15 @@
         margin-left: 60px;
         margin-right: -60px;
     }
+    .landingpage-category-name-wrapper{
+        bottom: 173px;
+    }
+    .landingpage-category-name{
+        width: 303px;
+        height: 303px;
+        background-color: rgba(255, 255, 255, .6);
+        font-size: 18px;
+    }
 }
 @media screen and (max-width: 1024px){
     .footer-container1-col1, .footer-container1-col2, .footer-container1-col3{
@@ -1675,6 +1719,18 @@
     }
     .forget-password-form-wrapper{
         top: 35%;
+    }
+    .landingpage-category-grid{
+        gap: 4rem;
+    }
+    .landingpage-category-name-wrapper{
+        bottom: 135px;
+    }
+    .landingpage-category-name{
+        width: 248px;
+        height: 248px;
+        background-color: rgba(255, 255, 255, .6);
+        font-size: 15px;
     }
 }
 @media screen and (max-width: 950px){
@@ -1717,6 +1773,9 @@
     }
     .landingpage-topslide-text > .split-text{
         font-size: 4rem;
+    }
+    .landingpage-category-name-wrapper{
+        bottom: 120px;
     }
 }
 @media screen and (max-width: 850px){
@@ -1762,6 +1821,15 @@
     }
     .landingpage-topslide-text:hover  .split-text::after{
         bottom: 18%;
+    }
+    .landingpage-category-name-wrapper{
+        bottom: 108px;
+    }
+    .landingpage-category-name{
+        width: 175px;
+        height: 175px;
+        background-color: rgba(255, 255, 255, .6);
+        font-size: 13px;
     }
 }
 @media screen and (max-width: 768px){
@@ -1816,5 +1884,17 @@
     }
     .landingpage-topslide-text > .split-text{
         font-size: 3rem;
+    }
+    .landingpage-category-grid{
+        gap: 3rem;
+    }
+    .landingpage-category-name-wrapper{
+        bottom: 128px;
+    }
+    .landingpage-category-name{
+        width: 218px;
+        height: 218px;
+        background-color: rgba(255, 255, 255, .6);
+        font-size: 13px;
     }
 }
