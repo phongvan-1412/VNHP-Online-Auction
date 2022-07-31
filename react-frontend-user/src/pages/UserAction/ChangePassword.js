@@ -146,9 +146,9 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
     }
 
     if (
-      checkValidNewPassword == false ||
-      checkValidConfirmPassword == false ||
-      checkValidOldPassword == false
+      !checkValidNewPassword ||
+      !checkValidConfirmPassword ||
+      !checkValidOldPassword
     ) {
       return;
     }
@@ -180,7 +180,6 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
           $("#customer-new-password-result").text("");
           $("#customer-confirm-new-password").val("");
           $("#customer-confirm-new-password-result").text("");
-          // window.location.href = "http://localhost:3000/userprofile";
         }
       });
   };

@@ -28,20 +28,22 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
     if (!fullname) {
       result.text("Please enter your name");
       result.css("color", "red");
+      checkValidFullName = false;
     } else {
       if (fullname.length < 2) {
         result.text("Your name too short.");
         result.css("color", "red");
+        checkValidFullName = false;
       } else if (isValidName(fullname)) {
         result.text(fullname + " is not valid.");
         result.css("color", "red");
+        checkValidFullName = false;
       } else {
         result.text(fullname + " is valid.");
         result.css("color", "green");
         checkValidFullName = true;
       }
     }
-    buttonSaveChanngeProfileSetter();
   };
 
   const onContactBlur = () => {
@@ -51,17 +53,18 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
     if (!contact) {
       result.text("Please enter your phone number");
       result.css("color", "red");
+      checkValidContact = false;
     } else {
       if (isValidPhoneNumber(contact)) {
         result.text(contact + " is valid.");
         result.css("color", "green");
         checkValidContact = true;
       } else {
-        result.text(contact + " is not valid.");
+        result.text(contact + " is not valid phone number.");
         result.css("color", "red");
+        checkValidContact = false;
       }
     }
-    buttonSaveChanngeProfileSetter();
   };
 
   const convertDatetime = (date) => {
@@ -72,34 +75,31 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
   };
 
   const onDobBlur = () => {
+    const inputDob = $("#editdateofbirth").val();
     const currentDate = convertDatetime(
       new Date(new Date().toLocaleString().substring(0, 9))
     );
-    const dob = convertDatetime(
-      new Date(new Date($("#editdateofbirth").val()))
-    );
+    const dob = convertDatetime(new Date(new Date(inputDob)));
 
     const currentDateTimestamp = new Date(currentDate).getTime();
     const dobTimestamp = new Date(dob).getTime();
 
     const result = $("#check-dob-result");
 
-    if (currentDateTimestamp < dobTimestamp) {
-      result.text("Date of birth is not valid.");
+    if (!inputDob) {
+      result.text("Please insert your date of birth.");
       result.css("color", "red");
+      checkValidDob = false;
     } else {
-      result.text("Date of birth is valid.");
-      result.css("color", "green");
-      checkValidDob = true;
-    }
-    buttonSaveChanngeProfileSetter();
-  };
-
-  const buttonSaveChanngeProfileSetter = () => {
-    if (checkValidFullName && checkValidContact && checkValidDob) {
-      $("#btn-save-change").removeAttr("disabled");
-    } else {
-      $("#btn-save-change").prop("disabled", true);
+      if (currentDateTimestamp < dobTimestamp) {
+        result.text("Date of birth is not valid.");
+        result.css("color", "red");
+        checkValidDob = false;
+      } else {
+        result.text("Date of birth is valid.");
+        result.css("color", "green");
+        checkValidDob = true;
+      }
     }
   };
 
@@ -114,12 +114,16 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
       $("#fullname-check-result").text("Please enter your first name");
       $("#fullname-check-result").css("color", "red");
 
-      $("#check-phonenumber-result").text("Please enter your last name");
+      $("#check-phonenumber-result").text("Please enter your phone number");
       $("#check-phonenumber-result").css("color", "red");
 
-      $("#check-dob-result").text("Please enter your pasword");
+      $("#check-dob-result").text("Please enter your date of birth");
       $("#check-dob-result").css("color", "red");
 
+      return;
+    }
+
+    if (!checkValidFullName || !checkValidContact || !checkValidDob) {
       return;
     }
 
@@ -150,28 +154,9 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
           customer_address.val("");
           customer_contact.val("");
           customer_dob.val("");
-
-          // window.location.href = "http://localhost:3000/userprofile";
         }
       });
   };
-
-  const resetForm = () => {
-    $("#change-profile-result").text("");
-
-    $("#editfullname").val("");
-    $("#fullname-check-result").text("");
-
-    $("#editcontact").val("");
-    $("#check-phonenumber-result").text("");
-
-    $("#editdateofbirth").val("");
-    $("#check-dob-result").text("");
-
-    $("#change-profile-result").text("");
-  };
-
- 
 
   return (
     <div
@@ -195,7 +180,6 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
               id="btn-close-edit-profile"
               data-bs-dismiss="modal"
               aria-label="Close"
-              onClick={resetForm}
             ></button>
           </div>
           <form id="form2">
@@ -286,7 +270,6 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
                 type="button"
                 id="btn-close-edit-popup"
                 data-bs-dismiss="modal"
-                onClick={resetForm}
               >
                 <b>CLOSE</b>
               </button>
