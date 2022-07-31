@@ -54,4 +54,15 @@ class CategoryAPI extends Controller
         }
         return 0;
     }
+
+    public function UpdateCategoryStatus(Request $request){
+        $categories = Category::select()->where('category_name',$request->category_name)->get();
+
+        if(count($categories) > 0)
+        {
+            Category::where('category_name', $request->category_name)->update(['category_status'=>$request->category_status]);
+            return 1;
+        }
+        return 0;
+    }
 }
