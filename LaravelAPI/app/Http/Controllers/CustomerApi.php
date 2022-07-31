@@ -239,50 +239,31 @@ class CustomerApi extends Controller
         return view('emailForgetPassword');
     }
 
-    public function CustomerAutionHistory(Request $request){
-        $currentCustomer = Customer::select()->where('customer_id',$request->customer_id)->get();
-
-        if(count($currentCustomer))
-        {
-            return DB::select("select p.product_name,ap.aution_price,ap.aution_day
+    public function CustomerAutionHistory(){
+        return DB::select("select ca.customer_id,p.product_name,ap.aution_price,ap.aution_day
             from customer_account ca
             join aution_price ap on (ca.customer_id = ap.customer_id)
             join product p on (ap.product_id = p.product_id)
-            where ap.customer_id = $request->customer_id
             order by ap.aution_day");
-        }
-        return 0;
     }
 
-    public function CustomerBillHistory(Request $request){
-        $currentCustomer = Customer::select()->where('customer_id',$request->customer_id)->get();
-
-        if(count($currentCustomer))
-        {
-            return view("select b.bill_id,pm.payment_mode_id,b.bill_payment,pm.payment_mode_type,p.product_name,b.bill_date 
-            from bill b
-            join product p on (p.product_id = b.product_id)
-            payment_mode pm on (b.payment_mode_id = pm.payment_mode_id)
-            join customer_account ca on (b.customer_id = ca.customer_id)
-            where b.bill_status = 1 and ca.customer_id = $request->customer_id
-            order by b.bill_date");
-        }
-        return 0;
+    public function CustomerBillHistory(){
+        return DB::select("select ca.customer_id,b.bill_id,pm.payment_mode_id,b.bill_payment,pm.payment_mode_type,p.product_name,b.bill_date 
+        from bill b
+        join product p on (p.product_id = b.product_id)
+        join payment_mode pm on (b.payment_mode_id = pm.payment_mode_id)
+        join customer_account ca on (b.customer_id = ca.customer_id)
+        where b.bill_status = 1
+        order by b.bill_date");
     }
 
-    public function CustomerNewBill(Request $request){
-        $currentCustomer = Customer::select()->where('customer_id',$request->customer_id)->get();
-
-        if(count($currentCustomer))
-        {
-            return view("select b.bill_id,pm.payment_mode_id,b.bill_payment,pm.payment_mode_type,p.product_name,b.bill_date 
-                from bill b
-                join product p on (p.product_id = b.product_id)
-                join payment_mode pm on (b.payment_mode_id = pm.payment_mode_id)
-                join customer_account ca on (b.customer_id = ca.customer_id)
-                where b.bill_status = 0 and ca.customer_id = $request->customer_id
-                order by b.bill_date");
-        }
-        return 0;
+    public function CustomerNewBill(){
+        return DB::select("select ca.customer_id,b.bill_id,pm.payment_mode_id,b.bill_payment,pm.payment_mode_type,p.product_name,b.bill_date 
+        from bill b
+        join product p on (p.product_id = b.product_id)
+        join payment_mode pm on (b.payment_mode_id = pm.payment_mode_id)
+        join customer_account ca on (b.customer_id = ca.customer_id)
+        where b.bill_status = 0
+        order by b.bill_date");
     }
 }
