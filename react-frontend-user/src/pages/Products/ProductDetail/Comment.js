@@ -1,0 +1,67 @@
+import React, { Component, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from 'axios';
+import $ from 'jquery';
+
+const Comment = ({ productId }) => {
+    const [feedback_content, setFeedbackContent] = useState("");
+
+    const onKeyUp = (event) => {
+        if (event.key === "Enter") {
+            const feedbackContent = event.target.value;
+            setFeedbackContent(feedbackContent);
+
+            const product_id = productId;
+            const customer_id = JSON.parse(localStorage.getItem("customer_info")).customer_id;
+            const feedback_date = new Date().toLocaleString();
+
+            const feedback = { product_id, feedback_content, customer_id, feedback_date }
+           
+
+            const result = $("#result")
+            axios
+                .post("http://127.0.0.1:8000/api/addcomment", feedback)
+                .then(function (response) {
+                    if (response.data.lenght > 0) {
+                        result.text(" just added.");
+                        result.css("color", "green");
+                    } else {
+                        result.text(" added failed.");
+                        result.css("color", "red");
+                    }
+                });
+        }
+    }
+
+    const showComments = (e) => {
+
+    }
+    return (
+        <div>
+            <div className="conversation-header">
+                <div className="col-md-6 conversation-header-right-component">
+                    <span className="conversation-header-head-text">Conversation</span>
+                    <span className="conversation-header-sub-text">Comments</span>
+                </div>
+
+                <div className="col-md-6 conversation-header-left-component">
+                    <span><i className="fa-solid fa-user-group meta-usergroup" /></span>
+                    <span className="conversation-header-sub-text"> Viewing</span>
+                </div>
+            </div>
+
+            <div className="row input-text">
+                <input type="text" placeholder="What do you think?" onKeyUp={onKeyUp} />
+            </div>
+
+            <div id="result"></div>
+            <div className="row button-showmore">
+                <button className="btn-showmore" onClick={showComments}>Show More Comments</button>
+            </div>
+        </div>
+    )
+};
+
+
+
+export default Comment;

@@ -17,7 +17,6 @@ const ProductDetail = ({ product, products, categories }) => {
     }
   });
 
-  console.log(suggestProducts)
   let currentCategory = [];
   categories.forEach(category =>{
     if(category.category_id === product.category_id)

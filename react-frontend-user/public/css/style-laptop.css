@@ -1444,6 +1444,52 @@
     color: var(--productPriceColor);
     font-weight: bold;
 }
+/* -----Sidebar-Suggest----- */
+.conversation-header{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+.conversation-header-right-component, .conversation-header-left-component{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.conversation-header-head-text{
+    margin-right: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--productPriceColor);
+}
+.conversation-header-sub-text{
+    font-weight: bold;
+}
+.conversation-header-left-component{
+    justify-content: flex-end;
+}
+.conversation-header-left-component .conversation-header-sub-text{
+    margin-left: 5px;
+}
+.meta-usergroup{
+    color: var(--productPriceColor);
+}
+.input-text{
+    margin: 30px 1px 40px 1px;
+    font-size: 13px;
+}
+.button-showmore{
+    margin: auto 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-showmore{
+    padding: 5px;
+    background-color: black;
+    color: var(--buttonColor);
+    font-weight: bold;
+}
 /* ---------------USERACTION--------------- */
 /* -----Forget-password-form----- */
 .forget-password-background{

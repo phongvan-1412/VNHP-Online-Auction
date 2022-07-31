@@ -51,7 +51,7 @@ class Login extends Component {
             result.css("color", "red");
           }
         });
-    };
+      };
 
     function returnHome() {
       window.location.href = "http://localhost:3000";

@@ -16,7 +16,6 @@ const Products = ({ products, category, categories }) => {
 
   
     const updateRange = (e,value) => {
-      // console.log(e.target.value)
       setVal(value);
       const valueNow = $("#price-slider").children()[4].ariaValueNow;
 

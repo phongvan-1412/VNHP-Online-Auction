@@ -1,6 +1,8 @@
 import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
+
 import DetailItem from "./DetailItem";
+import Comment from "./Comment";
 
 const DisplayProductDetail = ({ product }) => {
   const [verticalState, setVerticalState] = useState(1);
@@ -134,6 +136,10 @@ const DisplayProductDetail = ({ product }) => {
 
             </div>
           </div>
+        </div>
+
+        <div className="container mb-5 conversation" style={{ margin: "0px", padding: "0px" }}>
+          <Comment key={product.product_id} productId={product.product_id}/>
         </div>
       </div>
     </div>
