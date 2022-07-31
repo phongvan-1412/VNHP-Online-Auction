@@ -69,36 +69,33 @@ class HomePage extends Component {
         console.log(err);
       });
 
-    axios
-      .get("http://127.0.0.1:8000/api/customerautionhistory")
-      .then(function (response) {
-        if (response.data > 0) {
-          this.setState({ autionHistory: response.data });
-        } else {
-          alert("Something woring in server");
-        }
+    fetch("http://127.0.0.1:8000/api/customerautionhistory", { method: "GET" })
+      .then((ah) => ah.json())
+      .then((ah) => {
+        this.setState({ autionHistory: ah });
+      })
+      .catch((err) => {
+        console.log(err);
       });
 
-    axios
-      .get("http://127.0.0.1:8000/api/customerbillhistory")
-      .then(function (response) {
-        if (response.data > 0) {
-          this.setState({ billHistory: response.data });
-        } else {
-          alert("Something woring in server");
-        }
+    fetch("http://127.0.0.1:8000/api/customerbillhistory", { method: "GET" })
+      .then((bh) => bh.json())
+      .then((bh) => {
+        this.setState({ billHistory: bh });
+      })
+      .catch((err) => {
+        console.log(err);
       });
 
-    axios
-      .get("http://127.0.0.1:8000/api/customernewbill")
-      .then(function (response) {
-        if (response.data > 0) {
-          this.setState({ newBill: response.data });
-        } else {
-          alert("Something woring in server");
-        }
+    fetch("http://127.0.0.1:8000/api/customernewbill", { method: "GET" })
+      .then((nb) => nb.json())
+      .then((nb) => {
+        this.setState({ newBill: nb });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-
+      
     this.setState({
       userinfo: JSON.parse(localStorage.getItem("customer_info")),
     });
