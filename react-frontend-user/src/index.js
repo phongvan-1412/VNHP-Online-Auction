@@ -45,6 +45,9 @@ class HomePage extends Component {
     categories: [],
     customers: [],
     userinfo: {},
+    autionHistory: [],
+    billHistory: [],
+    newBill: [],
   };
 
   componentDidMount() {
@@ -66,11 +69,39 @@ class HomePage extends Component {
         console.log(err);
       });
 
+    axios
+      .get("http://127.0.0.1:8000/api/customerautionhistory")
+      .then(function (response) {
+        if (response.data > 0) {
+          this.setState({ autionHistory: response.data });
+        } else {
+          alert("Something woring in server");
+        }
+      });
+
+    axios
+      .get("http://127.0.0.1:8000/api/customerbillhistory")
+      .then(function (response) {
+        if (response.data > 0) {
+          this.setState({ billHistory: response.data });
+        } else {
+          alert("Something woring in server");
+        }
+      });
+
+    axios
+      .get("http://127.0.0.1:8000/api/customernewbill")
+      .then(function (response) {
+        if (response.data > 0) {
+          this.setState({ newBill: response.data });
+        } else {
+          alert("Something woring in server");
+        }
+      });
+
     this.setState({
       userinfo: JSON.parse(localStorage.getItem("customer_info")),
     });
-
-    
   }
 
   render() {
@@ -103,6 +134,9 @@ class HomePage extends Component {
             element={
               <UserProfile
                 userinfo={this.state.userinfo}
+                autionHistory={this.state.autionHistory}
+                billHistory={this.state.billHistory}
+                newBill={this.state.newBill}
                 updateUserLogin={customerLogin}
               />
             }
@@ -159,13 +193,21 @@ class HomePage extends Component {
             ></Route>
           ))}
 
-            {/* Product Detail   */}
-            {this.state.products.map((product) => (
-              <Route key={product.product_id} path={`/${product.category_id}/${product.product_name}`} element={
-                  <ProductDetail products={this.state.products} categories={this.state.categories} product={product}/>}>
-              </Route>
-            ))}
-          </Routes>
+          {/* Product Detail   */}
+          {this.state.products.map((product) => (
+            <Route
+              key={product.product_id}
+              path={`/${product.category_id}/${product.product_name}`}
+              element={
+                <ProductDetail
+                  products={this.state.products}
+                  categories={this.state.categories}
+                  product={product}
+                />
+              }
+            ></Route>
+          ))}
+        </Routes>
 
         {/* Footer  */}
         <Footer />
