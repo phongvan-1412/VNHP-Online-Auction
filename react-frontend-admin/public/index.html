@@ -38,4 +38,16 @@
 
 
   </body>
+  <script>
+    $(document).ready(function () {
+    $("#add-category-modal").on("hide.bs.modal", function () {
+      $("#add-category-result").text("");
+
+      $("#input-add-category").val("");
+      $("#check-category-result").text("");
+
+      $("#check-img-result").text("");
+    });
+  });
+  </script>
 </html>
