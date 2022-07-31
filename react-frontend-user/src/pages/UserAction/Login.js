@@ -19,7 +19,9 @@ class Login extends Component {
   render() {
     const { customerLogin } = this.props;
 
-    
+    if (localStorage.getItem("customer_info") != null) {
+      window.location.href = "http://localhost:3000";
+    }
 
     const settings = {
       dots: false,
@@ -51,7 +53,7 @@ class Login extends Component {
             result.css("color", "red");
           }
         });
-      };
+    };
 
     function returnHome() {
       window.location.href = "http://localhost:3000";
@@ -82,7 +84,6 @@ class Login extends Component {
         return;
       }
 
-      
       const customer = { customer_email, customer_pwd };
 
       axios

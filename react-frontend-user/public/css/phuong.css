@@ -230,7 +230,7 @@
   opacity: 0;
   transition: all 0.8s;
 }
-/* .btn-register-group > #btn-register:active:after {
+.btn-register-group > #btn-register:active:after {
   padding: 0;
   margin: 0;
   opacity: 1;
@@ -241,7 +241,7 @@
   margin: 0;
   opacity: 1;
   transition: 0s;
-} */
+}
 
 #btn-register b {
   font-size: 14px;

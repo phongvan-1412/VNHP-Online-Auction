@@ -16,7 +16,7 @@ class UserProfile extends Component {
     const { userinfo, autionHistory, billHistory, newBill, updateUserLogin } =
       this.props;
     let currentUserInfo = userinfo;
-    if (performance.navigation.type === 1) {
+    if(performance.navigation.type === 1) {
       if (localStorage.getItem("customer_info") == null) {
         window.location.href = "http://localhost:3000/login";
       } else {
