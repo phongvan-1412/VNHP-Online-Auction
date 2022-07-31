@@ -1,18 +1,39 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
+import { Slider } from "@material-ui/core"
+import $ from 'jquery';
 
 import ProductView from "./ProductView";
 
-class Products extends Component {
-  state = {
-    currentPage: 1
-  }
-  render(){
-    const { products, category, categories } = this.props;
+const Products = ({ products, category, categories }) => {
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    //Filter by Price
+    const [value, setVal] = useState([0,20000]);
+
+    let test  = {min:value[0],max:value[1]};
+
+  
+    const updateRange = (e,value) => {
+      // console.log(e.target.value)
+      setVal(value);
+      const valueNow = $("#price-slider").children()[4].ariaValueNow;
+
+      test = {min:value[0],max:value[1]};
+
+      if(valueNow>test.min){
+        test.max = valueNow;
+      }else{
+        test.min = valueNow;
+      }
+    }
+      
+    
     let totalProducts = [];
     products.forEach((product) => {
-      if (product.category_id === category.category_id) {
-        totalProducts = [...totalProducts, product];
+      if (product.category_id === category.category_id && product.product_start_price >= test.min && product.product_start_price <= test.max){
+          totalProducts = [...totalProducts, product];
       }
     });
 
@@ -22,10 +43,13 @@ class Products extends Component {
         categoryItems = [...categoryItems, currentCates];
       }
     });
-  
+    
+    
+
+    //Pagination
     const productsPerPage = 12;
   
-    const indexOfLastPage = this.state.currentPage * productsPerPage;
+    const indexOfLastPage = currentPage * productsPerPage;
     const indexOfFirstPage = indexOfLastPage - productsPerPage;
     const currentProducts = totalProducts.slice(indexOfFirstPage, indexOfLastPage);
   
@@ -33,7 +57,7 @@ class Products extends Component {
     for (let i = 1; i <= Math.ceil(totalProducts.length / productsPerPage); i++) {
       pageNumbers.push(i);
     }
-    const paginate = (pageNumber) => this.setState({currentPage: pageNumber});
+    const paginate = (pageNumber) => setCurrentPage({currentPage: pageNumber});
     return (
       <div className="container">
         <div className="row" style={{ padding: "0px", margin: "0px" }}>
@@ -72,6 +96,25 @@ class Products extends Component {
                         })}
                       </ul>
                     </div>
+
+                    <div className="widget mercado-widget filter-widget brand-widget">
+                      <h2 className="widget-title">PRICE</h2>
+                      <div className="widget-content-price">
+                       
+                        <div className="range-input">
+                              <Slider 
+                              id="price-slider"
+                              min={10}
+                              max={20000}
+                              step={10}
+                              value={value}
+                              onChange={updateRange}
+                              valueLabelDisplay = 'auto'
+                              />
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -112,6 +155,5 @@ class Products extends Component {
       </div>
     );
   }
-};
 
 export default Products;

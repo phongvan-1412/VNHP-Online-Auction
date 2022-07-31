@@ -1280,8 +1280,22 @@
     position: absolute;
     right: 8px;
 }
+.widget-content-price{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.widget-content-price .range-input{
+    margin-top: 45px;
+    width: 90%;
+    height: 80px;
+    background-color: whitesmoke;
+}
+
 /* ----------Sort-Product-Nav---------- */
-.wrap-shop-control{
+/* .wrap-shop-control{
     height: 50px;
     width: 100%;
     display: flex;
@@ -1298,7 +1312,7 @@
     padding: 3px;
     font-size: 14px;
     border: var(--selectBorder);
-}
+} */
 /* ----------Display-Product---------- */
 
 .pagination{
