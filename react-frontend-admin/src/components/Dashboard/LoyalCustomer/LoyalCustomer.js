@@ -57,7 +57,7 @@ class LoyalCustomer extends Component{
                                                 <td>{i}{Rank(i++)}</td>
                                                 <td>
                                                     <img className='mr-1' style={{height: "50px"}}
-                                                    src={require(`../../../../../LaravelAPI/public/AdminImage/${p.customer_img_name}`)}
+                                                    src={require(`../../../../../LaravelAPI/public/UserImage/${p.customer_img_name}`)}
                                                     /> 
                                                     <span>{p.customer_name}</span> 
                                                 </td>

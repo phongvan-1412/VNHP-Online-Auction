@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import $ from "jquery";
 import axios from "axios";
 import AddProduct from "./AddProduct";
-
+import "../css/switch.css"
 class TableProduct extends Component {
   constructor(props) {
     super(props);
@@ -88,18 +88,17 @@ class TableProduct extends Component {
                         <td>{h.start_aution_day}</td>
                         <td>{h.product_end_aution}</td>
                         <td>
-                          <div class="custom-control custom-switch">
-                            <input
-                              type="checkbox"
-                              class={"custom-control-input"}
-                              id="customSwitch1"
-                              value={h.product_status == 1 ?? "on"}
-                            />
-                            <label
-                              class="custom-control-label"
-                              for="customSwitch1"
-                            ></label>
-                          </div>
+                          {h.product_status == 1 ? (
+                            <label className="switch">
+                              <input type="checkbox" defaultChecked />
+                              <span className="slider round"></span>
+                            </label>
+                          ) : (
+                            <label className="switch">
+                              <input type="checkbox" />
+                              <span className="slider round"></span>
+                            </label>
+                          )}
                         </td>
                         <td>
                           <div className="form-action">
@@ -114,7 +113,7 @@ class TableProduct extends Component {
             </div>
           </div>
         </div>
-        <AddProduct categories={this.state.categories}/>
+        <AddProduct categories={this.state.categories} />
       </div>
     );
   }
