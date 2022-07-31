@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import $ from 'jquery';
 
-const Comment = ({ productId }) => {
+const Comment = ({ productId, currentFeedback }) => {
     const [feedback_content, setFeedbackContent] = useState("");
 
     const onKeyUp = (event) => {
@@ -22,7 +22,7 @@ const Comment = ({ productId }) => {
             axios
                 .post("http://127.0.0.1:8000/api/addcomment", feedback)
                 .then(function (response) {
-                    if (response.data.lenght > 0) {
+                    if (response.data.length > 0) {
                         result.text(" just added.");
                         result.css("color", "green");
                     } else {
@@ -51,10 +51,24 @@ const Comment = ({ productId }) => {
             </div>
 
             <div className="row input-text">
-                <input type="text" placeholder="What do you think?" onKeyUp={onKeyUp} />
+                <input placeholder="What do you think?" cols="30" rows="10" onKeyUp={onKeyUp} />
             </div>
 
             <div id="result"></div>
+            {currentFeedback.map((itemFeedback) => {
+                return(
+                    <div className="show-comment">
+                        <div className="customer-avatar">
+                            <img src={require(`../../../../../LaravelAPI/public/UserImage/${itemFeedback.customer_img_name}`)}/>
+                        </div>
+                        <div className="customer-name">{itemFeedback.customer_name}</div>
+                        <div className="feedback-date">{itemFeedback.feedback_date}</div>
+                        <div className="feedback-comment">{itemFeedback.feedback_content}</div>
+                    </div>
+                )
+                
+            })}
+            
             <div className="row button-showmore">
                 <button className="btn-showmore" onClick={showComments}>Show More Comments</button>
             </div>

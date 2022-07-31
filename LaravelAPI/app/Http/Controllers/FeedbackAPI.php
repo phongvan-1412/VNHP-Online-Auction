@@ -10,7 +10,6 @@ class FeedbackAPI extends Controller
 {
     //Add Comment
     public function AddComment(Request $request){
-        return $request;
         $newFeedback = new Feedback();
         $newFeedback->product_id =  $request->product_id;
         $newFeedback->customer_id =  $request->customer_id;
@@ -26,4 +25,14 @@ class FeedbackAPI extends Controller
         ->get(); 
     }
 
+    //Show Comment
+    public function ShowComment(){
+        $feedbacks = DB::select("select f.product_id, ca.customer_img_name, ca.customer_name, f.feedback_date, f.feedback_content from customer_account ca join feedback f 
+        on (ca.customer_id = f.customer_id)
+        where f.feedback_status=1
+        group by ca.customer_img_name, ca.customer_name, f.feedback_date, f.feedback_content, f.product_id
+        order by f.product_id, f.feedback_date");
+
+    return $feedbacks;
+    }
 }

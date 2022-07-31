@@ -48,6 +48,7 @@ class HomePage extends Component {
     autionHistory: [],
     billHistory: [],
     newBill: [],
+    feedbacks:[]
   };
 
   componentDidMount() {
@@ -95,7 +96,15 @@ class HomePage extends Component {
       .catch((err) => {
         console.log(err);
       });
-      
+
+    fetch("http://127.0.0.1:8000/api/showcomment", { method: "GET" })
+      .then((feedbacks) => feedbacks.json())
+      .then((feedbacks) => {
+        this.setState({ feedbacks: feedbacks });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     this.setState({
       userinfo: JSON.parse(localStorage.getItem("customer_info")),
     });
@@ -185,6 +194,7 @@ class HomePage extends Component {
                   products={this.state.products}
                   categories={this.state.categories}
                   product={product}
+                  feedbacks={this.state.feedbacks}
                 />
               }
             ></Route>

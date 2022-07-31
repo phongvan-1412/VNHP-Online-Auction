@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import DetailItem from "./DetailItem";
 import Comment from "./Comment";
 
-const DisplayProductDetail = ({ product }) => {
+const DisplayProductDetail = ({ product, currentFeedback }) => {
   const [verticalState, setVerticalState] = useState(1);
 
   const verticalTab = (index) => {
@@ -139,7 +139,7 @@ const DisplayProductDetail = ({ product }) => {
         </div>
 
         <div className="container mb-5 conversation" style={{ margin: "0px", padding: "0px" }}>
-          <Comment key={product.product_id} productId={product.product_id}/>
+          <Comment key={product.product_id} productId={product.product_id} currentFeedback={currentFeedback}/>
         </div>
       </div>
     </div>

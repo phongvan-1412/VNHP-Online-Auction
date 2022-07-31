@@ -45,6 +45,8 @@ Route::get('/addproducttable',[ProductAPI::class,'AddProductTable']);
 Route::post('/checkexistsproduct',[ProductAPI::class,'CheckExistsProduct']);
 //feedback
 Route::post('/addcomment',[FeedbackAPI::class,'AddComment']);
+Route::get('/showcomment',[FeedbackAPI::class,'ShowComment']);
+
 
 //BILL
 Route::post('/submitcart',[BillApi::class, 'InsertBill']);
