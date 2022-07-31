@@ -35,7 +35,7 @@ class TableProduct extends Component {
   }
   render() {
     let i = 1;
-    const onClick = (a)=>{
+    const onClick = (a) => {
       console.log(a.target.value);
     };
     return (
@@ -63,11 +63,8 @@ class TableProduct extends Component {
                 <thead>
                   <tr>
                     <th>#</th>
-
                     <th>Img</th>
                     <th>Product Name</th>
-                    <th>Information</th>
-                    <th>Ingredients</th>
                     <th>Start Price</th>
                     <th>End Price</th>
                     <th>Start Aution Day</th>
@@ -86,10 +83,15 @@ class TableProduct extends Component {
                     return (
                       <tr>
                         <td key={index}>{i++}</td>
-                        <td>{h.product_thumbnail_img_name}</td>
-                        <td>{h.product_name}</td>
-                        <td>{h.product_information}</td>
-                        <td>{h.product_ingredients}</td>
+
+                        <td>
+
+                          <img className="imgcategory" style={{ width: "100px", height: "100px" }}
+                            src={require(`../../../LaravelAPI/public/ProductImg/${h.product_thumbnail_img_name}`)}
+                          />
+                        </td>
+
+                        <td>{h.product_name.replace(/-/g," ")}</td>
                         <td>{h.product_start_price}</td>
                         <td>{h.product_price_aution}</td>
                         <td>{h.start_aution_day}</td>
@@ -109,14 +111,15 @@ class TableProduct extends Component {
                         </td>
                         <td>
                           <div className="form-action">
-                            <button 
-                            className="btn btn-secondary"
-                            type="button"
+                            <button
+                              className="btn btn-dark"
+                              type="button"
                               data-toggle="modal"
                               data-target="#con-close-modal2"
                               id="btn-edit-product"
                               value={h.product_name}
                               onClick={onClick}
+                              style={{color:"white"}}
                             >Edit
                             </button>
                           </div>
