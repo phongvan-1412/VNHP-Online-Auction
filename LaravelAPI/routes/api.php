@@ -40,6 +40,8 @@ Route::get('/selectproductstop15', [ProductAPI::class, 'SelectProductsTop15ByCou
 Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
 Route::get('/addproducttable',[ProductAPI::class,'AddProductTable']);
 
+Route::post('/checkexistsproduct',[ProductAPI::class,'AddProduct']);
+
 //BILL
 Route::post('/submitcart',[BillApi::class, 'InsertBill']);
 

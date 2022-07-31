@@ -88,4 +88,12 @@ class BillApi extends Controller
          customer_contact order by total_spending desc");
     }
 
+    public function BestCategorySeller(){
+        return DB::select("Select c.category_name, count(b.product_id) as amount
+                        from product p 
+                        join category c on (c.category_id = p.category_id)
+                        join bill b on (b.product_id = p.product_id)
+                        group by c.category_name
+                        order by c.category_name");
+    }
 }
