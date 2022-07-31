@@ -19,5 +19,7 @@ class Admin extends Model
         'emp_dob',
         'emp_img_name',
         'emp_address',
+        'emp_status',
+        'emp_login_status'
     ];
 }

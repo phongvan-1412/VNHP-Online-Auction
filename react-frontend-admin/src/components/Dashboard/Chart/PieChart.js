@@ -3,8 +3,32 @@ import Chart from "chart.js/auto";
 import { Pie } from "react-chartjs-2";
 
 class PieChart extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            CategoryData: []
+        }
+    }
+    componentDidMount(){
+        fetch("http://127.0.0.1:8000/api/bestcategoryseller", {
+            method: "GET"
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            let Arr = []
+            response.forEach(res => {
+                Arr = [...Arr, res.amount]
+            })
+            this.setState({
+                CategoryData: Arr
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    };
     render(){
-        const labels = ["Asian Art & Antiques","Decorative Art","Fine Art","Furniture","Jewelry","Collectibles"];
+        const labels = ["Asian Art & Antiques","Collectibles","Decorative Art","Fine Art","Furniture","Jewelry"];
         const data = {
             labels: labels,
             datasets: [{
@@ -16,7 +40,7 @@ class PieChart extends Component{
                   'rgba(54, 162, 235)',
                   'rgba(153, 102, 255)',
                 ],
-                data: [300, 50, 100, 55, 88, 33],
+                data: this.state.CategoryData   ,
                 hoverOffset: 4
                 }
             ]
