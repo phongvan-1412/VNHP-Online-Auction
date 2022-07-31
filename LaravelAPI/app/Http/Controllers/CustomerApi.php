@@ -59,7 +59,6 @@ class CustomerApi extends Controller
         $newCustomer->customer_pwd = md5($request->customer_pwd);
         $newCustomer->customer_contact = $request->customer_contact;
         $newCustomer->customer_token = strtoupper(Str::random(10));
-        // $newCustomer->customer_ip = $request->customer_ip;
 
         $isExist = Customer::select()->where('customer_email',  $newCustomer->customer_email)->exists();
 
