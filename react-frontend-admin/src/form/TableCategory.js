@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import AddCategory from "./AddCategory";
+import axios from "axios";
+
 class Category extends Component {
   constructor(props) {
     super(props);
     this.state = {
       CategoryData: [],
+      categoryName: "",
     };
   }
   componentDidMount() {
@@ -25,11 +28,37 @@ class Category extends Component {
 
   render() {
     let i = 1;
-    // change
+
     const onClick = (e) => {
-      console.log(e.target.value);
+      const category = {
+        category_name: e.target.name,
+        category_status: e.target.checked,
+      };
+      axios
+        .post(`http://127.0.0.1:8000/api/changecategorystatus`, category)
+        .then(function (response) {
+          if (response.data > 0) {
+            alert(
+              "Update " +
+                category.category_name.replace(/-/g, " ") +
+                " status successfully."
+            );
+          } else {
+            alert(
+              "Update " +
+                category.category_name.replace(/-/g, " ") +
+                " status fail."
+            );
+          }
+        });
+    };
+    const onEditClick = (e) => {
+      this.setState({ categoryName: e.target.value.replace(/-/g," ")});
     };
 
+    const onSaveEditClick = () => {
+      
+    }
     return (
       <div className="container-fluid">
         <button
@@ -69,17 +98,37 @@ class Category extends Component {
                       console.log(changecategory);
                     };
                     return (
-                      <tr>
-                        <td key={index}>{i++} </td>
+                      <tr key={index}>
+                        <td>{i++} </td>
                         <td>
-                         
-                          <img className="imgcategory" style={{width:"100px", height:"100px"}}
+                          <img
+                            className="imgcategory"
+                            style={{ width: "100px", height: "100px" }}
                             src={require(`../../../LaravelAPI/public/CategoryImg/${h.category_img_name}`)}
                           />
                         </td>
-                        <td>{h.category_name.replace(/-/g,' ')}</td>
+                        <td>{h.category_name.replace(/-/g, " ")}</td>
                         <td>
-                          <input type="checkbox" />
+                          {h.category_status == 1 ? (
+                            <label className="switch">
+                              <input
+                                type="checkbox"
+                                defaultChecked
+                                name={h.category_name}
+                                onClick={onClick}
+                              />
+                              <span className="slider round"></span>
+                            </label>
+                          ) : (
+                            <label className="switch">
+                              <input
+                                type="checkbox"
+                                name={h.category_name}
+                                onClick={onClick}
+                              />
+                              <span className="slider round"></span>
+                            </label>
+                          )}
                         </td>
                         {/*  */}
                         <td>
@@ -91,15 +140,15 @@ class Category extends Component {
                               data-target="#con-close-modal1"
                               id="btn-edit-category"
                               value={h.category_name}
-                              onClick={onClick}
-                              style={{color:"white"}}
+                              onClick={onEditClick}
+                              style={{ color: "white" }}
                             >
                               Edit
                             </button>
                             <div
                               className="modal fade "
                               id="con-close-modal1"
-                              tabindex="-1"
+                              tabIndex="-1"
                               role="dialog"
                               aria-labelledby="myLargeModalLabel"
                               aria-hidden="true"
@@ -131,7 +180,9 @@ class Category extends Component {
                                           </label>
                                           <input
                                             className="form-control"
-                                            id="category_add_name"
+                                            id="category_edit_name"
+                                            value={this.state.categoryName}
+                                            disabled
                                           />
                                         </div>
                                         <div className="form-group">
@@ -148,12 +199,12 @@ class Category extends Component {
                                           />
                                         </div>
                                         <div className="form-group">
-                                          <input
-                                            type="checkbox"
-                                            style={{ width: "50px" }}
-                                          />
                                           <label className="control-lable admin-category-label">
                                             Status
+                                          </label>
+                                          <label className="switch">
+                                            <input type="checkbox" id="edit-category-check-box"/>
+                                            <span className="slider round"></span>
                                           </label>
                                         </div>
                                       </div>
@@ -170,8 +221,8 @@ class Category extends Component {
                                       <input
                                         type="submit"
                                         className="btn btn-info waves-effect waves-light"
-                                        onClick={change}
-                                        value="Create"
+                                        onClick={onSaveEditClick}
+                                        value="Save Edit"
                                       />
                                     </div>
                                   </div>

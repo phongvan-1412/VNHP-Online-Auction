@@ -148,7 +148,6 @@ class TableProduct extends Component {
                                           <option id="input-category-id">{1026}</option>
                                           <option id="input-category-id">{1027}</option>
                                           <option id="input-category-id">{1028}</option>
-
                                         </select>
                                       </div>
                                     </div>

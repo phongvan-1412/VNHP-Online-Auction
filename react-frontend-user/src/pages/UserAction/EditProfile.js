@@ -74,8 +74,8 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
     return mm + "/" + dd + "/" + yyyy;
   };
 
-  const onDobBlur = () => {
-    const inputDob = $("#editdateofbirth").val();
+  const onDobBlur = (e) => {
+    const inputDob = e.targete.value;
     const currentDate = convertDatetime(
       new Date(new Date().toLocaleString().substring(0, 9))
     );
