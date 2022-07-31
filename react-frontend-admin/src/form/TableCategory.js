@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import AddCategory from "./AddCategory";
-
 class Category extends Component {
   constructor(props) {
     super(props);
@@ -23,8 +22,13 @@ class Category extends Component {
         console.log(err);
       });
   }
+
   render() {
     let i = 1;
+    // change
+    const onClick = (e) => {
+      console.log(e.target.value);
+    };
 
     return (
       <div className="container-fluid">
@@ -60,35 +64,114 @@ class Category extends Component {
 
                 <tbody>
                   {this.state.CategoryData.map((h, index) => {
+                    const change = () => {
+                      const changeproduct = h.category_name;
+                      console.log(changeproduct);
+                    };
                     return (
                       <tr>
                         <td key={index}>{i++} </td>
                         <td>{h.category_img_name}</td>
                         <td>{h.category_name}</td>
                         <td>
-                          <div class="custom-control custom-switch">
-                            <input
-                              type="checkbox"
-                              class={"custom-control-input"}
-                              id="customSwitch1" 
-                              value={h.category_status == 1 ?? "on"}
-                              
-                            />
-                            <label
-                              class="custom-control-label"
-                              for="customSwitch1"
-                            ></label>
-                          </div>
+                          <input type="checkbox" />
                         </td>
+                        {/*  */}
                         <td>
                           <div className="btn-group">
                             <button
                               type="button"
                               className="btn btn-secondary mr-1"
+                              data-toggle="modal"
+                              data-target="#con-close-modal1"
+                              id="btn-edit-category"
+                              value={h.category_name}
+                              onClick={onClick}
                             >
                               Edit
                             </button>
-                            
+                            <div
+                              className="modal fade "
+                              id="con-close-modal1"
+                              tabindex="-1"
+                              role="dialog"
+                              aria-labelledby="myLargeModalLabel"
+                              aria-hidden="true"
+                            >
+                              <div className="modal-dialog modal-lg">
+                                <div className="modal-content">
+                                  <div className="modal-header">
+                                    <h4 className="modal-title">
+                                      Change Category
+                                    </h4>
+                                    <button
+                                      type="button"
+                                      className="close"
+                                      data-dismiss="modal"
+                                      aria-hidden="true"
+                                    >
+                                      ×
+                                    </button>
+                                  </div>
+                                  <div className="modal-body p-4">
+                                    <div className="row">
+                                      <div className="container">
+                                        <div className="form-group">
+                                          <label
+                                            className="control-lable admin-category-label"
+                                            htmlFor="id"
+                                          >
+                                            Category Name
+                                          </label>
+                                          <input
+                                            className="form-control"
+                                            id="category_add_name"
+                                          />
+                                        </div>
+                                        <div className="form-group">
+                                          <label
+                                            className="control-lable admin-category-label"
+                                            htmlFor="id"
+                                          >
+                                            Img
+                                          </label>
+                                          <input
+                                            className="form-control"
+                                            type="file"
+                                            id="input-img-category"
+                                          />
+                                        </div>
+                                        <div className="form-group">
+                                          <input
+                                            type="checkbox"
+                                            style={{ width: "50px" }}
+                                          />
+                                          <label className="control-lable admin-category-label">
+                                            Status
+                                          </label>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className="modal-footer">
+                                      <button
+                                        className="btn btn-secondary waves-effect"
+                                        data-dismiss="modal"
+                                      >
+                                        Close
+                                      </button>
+
+                                      <input
+                                        type="submit"
+                                        className="btn btn-info waves-effect waves-light"
+                                        onClick={change}
+                                        value="Create"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </td>
                       </tr>
