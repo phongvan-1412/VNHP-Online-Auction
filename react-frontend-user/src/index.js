@@ -178,7 +178,7 @@ class HomePage extends Component {
           {/* Product Detail   */}
           {this.state.products.map((product) => (
             <Route
-              key={product.product_SKU}
+              key={product.product_id}
               path={`/${product.category_id}/${product.product_name}`}
               element={
                 <ProductDetail

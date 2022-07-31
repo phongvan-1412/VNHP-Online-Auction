@@ -19,7 +19,7 @@ class LandingPage extends Component {
             <LandingPageSlider1 products={products}/>
             <LandingPageSlider2 products={products}/>
             <LandingPageSlider3 products={products}/>
-            <LandingPageCategories categories={categories} />
+            <LandingPageCategories categories={categories}/>
           </div>
 
           <div className="col-md-1" style={{padding: '0px', margin: '0px'}}></div>
