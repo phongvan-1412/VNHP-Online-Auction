@@ -3,75 +3,167 @@ import $ from "jquery";
 import axios from "axios";
 
 function AddCategory() {
-  const eclick = () => {
+  let checkCategory = false;
 
-    console.log($("#button-delete-category"))
-  }
+  // function isValidCategoryName(name) {
+  //   var validNamePattern = /^[A-Za-z\s]+$/;
+  //   return validNamePattern.test(name.trim());
+  // }
+
+  const onCategoryNameBlur = () => {
+    const category_name = $("#input-add-category")
+      .val()
+      .trim()
+      .replace(/ /g, "-");
+    const result = $("#check-category-result");
+    axios
+      .post("http://127.0.0.1:8000/api/checkexistscategory", { category_name })
+      .then(function (response) {
+        if (response.data > 0) {
+          result.text("Category name " + category_name + " already exists");
+          result.css("color", "red");
+        } else {
+          if (
+            category_name != "" &&
+            category_name.length >= 3
+          ) {
+            result.text("Category name " + category_name + " is valid");
+            result.css("color", "green");
+            checkCategory = true;
+          } else {
+            result.text("Invalid category name");
+            result.css("color", "red");
+          }
+        }
+      });
+  };
+
   const element = () => {
-    const category_img= $("#input-img-category").prop("files")[0];
-    const name =  category_img.name;
+    const category_img = $("#input-img-category").prop("files")[0];
+    const category_name = $("#input-add-category")
+      .val()
+      .trim()
+      .replace(/ /g, "-");
+
+    const categoryNameResult = $("#check-category-result");
+    const categoryImageResult = $("#check-img-result");
+    const addCategoryResult = $("#add-category-result");
+
+    if (!category_name) {
+      categoryNameResult.text("Please enter category name.");
+      categoryNameResult.css("color", "red");
+      return;
+    }
+
+    if (category_img) {
+      categoryImageResult.text("");
+    } else {
+      categoryImageResult.text("Please choose category image");
+      categoryImageResult.css("color", "red");
+      return;
+    }
+
+    if (!checkCategory) {
+      return;
+    }
+
+    const name = category_img.name;
     const index = name.indexOf(".");
-    const category_name = $("#input-add-category").val().replace(/ /g, "-");
 
     const img_extension = name.substr(index, index + 4);
     let formData = new FormData();
-    formData.set("category_img",  category_img);
+    formData.set("category_img", category_img);
     formData.set("img_extension", img_extension);
-    formData.set("category_name",category_name);
-   
+    formData.set("category_name", category_name);
+
     axios
       .post("http://127.0.0.1:8000/api/addcategory", formData)
       .then(function (response) {
-        if (response.data>0)
-        {
-          console.log('success')
-        }else{
-          console.log('false')
+        if (response.data > 0) {
+          addCategoryResult.text("Insert new category: "+category_name+" succesfully.");
+          addCategoryResult.css("color", "green");
+        } else {
+          addCategoryResult.text("Insert new category: "+category_name+" fail");
+          addCategoryResult.css("color", "red");
         }
       });
-
-
-
-  }
-
+  };
 
   return (
-    
-      <div className="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h4 className="modal-title">Add Category</h4>
-              <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div className="modal-body p-4">
-              <div className="row">
-                <div className="container">
-                  <div className="form-group">
-                    <label className="control-lable admin-category-label" htmlFor="id">
-                      Category Name
-                    </label>
-                    <input className="form-control" id="input-add-category" />
-                  </div>
-                  <div className="form-group">
-                    <label className="control-lable admin-category-label" htmlFor="id">
-                      Img
-                    </label>
-                    <input className="form-control" type="file" id="input-img-category" />
-                  </div>
+    <div
+      className="modal fade bd-example-modal-lg"
+      id="add-category-modal"
+      tabIndex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+    >
+      <div className="modal-dialog modal-lg">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h4 className="modal-title">Add Category</h4>
+            <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >
+              ×
+            </button>
+          </div>
+          <div className="modal-body p-4">
+            <div className="row">
+              <div className="container">
+                <div id="add-category-result"></div>
+                <div className="form-group">
+                  <label
+                    className="control-lable admin-category-label"
+                    htmlFor="id"
+                  >
+                    Category Name
+                  </label>
+                  <input
+                    className="form-control"
+                    id="input-add-category"
+                    onBlur={onCategoryNameBlur}
+                  />
+                  <div id="check-category-result"></div>
+                </div>
+                <div className="form-group">
+                  <label
+                    className="control-lable admin-category-label"
+                    htmlFor="id"
+                  >
+                    Img
+                  </label>
+                  <input
+                    className="form-control"
+                    type="file"
+                    id="input-img-category"
+                  />
+                  <div id="check-img-result"></div>
                 </div>
               </div>
-              <div className="modal-footer">
-                <button className="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                <input type="submit" className="btn btn-info waves-effect waves-light" onClick={element} value="Create" />
-              </div>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-secondary waves-effect"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <input
+                type="submit"
+                className="btn btn-info waves-effect waves-light"
+                onClick={element}
+                value="Create"
+              />
             </div>
           </div>
         </div>
       </div>
-    
+    </div>
   );
 }
 
- export default AddCategory;
-
+export default AddCategory;

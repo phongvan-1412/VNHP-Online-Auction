@@ -35,8 +35,6 @@ class CategoryAPI extends Controller
         }
        
         return 0;  
-
-        
     }
 
     // table add category
@@ -46,4 +44,14 @@ class CategoryAPI extends Controller
 
     }
 
+    public function CheckExistsCategory(Request $request)
+    {
+        $categories = Category::select()->where('category_name',$request->category_name)->get();
+
+        if(count($categories) > 0)
+        {
+            return 1;
+        }
+        return 0;
+    }
 }
