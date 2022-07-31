@@ -18,6 +18,9 @@ class Login extends Component {
   }
   render() {
     const { customerLogin } = this.props;
+
+    
+
     const settings = {
       dots: false,
       infinite: true,

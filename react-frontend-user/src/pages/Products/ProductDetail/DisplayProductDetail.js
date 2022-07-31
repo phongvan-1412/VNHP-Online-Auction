@@ -1,10 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
 import DetailItem from "./DetailItem";
 
 const DisplayProductDetail = ({ product }) => {
-  let verticalState = 1;
-  const verticalTab = () => {};
+  const [verticalState, setVerticalState] = useState(1);
+
+  const verticalTab = (index) => {
+    setVerticalState(index);
+  };
+  // let verticalState = 1;
+  // const verticalTab = () => {};
   return (
     <div className="container product-detail-display" style={{ margin: "0px", padding: "0px" }}>
       <div className="product-detail-item-wrapper" style={{ margin: "0px", padding: "0px" }}>
@@ -13,7 +18,7 @@ const DisplayProductDetail = ({ product }) => {
         </div>
 
         <div className="container mb-5 product-detail-item-more-info" style={{ margin: "0px", padding: "0px" }}>
-          {/* <div className="card-box">
+          <div className="card-box">
             <div className="row">
               <div
                 className="col-sm-3"
@@ -30,11 +35,11 @@ const DisplayProductDetail = ({ product }) => {
                       verticalState === 1 ? "nav-link active show" : "nav-link"
                     }
                     onClick={() => verticalTab(1)}
-                    id="v-pills-home-tab"
+                    id="product-information-tab"
                     data-toggle="pill"
-                    to="#v-pills-home"
+                    to="#product-information"
                     role="tab"
-                    aria-controls="v-pills-home"
+                    aria-controls="product-information"
                     aria-selected="true"
                   >
                     DETAILS
@@ -45,14 +50,14 @@ const DisplayProductDetail = ({ product }) => {
                       verticalState === 2 ? "nav-link active show" : "nav-link"
                     }
                     onClick={() => verticalTab(2)}
-                    id="v-pills-profile-tab"
+                    id="product-materials-tab"
                     data-toggle="pill"
-                    to="#v-pills-profile"
+                    to="#product-materials"
                     role="tab"
-                    aria-controls="v-pills-profile"
+                    aria-controls="product-materials"
                     aria-selected="false"
                   >
-                    INGREDIENTS
+                    MATERIALS
                   </Link>
 
                   <Link
@@ -60,11 +65,11 @@ const DisplayProductDetail = ({ product }) => {
                       verticalState === 3 ? "nav-link active show" : "nav-link"
                     }
                     onClick={() => verticalTab(3)}
-                    id="v-pills-messages-tab"
+                    id="product-instructions-tab"
                     data-toggle="pill"
-                    to="#v-pills-messages"
+                    to="#product-instructions"
                     role="tab"
-                    aria-controls="v-pills-messages"
+                    aria-controls="product-instructions"
                     aria-selected="false"
                   >
                     INSTRUCTIONS FOR USE
@@ -75,11 +80,11 @@ const DisplayProductDetail = ({ product }) => {
                       verticalState === 4 ? "nav-link active show" : "nav-link"
                     }
                     onClick={() => verticalTab(4)}
-                    id="v-pills-settings-tab"
+                    id="product-storage-instructions-tab"
                     data-toggle="pill"
-                    to="#v-pills-settings"
+                    to="#product-storage-instructions"
                     role="tab"
-                    aria-controls="v-pills-settings"
+                    aria-controls="product-storage-instructions"
                     aria-selected="false"
                   >
                     STORAGE INSTRUCTIONS
@@ -90,59 +95,45 @@ const DisplayProductDetail = ({ product }) => {
               <div className="col-sm-9">
                 <div className="tab-content pt-0">
                   <div
-                    className={
-                      verticalState === 1
-                        ? "tab-pane fade active show"
-                        : "tab-pane fade"
-                    }
-                    id="v-pills-home"
+                    className={verticalState === 1 ? "tab-pane fade active show" : "tab-pane fade"}
+                    id="product-information"
                     role="tabpanel"
-                    aria-labelledby="v-pills-home-tab"
+                    aria-labelledby="product-information-tab"
                   >
                     <span>{product.product_information}</span>
                   </div>
 
                   <div
-                    className={
-                      verticalState === 2
-                        ? "tab-pane fade active show"
-                        : "tab-pane fade"
-                    }
+                    className={verticalState === 2 ? "tab-pane fade active show" : "tab-pane fade"}
                     role="tabpanel"
-                    aria-labelledby="v-pills-profile-tab"
+                    aria-labelledby="product-materials-tab"
+                  >
+                    <span>{product.product_ingredients}</span>
+                  </div>
+
+                  <div
+                    className={verticalState === 3 ? "tab-pane fade active show" : "tab-pane fade"}
+                    id="product-instructions"
+                    role="tabpanel"
+                    aria-labelledby="product-instructions-tab"
                   >
                     <span>{product.product_instruction_use}</span>
                   </div>
 
                   <div
-                    className={
-                      verticalState === 3
-                        ? "tab-pane fade active show"
-                        : "tab-pane fade"
-                    }
-                    id="v-pills-messages"
+                    className={verticalState === 4 ? "tab-pane fade active show" : "tab-pane fade"}
+                    id="product-storage-instructions"
                     role="tabpanel"
-                    aria-labelledby="v-pills-messages-tab"
+                    aria-labelledby="product-storage-instructions-tab"
                   >
                     <span>{product.product_instruction_store}</span>
                   </div>
 
-                  <div
-                    className={
-                      verticalState === 4
-                        ? "tab-pane fade active show"
-                        : "tab-pane fade"
-                    }
-                    id="v-pills-settings"
-                    role="tabpanel"
-                    aria-labelledby="v-pills-settings-tab"
-                  >
-                    <span>{product.product_information}</span>
-                  </div>
                 </div>
               </div>
+
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

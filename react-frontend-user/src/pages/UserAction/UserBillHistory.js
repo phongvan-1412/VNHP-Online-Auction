@@ -1,12 +1,13 @@
 import React from "react";
 
-function UserBillHistory() {
+function UserBillHistory({currentBillHistory}) {
   function Search() {
     var value = $("#search").val().toLowerCase();
     $("#bill-records tr").filter(function () {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
     });
   }
+  let i = 1;
   return (
     <div className="container">
       <div className="card shadow mb-4">
@@ -51,19 +52,19 @@ function UserBillHistory() {
               </tr>
             </tfoot> */}
               <tbody id="bill-records">
-                {/* {this.state.ProductData.map((p, index) => {
+                {currentBillHistory.map((bh, index) => {
                 return (
                   <tr>
                     <td key={index}>{i++}</td>
-                    <td>{p.product_name}</td>
-                    <td>{p.bill_date}</td>
-                    <td>{p.bill_payment}</td>
-                    <td>{p.customer_name}</td>
-                    <td>{p.payment_mode_id}</td>
-                    <td>{p.bill_status}</td>
+                    <td>{bh.bill_id}</td>
+                    <td>{bh.payment_mode_id}</td>
+                    <td>{bh.bill_payment}</td>
+                    <td>{bh.payment_mode_type}</td>
+                    <td>{bh.product_name}</td>
+                    <td>{bh.bill_date}</td>
                   </tr>
                 );
-              })} */}
+              })}
               </tbody>
             </table>
           </div>

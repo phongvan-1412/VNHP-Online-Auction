@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Link, renderMatches } from "react-router-dom";
-import $ from "jquery";
+import { Link } from "react-router-dom";
+
 import ProductView from "./ProductView";
 
 class Products extends Component {
@@ -64,7 +64,7 @@ class Products extends Component {
                       <ul className="list-style vertical-list list-limited" data-show="6">
                         {categoryItems.map((item) =>{
                           return(
-                            <li className="list-item">
+                            <li className="list-item" key={item.category_id}>
                               <Link className="filter-link" to={`/category/${item.category_name}`}><i className="fa-solid fa-crown"></i> {item.category_name.replace(/-/g, " ")}</Link>
                               <span className="count">({item.product_quantity})</span>
                             </li>

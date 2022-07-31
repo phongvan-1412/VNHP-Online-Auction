@@ -7,14 +7,15 @@ import UserAutionHistory from "./UserAutionHistory";
 import UserBillHistory from "./UserBillHistory";
 
 class UserProfile extends Component {
-  state = [{ viewIndex: 1 }];
+  state = { viewIndex: 1 };
+
   componentDidMount() {
     this.setState({ viewIndex: 1 });
   }
   render() {
-    const { userinfo, updateUserLogin } = this.props;
+    const { userinfo, autionHistory, billHistory, newBill, updateUserLogin } =
+      this.props;
     let currentUserInfo = userinfo;
-    
     if (performance.navigation.type === 1) {
       if (localStorage.getItem("customer_info") == null) {
         window.location.href = "http://localhost:3000/login";
@@ -26,6 +27,16 @@ class UserProfile extends Component {
     if (currentUserInfo.customer_img_name == null) {
       window.location.href = "http://localhost:3000";
     }
+
+    const currentAutionHistory = autionHistory.filter(
+      (ah) => ah.customer_id == currentUserInfo.customer_id
+    );
+    const currentBillHistory = billHistory.filter(
+      (bh) => bh.customer_id == currentUserInfo.customer_id
+    );
+    const currentNewBill = newBill.filter(
+      (nb) => nb.customer_id == currentUserInfo.customer_id
+    );
 
     function onAvatarChange() {
       $("#avatar-img-result").text("");
@@ -83,7 +94,7 @@ class UserProfile extends Component {
           }
         });
     };
-    
+
     return (
       <div className="container">
         <div className="row user-account-profile">
@@ -254,21 +265,21 @@ class UserProfile extends Component {
               this.state.viewIndex == 1 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            <UserAutionHistory />
+            <UserAutionHistory currentAutionHistory={currentAutionHistory} />
           </div>
           <div
             className={
               this.state.viewIndex == 2 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            <UserBillHistory />
+            <UserBillHistory currentBillHistory={currentBillHistory} />
           </div>
           <div
             className={
               this.state.viewIndex == 3 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            <UserNewBill />
+            <UserNewBill currentNewBill={currentNewBill} />
           </div>
         </div>
         <ChangePassword
