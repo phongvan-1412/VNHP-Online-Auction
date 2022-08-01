@@ -14,6 +14,20 @@ function AddProduct({ categories }) {
   let validProductStartAutionDay = false;
   let validProductEndAutionDay = false;
 
+  let product_name = "";
+  let input_imgs_product = "";
+  let input_img1_product = "";
+  let input_img2_product = "";
+  let input_img3_product = "";
+  let information = "";
+  let instruction_use = "";
+  let ingredients = "";
+  let instruction_store = "";
+  let start_price = "";
+  let start_aution_day = "";
+  let end_aution_day = "";
+
+
   const categoryOnChange = (e) => {
     categories.forEach((category) => {
       if (category.category_name == e.target.value.trim().replace(/ /g, "-")) {
@@ -27,7 +41,7 @@ function AddProduct({ categories }) {
   };
 
   const onProductNameBlur = (e) => {
-    const product_name = e.target.value;
+    product_name = e.target.value;
     const result = $("#check-product-name-result");
 
     axios
@@ -55,10 +69,10 @@ function AddProduct({ categories }) {
   };
 
   const onProductThumbnailImgChange = (e) => {
-    const productThumbnailImg = e.target.files[0];
+    input_imgs_product = e.target.files[0];
     const result = $("#product-thumbnail-img-check-result");
     result.text("");
-    if (productThumbnailImg != null) {
+    if (input_imgs_product != null) {
       result.text("");
       validProductThumbnailImg = true;
     } else {
@@ -69,12 +83,12 @@ function AddProduct({ categories }) {
   };
 
   const onProductImg1Change = (e) => {
-    const img = e.target.files[0];
+    input_img1_product = e.target.files[0];
     const result = $("#product-img1-check-result");
-    result.text("");
 
-    if (img != null) {
-      result.text("");
+    if (input_img1_product != null) {
+      result.text("Valid image");
+      result.css("color", "green");
       validProductImg1 = true;
     } else {
       result.text("Please choose product img1 image");
@@ -84,12 +98,12 @@ function AddProduct({ categories }) {
   };
 
   const onProductImg2Change = (e) => {
-    const img = e.target.files[0][0];
+    input_img2_product = e.target.files[0];
     const result = $("#product-img2-check-result");
-    result.text("");
 
-    if (img != null) {
-      result.text("");
+    if (input_img2_product != null) {
+      result.text("Valid image");
+      result.css("color", "green");
       validProductImg2 = true;
     } else {
       result.text("Please choose product img2 image");
@@ -99,12 +113,12 @@ function AddProduct({ categories }) {
   };
 
   const onProductImg3Change = (e) => {
-    const img = e.target.files[0][0];
+    input_img3_product = e.target.files[0];
     const result = $("#product-img3-check-result");
-    result.text("");
 
-    if (img != null) {
-      result.text("");
+    if (input_img3_product != null) {
+      result.text("Valid image");
+      result.css("color", "green");
       validProductImg3 = true;
     } else {
       result.text("Please choose product img3 image");
@@ -114,15 +128,15 @@ function AddProduct({ categories }) {
   };
 
   const onProductInfoOnBlur = (e) => {
-    const productInfo = e.target.value;
+    information = e.target.value;
     const result = $("#product-info-check-result");
 
-    if (!productInfo) {
+    if (!information) {
       result.text("Please enter product infomation.");
       result.css("color", "red");
       validProductInfo = false;
     } else {
-      if (productInfo.length >= 100 && productInfo.length <= 4000) {
+      if (information.length >= 100 && information.length <= 4000) {
         result.text("Product infomation is valid.");
         result.css("color", "green");
         validProductInfo = true;
@@ -135,22 +149,22 @@ function AddProduct({ categories }) {
   };
 
   const onProductPriceOnBlur = (e) => {
-    const productPrice = e.target.value;
+    start_price = e.target.value;
     const result = $("#product-price-check-result");
 
-    if (!productPrice) {
+    if (!start_price) {
       result.text("Please enter product price.");
       result.css("color", "red");
       validProductPrice = false;
     } else {
-      if (productPrice <= 0) {
+      if (start_price <= 0) {
         result.text(
           "Price cant small than or equal 0. Please enter product price again"
         );
         result.css("color", "red");
         validProductPrice = false;
         e.target.value = 0;
-      } else if (productPrice > 1000000) {
+      } else if (start_price > 1000000) {
         result.text(
           "Price cant lager than 1 Milion Dola. Please enter product price again"
         );
@@ -170,20 +184,30 @@ function AddProduct({ categories }) {
     var yyyy = date.getFullYear();
     return mm + "/" + dd + "/" + yyyy;
   };
+  
+  const onIngredientOnBlur = (e) => {
+    ingredients = e.target.value;
+  }
+  const onInstructionUseOnBlur = (e) => {
+    instruction_use = e.target.value;
+  }
+  const onInstructionStoreOnBlur = (e) => {
+    instruction_store= e.target.value;
+  }
 
   const onProductStartAutionDayOnBlur = (e) => {
-    const productStartDay = e.target.value;
+    start_aution_day = e.target.value;
     const result = $("#product-start-aution-day-check-result");
 
     const currentDate = convertDatetime(
       new Date(new Date().toLocaleString().substring(0, 9))
     );
-    const currentDay = convertDatetime(new Date(new Date(productStartDay)));
+    const currentDay = convertDatetime(new Date(new Date(start_aution_day)));
 
     const currentProductStartDay = new Date(currentDate).getTime();
     const currentDayTimestamp = new Date(currentDay).getTime();
 
-    if (!productStartDay) {
+    if (!start_aution_day) {
       result.text("Please enter start aution day.");
       result.css("color", "red");
       validProductStartAutionDay = false;
@@ -201,14 +225,14 @@ function AddProduct({ categories }) {
   };
 
   const onProductEndAutionDayOnBlur = (e) => {
-    const productEndDay = e.target.value;
+    end_aution_day = e.target.value;
     const result = $("#product-end-aution-day-check-result");
 
     const currentDate = convertDatetime(
       new Date(new Date().toLocaleString().substring(0, 9))
     );
     const productEndAutionday = convertDatetime(
-      new Date(new Date(productEndDay))
+      new Date(new Date(end_aution_day))
     );
 
     const currentDateTimestamp = new Date(currentDate).getTime();
@@ -216,7 +240,7 @@ function AddProduct({ categories }) {
       productEndAutionday
     ).getTime();
 
-    if (!productEndDay) {
+    if (!end_aution_day) {
       result.text("Please enter end aution day.");
       result.css("color", "red");
       validProductEndAutionDay = false;
@@ -234,20 +258,7 @@ function AddProduct({ categories }) {
   };
 
   const productElement = () => {
-    const product_name = $("#input-product_name").val().replace(/ /g, "-");
-    const avatar = $("#avatar").prop("files")[0];
-            
-    const input_imgs_product = $("#input-imgs-product").prop("files")[0];
-    const input_img1_product = $("#input-img1-product").prop("files")[0];
-    const input_img2_product = $("#input-img2-product").prop("files")[0];
-    const input_img3_product = $("#input-img3-product").prop("files")[0];
-    const information = $("#input-information-product").val();
-    const instruction_use = $("#input-instruction_use-product").val();
-    const start_price = $("#input-price-product").val();
-    const start_aution_day = $("#input-start-aution-product").val();
-    const end_aution_day = $("#input-end-aution-product").val();
-    const ingredients = $("#input-ingredients-product").val();
-    const instruction_store = $("#input-instruction_store-product").val();
+    
 
     const checkProductName = $("#check-product-name-result");
     const checkProductThmbnailImg = $("#product-thumbnail-img-check-result");
@@ -606,6 +617,7 @@ function AddProduct({ categories }) {
                   <textarea
                     className="form-control "
                     id="input-ingredients-product"
+                    onBlur={onIngredientOnBlur}
                   />
                 </div>
               </div>
@@ -616,7 +628,8 @@ function AddProduct({ categories }) {
                   </label>
                   <textarea
                     className="form-control "
-                    id="input-instruction_use-product"
+                    id="input-instruction-use-product"
+                    onBlue={onInstructionUseOnBlur}
                   />
                 </div>
               </div>
@@ -627,7 +640,8 @@ function AddProduct({ categories }) {
                   </label>
                   <textarea
                     className="form-control "
-                    id="input-instruction_store-product"
+                    id="input-instruction-store-product"
+                    onBlur={onInstructionStoreOnBlur}
                   />
                 </div>
               </div>
