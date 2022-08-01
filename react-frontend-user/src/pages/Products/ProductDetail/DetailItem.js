@@ -4,9 +4,28 @@ import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const DetailItem = ({ product }) => { 
+  var productEndDate = product.product_end_aution_day ;
+  
+  var countDownDate = new Date(product.product_end_aution_day).getTime();
+
+  var productNow = setInterval(function() {
+    var now = new Date().getTime();
+
+    var distance = countDownDate - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    if (document.getElementById('productnow' + product.product_id + product.product_name) == null) return;
+    if (document.getElementById('productnow' + product.product_id + product.product_name) == null || distance < 0){
+      clearInterval(productNow);
+      document.getElementById('productnow' + product.product_id + product.product_name).innerHTML = "EXPIRED";
+    }
+    document.getElementById('productnow' + product.product_id + product.product_name).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";}, 1000);
   return (
     <div className="row">
-      <div style={{marginLeft:'200px'}}></div>
 
       <div className="col-md-6 product-detail-img-wrapper">
         <img
@@ -16,6 +35,7 @@ const DetailItem = ({ product }) => {
       </div>
 
       <div className="col-md-6 product-detail-info-wrapper">
+        <div id={'productnow' + product.product_id + product.product_name}></div>
         <div className="product-detail-product-name">
           <h3>{product.product_name.replace(/-/g, " ")}</h3>
         </div>
