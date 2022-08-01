@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\NameSetting as Name;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use App\Models\Bill;
+
+
 class ProductAPI extends Controller
 {
 
@@ -62,6 +65,7 @@ class ProductAPI extends Controller
         $newProduct->product_instruction_use =  $request->product_instruction_use;
         $newProduct->product_start_price =  $request->product_start_price;
         $newProduct->product_start_aution_day=  $request->product_start_aution_day;
+        $newProduct->product_price_aution=  $request->product_start_price;
         $newProduct->product_end_aution_day=  $request->product_end_aution_day;
 
         $isExist = Product::select()->where('product_name',$newProduct->product_name)->exists();
@@ -97,4 +101,34 @@ class ProductAPI extends Controller
         return 0;
     }
     
+    public function CountdownEnd(Request $req_product){
+        $countDownEnd = new Product();
+        $product = Product::select()->where('product_id', $req_product->countdownProduct)->get();
+        
+        $productItem = '';
+        foreach($product as $item){
+            $productItem = $item;
+        }
+
+        if ($productItem->product_price_aution <= $productItem->product_start_price){
+            Product::where('product_id', $req_product->countdownProduct)->update(['product_status' => 2]);
+            // DB::select("update product set product_status = 2 where product_id = $req_product->countdownProduct");           
+        }else{
+            Product::where('product_id', $req_product->countdownProduct)->update(['product_status' => 3]);
+            $countDownDate = date('Y-m-d h:m:s', time());
+            
+            $newBillId = Bill::select()->where('product_id', $req_product->countdownProduct)->where('customer_id', $req_product->countdownCustomer)->get();
+
+
+            if(count($newBillId) <= 0){
+                DB::insert("insert into bill(product_id, bill_date, bill_payment, customer_id) values (?,?,?,?)", [$req_product->countdownProduct, $countDownDate, $productItem->product_price_aution, $req_product->countdownCustomer]);  
+            }
+            $newbill = Bill::select()->where('product_id', $req_product->countdownProduct)->get();
+
+            return $newbill;
+        }
+        // $abc = Product::select()->where('product_id', $req_product->countdown)->get();
+        // return $abc;
+         
+    }
 }

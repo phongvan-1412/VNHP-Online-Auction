@@ -48,6 +48,10 @@ class BillApi extends Controller
     //                     [$newBill->bill_id, $newBill->product_id,$newBill->bill_detail_quantity,$newBill->price_per_unit,$newBill->bill_detail_total_payment]);
     //     }
     // }
+    public function SelectAllBill(){
+        $bill = DB::select("select * from bill")->get();
+        return $bill;
+    }
 
     public function SelectBill()
     {

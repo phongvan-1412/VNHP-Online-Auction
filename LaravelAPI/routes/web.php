@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 Route::get('/actived/{customer_id}/{customer_token}',[CustomerApi::class, 'CustomerActivedEmail'])->name('customer.actived');
 Route::get('/forgetpassword', [CustomerApi::class, 'CustomerForgetPasswordView'])->name('forgetpass');
+
+
