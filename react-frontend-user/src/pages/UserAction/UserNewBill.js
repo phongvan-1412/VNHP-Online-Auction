@@ -61,9 +61,9 @@ const UserNewBill = ({currentNewBill}) => {
                     <td key={index}>{i++}</td>
                     <td>{nb.product_name}</td>
                     <td>{nb.bill_payment}</td>
-                    <td>{nb.bill_date}</td>
+                    <td>{nb.bill_date}</td> 
                     <td>
-                      <Link to={`/paymentgateway/?id=${nb.bill_id}`} id="btn-payment">Payment</Link>
+                      <Link to={`/paymentgateway/${nb.bill_id}`} id="btn-payment">Payment</Link>
                     </td>
                   </tr>
                 );

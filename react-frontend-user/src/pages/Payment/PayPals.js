@@ -5,8 +5,8 @@ class PayPals extends Component {
     state =[{bill_id:0}]
     
     componentDidMount(){
-        const test = new URLSearchParams(window.location.href)
-        let id = test.toString().split('id=')[1];
+        const test = window.location.href;
+        let id = test.toString().split('/')[4];
         this.setState({bill_id: id})
     }
     render(){
