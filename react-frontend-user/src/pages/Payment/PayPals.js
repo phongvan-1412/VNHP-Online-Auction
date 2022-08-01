@@ -5,10 +5,13 @@ class PayPals extends Component {
     state =[{bill_id:0}]
     
     componentDidMount(){
-        this.setState({bill_id: this.props.match.params.bill_id})
+        const test = new URLSearchParams(window.location.href)
+        let id = test.toString().split('id=')[1];
+        this.setState({bill_id: id})
     }
     render(){
         console.log(this.state.bill_id)
+
         return(
             <div className="container">
                 <h1>PAYMENT GATEWAY</h1>

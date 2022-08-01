@@ -150,8 +150,8 @@ class HomePage extends Component {
               <ForgetPassword style={{ backgroundImage: "url(../../img/About/about2.jpg)" }} userinfo={this.state.userinfo}/>}>
           </Route>
 
-          <Route path="/paymentgateway" element={ <PayPals />}></Route>
-          <Route path="/paymentgateway/:bill_id" element={ <PayPals />}></Route>
+          {/* <Route path="/paymentgateway" element={ <PayPals />}></Route> */}
+          <Route path="/paymentgateway/:id" element={ <PayPals />}></Route>
 
           {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 

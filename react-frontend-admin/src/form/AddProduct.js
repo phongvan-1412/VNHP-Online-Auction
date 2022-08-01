@@ -235,6 +235,8 @@ function AddProduct({ categories }) {
 
   const productElement = () => {
     const product_name = $("#input-product_name").val().replace(/ /g, "-");
+    const avatar = $("#avatar").prop("files")[0];
+            
     const input_imgs_product = $("#input-imgs-product").prop("files")[0];
     const input_img1_product = $("#input-img1-product").prop("files")[0];
     const input_img2_product = $("#input-img2-product").prop("files")[0];
