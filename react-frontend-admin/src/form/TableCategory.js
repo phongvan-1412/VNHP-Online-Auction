@@ -53,18 +53,16 @@ class Category extends Component {
         });
     };
     const onEditClick = (e) => {
-      this.setState({ categoryName: e.target.value.replace(/-/g," ")});
+      this.setState({ categoryName: e.target.value.replace(/-/g, " ") });
     };
 
-    const onSaveEditClick = () => {
-      
-    }
+    const onSaveEditClick = () => {};
     return (
       <div className="container-fluid">
         <button
           className="btn btn-success mb-3 "
           data-toggle="modal"
-          data-target=".bd-example-modal-lg"
+          data-target="#add-category-modal"
         >
           Add new
         </button>
@@ -93,10 +91,6 @@ class Category extends Component {
 
                 <tbody>
                   {this.state.CategoryData.map((h, index) => {
-                    const change = () => {
-                      const changecategory = h.category_name;
-                      console.log(changecategory);
-                    };
                     return (
                       <tr key={index}>
                         <td>{i++} </td>
@@ -203,7 +197,10 @@ class Category extends Component {
                                             Status
                                           </label>
                                           <label className="switch">
-                                            <input type="checkbox" id="edit-category-check-box"/>
+                                            <input
+                                              type="checkbox"
+                                              id="edit-category-check-box"
+                                            />
                                             <span className="slider round"></span>
                                           </label>
                                         </div>
