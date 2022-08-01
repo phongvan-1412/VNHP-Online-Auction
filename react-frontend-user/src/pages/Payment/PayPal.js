@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 const PayPal = ({totalPayment}) => {
     const paypal = useRef();
@@ -22,12 +21,12 @@ const PayPal = ({totalPayment}) => {
             },
             onApprove: async (data, actions) => {
                 const order = await (actions.order.capture())
-                console.log(data)
+                console.log(order)
             },
             onError: (err) => {
                 console.log(err)
             }
-        }).render(paypal.current)
+        }).render(paypal.current);
     }, [])
 
     return (
@@ -35,7 +34,6 @@ const PayPal = ({totalPayment}) => {
     )
 }
 
-// PayPal.propTypes = propTypes;
-// PayPal.defaultProps = defaultProps;
 
 export default PayPal;
+

@@ -151,7 +151,7 @@ class HomePage extends Component {
           </Route>
 
           {/* <Route path="/paymentgateway" element={ <PayPals />}></Route> */}
-          <Route path="/paymentgateway/:id" element={ <PayPals />}></Route>
+          <Route path="/paymentgateway/:billid/:customerid" element={ <PayPals />}></Route>
 
           {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 

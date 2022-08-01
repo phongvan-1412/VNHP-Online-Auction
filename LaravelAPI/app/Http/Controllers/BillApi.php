@@ -100,4 +100,15 @@ class BillApi extends Controller
                         group by c.category_name
                         order by c.category_name");
     }
+
+    public function CustomerPayBill(Request $req){
+        $newCurrentBill = new Bill();
+        $bills = Bill::select()->where('customer_id', $req->customerid)->where('bill_id', $req->billid)->get();
+
+        $currentBill = '';
+        foreach($bills as $bill){
+            $currentBill = $bill;
+        }
+        return $currentBill;
+    }
 }
