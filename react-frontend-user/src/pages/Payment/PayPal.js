@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const PayPal = ({subtotal}) => {
+const PayPal = ({totalPayment}) => {
     const paypal = useRef();
-    const value = (subtotal/1000).toFixed(2);
+    const value = (totalPayment/1000).toFixed(2);
     useEffect(()=>{
         window.paypal.Buttons({
             

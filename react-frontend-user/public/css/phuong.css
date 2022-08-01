@@ -597,7 +597,13 @@
   opacity: 1;
   transition: 0s;
 }
-
+#btn-payment{
+  padding: 8px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.75);
+  font-size: 11px;
+  color: var(--textColor);
+}
 /* change password popup*/
 .change-password-body .change-password-form-group {
   display: flex;

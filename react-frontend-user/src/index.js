@@ -21,6 +21,7 @@ import Login from "./pages/UserAction/Login";
 import Register from "./pages/UserAction/Register";
 import ForgetPassword from "./pages/UserAction/ForgetPassword";
 import UserProfile from "./pages/UserAction/UserProfile";
+import PayPals from "./pages/Payment/PayPals";
 //Footer
 import Footer from "./layout/Footer";
 
@@ -130,32 +131,27 @@ class HomePage extends Component {
           <Route path="/contactus" element={<Contact />}></Route>
 
           {/* UserAction  */}
-          <Route
-            path="/login"
-            element={<Login customerLogin={customerLogin} />}
-          ></Route>
+          <Route path="/login" element={
+            <Login customerLogin={customerLogin} />}>
+          </Route>
+
           <Route path="/register" element={<Register />}></Route>
-          <Route
-            path="/userprofile"
-            element={
-              <UserProfile
-                userinfo={this.state.userinfo}
-                autionHistory={this.state.autionHistory}
-                billHistory={this.state.billHistory}
-                newBill={this.state.newBill}
-                updateUserLogin={customerLogin}
-              />
-            }
-          ></Route>
-          <Route
-            path="/forgetpassword"
-            element={
-              <ForgetPassword
-                style={{ backgroundImage: "url(../../img/About/about2.jpg)" }}
-                userinfo={this.state.userinfo}
-              />
-            }
-          ></Route>
+
+          <Route path="/userprofile" element={
+            <UserProfile
+              userinfo={this.state.userinfo}
+              autionHistory={this.state.autionHistory}
+              billHistory={this.state.billHistory}
+              newBill={this.state.newBill}
+              updateUserLogin={customerLogin}/>}>
+          </Route>
+
+          <Route path="/forgetpassword" element={
+              <ForgetPassword style={{ backgroundImage: "url(../../img/About/about2.jpg)" }} userinfo={this.state.userinfo}/>}>
+          </Route>
+
+          <Route path="/paymentgateway" element={ <PayPals newBill={this.state.newBill} />}></Route>
+
           {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
           {/* LandingPage  */}

@@ -15,6 +15,7 @@ class UserProfile extends Component {
   render() {
     const { userinfo, autionHistory, billHistory, newBill, updateUserLogin } =
       this.props;
+
     let currentUserInfo = userinfo;
     if(performance.navigation.type === 1) {
       if (localStorage.getItem("customer_info") == null) {

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from 'react-router-dom'
 
-function UserNewBill({currentNewBill}) {
+const UserNewBill = ({currentNewBill}) => {
   function Search() {
     var value = $("#search").val().toLowerCase();
     $("#bill-records tr").filter(function () {
@@ -57,7 +58,7 @@ function UserNewBill({currentNewBill}) {
                     <td>{nb.product_name}</td>
                     <td>{nb.bill_payment}</td>
                     <td>{nb.bill_date}</td>
-                    <td><button id="btn-payment"onClick={() => {console.log(nb.bill_id)}}>Payment</button></td>
+                    <td><Link to="/paymentgateway" id="btn-payment" onClick={() => {nb.bill_id}}>Payment</Link></td>
                   </tr>
                 );
               })}

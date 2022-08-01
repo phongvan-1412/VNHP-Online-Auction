@@ -15,7 +15,7 @@ const Dropdown = ({categories}) => {
                     <div className="col-12 " key={category.category_id}>
                       <Link
                         className="submenu-name"
-                        to={`/${category.category_name}`}
+                        to={`/category/${category.category_name}`}
                         name={category.category_name}
                         // onClick={onClick}
                       >
