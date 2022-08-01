@@ -23,14 +23,14 @@ class CategoryAPI extends Controller
         $newCategory = new Category();
         $newCategory->category_name =  $request->category_name;
         $category_img = $request->file('category_img');
-        $newCategory->category_img_name = time().'-'.'category'. $request->img_extension;
+        $newCategory->category_img_name = time().'-'.'category'.$request->img_extension;
 
-        $isExist = Category::select()->where('category_name',  $request->category_name)->exists();
+        $isExist = Category::select()->where('category_name', $request->category_name)->exists();
 
         if(!$isExist)
         {
             $newCategory->save();
-            $category_img->move(public_path('CategoryImg'),  time().'-'.'category'.$request->img_extension);
+            $category_img->move(public_path('CategoryImg'), $newCategory->category_img_name);
             return 1;
         }
        
@@ -57,6 +57,12 @@ class CategoryAPI extends Controller
 
     public function UpdateCategoryStatus(Request $request){
         $categories = Category::select()->where('category_name',$request->category_name)->get();
+
+        $tmp = new Category();
+        foreach($categories as $category)
+        {
+            $tmp = $category;
+        }
 
         if(count($categories) > 0)
         {

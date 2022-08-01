@@ -4,17 +4,14 @@ import axios from "axios";
 
 function AddCategory() {
   let checkCategory = false;
-
+  let checkCategoryImage = false;
   // function isValidCategoryName(name) {
   //   var validNamePattern = /^[A-Za-z\s]+$/;
   //   return validNamePattern.test(name.trim());
   // }
 
-  const onCategoryNameBlur = () => {
-    const category_name = $("#input-add-category")
-      .val()
-      .trim()
-      .replace(/ /g, "-");
+  const onCategoryNameBlur = (e) => {
+    const category_name = e.target.value.trim().replace(/ /g, "-");
     const result = $("#check-category-result");
     axios
       .post("http://127.0.0.1:8000/api/checkexistscategory", { category_name })
@@ -23,10 +20,7 @@ function AddCategory() {
           result.text("Category name " + category_name + " already exists");
           result.css("color", "red");
         } else {
-          if (
-            category_name != "" &&
-            category_name.length >= 3
-          ) {
+          if (category_name != "" && category_name.length >= 3) {
             result.text("Category name " + category_name + " is valid");
             result.css("color", "green");
             checkCategory = true;
@@ -37,9 +31,23 @@ function AddCategory() {
         }
       });
   };
+  let category_img = "";
 
+  const onCategoryImageChange = (e) => {
+    const img = e.target.files[0];
+    const result = $("#check-img-result");
+    if (img != null) {
+      result.text("Valid  image");
+      result.css("color", "green");
+      category_img = e.target.files[0];
+      checkCategoryImage = true;
+    } else {
+      result.text("Please choose category image");
+      result.css("color", "red");
+      checkCategoryImage = false;
+    }
+  };
   const element = () => {
-    const category_img = $("#input-img-category").prop("files")[0];
     const category_name = $("#input-add-category")
       .val()
       .trim()
@@ -55,15 +63,16 @@ function AddCategory() {
       return;
     }
 
-    if (category_img) {
-      categoryImageResult.text("");
+    if (checkCategoryImage) {
+      categoryImageResult.text("Valid  image");
+      categoryImageResult.css("color", "green");
     } else {
       categoryImageResult.text("Please choose category image");
       categoryImageResult.css("color", "red");
       return;
     }
 
-    if (!checkCategory) {
+    if (!checkCategory || !checkCategoryImage) {
       return;
     }
 
@@ -80,10 +89,14 @@ function AddCategory() {
       .post("http://127.0.0.1:8000/api/addcategory", formData)
       .then(function (response) {
         if (response.data > 0) {
-          addCategoryResult.text("Insert new category: "+category_name+" succesfully.");
+          addCategoryResult.text(
+            "Insert new category: " + category_name + " succesfully."
+          );
           addCategoryResult.css("color", "green");
         } else {
-          addCategoryResult.text("Insert new category: "+category_name+" fail");
+          addCategoryResult.text(
+            "Insert new category: " + category_name + " fail"
+          );
           addCategoryResult.css("color", "red");
         }
       });
@@ -140,6 +153,7 @@ function AddCategory() {
                     className="form-control"
                     type="file"
                     id="input-img-category"
+                    onChange={onCategoryImageChange}
                   />
                   <div id="check-img-result"></div>
                 </div>
@@ -152,12 +166,13 @@ function AddCategory() {
               >
                 Close
               </button>
-              <input
-                type="submit"
+              <button
                 className="btn btn-info waves-effect waves-light"
                 onClick={element}
                 value="Create"
-              />
+              >
+                Create
+              </button>
             </div>
           </div>
         </div>
