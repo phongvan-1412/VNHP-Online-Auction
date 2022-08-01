@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import PayPal from "../Payment/PayPal";
 
-const PayPals = ({ newBill }) => {
-    const currentNewBill = newBill.filter(
-        (nb) => nb.customer_id == currentUserInfo.customer_id
-      );
-    return(
-        <div className="container">
-            <h1>PAYMENT GATEWAY</h1>
-        <PayPal totalPayment={totalPayment} paymentId={paymentId} />
-    </div>
-    )
+class PayPals extends Component {
+    state =[{bill_id:0}]
+    
+    componentDidMount(){
+        this.setState({bill_id: this.props.match.params.bill_id})
+    }
+    render(){
+        console.log(this.state.bill_id)
+        return(
+            <div className="container">
+                <h1>PAYMENT GATEWAY</h1>
+                <PayPal  />
+            </div>
+        )
+    }
+    
+    
 }
 
 export default PayPals;

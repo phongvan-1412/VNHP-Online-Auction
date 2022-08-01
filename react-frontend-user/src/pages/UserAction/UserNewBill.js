@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
+import PayPals from "../Payment/PayPals";
 
 const UserNewBill = ({currentNewBill}) => {
+
   function Search() {
     var value = $("#search").val().toLowerCase();
     $("#bill-records tr").filter(function () {
@@ -9,6 +12,7 @@ const UserNewBill = ({currentNewBill}) => {
     });
   }
   let i = 1;
+  
   return (
     <div className="container">
       <div className="card shadow mb-4">
@@ -58,7 +62,9 @@ const UserNewBill = ({currentNewBill}) => {
                     <td>{nb.product_name}</td>
                     <td>{nb.bill_payment}</td>
                     <td>{nb.bill_date}</td>
-                    <td><Link to="/paymentgateway" id="btn-payment" onClick={() => {nb.bill_id}}>Payment</Link></td>
+                    <td>
+                      <Link to={`/paymentgateway/${nb.bill_id}`} id="btn-payment">Payment</Link>
+                    </td>
                   </tr>
                 );
               })}
