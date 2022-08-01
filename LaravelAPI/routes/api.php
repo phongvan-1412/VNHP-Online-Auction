@@ -31,6 +31,7 @@ Route::post('/addcategory',[CategoryAPI::class,'AddCategory']);
 Route::get('/addcategorytable',[CategoryAPI::class,'AddCategoryTable']);
 Route::get('/addcategorytable',[CategoryAPI::class,'AddCategoryTable']);
 
+Route::post('/updatecategory',[CategoryAPI::class,'UpdateCategory']);
 Route::post('/changecategorystatus',[CategoryAPI::class,'UpdateCategoryStatus']);
 Route::post('/checkexistscategory',[CategoryAPI::class,'CheckExistsCategory']);
 
