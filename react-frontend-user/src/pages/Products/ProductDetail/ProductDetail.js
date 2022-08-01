@@ -29,8 +29,7 @@ const ProductDetail = ({ product, products, categories, feedbacks }) => {
       currentFeedback = [...currentFeedback, feedback];
     }
   })
-  console.log(currentFeedback)
-
+  
   return (
     <div className="row">
       <div className="col-md-1" style={{ padding: "0px", margin: "0px" }}></div>

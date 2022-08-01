@@ -44,6 +44,8 @@ Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
 Route::get('/addproducttable',[ProductAPI::class,'AddProductTable']);
 
 Route::post('/checkexistsproduct',[ProductAPI::class,'CheckExistsProduct']);
+Route::post('/countdownend', [ProductApi::class,'CountdownEnd']);
+
 //feedback
 Route::post('/addcomment',[FeedbackAPI::class,'AddComment']);
 Route::get('/showcomment',[FeedbackAPI::class,'ShowComment']);
