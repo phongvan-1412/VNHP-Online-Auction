@@ -5,10 +5,6 @@ import axios from "axios";
 function AddCategory() {
   let checkCategory = false;
   let checkCategoryImage = false;
-  // function isValidCategoryName(name) {
-  //   var validNamePattern = /^[A-Za-z\s]+$/;
-  //   return validNamePattern.test(name.trim());
-  // }
 
   const onCategoryNameBlur = (e) => {
     const category_name = e.target.value.trim().replace(/ /g, "-");
@@ -19,6 +15,7 @@ function AddCategory() {
         if (response.data > 0) {
           result.text("Category name " + category_name + " already exists");
           result.css("color", "red");
+          checkCategory = false;
         } else {
           if (category_name != "" && category_name.length >= 3) {
             result.text("Category name " + category_name + " is valid");
@@ -27,10 +24,12 @@ function AddCategory() {
           } else {
             result.text("Invalid category name");
             result.css("color", "red");
+            checkCategory = false;
           }
         }
       });
   };
+
   let category_img = "";
 
   const onCategoryImageChange = (e) => {
@@ -44,6 +43,7 @@ function AddCategory() {
     } else {
       result.text("Please choose category image");
       result.css("color", "red");
+      category_img = "";
       checkCategoryImage = false;
     }
   };
