@@ -56,7 +56,46 @@ class Category extends Component {
       this.setState({ categoryName: e.target.value.replace(/-/g, " ") });
     };
 
-    const onSaveEditClick = () => {};
+    let checkImg = false;
+    let category_img_name = "";
+    const onCategoryImgChange = (e) => {
+      category_img_name = e.target.files[0].name;
+
+      if (category_img_name) {
+        $("#category-edit-img-check").text(category_img_name + " valid.");
+        $("#category-edit-img-check").css("color", "green");
+        checkImg = true;
+      } else {
+        $("#category-edit-img-check").text(
+          category_img_name + " is not valid."
+        );
+        $("#category-edit-img-check").css("color", "red");
+        checkImg = false;
+      }
+    };
+
+    const onSaveEditClick = () => {
+      const category_name = this.state.categoryName.replace(/ /g, "-");
+      const fileImg = $("#edit-img-category").prop("files")[0];
+      const img_extension = "." + fileImg.name.split(".")[1];
+      const category_status = $("#edit-category-check-box").prop("checked");
+
+      let formData = new FormData();
+      formData.set("category_img", fileImg);
+      formData.set("img_extension", img_extension);
+      formData.set("category_name", category_name);
+      formData.set("category_status", category_status);
+
+      axios
+        .post(`http://127.0.0.1:8000/api/updatecategory`, formData)
+        .then(function (response) {
+          console.log(response.data)
+          if (response.data > 0) {
+
+          } else {
+          }
+        });
+    };
     return (
       <div className="container-fluid">
         <button
@@ -189,8 +228,10 @@ class Category extends Component {
                                           <input
                                             className="form-control"
                                             type="file"
-                                            id="input-img-category"
+                                            id="edit-img-category"
+                                            onChange={onCategoryImgChange}
                                           />
+                                          <div id="category-edit-img-check"></div>
                                         </div>
                                         <div className="form-group">
                                           <label className="control-lable admin-category-label">

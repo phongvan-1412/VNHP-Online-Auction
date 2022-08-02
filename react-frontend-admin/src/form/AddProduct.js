@@ -1,6 +1,7 @@
 import React from "react";
 import $ from "jquery";
 import axios from "axios";
+
 function AddProduct({ categories }) {
   let category_name = "";
   let validProductName = false;
@@ -26,7 +27,6 @@ function AddProduct({ categories }) {
   let start_price = "";
   let start_aution_day = "";
   let end_aution_day = "";
-
 
   const categoryOnChange = (e) => {
     categories.forEach((category) => {
@@ -184,16 +184,16 @@ function AddProduct({ categories }) {
     var yyyy = date.getFullYear();
     return mm + "/" + dd + "/" + yyyy;
   };
-  
+
   const onIngredientOnBlur = (e) => {
     ingredients = e.target.value;
-  }
+  };
   const onInstructionUseOnBlur = (e) => {
     instruction_use = e.target.value;
-  }
+  };
   const onInstructionStoreOnBlur = (e) => {
-    instruction_store= e.target.value;
-  }
+    instruction_store = e.target.value;
+  };
 
   const onProductStartAutionDayOnBlur = (e) => {
     start_aution_day = e.target.value;
@@ -258,8 +258,6 @@ function AddProduct({ categories }) {
   };
 
   const productElement = () => {
-    
-
     const checkProductName = $("#check-product-name-result");
     const checkProductThmbnailImg = $("#product-thumbnail-img-check-result");
     const checkProductImg1 = $("#product-img1-check-result");
@@ -437,15 +435,15 @@ function AddProduct({ categories }) {
 
   return (
     <div
-      class="modal fade bd-example-modal-lg"
-      tabindex="-1"
+      className="modal fade bd-example-modal-lg"
+      tabIndex="-1"
       role="dialog"
       id="add-product-modal"
       aria-labelledby="myLargeModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+      <div className="modal-dialog modal-lg">
+        <div className="modal-content">
           <div className="modal-header">
             <h4 className="modal-title">Add bill</h4>
             <button
@@ -486,7 +484,7 @@ function AddProduct({ categories }) {
                     <option hidden>Please Choose Category... </option>
                     {categories.map((category) => {
                       return (
-                        <option>
+                        <option key={category.category_id}>
                           {category.category_name.replace(/-/g, " ")}
                         </option>
                       );
@@ -629,7 +627,7 @@ function AddProduct({ categories }) {
                   <textarea
                     className="form-control "
                     id="input-instruction-use-product"
-                    onBlue={onInstructionUseOnBlur}
+                    onBlur={onInstructionUseOnBlur}
                   />
                 </div>
               </div>

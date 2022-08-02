@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import $ from "jquery";
 import axios from "axios";
 import AddProduct from "./AddProduct";
-import "../css/switch.css"
+import "../css/switch.css";
+
 class TableProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
       ProductData: [],
       categories: [],
+      productName: "",
     };
   }
   componentDidMount() {
@@ -36,7 +38,40 @@ class TableProduct extends Component {
   render() {
     let i = 1;
     const onClick = (a) => {
-      console.log(a.target.value);
+      this.setState({ productName: a.target.value });
+    };
+    let category_id = "";
+
+    const categoryOnChange = (e) => {
+      this.state.categories.forEach((category) => {
+        if (category.category_name == e.target.value.trim().replace(/ /g, "-")) {
+          category_id = category.category_id;
+          // $("#check-category-name-result").text(e.target.value + " is valid.");
+          // $("#check-category-name-result").css("color", "green");
+          // validCategoryName = true;
+          return;
+        }
+      });
+    };
+    const changeproduct = () => {
+      const product_name = $('#edit-product-name').val().replace(/ /g,"-");
+      const product_start_price = $('#edit-product-start-price').val();
+      const product_start_aution_day = $('#edit-product-start-aution-day').val();
+      const product_end_aution_day = $('#edit-product-end-aution-day').val();
+
+      const product = {product_name,category_id,product_start_price,product_start_aution_day,product_end_aution_day};
+
+      axios
+        .post(`http://127.0.0.1:8000/api/editproduct`, product)
+        .then(function (response) {
+          if (response.data > 0) {
+            $("#edit-product-result").text("Edit product successfully.");
+            $("#edit-product-result").css("color", "green");
+          } else {
+            $("#edit-product-result").text("Edit product fail.");
+            $("#edit-product-result").css("color", "red");
+          }
+        });
     };
     return (
       <div className="container-fluid">
@@ -76,26 +111,23 @@ class TableProduct extends Component {
 
                 <tbody>
                   {this.state.ProductData.map((h, index) => {
-                    const changeproduct = () => {
-                      const changeproductname = h.product_name;
-                      console.log(changeproductname)
-                    };
                     return (
-                      <tr>
-                        <td key={index}>{i++}</td>
+                      <tr key={index}>
+                        <td>{i++}</td>
 
                         <td>
-
-                          <img className="imgcategory" style={{ width: "100px", height: "100px" }}
+                          <img
+                            className="imgcategory"
+                            style={{ width: "100px", height: "100px" }}
                             src={require(`../../../LaravelAPI/public/ProductImg/${h.product_thumbnail_img_name}`)}
                           />
                         </td>
 
-                        <td>{h.product_name.replace(/-/g," ")}</td>
+                        <td>{h.product_name.replace(/-/g, " ")}</td>
                         <td>{h.product_start_price}</td>
                         <td>{h.product_price_aution}</td>
-                        <td>{h.start_aution_day}</td>
-                        <td>{h.product_end_aution}</td>
+                        <td>{h.product_start_aution_day}</td>
+                        <td>{h.product_end_aution_day}</td>
                         <td>
                           {h.product_status == 1 ? (
                             <label className="switch">
@@ -119,132 +151,146 @@ class TableProduct extends Component {
                               id="btn-edit-product"
                               value={h.product_name}
                               onClick={onClick}
-                              style={{color:"white"}}
-                            >Edit
+                              style={{ color: "white" }}
+                            >
+                              Edit
                             </button>
                           </div>
-                          <div class="modal fade " id="con-close-modal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                              <div class="modal-content">
+                          <div
+                            className="modal fade "
+                            id="con-close-modal2"
+                            tabIndex="-1"
+                            role="dialog"
+                            aria-labelledby="myLargeModalLabel"
+                            aria-hidden="true"
+                          >
+                            <div className="modal-dialog modal-lg">
+                              <div className="modal-content">
                                 <div className="modal-header">
                                   <h4 className="modal-title">Add Product</h4>
-                                  <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                  <button
+                                    type="button"
+                                    className="close"
+                                    data-dismiss="modal"
+                                    aria-hidden="true"
+                                  >
+                                    ×
+                                  </button>
                                 </div>
                                 <div className="modal-body p-4">
+                                  <div id="edit-product-result"></div>
                                   <div className="row">
                                     <div className="col-md-6">
                                       <div className="form-group">
-                                        <label className="control-label" htmlFor="id">Product Name</label>
-                                        <input type="text" className="form-control" id="input-product_name" />
+                                        <label
+                                          className="control-label"
+                                          htmlFor="id"
+                                        >
+                                          Product Name
+                                        </label>
+                                        <input
+                                          type="text"
+                                          className="form-control"
+                                          value={this.state.productName.replace(
+                                            /-/g,
+                                            " "
+                                          )}
+                                          id="edit-product-name"
+                                          disabled
+                                        />
                                       </div>
                                     </div>
                                     <div className="col-md-6">
                                       <div className="form-group">
-                                        <label className="control-label" htmlFor="id">Category Name</label>
-                                        <select className="form-control " >
-                                          <option id="input-category-id">{1023}</option>
-                                          <option id="input-category-id">{1024}</option>
-                                          <option id="input-category-id">{1025}</option>
-                                          <option id="input-category-id">{1026}</option>
-                                          <option id="input-category-id">{1027}</option>
-                                          <option id="input-category-id">{1028}</option>
+                                        <label
+                                          className="control-label"
+                                          htmlFor="id"
+                                        >
+                                          Category Name
+                                        </label>
+                                        <select
+                                          className="form-control"
+                                          onChange={categoryOnChange}
+                                          defaultValue={"Choose Category"}
+                                        >
+                                          <option hidden>
+                                            Please Choose Category...{" "}
+                                          </option>
+                                          {this.state.categories.map(
+                                            (category,index) => {
+                                              return (
+                                                <option key={index} >
+                                                  {category.category_name.replace(
+                                                    /-/g,
+                                                    " "
+                                                  )}
+                                                </option>
+                                              );
+                                            }
+                                          )}
                                         </select>
                                       </div>
                                     </div>
                                   </div>
                                   <div className="row">
                                     <div className="col-md-6">
-                                      <div className="form-group">
-                                        <label className="control-label" htmlFor="id">Images</label>
-                                        <input className="form-control " type="file" id="input-imgs-product" required />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <label className="control-label">Start Price</label>
-                                      <input className="form-control " id="input-price1-product" />
-                                    </div>
-                                  </div>
-                                  <div className="row">
-                                    <div className="col-md-6">
-                                      <div className="form-group">
-                                        <label className="control-label" htmlFor="id">Images 1</label>
-                                        <input className="form-control " type="file" id="input-img1-product" required />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="form-group">
-                                        <label className="control-label">Start Aution Day</label>
-                                        <input className="form-control " id="input-start-aution-product" type="date" />
-                                      </div>
+                                      <label className="control-label">
+                                        Start Price
+                                      </label>
+                                      <input
+                                        type="text"
+                                        className="form-control "
+                                        id="edit-product-start-price"
+                                      />
                                     </div>
                                   </div>
                                   <div className="row">
                                     <div className="col-md-6">
                                       <div className="form-group">
-                                        <label className="control-label" htmlFor="id">Images 2</label>
-                                        <input className="form-control " type="file" id="input-img2-product" required />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="form-group">
-                                        <label className="control-label">End Aution Day</label>
-                                        <input className="form-control " id="input-end-aution-product" type="date" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="row">
-                                    <div className="col-md-6">
-                                      <div className="form-group">
-                                        <label className="control-label" htmlFor="id">Images 3</label>
-                                        <input className="form-control " type="file" id="input-img3-product" required />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="form-group">
-                                        <label className="control-label" htmlFor="id">Status</label>
-                                        <label className="switch">
-                                          <input name="category_status" type="checkbox" id="input-status-product" />
-                                          <span className="slider round"></span>
+                                        <label className="control-label">
+                                          Start Aution Day
                                         </label>
+                                        <input
+                                          className="form-control "
+                                          id="edit-product-start-aution-day"
+                                          type="date"
+                                        />
                                       </div>
                                     </div>
                                   </div>
-
                                   <div className="row">
                                     <div className="col-md-6">
                                       <div className="form-group">
-                                        <label className="control-label" htmlFor="id">Information</label>
-                                        <textarea className="form-control " id="input-information-product" />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="form-group">
-                                        <label className="control-label" htmlFor="id">Ingredients</label>
-                                        <textarea className="form-control " id="input-ingredients-product" />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="form-group">
-                                        <label className="control-label" htmlFor="id">Instruction use</label>
-                                        <textarea className="form-control " id="input-instruction_use-product" />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <div className="form-group">
-                                        <label className="control-label" htmlFor="id">Instruction store</label>
-                                        <textarea className="form-control " id="input-instruction_store-product" />
+                                        <label className="control-label">
+                                          End Aution Day
+                                        </label>
+                                        <input
+                                          className="form-control "
+                                          id="edit-product-end-aution-day"
+                                          type="date"
+                                        />
                                       </div>
                                     </div>
                                   </div>
+                                
                                   <div className="modal-footer">
-                                    <button className="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                    <input type="submit" className="btn btn-info waves-effect waves-light" onClick={changeproduct} value="Create" />
+                                    <button
+                                      className="btn btn-secondary waves-effect"
+                                      data-dismiss="modal"
+                                    >
+                                      Close
+                                    </button>
+                                    <input
+                                      type="submit"
+                                      className="btn btn-info waves-effect waves-light"
+                                      onClick={changeproduct}
+                                      value="Update Product"
+                                    />
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-
                         </td>
                       </tr>
                     );

@@ -102,7 +102,6 @@ class ProductAPI extends Controller
     }
     
     public function CountdownEnd(Request $req_product){
-        $countDownEnd = new Product();
         $product = Product::select()->where('product_id', $req_product->countdownProduct)->get();
         
         $productItem = '';
@@ -112,13 +111,11 @@ class ProductAPI extends Controller
 
         if ($productItem->product_price_aution <= $productItem->product_start_price){
             Product::where('product_id', $req_product->countdownProduct)->update(['product_status' => 2]);
-            // DB::select("update product set product_status = 2 where product_id = $req_product->countdownProduct");           
         }else{
             Product::where('product_id', $req_product->countdownProduct)->update(['product_status' => 3]);
             $countDownDate = date('Y-m-d h:m:s', time());
             
             $newBillId = Bill::select()->where('product_id', $req_product->countdownProduct)->where('customer_id', $req_product->countdownCustomer)->get();
-
 
             if(count($newBillId) <= 0){
                 DB::insert("insert into bill(product_id, bill_date, bill_payment, customer_id) values (?,?,?,?)", [$req_product->countdownProduct, $countDownDate, $productItem->product_price_aution, $req_product->countdownCustomer]);  
@@ -127,8 +124,27 @@ class ProductAPI extends Controller
 
             return $newbill;
         }
-        // $abc = Product::select()->where('product_id', $req_product->countdown)->get();
-        // return $abc;
-         
     }
+
+    public function EditProduct(Request $request)
+    {
+        $product = Product::select()->where('product_name', $request->product_name)->get();
+
+        $productItem = '';
+        foreach($product as $item){
+            $productItem = $item;
+        }
+        if(count($product) > 0){
+            
+                    Product::select()->where('product_name',$request->product_name)
+                                            ->update(['category_id'=>$request->category_id,
+                                            'product_start_price'=>$request->product_start_price,
+                                            'product_start_aution_day'=>$request->product_start_aution_day,
+                                            'product_end_aution_day'=>$request->product_end_aution_day]);
+
+            return 1;
+        }
+        return 0;
+    }
+    
 }
