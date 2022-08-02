@@ -80,6 +80,7 @@ class Category extends Component {
       const img_extension = "." + fileImg.name.split(".")[1];
       const category_status = $("#edit-category-check-box").prop("checked");
 
+      console.log(fileImg)
       let formData = new FormData();
       formData.set("category_img", fileImg);
       formData.set("img_extension", img_extension);

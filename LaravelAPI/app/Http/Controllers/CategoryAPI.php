@@ -83,13 +83,13 @@ class CategoryAPI extends Controller
         }
         
         if(count($categories) > 0){
-            // File::delete(public_path('CategoryImg/'.$tmp->category_img_name));
+            File::delete(public_path('CategoryImg/'.$tmp->category_img_name));
 
-            // $category_img = $request->file('category_img');
-            // $category_img_name = time().'-'.'category'.$request->img_extension
-            // $category_img->move(public_path('CategoryImg'),  $category_img_name);
-            // Admin::where('category_name', $request->category_name)->update(['category_img_name'=> $category_img_name,
-            //                                                             'category_status'=>$request->category_status]);
+            $category_img = $request->file('category_img');
+            $category_img_name = time().'-'.'category'.$request->img_extension;
+            $category_img->move(public_path('CategoryImg'),  $category_img_name);
+            Category::where('category_name', $request->category_name)->update(['category_img_name'=> $category_img_name,
+                                                                        'category_status'=>$request->category_status]);
             
             return $category_img_name;
         }
