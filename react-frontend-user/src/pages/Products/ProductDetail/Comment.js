@@ -25,6 +25,7 @@ const Comment = ({ productId, currentFeedback }) => {
                     if (response.data.length > 0) {
                         result.text(" just added.");
                         result.css("color", "green");
+                        $("#input-comment").val("") ;
                     } else {
                         result.text(" added failed.");
                         result.css("color", "red");
@@ -51,7 +52,7 @@ const Comment = ({ productId, currentFeedback }) => {
             </div>
 
             <div className="row input-text">
-                <input placeholder="What do you think?" cols="30" rows="10" onKeyUp={onKeyUp} />
+                <input id="input-comment" placeholder="What do you think?" cols="30" rows="10" onKeyUp={onKeyUp} />
             </div>
 
             <div id="result"></div>

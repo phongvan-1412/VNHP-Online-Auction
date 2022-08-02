@@ -28,7 +28,7 @@ class UserProfile extends Component {
     if (currentUserInfo.customer_img_name == null) {
       window.location.href = "http://localhost:3000";
     }
-
+    console.log(currentUserInfo.customer_id)
     const currentAutionHistory = autionHistory.filter(
       (ah) => ah.customer_id == currentUserInfo.customer_id
     );
