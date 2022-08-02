@@ -16,7 +16,6 @@ const ProductItem = ({ product }) => {
           to={`/${product.category_id}/${product.product_name}`}
           replace
           className="product-img"
-          onClick={onProductClicked}
         >
           <img name={product.product_id}
             src={require(`../../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
