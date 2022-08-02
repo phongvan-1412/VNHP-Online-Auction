@@ -2,17 +2,11 @@ import React, { Component } from 'react'
 import $ from 'jquery'
 import axios from 'axios';
 
-function ChangePassword({currentAdminInfo, UpdateAdminLogin}){
-  
-        // let currentAdminInfo = admininfo;
-        // if (performance.navigation.type === 1) {
-        //   if (localStorage.getItem("admin_info") == null) {
-        //     window.location.href = "http://localhost:3001/login";
-        //   } else {
-        //     currentAdminInfo = JSON.parse(localStorage.getItem("admin_info"));
-        //   }
-        // }
+class ChangePassword extends Component{
+        state = { loading: false }
 
+        render(){
+        const {currentAdminInfo, UpdateAdminLogin} = this.props
         const CheckPwd = () => {
             const password = $("#newpwd").val();
             const confirmPassword = $("#confirmpwd").val();
@@ -27,30 +21,33 @@ function ChangePassword({currentAdminInfo, UpdateAdminLogin}){
             }
         }
         const ChangePass = () => {
+            this.setState({ loading:true })    
             const Email = $('#currentemail').val();
             const CurrentPassword = $("#currentpwd").val();
             const ConfirmPassword = $("#confirmpwd").val();
+            const self=this;
+            console.log(ConfirmPassword)
             if(!CurrentPassword){
                 $("#alert").html("Current password is require").addClass('text-danger')
+                self.setState({ loading:false })        
             }else{
                 const Data = {Email, CurrentPassword, ConfirmPassword}
                 axios.post("http://127.0.0.1:8000/api/changepassword", Data)
                     .then(function(response){
                         if(response.data == 0){
                             $('#result-pwd').text("Wrong current password").addClass('alert alert-danger').removeClass('alert-success');
-                            $("#newpwd").text("");
-                            $("#currentpwd").text("");
-                            $("#confirmpwd").text("");
                         }else{
                             $('#result-pwd').text("Success to change password").addClass('alert alert-success').removeClass('alert-danger');
                             localStorage.removeItem("admin_info");
                             localStorage.setItem("admin_info",JSON.stringify(response.data));
                             UpdateAdminLogin();    
+                            self.setState({ loading:false })    
                         }
                     })
             }
 
         }
+        const {loading} = this.state;
     return (
         <div className="col-xl-8" id="changepwdform" style={{display: "none"}}>
             <div className="card mb-4">
@@ -98,8 +95,11 @@ function ChangePassword({currentAdminInfo, UpdateAdminLogin}){
                             className="btn btn-primary"
                             id="changepwd-btn"
                             onClick={ChangePass}
+                            disabled={loading}
                         >
-                            Change Password
+                            { loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> }
+                            { !loading && <span>Change Password</span>}
+                            { loading && <span> Loading...</span>}
                         </button>
                     </div>
                 </div>
@@ -108,5 +108,5 @@ function ChangePassword({currentAdminInfo, UpdateAdminLogin}){
         </div>
     )
 }
-
+}
 export default ChangePassword

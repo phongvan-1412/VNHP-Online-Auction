@@ -1,6 +1,47 @@
 import React, { Component } from 'react'
 
 class Statistical extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            EarningData: [],
+            CustomerData: [],
+            SellData: []
+    }}    
+    componentDidMount() {
+        fetch("http://127.0.0.1:8000/api/earninglastmonth", {method: "GET",})
+        .then((response) => response.json())
+        .then((response) => {
+            this.setState({
+            EarningData: response
+            }); 
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        fetch("http://127.0.0.1:8000/api/countcustomer", {method: "GET",})
+        .then((response) => response.json())
+        .then((response) => {
+            this.setState({
+            CustomerData: response
+            }); 
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    };
+    // componentDidMount() {
+    //     fetch("http://127.0.0.1:8000/api/selectbill", {method: "GET",})
+    //     .then((response) => response.json())
+    //     .then((response) => {
+    //         this.setState({
+    //         SellData: response
+    //         }); 
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //     })
+    // };
     render(){
         return (
             <div className="row">
@@ -10,8 +51,15 @@ class Statistical extends Component{
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
                                     <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Earnings (last month)</div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                        Earnings (last month)
+                                    </div>
+                                        {this.state.EarningData.map((p,index)=>{
+                                            return(
+                                                <div key={index} className="h5 mb-0 font-weight-bold text-gray-800">
+                                                   ${p.revenues}
+                                                </div>
+                                            )
+                                        })}
                                 </div>
                                 <div className="col-auto">
                                     <i className="fas fa-calendar fa-2x text-gray-300"></i>
@@ -27,8 +75,15 @@ class Statistical extends Component{
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
                                     <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Customer</div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                        Customer
+                                    </div>
+                                    {this.state.CustomerData.map((p,index)=>{
+                                        return(
+                                            <div key={index} className="h5 mb-0 font-weight-bold text-gray-800">
+                                                {p.amount}
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                                 <div className="col-auto">
                                     <i className="fas fa-dollar-sign fa-2x text-gray-300"></i>

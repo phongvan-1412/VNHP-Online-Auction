@@ -67,12 +67,14 @@ class AdminProfile extends Component{
 
         const ChangeProfile = () => {
             this.setState({ loading:true })    
+
             const email = $('#email').val();
             const fullname = $('#fullname').val();
             const address = $('#address').val();
             const phonenumber = $('#phonenumber').val();
             const dateofbirth = $('#dateofbirth').val();
             const Data = {email, fullname, address, phonenumber, dateofbirth}
+            const self = this;
             axios
                 .post("http://127.0.0.1:8000/api/changeprofile", Data)
                 .then(function(response){
@@ -83,7 +85,7 @@ class AdminProfile extends Component{
                         localStorage.removeItem("admin_info");
                         localStorage.setItem("admin_info",JSON.stringify(response.data));
                         UpdateAdminLogin();           
-                        this.setState({ loading: false })
+                        self.setState({ loading: false })
                     }
                 })
         }

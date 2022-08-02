@@ -5,28 +5,30 @@ import axios from 'axios';
 import "../../css/all.min.css"
 
 class LogIn extends Component{
+    state = { loading: false }
     render(){
         function returnDashboard() {
             window.location.href = "http://localhost:3001";
           }
-        function login(){
+        const login = () =>{
+            this.setState({loading:true})
             const email = $('#email').val();
             const pwd = $('#pwd').val();
-            const admin = {email, pwd}
-
+            const admin = {email, pwd};
+            const self=this;
             axios.post("http://127.0.0.1:8000/api/login", admin)
             .then(function(response){
                 if(response.data == 0){
                     $('#msg').text('Wrong email or password').addClass('text-danger'); 
+                    self.setState({loading:false})
                 }else{
-                    localStorage.setItem(
-                        "admin_info",
-                        JSON.stringify(response.data)
-                    );
-                    setInterval(returnDashboard, 3000);
+                    localStorage.setItem("admin_info",JSON.stringify(response.data));
+                    self.setState({loading:false})
+                    setInterval(returnDashboard, 1000);
                 }
             })
         };
+        const {loading} = this.state;
         return (
             <div className="container">
                 <div className="row justify-content-center mt-5 pt-5">
@@ -54,9 +56,14 @@ class LogIn extends Component{
 
                                                 </div>
 
-                                                <a onClick={login} className=" mt-4 btn btn-primary btn-user ">
-                                                    Login
-                                                </a>
+                                                <button 
+                                                    className=" mt-4 btn btn-primary btn-user"
+                                                    onClick={login} 
+                                                    disabled={loading}
+                                                >
+                                                    {loading && <span className='spinner-border spinner-border-sm' role="status" aria-hidden="true"></span>}
+                                                    {!loading && <span>Login</span>}
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

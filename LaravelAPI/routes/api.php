@@ -95,3 +95,6 @@ Route::get('/bestcategoryseller', [BillApi::class, 'BestCategorySeller']);
 //PROFILE
 Route::post('/changeavatar',[AdminController::class, 'ChangeAvatar']);
 Route::post('/changeprofile',[AdminController::class, 'ChangeProfile']);
+Route::post('/changepassword',[AdminController::class, 'ChangePassword']);
+Route::get('/earninglastmonth',[BillApi::class, 'EarningLastMonth']);
+Route::get('/countcustomer',[BillApi::class, 'CountCustomer']);
