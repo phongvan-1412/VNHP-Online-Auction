@@ -18,7 +18,7 @@ class AdminProfile extends Component{
           }
         }
         var check = true;
-        const ChangePwd = () =>{
+        const ShowChangePwd = () =>{
             if(check){
                 $('#account-detail').hide(100);
                 $('#changepwdform').show(200);
@@ -33,8 +33,7 @@ class AdminProfile extends Component{
         } 
         
 
-        function onAvatarChange(e) {
-            
+        function onAvatarChange() {
             let avatar = $("#avatar").prop("files")[0];
             let reader = new FileReader();
             reader.readAsDataURL(avatar);
@@ -60,12 +59,12 @@ class AdminProfile extends Component{
                         localStorage.removeItem("admin_info");
                         localStorage.setItem("admin_info",JSON.stringify(response.data));
                         UpdateAdminLogin();
-                    
+                        window.location.reload()
                     }
-                    // console.log(response.data)
                 })
             
         }
+
         const ChangeProfile = () => {
             this.setState({ loading:true })    
             const email = $('#email').val();
@@ -73,28 +72,22 @@ class AdminProfile extends Component{
             const address = $('#address').val();
             const phonenumber = $('#phonenumber').val();
             const dateofbirth = $('#dateofbirth').val();
-            let formData = new FormData();
-            formData.set("emp_email", email);
-            formData.set("fullname", fullname);
-            formData.set("address", address);
-            formData.set("phonenumber", phonenumber);
-            formData.set("dateofbirth", dateofbirth);
+            const Data = {email, fullname, address, phonenumber, dateofbirth}
             axios
-                .post("http://127.0.0.1:8000/api/changeprofile", formData)
+                .post("http://127.0.0.1:8000/api/changeprofile", Data)
                 .then(function(response){
                     if(response.data == 0){
-                        $('#result-img').text("Fail to change profile").addClass('alert-danger')
+                        $('#result-profile').text("Fail to change profile").addClass('alert alert-danger');
                     }else{
+                        $('#result-profile').text("Success to change profile").addClass('alert alert-success');
                         localStorage.removeItem("admin_info");
-                        localStorage.setItem(
-                          "admin_info",
-                          JSON.stringify(response.data)
-                        );
-                        // UpdateAdminLogin();
+                        localStorage.setItem("admin_info",JSON.stringify(response.data));
+                        UpdateAdminLogin();           
+                        this.setState({ loading: false })
                     }
                 })
         }
-
+            
         const {loading} = this.state;
 
         return (
@@ -122,7 +115,7 @@ class AdminProfile extends Component{
                             <span 
                                 className="btn btn-primary"  
                                 id="changepwd"
-                                onClick={ChangePwd}
+                                onClick={ShowChangePwd}
                             >
                             Change Password
                             </span>
@@ -134,6 +127,7 @@ class AdminProfile extends Component{
                     <div className="col-xl-8" id="account-detail">
                     <div className="card mb-4">
                         <div className="card-header">Account Details</div>
+                        <div id="result-profile"></div>
                         <div className="card-body">
                         <div className="mb-3">
                             <label className="small mb-1" htmlFor="position">
@@ -214,14 +208,14 @@ class AdminProfile extends Component{
                         </div>
                         <button  className="btn btn-primary" onClick={ChangeProfile} disabled={loading} type="submit">
                             { loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> }
-                            { loading && <span> Loading...</span>}
                             { !loading && <span>Save Change</span>}
+                            { loading && <span> Loading...</span>}
                         </button>
                         </div>
                     </div>
                     </div>
                     {/* CHANGE PASSWORD FORM */}
-                    <ChangePassword />
+                    <ChangePassword currentAdminInfo={currentAdminInfo} UpdateAdminLogin={UpdateAdminLogin}/>
                 </div>
             </div>
         );
