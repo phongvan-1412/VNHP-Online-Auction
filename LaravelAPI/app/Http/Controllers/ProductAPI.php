@@ -136,6 +136,7 @@ class ProductAPI extends Controller
         foreach($products as $product){
             $productItem = $product;
         }
+<<<<<<< HEAD
 
         if ($req->realBidPrice <= $productItem->product_start_price) 
             return 0;
@@ -145,6 +146,25 @@ class ProductAPI extends Controller
             DB::insert("insert into aution_price(customer_id, product_id, aution_price, aution_day) values (?,?,?,?)", 
             [$req->customerId, $req->productId, $req->realBidPrice, $req->auctionDay]);  
 
+=======
+        if(count($product) > 0){
+            Product::select()->where('product_name',$request->product_name)
+                                    ->update(['category_id'=>$request->category_id,
+                                    'product_start_price'=>$request->product_start_price,
+                                    'product_start_aution_day'=>$request->product_start_aution_day,
+                                    'product_end_aution_day'=>$request->product_end_aution_day]);
+            return 1;
+        }
+        return 0;
+    }
+    
+    public function ChangeProductStatus(Request $request)
+    {
+        $product = Product::select()->where('product_id', $request->product_id)->get();
+        if(count($product) > 0){
+            Product::select()->where('product_id',$request->product_id)
+                                    ->update(['product_status'=>$request->product_status]);
+>>>>>>> c40c1b0c315127ba3d5991099e4836b17fb4384c
             return 1;
 
     }
