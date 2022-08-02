@@ -64,7 +64,8 @@ const DetailItem = ({ product }) => {
                         setCurrentBid(realBidPrice)
                         result.text("Your price is acceptable");
                         result.css("color", "green");
-                        $("#input-bidprice").val("") ;
+                        $("#result-bidprice");
+                        $("#input-bidprice").val("");
                     } else {
                         result.text("Your price is invalid");
                         result.css("color", "red");
@@ -72,6 +73,12 @@ const DetailItem = ({ product }) => {
                 });
         }
     }
+
+    //CLEAR ANNOUCEMENT
+    // const onChange = () => {
+    //   $("#input-bidprice").val("") ;
+    // }
+    
     return (
     <div className="row">
 
@@ -112,12 +119,13 @@ const DetailItem = ({ product }) => {
             </div>
           </div>
 
+          <div id="result-bidprice"></div>
+
           <div className="product-detail-product-bidprice-wrapper">
-            <input id="input-bidprice" className="product-detail-product-bidprice" type="number" min={product.product_start_price} step="10" placeholder="Your Max Bid" onKeyUp={onKeyUp}/>
+            <input id="input-bidprice" className="product-detail-product-bidprice" type="number" min={product.product_start_price} step="10" placeholder="Your Max Bid" onKeyUp={onKeyUp} />
             <Link to="/register" className="product-detail-product-bidprice-register">Register to Bid</Link>
           </div>
 
-          <div id="result-bidprice"></div>
           <div className="product-detail-product-bidprice-headtext"><i className="fa-solid fa-lock"/> Secure Bidding</div>
 
           <div className="product-detail-product-categoryname">{product.category_name.replace(/-/g, " ")}</div>

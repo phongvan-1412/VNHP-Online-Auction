@@ -137,7 +137,7 @@ class ProductAPI extends Controller
         if ($req->realBidPrice <= $productItem->product_price_aution)
             return 0;
 
-            Product::select()->where('product_id',$req->productId)->update('product_price_aution', $req->realBidPrice);
+            Product::select()->where('product_id',$req->productId)->update(['product_price_aution'=> $req->realBidPrice]);
 
             DB::insert("insert into aution_price(customer_id, product_id, aution_price, aution_day) values (?,?,?,?)", 
             [$req->customerId, $req->productId, $req->realBidPrice, $req->auctionDay]);  
