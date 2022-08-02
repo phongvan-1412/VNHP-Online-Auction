@@ -8,7 +8,7 @@ class TopBar extends Component {
     let admin = {};
     const isAdminLogin = () => {
       if (localStorage.getItem("admin_info") == null) {
-        window.location.href = "http://localhost:3000/login";
+        window.location.href = "http://localhost:3001/login";
       } else {
         admin = JSON.parse(localStorage.getItem("admin_info"));
       }
@@ -22,7 +22,7 @@ class TopBar extends Component {
         .then(function (response) {
           if (response.data > 0) {
             localStorage.removeItem("admin_info");
-            window.location.href = "http://localhost:3000/login";
+            window.location.href = "http://localhost:3001/login";
           }
         })
         .catch((err) => {
@@ -73,7 +73,10 @@ class TopBar extends Component {
               <span className="mr-2 d-none d-lg-inline text-gray-600 small">
                 Hello {admin.emp_name}
               </span>
-              <img className="img-profile rounded-circle" src="#" />
+              <img 
+                className="img-profile rounded-circle" 
+                src={require(`../../../LaravelAPI/public/AdminImage/${admin.emp_img_name}`)}
+              />
             </Link>
             <div
               className="dropdown-menu dropdown-menu-right shadow animated--grow-in"

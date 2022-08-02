@@ -1,15 +1,18 @@
 import {React, Component} from "react";
 import  ChangePassword  from "./ChangePassword";
-import $ from "jquery"
-import "../../css/profile.css"
+import $ from "jquery";
+import "../../css/profile.css";
+import axios from 'axios';
 
 class AdminProfile extends Component{
+    state = { loading: false }
+
     render(){ 
-        const {admininfo} = this.props;
+        const {admininfo, UpdateAdminLogin} = this.props;
         let currentAdminInfo = admininfo;
         if (performance.navigation.type === 1) {
           if (localStorage.getItem("admin_info") == null) {
-            window.location.href = "http://localhost:3000/login";
+            window.location.href = "http://localhost:3001/login";
           } else {
             currentAdminInfo = JSON.parse(localStorage.getItem("admin_info"));
           }
@@ -27,7 +30,73 @@ class AdminProfile extends Component{
                 $('#changepwd').html("Change Password");
                 check = true;
             }
-        }    
+        } 
+        
+
+        function onAvatarChange(e) {
+            
+            let avatar = $("#avatar").prop("files")[0];
+            let reader = new FileReader();
+            reader.readAsDataURL(avatar);
+      
+            reader.onloadend = function() {
+                $("#avatar-img").prop("src", reader.result);
+            }
+            const avatar_name = avatar.name;
+            const index = avatar_name.indexOf(".");
+            const img_extension = avatar_name.substr(index, index + 4);
+            const email = $('#email').val();
+
+            let formData = new FormData();
+            formData.set("emp_email", email);
+            formData.set("avatar", avatar);
+            formData.set("extension", img_extension);
+            axios
+                .post("http://127.0.0.1:8000/api/changeavatar", formData)
+                .then(function(response){
+                    if(response.data == 0){
+                        $('#result-img').text("Fail to change avatar").addClass('alert alert-danger')
+                    }else{
+                        localStorage.removeItem("admin_info");
+                        localStorage.setItem("admin_info",JSON.stringify(response.data));
+                        UpdateAdminLogin();
+                    
+                    }
+                    // console.log(response.data)
+                })
+            
+        }
+        const ChangeProfile = () => {
+            this.setState({ loading:true })    
+            const email = $('#email').val();
+            const fullname = $('#fullname').val();
+            const address = $('#address').val();
+            const phonenumber = $('#phonenumber').val();
+            const dateofbirth = $('#dateofbirth').val();
+            let formData = new FormData();
+            formData.set("emp_email", email);
+            formData.set("fullname", fullname);
+            formData.set("address", address);
+            formData.set("phonenumber", phonenumber);
+            formData.set("dateofbirth", dateofbirth);
+            axios
+                .post("http://127.0.0.1:8000/api/changeprofile", formData)
+                .then(function(response){
+                    if(response.data == 0){
+                        $('#result-img').text("Fail to change profile").addClass('alert-danger')
+                    }else{
+                        localStorage.removeItem("admin_info");
+                        localStorage.setItem(
+                          "admin_info",
+                          JSON.stringify(response.data)
+                        );
+                        // UpdateAdminLogin();
+                    }
+                })
+        }
+
+        const {loading} = this.state;
+
         return (
             <div className="container-xl px-4 mt-4">
             <hr className="mt-0 mb-4" />
@@ -35,12 +104,20 @@ class AdminProfile extends Component{
                     <div className="col-xl-4">
                     <div className="card mb-2 mb-xl-0">
                         <div className="card-header">Profile Picture</div>
+                        <div id="result-img"></div>
                         <div className="card-body text-center">
                         <img
                             className="img-account-profile rounded-circle mb-2"
+                            id="avatar-img"
                             src={require(`../../../../LaravelAPI/public/AdminImage/${currentAdminInfo.emp_img_name}`)}
+                            alt="avatar"
                         />
-                        <input type="file" name="avatar" />
+                        <input 
+                            type="file"
+                            name="avatar" 
+                            id="avatar"
+                            onChange={onAvatarChange}                        
+                        />
                         <div className="card mt-3">
                             <span 
                                 className="btn btn-primary"  
@@ -67,7 +144,7 @@ class AdminProfile extends Component{
                             name="position"
                             id="position"
                             type="text"
-                            value="Admin"
+                            defaultValue="Admin"
                             disabled
                             />
                         </div>
@@ -81,7 +158,7 @@ class AdminProfile extends Component{
                             id="fullname"
                             name="fullname"
                             type="text"
-                            value={admininfo.emp_name}
+                            defaultValue={currentAdminInfo.emp_name}
                             />
                         </div>
 
@@ -94,7 +171,7 @@ class AdminProfile extends Component{
                                 id="address"
                                 name="address"
                                 type="text"
-                                value={admininfo.emp_address}
+                                defaultValue={currentAdminInfo.emp_address}
                             />
                         </div>
                         <div className="mb-3">
@@ -104,7 +181,7 @@ class AdminProfile extends Component{
                             <input 
                                 className="form-control" 
                                 id="email"
-                                value={admininfo.emp_email}
+                                defaultValue={currentAdminInfo.emp_email}
                                 disabled 
                             />
                         </div>
@@ -118,7 +195,7 @@ class AdminProfile extends Component{
                                 id="phonenumber"
                                 name="phonenumber"
                                 type="tel"
-                                value={admininfo.emp_contact}
+                                defaultValue={currentAdminInfo.emp_contact}
                             />
                             </div>
                             <div className="col-md-6">
@@ -131,12 +208,14 @@ class AdminProfile extends Component{
                                 type="date"
                                 name="dateofbirth"
                                 placeholder="Enter your birthday"
-                                value={admininfo.emp_dob}
+                                defaultValue={currentAdminInfo.emp_dob}
                             />
                             </div>
                         </div>
-                        <button className="btn btn-primary" type="submit">
-                            Save changes
+                        <button  className="btn btn-primary" onClick={ChangeProfile} disabled={loading} type="submit">
+                            { loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> }
+                            { loading && <span> Loading...</span>}
+                            { !loading && <span>Save Change</span>}
                         </button>
                         </div>
                     </div>

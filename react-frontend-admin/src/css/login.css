@@ -4,7 +4,7 @@
     padding:0;
     height: 100% ;
     font-family: sans-serif;
-    background: linear-gradient(#5874DC, #E06C78) no-repeat;
+    /* background: linear-gradient(#5874DC, #E06C78) no-repeat; */
   }
   
   .login-box {

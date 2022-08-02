@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use File;
 
 class AdminController extends Controller
 {
@@ -40,14 +41,46 @@ class AdminController extends Controller
         return 0;
     }
 
-    public function Getaccount(){
-         
-        $admin = Admin::select()->where('emp_email','nhan@gmail.com')->where('emp_pwd','123123')->get();
-        
-        $tmpAdmin = new Admin;
-        foreach($admin as $ad){
-            $tmpAdmin = $ad;
+    public function ChangeAvatar(request $request){
+        $admins = Admin::select()->where('emp_email',$request->emp_email)->get();
+        if(count($admins) > 0){
+            foreach($admins as $admin){
+
+                if($admin->emp_img_name != 'default_account_image.jpg'){
+                    File::delete(public_path('AdminImage/'.$admin->emp_img_name));
+                }
+                Admin::select()->where('emp_email',$request->emp_email)->update([
+                    'emp_img_name'=>time().'-avatar'.$request->extension
+                ]);
+
+                $avatar = $request->file('avatar');
+                $avatar->move(public_path('AdminImage'), time().'-avatar'.$request->extension);
+            }
+            $newAdmin = Admin::select()->where('emp_email',$request->emp_email)->get();
+            foreach($newAdmin as $Admin)
+            {
+                return $Admin;
+            }
+        }else{
+            return 0;
         }
-        return $tmpAdmin;
     }
+    public function ChangeProfile(request $request){
+        $admins = Admin::select()->where('emp_email',$request->emp_email)->get();
+        if(count($admins) > 0){
+            Admin::select()->where('emp_email',$request->email)->update([
+                'emp_name'=> $request->fullname,
+                'emp_contact'=>$request->phonenumber,
+                'emp_address'=>$request->address,
+                'emp_dob'=>$request->dateofbirth,
+            ]);
+        }
+        $newAdmin = Admin::select()->where('emp_email',$request->email)->get();
+        foreach($newAdmin as $Admin)
+        {
+            return $Admin;
+        }
+        return 0; 
+    }
+    
 }
