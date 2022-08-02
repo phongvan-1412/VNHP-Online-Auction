@@ -53,7 +53,6 @@ class TableProduct extends Component {
         }
       });
     };
-
     const changeproduct = () => {
       const product_name = $('#edit-product-name').val().replace(/ /g,"-");
       const product_start_price = $('#edit-product-start-price').val();
@@ -74,24 +73,6 @@ class TableProduct extends Component {
           }
         });
     };
-
-    const onChangeProductStatus = (e) => {
-      const product_id = e.target.name;
-      const product_status = e.target.checked ? 1 : 0;
-      axios
-        .post(`http://127.0.0.1:8000/api/changeproductstatus`, {product_id,product_status})
-        .then(function (response) {
-          console.log(response.data);
-          // if (response.data > 0) {
-          //   $("#edit-product-result").text("Edit product successfully.");
-          //   $("#edit-product-result").css("color", "green");
-          // } else {
-          //   $("#edit-product-result").text("Edit product fail.");
-          //   $("#edit-product-result").css("color", "red");
-          // }
-        });
-
-    } 
     return (
       <div className="container-fluid">
         <button
@@ -150,12 +131,12 @@ class TableProduct extends Component {
                         <td>
                           {h.product_status == 1 ? (
                             <label className="switch">
-                              <input type="checkbox" defaultChecked onChange={onChangeProductStatus} name={h.product_id}/>
+                              <input type="checkbox" defaultChecked />
                               <span className="slider round"></span>
                             </label>
                           ) : (
                             <label className="switch">
-                              <input type="checkbox" onChange={onChangeProductStatus} name={h.product_id}/>
+                              <input type="checkbox" />
                               <span className="slider round"></span>
                             </label>
                           )}

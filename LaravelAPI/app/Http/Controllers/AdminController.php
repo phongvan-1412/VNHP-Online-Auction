@@ -66,7 +66,7 @@ class AdminController extends Controller
         }
     }
     public function ChangeProfile(request $request){
-        $admins = Admin::select()->where('emp_email',$request->emp_email)->get();
+        $admins = Admin::select()->where('emp_email',$request->email)->get();
         if(count($admins) > 0){
             Admin::select()->where('emp_email',$request->email)->update([
                 'emp_name'=> $request->fullname,
@@ -74,13 +74,33 @@ class AdminController extends Controller
                 'emp_address'=>$request->address,
                 'emp_dob'=>$request->dateofbirth,
             ]);
+            $newAdmin = Admin::select()->where('emp_email',$request->email)->get();
+            foreach($newAdmin as $Admin)
+            {
+                return $Admin;
+            }
+        }else{
+            return 0; 
         }
-        $newAdmin = Admin::select()->where('emp_email',$request->email)->get();
-        foreach($newAdmin as $Admin)
-        {
-            return $Admin;
+    }
+
+    public function ChangePassword(request $request){
+        $admin = Admin::select()->where('emp_email',$request->Email)
+            ->where('emp_pwd',$request->CurrentPassword)->exists();
+        if($admin){
+            Admin::select()->where('emp_email',$request->Email)->where('emp_pwd',$request->CurrentPassword)
+                                                                ->update(['emp_pwd'=>$request->ConfirmPassword]);
+            $newAdmin = Admin::select()->where('emp_email',$request->Email)->get();
+            foreach($newAdmin as $Admin)
+            {
+                return $Admin;
+            }
+        }else{
+            return 0;
         }
-        return 0; 
+
+        
+
     }
     
 }
