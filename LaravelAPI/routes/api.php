@@ -46,7 +46,6 @@ Route::get('/addproducttable',[ProductAPI::class,'AddProductTable']);
 Route::post('/checkexistsproduct',[ProductAPI::class,'CheckExistsProduct']);
 Route::post('/editproduct',[ProductAPI::class,'EditProduct']);
 Route::post('/countdownend', [ProductApi::class,'CountdownEnd']);
-Route::post('/currentbidprice', [ProductApi::class,'CurrentBidPrice']);
 
 //feedback
 Route::post('/addcomment',[FeedbackAPI::class,'AddComment']);
