@@ -36,6 +36,7 @@ const Comment = ({ productId, currentFeedback }) => {
     const showComments = (e) => {
 
     }
+
     return (
         <div>
             <div className="conversation-header">
@@ -55,9 +56,9 @@ const Comment = ({ productId, currentFeedback }) => {
             </div>
 
             <div id="result"></div>
-            {currentFeedback.map((itemFeedback) => {
+            {currentFeedback.map((itemFeedback, index) => {
                 return(
-                    <div className="show-comment">
+                    <div className="show-comment" key={index}>
                         <div className="customer-avatar">
                             <img src={require(`../../../../../LaravelAPI/public/UserImage/${itemFeedback.customer_img_name}`)}/>
                         </div>
