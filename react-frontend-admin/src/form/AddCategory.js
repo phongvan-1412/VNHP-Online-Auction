@@ -93,10 +93,6 @@ function AddCategory() {
             "Insert new category: " + category_name + " succesfully."
           );
           addCategoryResult.css("color", "green");
-
-          $("#input-add-category").val("");
-          categoryNameResult.text("");
-          categoryImageResult.text("");
         } else {
           addCategoryResult.text(
             "Insert new category: " + category_name + " fail"

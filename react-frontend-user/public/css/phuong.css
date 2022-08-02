@@ -1087,3 +1087,21 @@
   opacity: 1;
   transition: 0s;
 }
+
+/* product quick view*/
+#product-grid-wrapper #product-quick-view{
+  display: none;
+}
+
+#product-grid-wrapper:hover #product-quick-view{
+  display: flex;
+}
+
+#product-quick-view-img{
+  width: 300px;
+  height: auto;
+}
+#product-quick-view-sub-img{
+  width: 100px;
+  height: auto;
+}

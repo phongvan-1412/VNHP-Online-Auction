@@ -4,11 +4,6 @@ import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import $ from "jquery";
 
 const ProductItem = ({ product }) => {
-
-  const onProductClicked = (e) => {
-    $("#data").data("productid", e.target.name);
-  };
-  
   return (
     <div className="product-grid">
       <div>
@@ -16,7 +11,6 @@ const ProductItem = ({ product }) => {
           to={`/${product.category_id}/${product.product_name}`}
           replace
           className="product-img"
-          onClick={onProductClicked}
         >
           <img name={product.product_id}
             src={require(`../../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
@@ -24,16 +18,11 @@ const ProductItem = ({ product }) => {
         </Link>
       </div>
 
-      {/* <div className="category-name">
-        {product.category_id}
-      </div> */}
-
       <div className="product-name">
         <Link
           to={`/${product.category_id}/${product.product_name}`}
           name={product.product_id}
           replace
-          onClick={onProductClicked}
         >
           {product.product_name.replace(/-/g, " ")}
         </Link>
