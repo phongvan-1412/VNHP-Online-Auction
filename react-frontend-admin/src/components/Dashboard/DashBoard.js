@@ -9,7 +9,7 @@ class DashBoard extends Component{
     render(){
         const isAdminLogin = () => {
             if (localStorage.getItem("admin_info") == null){
-              window.location.href = "http://localhost:3000/login";
+              window.location.href = "http://localhost:3001/login";
             }
           };
           isAdminLogin();

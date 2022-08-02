@@ -22,6 +22,11 @@ export class Layout extends Component{
     })
   }
   render(){
+    const adminLogin = () => {
+      this.setState({
+        admininfo: JSON.parse(localStorage.getItem("admin_info"))
+      })
+    }
     return (
       <div id="wrapper">
           <MenuBar/>
@@ -37,6 +42,7 @@ export class Layout extends Component{
                         <Route path='/adminprofile' element={
                             <AdminProfile 
                               admininfo={this.state.admininfo}
+                              UpdateAdminLogin={adminLogin}
                             />
                         }>
                         </Route> 

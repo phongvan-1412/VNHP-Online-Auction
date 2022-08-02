@@ -7,7 +7,7 @@ import "../../css/all.min.css"
 class LogIn extends Component{
     render(){
         function returnDashboard() {
-            window.location.href = "http://localhost:3000";
+            window.location.href = "http://localhost:3001";
           }
         function login(){
             const email = $('#email').val();
