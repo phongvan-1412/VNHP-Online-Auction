@@ -445,7 +445,7 @@ function AddProduct({ categories }) {
       <div className="modal-dialog modal-lg">
         <div className="modal-content">
           <div className="modal-header">
-            <h4 className="modal-title">Add bill</h4>
+            <h4 className="modal-title">Add Product</h4>
             <button
               type="button"
               className="close"

@@ -47,7 +47,7 @@ function AddCategory() {
       checkCategoryImage = false;
     }
   };
-  const element = () => {
+  const buttononclick = () => {
     const category_name = $("#input-add-category")
       .val()
       .trim()
@@ -172,7 +172,7 @@ function AddCategory() {
               </button>
               <button
                 className="btn btn-info waves-effect waves-light"
-                onClick={element}
+                onClick={buttononclick}
                 value="Create"
               >
                 Create
