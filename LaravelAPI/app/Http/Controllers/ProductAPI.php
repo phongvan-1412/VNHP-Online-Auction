@@ -7,14 +7,14 @@ use App\Models\NameSetting as Name;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use App\Models\Bill;
-
+use App\Models\AuctionPrice;
 
 class ProductAPI extends Controller
 {
 
     public function SelectProducts()
     {
-        $tmp_products = DB::select("select * from product");
+        $tmp_products = DB::select("select * from product p join category c on (p.category_id = c.category_id) join customer_account cc on (p.owner_id = cc.customer_id)");
         return $tmp_products;
     }
 
@@ -123,6 +123,35 @@ class ProductAPI extends Controller
             $newbill = Bill::select()->where('product_id', $req_product->countdownProduct)->get();
 
             return $newbill;
+        }
+    }
+      
+    public function CurrentBidPrice(Request $req){
+        $products = Product::where('product_id', $req->productId)->get();
+
+        $productItem = "";
+        foreach($products as $product){
+            $productItem = $product;
+        }
+
+        if ($req->realBidPrice <= $productItem->product_price_aution)
+            return 0;
+
+            Product::select()->where('product_id',$req->productId)->update('product_price_aution', $req->realBidPrice);
+
+            DB::insert("insert into aution_price(customer_id, product_id, aution_price, aution_day) values (?,?,?,?)", 
+            [$req->customerId, $req->productId, $req->realBidPrice, $req->auctionDay]);  
+
+            return 1;
+    }
+    
+    public function ChangeProductStatus(Request $request)
+    {
+        $product = Product::select()->where('product_id', $request->product_id)->get();
+        if(count($product) > 0){
+            Product::select()->where('product_id',$request->product_id)
+                                    ->update(['product_status'=>$request->product_status]);
+            return 1;
         }
     }
 
