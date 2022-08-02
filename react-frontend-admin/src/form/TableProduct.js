@@ -46,8 +46,7 @@ class TableProduct extends Component {
       this.state.categories.forEach((category) => {
         if (category.category_name == e.target.value.trim().replace(/ /g, "-")) {
           category_id = category.category_id;
-          // $("#check-category-name-result").text(e.target.value + " is valid.");
-          // $("#check-category-name-result").css("color", "green");
+          $("#check-category-name-result").text("");
           // validCategoryName = true;
           return;
         }

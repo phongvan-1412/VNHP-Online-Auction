@@ -13,13 +13,12 @@ function AddCategory() {
       .post("http://127.0.0.1:8000/api/checkexistscategory", { category_name })
       .then(function (response) {
         if (response.data > 0) {
-          result.text("Category name " + category_name + " already exists");
+          result.text("Category name already exists");
           result.css("color", "red");
           checkCategory = false;
         } else {
-          if (category_name != "" && category_name.length >= 3) {
-            result.text("Category name " + category_name + " is valid");
-            result.css("color", "green");
+          if (category_name != "" && category_name.length >= 3 && category_name.length <= 20) {
+            result.text("");
             checkCategory = true;
           } else {
             result.text("Invalid category name");
@@ -36,8 +35,7 @@ function AddCategory() {
     const img = e.target.files[0];
     const result = $("#check-img-result");
     if (img != null) {
-      result.text("Valid  image");
-      result.css("color", "green");
+      result.text("");
       category_img = e.target.files[0];
       checkCategoryImage = true;
     } else {
@@ -64,8 +62,7 @@ function AddCategory() {
     }
 
     if (checkCategoryImage) {
-      categoryImageResult.text("Valid  image");
-      categoryImageResult.css("color", "green");
+      categoryImageResult.text("");
     } else {
       categoryImageResult.text("Please choose category image");
       categoryImageResult.css("color", "red");
@@ -89,14 +86,10 @@ function AddCategory() {
       .post("http://127.0.0.1:8000/api/addcategory", formData)
       .then(function (response) {
         if (response.data > 0) {
-          addCategoryResult.text(
-            "Insert new category: " + category_name + " succesfully."
-          );
+          addCategoryResult.text("Insert new category succesfully.");
           addCategoryResult.css("color", "green");
         } else {
-          addCategoryResult.text(
-            "Insert new category: " + category_name + " fail"
-          );
+          addCategoryResult.text("Insert new category fail");
           addCategoryResult.css("color", "red");
         }
       });

@@ -62,13 +62,10 @@ class Category extends Component {
       category_img_name = e.target.files[0].name;
 
       if (category_img_name) {
-        $("#category-edit-img-check").text(category_img_name + " valid.");
-        $("#category-edit-img-check").css("color", "green");
+        $("#category-edit-img-check").text("");
         checkImg = true;
       } else {
-        $("#category-edit-img-check").text(
-          category_img_name + " is not valid."
-        );
+        $("#category-edit-img-check").text("Invaid image.");
         $("#category-edit-img-check").css("color", "red");
         checkImg = false;
       }
@@ -89,9 +86,8 @@ class Category extends Component {
       axios
         .post(`http://127.0.0.1:8000/api/updatecategory`, formData)
         .then(function (response) {
-          console.log(response.data)
+          console.log(response.data);
           if (response.data > 0) {
-
           } else {
           }
         });

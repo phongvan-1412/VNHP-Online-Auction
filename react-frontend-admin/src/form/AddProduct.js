@@ -32,8 +32,7 @@ function AddProduct({ categories }) {
     categories.forEach((category) => {
       if (category.category_name == e.target.value.trim().replace(/ /g, "-")) {
         category_name = category.category_id;
-        $("#check-category-name-result").text(e.target.value + " is valid.");
-        $("#check-category-name-result").css("color", "green");
+        $("#check-category-name-result").text("");
         validCategoryName = true;
         return;
       }
@@ -48,7 +47,7 @@ function AddProduct({ categories }) {
       .post("http://127.0.0.1:8000/api/checkexistsproduct", { product_name })
       .then(function (response) {
         if (response.data > 0) {
-          result.text("Product name " + product_name + " already exists");
+          result.text("Product name already exists");
           result.css("color", "red");
           validProductName = false;
         } else {
@@ -56,11 +55,10 @@ function AddProduct({ categories }) {
             result.text("Please enter product name");
             result.css("color", "red");
           } else if (product_name.length >= 15 && product_name.length <= 200) {
-            result.text(product_name + " is valid product name.");
-            result.css("color", "green");
+            result.text("");
             validProductName = true;
           } else {
-            result.text(product_name + " is valid product name.");
+            result.text("Invalid product name.");
             result.css("color", "red");
             validProductName = false;
           }
@@ -76,7 +74,7 @@ function AddProduct({ categories }) {
       result.text("");
       validProductThumbnailImg = true;
     } else {
-      result.text("Please choose product thumbnail image");
+      result.text("Please choose product image");
       result.css("color", "red");
       validProductThumbnailImg = false;
     }
@@ -87,11 +85,10 @@ function AddProduct({ categories }) {
     const result = $("#product-img1-check-result");
 
     if (input_img1_product != null) {
-      result.text("Valid image");
-      result.css("color", "green");
+      result.text("");
       validProductImg1 = true;
     } else {
-      result.text("Please choose product img1 image");
+      result.text("Please choose product image");
       result.css("color", "red");
       validProductImg1 = false;
     }
@@ -102,11 +99,10 @@ function AddProduct({ categories }) {
     const result = $("#product-img2-check-result");
 
     if (input_img2_product != null) {
-      result.text("Valid image");
-      result.css("color", "green");
+      result.text("");
       validProductImg2 = true;
     } else {
-      result.text("Please choose product img2 image");
+      result.text("Please choose product image");
       result.css("color", "red");
       validProductImg2 = false;
     }
@@ -117,11 +113,10 @@ function AddProduct({ categories }) {
     const result = $("#product-img3-check-result");
 
     if (input_img3_product != null) {
-      result.text("Valid image");
-      result.css("color", "green");
+      result.text("");
       validProductImg3 = true;
     } else {
-      result.text("Please choose product img3 image");
+      result.text("Please choose product image");
       result.css("color", "red");
       validProductImg3 = false;
     }
@@ -137,11 +132,11 @@ function AddProduct({ categories }) {
       validProductInfo = false;
     } else {
       if (information.length >= 100 && information.length <= 4000) {
-        result.text("Product infomation is valid.");
+        result.text("");
         result.css("color", "green");
         validProductInfo = true;
       } else {
-        result.text("Product infomation is not valid.");
+        result.text("error: max length 4000");
         result.css("color", "red");
         validProductInfo = false;
       }
@@ -159,20 +154,20 @@ function AddProduct({ categories }) {
     } else {
       if (start_price <= 0) {
         result.text(
-          "Price cant small than or equal 0. Please enter product price again"
+          "Price cant small than or equal 0."
         );
         result.css("color", "red");
         validProductPrice = false;
         e.target.value = 0;
       } else if (start_price > 1000000) {
         result.text(
-          "Price cant lager than 1 Milion Dola. Please enter product price again"
+          "Price cant lager than 1 Milion Dola."
         );
         result.css("color", "red");
         validProductPrice = false;
         e.target.value = 0;
       } else {
-        result.text("Valid price.");
+        result.text("");
         result.css("color", "green");
         validProductPrice = true;
       }
