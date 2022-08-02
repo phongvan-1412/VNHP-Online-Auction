@@ -78,21 +78,18 @@ class Category extends Component {
       const category_name = this.state.categoryName.replace(/ /g, "-");
       const fileImg = $("#edit-img-category").prop("files")[0];
       const img_extension = "." + fileImg.name.split(".")[1];
-      const category_status = $("#edit-category-check-box").prop("checked");
 
-      console.log(fileImg)
+      console.log(fileImg);
       let formData = new FormData();
       formData.set("category_img", fileImg);
       formData.set("img_extension", img_extension);
       formData.set("category_name", category_name);
-      formData.set("category_status", category_status);
 
       axios
         .post(`http://127.0.0.1:8000/api/updatecategory`, formData)
         .then(function (response) {
-          console.log(response.data)
+          console.log(response.data);
           if (response.data > 0) {
-
           } else {
           }
         });
@@ -233,18 +230,6 @@ class Category extends Component {
                                             onChange={onCategoryImgChange}
                                           />
                                           <div id="category-edit-img-check"></div>
-                                        </div>
-                                        <div className="form-group">
-                                          <label className="control-lable admin-category-label">
-                                            Status
-                                          </label>
-                                          <label className="switch">
-                                            <input
-                                              type="checkbox"
-                                              id="edit-category-check-box"
-                                            />
-                                            <span className="slider round"></span>
-                                          </label>
                                         </div>
                                       </div>
                                     </div>

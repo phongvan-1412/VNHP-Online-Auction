@@ -88,8 +88,7 @@ class CategoryAPI extends Controller
             $category_img = $request->file('category_img');
             $category_img_name = time().'-'.'category'.$request->img_extension;
             $category_img->move(public_path('CategoryImg'),  $category_img_name);
-            Category::where('category_name', $request->category_name)->update(['category_img_name'=> $category_img_name,
-                                                                        'category_status'=>$request->category_status]);
+            Category::where('category_name', $request->category_name)->update(['category_img_name'=> $category_img_name]);
             
             return $category_img_name;
         }
