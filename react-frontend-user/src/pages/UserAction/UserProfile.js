@@ -32,9 +32,11 @@ class UserProfile extends Component {
     const currentAutionHistory = autionHistory.filter(
       (ah) => ah.customer_id == currentUserInfo.customer_id
     );
+
     const currentBillHistory = billHistory.filter(
       (bh) => bh.customer_id == currentUserInfo.customer_id
     );
+    
     const currentNewBill = newBill.filter(
       (nb) => nb.customer_id == currentUserInfo.customer_id
     );

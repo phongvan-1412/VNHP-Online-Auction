@@ -135,13 +135,22 @@ class ProductAPI extends Controller
             $productItem = $item;
         }
         if(count($product) > 0){
-            
-                    Product::select()->where('product_name',$request->product_name)
-                                            ->update(['category_id'=>$request->category_id,
-                                            'product_start_price'=>$request->product_start_price,
-                                            'product_start_aution_day'=>$request->product_start_aution_day,
-                                            'product_end_aution_day'=>$request->product_end_aution_day]);
-
+            Product::select()->where('product_name',$request->product_name)
+                                    ->update(['category_id'=>$request->category_id,
+                                    'product_start_price'=>$request->product_start_price,
+                                    'product_start_aution_day'=>$request->product_start_aution_day,
+                                    'product_end_aution_day'=>$request->product_end_aution_day]);
+            return 1;
+        }
+        return 0;
+    }
+    
+    public function ChangeProductStatus(Request $request)
+    {
+        $product = Product::select()->where('product_id', $request->product_id)->get();
+        if(count($product) > 0){
+            Product::select()->where('product_id',$request->product_id)
+                                    ->update(['product_status'=>$request->product_status]);
             return 1;
         }
         return 0;
