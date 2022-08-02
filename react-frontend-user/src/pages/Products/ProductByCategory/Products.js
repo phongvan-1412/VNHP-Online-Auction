@@ -6,7 +6,7 @@ import $ from 'jquery';
 import ProductView from "./ProductView";
 
 const Products = ({ products, category, categories }) => {
-
+    const  [filterProducts, setFilterProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
     //Filter by Price
@@ -17,6 +17,7 @@ const Products = ({ products, category, categories }) => {
   
     const updateRange = (e,value) => {
       setVal(value);
+      
       const valueNow = $("#price-slider").children()[4].ariaValueNow;
 
       test = {min:value[0],max:value[1]};
@@ -27,12 +28,11 @@ const Products = ({ products, category, categories }) => {
         test.min = valueNow;
       }
     }
-      
-    
+    // 
     let totalProducts = [];
     products.forEach((product) => {
       if (product.category_id === category.category_id && product.product_start_price >= test.min && product.product_start_price <= test.max){
-          totalProducts = [...totalProducts, product];
+        totalProducts = [...totalProducts, product];
       }
     });
 
@@ -42,18 +42,17 @@ const Products = ({ products, category, categories }) => {
         categoryItems = [...categoryItems, currentCates];
       }
     });
-    
-    
+
 
     //Pagination
     const productsPerPage = 12;
   
     const indexOfLastPage = currentPage * productsPerPage;
     const indexOfFirstPage = indexOfLastPage - productsPerPage;
-    const currentProducts = totalProducts.slice(indexOfFirstPage, indexOfLastPage);
+    const currentProducts = filterProducts.slice(indexOfFirstPage, indexOfLastPage);
   
     let pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(totalProducts.length / productsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(filterProducts.length / productsPerPage); i++) {
       pageNumbers.push(i);
     }
     const paginate = (pageNumber) => setCurrentPage({currentPage: pageNumber});

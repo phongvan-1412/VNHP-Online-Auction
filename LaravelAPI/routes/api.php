@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/selectcategories',[CategoryAPI::class, 'SelectCategories']);
 Route::post('/addcategory',[CategoryAPI::class,'AddCategory']);
 Route::get('/addcategorytable',[CategoryAPI::class,'AddCategoryTable']);
+Route::get('/addcategorytable',[CategoryAPI::class,'AddCategoryTable']);
 
 Route::post('/updatecategory',[CategoryAPI::class,'UpdateCategory']);
 Route::post('/changecategorystatus',[CategoryAPI::class,'UpdateCategoryStatus']);
@@ -44,8 +45,9 @@ Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
 Route::get('/addproducttable',[ProductAPI::class,'AddProductTable']);
 
 Route::post('/checkexistsproduct',[ProductAPI::class,'CheckExistsProduct']);
-Route::post('/editproduct',[ProductAPI::class,'EditProduct']);
 Route::post('/countdownend', [ProductApi::class,'CountdownEnd']);
+Route::post('/currentbidprice', [ProductApi::class,'CurrentBidPrice']);
+
 
 //feedback
 Route::post('/addcomment',[FeedbackAPI::class,'AddComment']);
