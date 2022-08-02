@@ -54,8 +54,8 @@ function UserBillHistory({currentBillHistory}) {
               <tbody id="bill-records">
                 {currentBillHistory.map((bh, index) => {
                 return (
-                  <tr>
-                    <td key={index}>{i++}</td>
+                  <tr key={index}>
+                    <td>{i++}</td>
                     <td>{bh.bill_id}</td>
                     <td>{bh.payment_mode_id}</td>
                     <td>{bh.bill_payment}</td>

@@ -53,27 +53,26 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
   const onNewPasswordBlur = () => {
     const result = $("#customer-new-password-result");
     const password = $("#customer-new-password").val();
-    result.text("");
 
     if (!password) {
       result.text("Please enter your new password.");
       result.css("color", "red");
+      checkValidNewPassword = false;
     } else {
       if (password === $("#customer-old-password").val()) {
         result.text(
           "You enter same old password. Please try another password."
         );
         result.css("color", "red");
+        checkValidNewPassword = false;
       } else if (isValidNewPassword(password)) {
-        result.text("Password is valid.");
-        result.css("color", "green");
+        result.text("");
         checkValidNewPassword = true;
         onNewConfirmPasswordBlur();
       } else {
-        result.text(
-          "Password is too short. Please enter more than 6 character"
-        );
+        result.text("Please enter more than 6 character");
         result.css("color", "red");
+        checkValidNewPassword = false;
       }
     }
   };
@@ -92,27 +91,13 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
       result.css("color", "red");
     } else {
       if (isValidNewConfirmPassword(password)) {
-        result.text("Confirm password is valid.");
-        result.css("color", "green");
+        result.text("");
         checkValidConfirmPassword = true;
       } else {
         result.text("Please enter same new password.");
         result.css("color", "red");
       }
     }
-  };
-
-  const resetFrom = () => {
-    $("#change-password-result").text("");
-
-    $("#customer-old-password").val("");
-    $("#customer-old-password-result").text("");
-
-    $("#customer-new-password").val("");
-    $("#customer-new-password-result").text("");
-
-    $("#customer-confirm-new-password").val("");
-    $("#customer-confirm-new-password-result").text("");
   };
 
   const onButtonChangePasswordClick = () => {
@@ -183,7 +168,6 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
         }
       });
   };
- 
 
   return (
     <div
@@ -208,7 +192,6 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
               id="btn-close-popup-change-password"
               data-bs-dismiss="modal"
               aria-label="Close"
-              onClick={resetFrom}
             ></button>
           </div>
           <div id="change-password-result"></div>
@@ -228,7 +211,7 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
                   <b id="title">OLD PASSWORD</b>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control change-password-input change-password-form"
                   id="customer-old-password"
                   placeholder="Your old password"
@@ -245,7 +228,7 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
                   <b id="title">NEW PASSWORD</b>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control change-password-form"
                   id="customer-new-password"
                   placeholder="Your new password"
@@ -262,7 +245,7 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
                   <b id="title">CONFIRM NEW PASSWORD</b>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control change-password-form"
                   id="customer-confirm-new-password"
                   placeholder="Your confirm new password"
@@ -279,7 +262,6 @@ function ChangePassword({ currentUserInfo, updateUserLogin }) {
               className="btn change-password-form"
               id="btn-cancel-save-change-pasword"
               data-bs-dismiss="modal"
-              onClick={resetFrom}
             >
               <b>CLOSE</b>
             </button>

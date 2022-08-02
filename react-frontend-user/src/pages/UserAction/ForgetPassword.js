@@ -15,8 +15,7 @@ function ForgetPassword() {
           result.css("color", "red");
           isValidEmail = false;
         } else {
-          result.text("Email " + customer_email + " is exists.");
-          result.css("color", "green");
+          result.text("");
           isValidEmail = true;
         }
       });

@@ -57,8 +57,8 @@ const UserNewBill = ({currentNewBill}) => {
               <tbody id="bill-records">
                 {currentNewBill.map((nb, index) => {
                 return (
-                  <tr>
-                    <td key={index}>{i++}</td>
+                  <tr key={index}>
+                    <td>{i++}</td>
                     <td>{nb.product_name}</td>
                     <td>{nb.bill_payment}</td>
                     <td>{nb.bill_date}</td> 

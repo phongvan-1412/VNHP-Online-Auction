@@ -12,6 +12,7 @@ class Register extends Component {
     checkValidPassword: false,
     checkValidConfirmPassword: false,
     checkValidPhoneNumber: false,
+    loading: false,
   };
   render() {
     function isValidName(name) {
@@ -22,28 +23,22 @@ class Register extends Component {
     const onFirstNameBlur = (e) => {
       const $result = $("#firstnameResult");
       const name = e.target.value;
-      $result.text("");
+
       if (!name) {
         $result.text("Please enter your name");
         $result.css("color", "red");
-
         this.setState({ checkValidFirstName: false });
       } else {
-        if (name.length < 2) {
-          $result.text(
-            "firstname".charAt(0).toUpperCase() +
-              "firstname".slice(1) +
-              " too short."
-          );
+        if (isValidName(name)) {
+          $result.text("error: letter only");
           $result.css("color", "red");
           this.setState({ checkValidFirstName: false });
-        } else if (isValidName(name)) {
-          $result.text(name + " is not valid.");
+        } else if (name.length > 10) {
+          $result.text("erro: max length 10.");
           $result.css("color", "red");
           this.setState({ checkValidFirstName: false });
         } else {
-          $result.text(name + " is valid.");
-          $result.css("color", "green");
+          $result.text("");
           this.setState({ checkValidFirstName: true });
         }
       }
@@ -52,27 +47,22 @@ class Register extends Component {
     const onLastNameBlur = (e) => {
       const $result = $("#lastnameResult");
       const name = e.target.value;
-      $result.text("");
+
       if (!name) {
         $result.text("Please enter your name");
         $result.css("color", "red");
         this.setState({ checkValidLastName: false });
       } else {
-        if (name.length < 2) {
-          $result.text(
-            "lastname".charAt(0).toUpperCase() +
-              "lastname".slice(1) +
-              " too short."
-          );
+        if (isValidName(name)) {
+          $result.text("error: letter only");
           $result.css("color", "red");
           this.setState({ checkValidLastName: false });
-        } else if (isValidName(name)) {
-          $result.text(name + " is not valid.");
+        } else if (name.length > 10) {
+          $result.text("erro: max length 10.");
           $result.css("color", "red");
           this.setState({ checkValidLastName: false });
         } else {
-          $result.text(name + " is valid.");
-          $result.css("color", "green");
+          $result.text("");
           this.setState({ checkValidLastName: true });
         }
       }
@@ -84,57 +74,41 @@ class Register extends Component {
       );
     };
 
-    const isValidPassword = (password) => {
-      var validPassword = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
-
-      if (password.length < 6 || validPassword.test(password)) return false;
-      return true;
-    };
-
     const onPasswordBlur = () => {
       const $result = $("#passwordResult");
       const password = $("#password").val();
-      $result.text("");
 
       if (!password) {
         $result.text("Please enter your password.");
         $result.css("color", "red");
         this.setState({ checkValidPassword: false });
       } else {
-        if (isValidPassword(password)) {
-          $result.text("Password is valid.");
-          $result.css("color", "green");
+        if (password.length >= 6) {
+          $result.text("");
           this.setState({ checkValidPassword: true });
-
           onConfirmPasswordBlur();
         } else {
-          $result.text("Password is not valid.");
+          $result.text("Use 6 characters or more for your password");
           $result.css("color", "red");
           this.setState({ checkValidPassword: false });
         }
       }
     };
 
-    const isValidConfirmPassword = (password) => {
-      if (password === $("#password").val()) return true;
-      return false;
-    };
-
     const onConfirmPasswordBlur = () => {
       const $result = $("#confirmPasswordResult");
       const password = $("#confirmpassword").val();
-      $result.text("");
+
       if (!password) {
         $result.text("Please enter your confirm password.");
         $result.css("color", "red");
         this.setState({ checkValidConfirmPassword: false });
       } else {
-        if (isValidConfirmPassword(password)) {
-          $result.text("Password is valid.");
-          $result.css("color", "green");
+        if (password.length >= 6) {
+          $result.text("");
           this.setState({ checkValidConfirmPassword: true });
         } else {
-          $result.text("Password is not valid.");
+          $result.text("Please enter same password.");
           $result.css("color", "red");
           this.setState({ checkValidConfirmPassword: false });
         }
@@ -143,7 +117,6 @@ class Register extends Component {
 
     const isValidPhoneNumber = (phoneNumber) => {
       const regexPhoneNumber = /^((\+)33|0)[1-9](\d{2}){4}$/;
-
       if (!phoneNumber.match(regexPhoneNumber)) {
         return false;
       }
@@ -153,18 +126,16 @@ class Register extends Component {
     const onPhoneNumberBlur = () => {
       const $result = $("#phonenumberResult");
       const phoneNumber = $("#phonenumber").val();
-      $result.text("");
       if (!phoneNumber) {
         $result.text("Please enter your phone number.");
         $result.css("color", "red");
         this.setState({ checkValidPhoneNumber: false });
       } else {
         if (isValidPhoneNumber(phoneNumber)) {
-          $result.text("Phone Number is valid.");
-          $result.css("color", "green");
+          $result.text("");
           this.setState({ checkValidPhoneNumber: true });
         } else {
-          $result.text("Phone Number is not valid.");
+          $result.text("Please check your phone nunber.");
           $result.css("color", "red");
           this.setState({ checkValidPhoneNumber: false });
         }
@@ -181,7 +152,7 @@ class Register extends Component {
         .post(`http://127.0.0.1:8000/api/isemailexists`, checkEmail)
         .then(function (response) {
           if (!customer_email) {
-            $result.text("*Please enter your email");
+            $result.text("Please enter your email");
             $result.css("color", "red");
           } else {
             if (isValidEmail(customer_email)) {
@@ -189,8 +160,7 @@ class Register extends Component {
                 $result.text(customer_email + " already exists.");
                 $result.css("color", "red");
               } else {
-                $result.text(customer_email + " is valid.");
-                $result.css("color", "green");
+                $result.text("");
                 self.setState({ checkValidEmail: true });
               }
             } else {
@@ -220,7 +190,7 @@ class Register extends Component {
         $("#lastnameResult").text("Please enter your last name");
         $("#lastnameResult").css("color", "red");
 
-        $("#emailResult").text("Please enter your pasword");
+        $("#emailResult").text("Please enter your email");
         $("#emailResult").css("color", "red");
 
         $("#passwordResult").text("Please enter your pasword");
@@ -229,7 +199,7 @@ class Register extends Component {
         $("#confirmPasswordResult").text("Please enter your confirm password");
         $("#confirmPasswordResult").css("color", "red");
 
-        $("#phonenumberResult").text("Please enter your password.");
+        $("#phonenumberResult").text("Please enter your phone number.");
         $("#phonenumberResult").css("color", "red");
         return;
       }
@@ -247,7 +217,7 @@ class Register extends Component {
       }
 
       if (!$("#email").val()) {
-        $("#emailResult").text("Please enter your pasword");
+        $("#emailResult").text("Please enter your email");
         $("#emailResult").css("color", "red");
         return;
       }
@@ -259,17 +229,11 @@ class Register extends Component {
       }
 
       if (!$("#phonenumber").val()) {
-        $("#phonenumberResult").text("Please enter your password.");
+        $("#phonenumberResult").text("Please enter your phone number.");
         $("#phonenumberResult").css("color", "red");
         return;
       }
-      console.log(this.state.checkValidFirstName);
-      console.log(this.state.checkValidLastName);
-      console.log(this.state.checkValidEmail);
-      console.log(this.state.checkValidPassword);
-      console.log(this.state.checkValidConfirmPassword);
-      console.log(this.state.checkValidPhoneNumber);
-
+ 
       if (
         !this.state.checkValidFirstName ||
         !this.state.checkValidLastName ||
@@ -293,54 +257,37 @@ class Register extends Component {
         customer_contact,
       };
 
+      $("#btn-register").attr("disable", true);
+
       axios
         .post(`http://127.0.0.1:8000/api/customerregister`, customer)
         .then(function (response) {
           if (response.data > 0) {
-            $("#firstname").text("");
+            $("#firstname").val("");
             $("#firstnameResult").text("");
 
-            $("#lastname").text("");
+            $("#lastname").val("");
             $("#lastnameResult").text("");
 
-            $("#email").text("");
+            $("#email").val("");
             $("#emailResult").text("");
 
-            $("#password").text("");
+            $("#password").val("");
             $("#passwordResult").text("");
 
-            $("#confirmPassword").text("");
+            $("#confirmpassword").val("");
             $("#confirmPasswordResult").text("");
 
-            $("#phonenumber").text("");
+            $("#phonenumber").val("");
             $("#phonenumberResult").text("");
 
             $("#registerResult").text(
-              "Register successfully. Please check your email.Redirecting to login."
+              "Register successfully. Please activate your email."
             );
             $("#registerResult").css("color", "green");
-            setInterval(showTime, 5000);
+            // setInterval(showTime, 5000);
           } else {
-            $("#firstname").text("");
-            $("#firstnameResult").text("");
-
-            $("#lastname").text("");
-            $("#lastnameResult").text("");
-
-            $("#email").text("");
-            $("#emailResult").text("");
-
-            $("#password").text("");
-            $("#passwordResult").text("");
-
-            $("#confirmPassword").text("");
-            $("#confirmPasswordResult").text("");
-
-            $("#phonenumber").text("");
-            $("#phonenumberResult").text("");
-
-            $("#registerResult").text("Register Fail.");
-            $("#registerResult").css("color", "red");
+            // $("#btn-register").removeAttr("disable");
           }
         });
     };
@@ -365,6 +312,7 @@ class Register extends Component {
                 id="firstname"
                 name="firstname"
                 className="form-control"
+                placeholder="John"
                 onBlur={onFirstNameBlur}
               />
               <div
@@ -378,6 +326,7 @@ class Register extends Component {
                 type="text"
                 id="lastname"
                 name="lastname"
+                placeholder="Nathan"
                 className="form-control"
                 onBlur={onLastNameBlur}
               />
@@ -391,6 +340,7 @@ class Register extends Component {
               <input
                 type="text"
                 id="email"
+                placeholder="johnnaton@gmail.com"
                 className="form-control"
                 onBlur={isEmailExists}
               />
@@ -438,12 +388,7 @@ class Register extends Component {
                 className="small font-italic form-waring-text"
               ></div>
             </div>
-
-            {/* <span id="mostro">Don't have a date yet? Enter your best guess.</span> */}
             <br />
-            <span id="mos">* required field</span>
-            <br />
-
             <p id="mostro1" className="register-term">
               By clicking Register, I agree that the information I provide to
               VNHP Aution will be used to create an account and will be subject

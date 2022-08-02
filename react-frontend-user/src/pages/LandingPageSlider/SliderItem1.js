@@ -11,7 +11,7 @@ const SliderItem1 = ({ product }) => {
   //COUNTDOWN
   var upComing = product.product_start_aution_day ;
   
-  var countDownDate = new Date(product.product_start_aution_day).getTime();
+  var countDownDate = new Date(product.product_end_aution_day).getTime();
 
   var slider1 = setInterval(function() {
     var now = new Date().getTime();
@@ -40,9 +40,12 @@ const SliderItem1 = ({ product }) => {
           className="product-img"
           onClick={onProductClicked}
         >
-          <img name={product.product_id}
+          {/* <img name={product.product_id}
             src={require(`../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
-            />
+            /> */}
+                       <img name={product.product_id}
+            src={"http://localhost:8000/ProductImg/" + product.product_thumbnail_img_name}
+            /> 
         </Link>
       </div>
       <div className="category-name">

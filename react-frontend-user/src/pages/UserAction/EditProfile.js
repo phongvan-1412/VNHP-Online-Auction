@@ -11,7 +11,7 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
   const isValidPhoneNumber = (phoneNumber) => {
     const regexPhoneNumber = /^((\+)33|0)[1-9](\d{2}){4}$/;
 
-    if (!phoneNumber.match(regexPhoneNumber)) {
+    if (!phoneNumber.match(regexPhoneNumber) && phoneNumber >= 10 && phoneNumber <= 12) {
       return false;
     }
     return true;
@@ -30,17 +30,16 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
       result.css("color", "red");
       checkValidFullName = false;
     } else {
-      if (fullname.length < 2) {
-        result.text("Your name too short.");
+      if (fullname.length > 20) {
+        result.text("error: max length 20");
         result.css("color", "red");
         checkValidFullName = false;
       } else if (isValidName(fullname)) {
-        result.text(fullname + " is not valid.");
+        result.text("error: only letter");
         result.css("color", "red");
         checkValidFullName = false;
       } else {
-        result.text(fullname + " is valid.");
-        result.css("color", "green");
+        result.text("");
         checkValidFullName = true;
       }
     }
@@ -56,11 +55,12 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
       checkValidContact = false;
     } else {
       if (isValidPhoneNumber(contact)) {
-        result.text(contact + " is valid.");
-        result.css("color", "green");
+        result.text("");
         checkValidContact = true;
+      }else if(contact){
+
       } else {
-        result.text(contact + " is not valid phone number.");
+        result.text("Phone number is invalid.");
         result.css("color", "red");
         checkValidContact = false;
       }
@@ -92,12 +92,11 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
       checkValidDob = false;
     } else {
       if (currentDateTimestamp < dobTimestamp) {
-        result.text("Date of birth is not valid.");
+        result.text("Date of birth is invalid.");
         result.css("color", "red");
         checkValidDob = false;
       } else {
-        result.text("Date of birth is valid.");
-        result.css("color", "green");
+        result.text("");
         checkValidDob = true;
       }
     }

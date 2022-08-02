@@ -46,10 +46,9 @@ class Login extends Component {
         .post("http://127.0.0.1:8000/api/isemailexists", checkEmail)
         .then(function (response) {
           if (response.data > 0) {
-            result.text(customer_email + " is valid.");
-            result.css("color", "green");
+            result.text("");
           } else {
-            result.text(customer_email + " is not valid email.");
+            result.text(customer_email + " is not exists.");
             result.css("color", "red");
           }
         });
@@ -90,20 +89,19 @@ class Login extends Component {
         .post(`http://127.0.0.1:8000/api/customerlogin`, customer)
         .then((response) => {
           if (response.data == 2) {
-            passwordResult.text("Please check your validate email.");
+            passwordResult.text("Please activate your email.");
             passwordResult.css("color", "red");
           } else if (response.data == 0) {
             passwordResult.text("Please check your pasword");
             passwordResult.css("color", "red");
           } else {
             passwordResult.text("Login successfully. Redirect to Home");
-            passwordResult.css("color", "green");
             localStorage.setItem(
               "customer_info",
               JSON.stringify(response.data)
             );
             customerLogin();
-            setInterval(returnHome, 3000);
+            // setInterval(returnHome, 3000);
           }
         })
         .catch((err) => {
@@ -118,7 +116,7 @@ class Login extends Component {
         result.text("Please enter your pasword.");
         result.css("color", "red");
       } else if ($("#password").val().length < 6) {
-        result.text("Password too short.");
+        result.text("please enter 6 characters or more.");
         result.css("color", "red");
       } else {
         result.text("");
@@ -136,6 +134,7 @@ class Login extends Component {
               type="text"
               className="form-control"
               id="email"
+              placeholder="Enter your email"
               onBlur={validateEmail}
             />
             <div
@@ -151,6 +150,7 @@ class Login extends Component {
               type="password"
               className="form-control"
               id="password"
+              placeholder="Enter your password"
               onBlur={checkPassword}
             />
             <div

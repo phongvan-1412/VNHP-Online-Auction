@@ -112,7 +112,7 @@ class UserProfile extends Component {
                     <img
                       className="img-user-account-profile rounded-circle"
                       id="avatar-img"
-                      src={require(`../../../../LaravelAPI/public/UserImage/${currentUserInfo.customer_img_name}`)}
+                      src={"http://localhost:8000/UserImage/" + currentUserInfo.customer_img_name}
                     />
                   </div>
 

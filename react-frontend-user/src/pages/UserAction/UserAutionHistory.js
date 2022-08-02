@@ -51,8 +51,8 @@ function UserAutionHistory({currentAutionHistory}) {
               <tbody id="aution-history">
                 {currentAutionHistory.map((ah, index) => {
                 return (
-                  <tr>
-                    <td key={index}>{i++}</td>
+                  <tr key={index}>
+                    <td >{i++}</td>
                     <td>{ah.product_name}</td>
                     <td>{ah.aution_price}</td>
                     <td>{ah.aution_day}</td>
