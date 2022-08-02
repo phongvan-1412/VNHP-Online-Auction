@@ -56,7 +56,12 @@ const Products = ({ products, category, categories }) => {
     for (let i = 1; i <= Math.ceil(totalProducts.length / productsPerPage); i++) {
       pageNumbers.push(i);
     }
-    const paginate = (number) => setCurrentPage({currentPage: number});
+
+    const paginate = (number) => {
+      setCurrentPage(number); 
+    }
+
+
     return (
       <div className="container">
         <div className="row" style={{ padding: "0px", margin: "0px" }}>
@@ -143,7 +148,6 @@ const Products = ({ products, category, categories }) => {
                   <li key={number} className="page-item">
                     <Link to="#" className="page-link" onClick={() => paginate(number)}>
                       {number}
-                      
                     </Link>
                   </li>
                 ))}
