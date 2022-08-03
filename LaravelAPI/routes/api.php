@@ -35,7 +35,7 @@ Route::post('/changecategorystatus',[CategoryAPI::class,'UpdateCategoryStatus'])
 Route::post('/checkexistscategory',[CategoryAPI::class,'CheckExistsCategory']);
 
 //PRODUCTS
-Route::get('/selectallproducts',[ProductAPI::class, 'SelectProducts']);
+Route::get('/selectallproducts',[ProductAPI::class, 'SelectProductsByEndDate']);
 Route::get('/selectproductsbycate', [ProductAPI::class, 'SelectProductsByCategory']);
 Route::get('/selectproductsbystartdate', [ProductAPI::class, 'SelectProductsByStartDate']);
 Route::get('/selectproductsbyenddate', [ProductAPI::class, 'SelectProductsByEndDate']);

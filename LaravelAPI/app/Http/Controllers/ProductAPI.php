@@ -16,13 +16,13 @@ class ProductAPI extends Controller
     {
         $tmp_products = DB::select("select * from product p join category c 
         on (p.category_id = c.category_id) join customer_account cc on (p.owner_id = cc.customer_id)
+		where p.product_status = 1
         order by p.product_end_aution_day");
         return $tmp_products;
     }
 
     public function SelectProductsTop15ByCountCustomerId(){
-        $tmp_products = DB::select
-        ("select top 15 * from product p join auction_price a on (
+        $tmp_products = DB::select("select top 15 * from product p join auction_price a on (
             p.product_id = a.product_id) 
             group by p.product_id
             order by count(a.customer_id)");
@@ -162,5 +162,25 @@ class ProductAPI extends Controller
         }
         return 0;
     }
-    
+    public function UpComingProducts()
+    {
+        return DB::select("select * from product
+        where product_status = 1 and convert(datetime, product_start_aution_day, 120) > getdate() 
+        order by product_start_aution_day");
+    }
+
+    public function EndingSoonProducts()
+    {
+        return DB::select("select * from product
+        where product_status = 1 and convert(datetime, product_end_aution_day, 120) > getdate() 
+        order by product_end_aution_day
+        ");
+    }
+
+    public function HotAuctionProducts()
+    {
+        return DB::select("select * from product p
+        join aution_price  ap on(p.product_id = ap.product_id)
+        where product_status = 1 and convert(datetime, product_end_aution_day, 120) > getdate() ");
+    }
 }
