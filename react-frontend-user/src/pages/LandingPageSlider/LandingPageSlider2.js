@@ -22,7 +22,7 @@ const LandingPageSlider2 = ({products}) => {
   const settings = {
     dots: false, 
     infinite: false, 
-    speed: 350, 
+    speed: 250, 
     slidesToShow: 5, 
     slidesToScroll: 5,
   };
@@ -39,8 +39,6 @@ const LandingPageSlider2 = ({products}) => {
             <h4>
               <b>ENDING SOON</b>
             </h4>
-            {/* <button value={1} name="Fruit" className={ horizontalState == 1 ? "btn-category mb-2 btn-active-show" : "btn-category mb-2 btn-show"} onClick={horizontalTab}>Fruit</button> */}
-            {/* <button value={2} name="Meat" className={ horizontalState == 2 ? "btn-category mb-2 btn-active-show" : "btn-category mb-2 btn-show"} onClick={horizontalTab}>Meat</button> */}
           </div>
 
           <Slider ref={ref} {...settings}>

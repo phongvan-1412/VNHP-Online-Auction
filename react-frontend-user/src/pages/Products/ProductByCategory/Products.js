@@ -1,7 +1,14 @@
 import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
-import { Slider } from "@material-ui/core"
 import $ from 'jquery';
+
+//Slider
+import { Slider } from "@material-ui/core"
+
+//Filter Date
+import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; 
+import 'react-date-range/dist/theme/default.css'; 
 
 import ProductView from "./ProductView";
 
@@ -14,7 +21,6 @@ const Products = ({ products, category, categories }) => {
 
     let test  = {min:value[0],max:value[1]};
 
-  
     const updateRange = (e,value) => {
       setVal(value);
       const valueNow = $("#price-slider").children()[4].ariaValueNow;
@@ -27,13 +33,39 @@ const Products = ({ products, category, categories }) => {
         test.min = valueNow;
       }
     }
-      
     
+    //Filter by Date
+    const [sort, setSort] = useState(0);
+    const onClick = (e, sort) => {
+      setSort(e.target.value); 
+      
+    }
+    
+
     let totalProducts = [];
     products.forEach((product) => {
-      if (product.category_id === category.category_id && product.product_start_price >= test.min && product.product_start_price <= test.max){
-          totalProducts = [...totalProducts, product];
+      var productStartDate = product.product_start_aution_day + " " + "00:00:00";
+      var productEndDate = product.product_end_aution_day + " " + "00:00:00";
+      // var countNext7Day = ;
+      // var countNext30Day = ;
+      // var countNext60Day = ;
+
+      var countDownStartDate = new Date(new Date(productStartDate).toLocaleString()).getTime();
+      var countDownEndDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
+      var now = new Date(new Date().toLocaleString()).getTime();
+
+      if (sort == 0){
+        return;
+      } 
+      if ( sort == 1 && countDownStartDate <= now && now <= countDownEndDate){
+        totalProducts = [...totalProducts, product];    
       }
+      
+
+      // if (product.category_id === category.category_id && product.product_start_price >= test.min && product.product_start_price <= test.max ){
+      //     totalProducts = [...totalProducts, product];    
+      // }
+
     });
 
     let categoryItems = [];
@@ -63,8 +95,8 @@ const Products = ({ products, category, categories }) => {
 
 
     return (
-      <div className="container">
-        <div className="row" style={{ padding: "0px", margin: "0px" }}>
+      <div className="container-fluid d-flex justify-content-center" style={{ padding: "0px", margin: "0px" }}>
+        <div className="row" style={{ padding: "0px", margin: "0px 30px" }}>
           <div className="container" style={{ padding: "0px", margin: "0px" }}>
             <div className="row">
               {/* wrap-breadcrumb */}
@@ -104,8 +136,7 @@ const Products = ({ products, category, categories }) => {
                     <div className="widget mercado-widget filter-widget brand-widget">
                       <h2 className="widget-title">PRICE</h2>
                       <div className="widget-content-price">
-                       
-                        <div className="range-input">
+                        <div className="range-input-price">
                               <Slider 
                               id="price-slider"
                               min={10}
@@ -115,10 +146,32 @@ const Products = ({ products, category, categories }) => {
                               onChange={updateRange}
                               valueLabelDisplay = 'auto'
                               />
+                              <span>Drag or pick price of product you want to look for.</span>
                         </div>
                       </div>
                     </div>
-
+                    <div className="widget mercado-widget filter-widget brand-widget">
+                      <h2 className="widget-title">DATE</h2>
+                      <div className="widget-content-date">
+                       
+                        <div className="range-date">
+                          {/* <DateRange 
+                            id="date-filter"
+                            date={currentDate}
+                            name={date}
+                            onChange={updateDate}
+                             /> */}
+                             <select id="date-select" onChange={onClick} defaultValue="Choose Your Option">
+                                <option value="0" hidden>Choose Your Option</option>
+                                <option value="1">On Bidding</option>
+                                <option value="7">Next 7 Days</option>
+                                <option value="30">Next 30 Days</option>
+                                <option value="60">Next 60 Days</option>
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+                    
                   </div>
                 </div>
               </div>

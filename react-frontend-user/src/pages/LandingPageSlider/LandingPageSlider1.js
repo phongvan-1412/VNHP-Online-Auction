@@ -19,7 +19,7 @@ const LandingPageSlider1 = ({products}) => {
     ref.current.slickPrev();
   };
 
-  const settings = { dots: false, infinite: false, speed: 350, slidesToShow: 5, slidesToScroll: 5};
+  const settings = { dots: false, infinite: false, speed: 250, slidesToShow: 5, slidesToScroll: 5};
   
 
   const [horizontalState, setHorizontalState] = useState(1);
@@ -35,8 +35,6 @@ const LandingPageSlider1 = ({products}) => {
             <h4>
               <b>UPCOMING AUCTIONS</b>
             </h4>
-            {/* <button value={1} name="Breakfast" className={ horizontalState == 1 ? "btn-category mb-2 btn-active-show" : "btn-category mb-2 btn-show"} onClick={horizontalTab}>Breakfast</button> */}
-            {/* <button value={2} name="Chocolate" className={ horizontalState == 2 ? "btn-category mb-2 btn-active-show" : "btn-category mb-2 btn-show"} onClick={horizontalTab}>Chocolate</button> */}
           </div>
 
           <Slider ref={ref} {...settings}>

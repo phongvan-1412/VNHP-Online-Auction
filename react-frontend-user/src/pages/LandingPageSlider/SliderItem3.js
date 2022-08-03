@@ -59,7 +59,7 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
         />
       </Link>
 
-      <div className="product-item-categoryname">
+      <div replace className="product-item-categoryname">
         <Link to={`/category/${product.category_name}`}>{product.category_name.replace(/-/g, " ")}</Link>
       </div>
 
