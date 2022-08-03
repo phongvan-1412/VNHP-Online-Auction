@@ -35,47 +35,14 @@ const Products = ({ products, category, categories }) => {
     }
     
     //Filter by Date
-    const [sort, setSort] = useState(0);
-    const onClick = (e, sort) => {
-      setSort(e.target.value); 
-      
-    }
-    
 
     let totalProducts = [];
     products.forEach((product) => {
-      var productStartDate = product.product_start_aution_day + " " + "00:00:00";
-      var productEndDate = product.product_end_aution_day + " " + "00:00:00";
-
-      var countNext7Day = new Date().setDate(new Date().getDate() + 7);
-      var countNext30Day = new Date().setDate(new Date().getDate() + 30);
-      var countNext60Day = new Date().setDate(new Date().getDate() + 60);
-      
-      var countDownStartDate = new Date(new Date(productStartDate).toLocaleString()).getTime();
-      var countDownEndDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
-      var now = new Date(new Date().toLocaleString()).getTime();
-
-      if (sort == 0){
-        totalProducts = [...totalProducts, product];    
-      }else{
-        if (countDownStartDate <= now && now <= countDownEndDate){
-          sort == 1 ;
-          totalProducts = [...totalProducts, product];    
-        }
-        if (now <= countNext7Day){
-          sort == 2 ;
-          totalProducts = [...totalProducts, product];
-        }
-      }
-      
-      
-
-      // if (product.category_id === category.category_id && product.product_start_price >= test.min && product.product_start_price <= test.max ){
-      //     totalProducts = [...totalProducts, product];    
-      // }
+      if (product.category_id === category.category_id && product.product_start_price >= test.min && product.product_start_price <= test.max){
+          totalProducts = [...totalProducts, product]; 
+      } 
 
     });
-
     let categoryItems = [];
     categories.forEach((currentCates) => {
       if (currentCates.category_id !== category.category_id) {
@@ -169,12 +136,12 @@ const Products = ({ products, category, categories }) => {
                             name={date}
                             onChange={updateDate}
                              /> */}
-                             <select id="date-select" onChange={onClick} defaultValue="Choose Your Option">
-                                <option value="0" hidden>All Products</option>
-                                <option value="1">On Bidding</option>
-                                <option value="7">Next 7 Days</option>
-                                <option value="30">Next 30 Days</option>
-                                <option value="60">Next 60 Days</option>
+                             <select id="date-select" defaultValue="Choose Your Option">
+                                <option id="allproducts">All Products</option>
+                                <option id="onbidding">On Bidding</option>
+                                <option id="next7days">Next 7 Days</option>
+                                <option id="next30days">Next 30 Days</option>
+                                <option id="next60days">Next 60 Days</option>
                             </select>
                         </div>
                       </div>
@@ -218,6 +185,5 @@ const Products = ({ products, category, categories }) => {
         </div>
       </div>
     );
-  }
-
+}
 export default Products;
