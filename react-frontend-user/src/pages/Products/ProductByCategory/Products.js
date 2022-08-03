@@ -46,20 +46,28 @@ const Products = ({ products, category, categories }) => {
     products.forEach((product) => {
       var productStartDate = product.product_start_aution_day + " " + "00:00:00";
       var productEndDate = product.product_end_aution_day + " " + "00:00:00";
-      // var countNext7Day = ;
-      // var countNext30Day = ;
-      // var countNext60Day = ;
 
+      var countNext7Day = new Date().setDate(new Date().getDate() + 7);
+      var countNext30Day = new Date().setDate(new Date().getDate() + 30);
+      var countNext60Day = new Date().setDate(new Date().getDate() + 60);
+      
       var countDownStartDate = new Date(new Date(productStartDate).toLocaleString()).getTime();
       var countDownEndDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
       var now = new Date(new Date().toLocaleString()).getTime();
 
       if (sort == 0){
-        return;
-      } 
-      if ( sort == 1 && countDownStartDate <= now && now <= countDownEndDate){
         totalProducts = [...totalProducts, product];    
+      }else{
+        if (countDownStartDate <= now && now <= countDownEndDate){
+          sort == 1 ;
+          totalProducts = [...totalProducts, product];    
+        }
+        if (now <= countNext7Day){
+          sort == 2 ;
+          totalProducts = [...totalProducts, product];
+        }
       }
+      
       
 
       // if (product.category_id === category.category_id && product.product_start_price >= test.min && product.product_start_price <= test.max ){
@@ -162,7 +170,7 @@ const Products = ({ products, category, categories }) => {
                             onChange={updateDate}
                              /> */}
                              <select id="date-select" onChange={onClick} defaultValue="Choose Your Option">
-                                <option value="0" hidden>Choose Your Option</option>
+                                <option value="0" hidden>All Products</option>
                                 <option value="1">On Bidding</option>
                                 <option value="7">Next 7 Days</option>
                                 <option value="30">Next 30 Days</option>
