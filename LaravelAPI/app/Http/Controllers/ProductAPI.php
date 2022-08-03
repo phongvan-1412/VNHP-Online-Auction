@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\NameSetting as Name;
 use App\Models\Product;
+use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 use App\Models\Bill;
 use App\Models\AuctionPrice;
@@ -100,18 +101,36 @@ class ProductAPI extends Controller
             Product::where('product_id', $req_product->countdownProduct)->update(['product_status' => 2]);
         }else{
             Product::where('product_id', $req_product->countdownProduct)->update(['product_status' => 3]);
-            $countDownDate = date('Y-m-d h:m:s', time());
-            
-            $newBillId = Bill::select()->where('product_id', $req_product->countdownProduct)->where('customer_id', $req_product->countdownCustomer)->get();
 
-            if(count($newBillId) <= 0){
-                DB::insert("insert into bill(product_id, bill_date, bill_payment, customer_id) values (?,?,?,?)", [$req_product->countdownProduct, $countDownDate, $productItem->product_price_aution, $req_product->countdownCustomer]);  
+            $tmp = AuctionPrice::find(\DB::table('aution_price')->where('customer_id',$req_product->countdownCustomer)->max('aution_price'));
+            // $tmp = AuctionPrice::find(\DB::table('aution_price')->where('customer_id',$req_product->countdownCustomer)->max('aution_price'))->get();
+
+            // can test
+            $customer_id = '';
+            foreach($tmp as $customer)
+            {
+                $customer_id = $customer->customer_id;
             }
-            $newbill = Bill::select()->where('product_id', $req_product->countdownProduct)->get();
 
-            return $newbill;
+            $tmpCus = Customer::select()->where('customer_id', $customer_id)->get();
+            $newCustomer = "";
+
+            foreach($tmpCus as $customer)
+            {
+                $newCustomer = $customer->customer_id;
+            }
+
+            Mail::send('emailVeritifiPayment', compact('newCustomer','productItem'), function($email) use($newCustomer){
+                $email->subject('VNHP Aution - Verify account');
+                $email->to($newCustomer->customer_email, $newCustomer->customer_name);
+            });
+            
+            return 1;
         }
     }
+
+    
+    
       
     public function CurrentBidPrice(Request $req){
         $products = Product::where('product_id', $req->productId)->get();
@@ -140,6 +159,7 @@ class ProductAPI extends Controller
                                     ->update(['product_status'=>$request->product_status]);
             return 1;
         }
+        return 0;
     }
 
     public function EditProduct(Request $request)
@@ -192,5 +212,7 @@ class ProductAPI extends Controller
         ,p.product_img_name2,p.product_img_name3,p.product_start_price,p.product_price_aution,p.product_start_aution_day,p.product_end_aution_day
         order by count(ap.aution_id)");
     }
+
+
 
 }

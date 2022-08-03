@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\NameSetting as Name;
 use App\Models\Bill;
 use App\Models\PaymentMode;
+use App\Models\Product;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\DB;
@@ -108,16 +109,69 @@ class BillApi extends Controller
         
         $payments = PaymentMode::select()->where('orderId', $request->orderId)->get();
 
-        $tmp = '';
-        foreach($payments as $payment)
+        if(count($payments) > 0)
         {
-            $tmp = $payment;
+            $tmp = '';
+            foreach($payments as $payment)
+            {
+                $tmp = $payment;
+            }
+    
+            Bill::where('bill_id', $request->billId)->update(['bill_status' => 1,'payment_mode_id'=>$tmp->payment_mode_id]);
+            
+            $products = DB::select("select * from product p join bill b on(p.product_id = b.product_id) where p.product_id = ".$request->billId);
+            $product = '';
+            foreach($products as $tmp)
+            {
+                $product = $tmp;
+            }
+            
+            Product::select()->where('product_id',$request->product_id)->update(['product_status'=>0]);
+            return 1;
         }
-
-        Bill::where('bill_id', $request->billId)->update(['bill_status' => 1,'payment_mode_id'=>$tmp->payment_mode_id]);
-
-        return 1;
+        return 0;
     }
-	
+
+
+    public function VeritifitionPayment($customer_id,$product_id,$payment)
+    {
+        $billDate = date('Y-m-d h:m:s', time());
+            
+        $newBillId = Bill::select()->where('product_id', $product_id)->where('customer_id', $customer_id)->get();
+
+        $tmp = DB::select("select * 
+        from product p 
+        join aution_price ap on (p.product_id = ap.product_id)
+        where p.product_price_aution = ap.aution_price and p.product_status = 3 and ap.customer_id = ".$customer_id)
+
+
+        if(count($newBillId) <= 0 && count($tmp) > 0){
+            DB::insert("insert into bill(product_id, bill_date, bill_payment, customer_id) values (?,?,?,?)",
+             [$product_id, $billDate, $payment, $req_product->countdownCustomer]);  
+             return 1;
+        }
+        return 0;
+    }
+
+    public function CancelPayment($customer_id,$product_id)
+    {
+        $products = Product::select()->where('product_id', $product_id)->get();
+
+        if(count($products) > 0)
+        {
+            $product = '';
+            foreach($products as $pro)
+            {
+                $product = $pro;
+            }
+            Product::select()->where('product_id',$product_id)
+                                    ->update(['product_price_aution'=>$product->product_start_price,
+                                                'product_status'=>2]);
+
+            return 1;
+        }
+        return 0;
+    }
+    
 }
 
