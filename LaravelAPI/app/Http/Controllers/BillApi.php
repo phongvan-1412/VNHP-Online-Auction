@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\NameSetting as Name;
 use App\Models\Bill;
-use App\Models\BillDetail;
-use App\Models\Product;
-use App\Models\Customer;
+use App\Models\PaymentMode;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\DB;
@@ -98,5 +96,28 @@ class BillApi extends Controller
         }
         return $currentBill;
     }
+    public function PayBill(Request $request)
+    {
+        $newPayment = new PaymentMode();
+        $newPayment->payment_mode_type = $request->paymentSource;
+        $newPayment->orderId = $request->orderId;
+        $newPayment->payId = $request->payId;
+        $newPayment->payment_mode_date = $request->payment_mode_date;
+
+        $newPayment->save();
+        
+        $payments = PaymentMode::select()->where('orderId', $request->orderId)->get();
+
+        $tmp = '';
+        foreach($payments as $payment)
+        {
+            $tmp = $payment;
+        }
+
+        Bill::where('bill_id', $request->billId)->update(['bill_status' => 1,'payment_mode_id'=>$tmp->payment_mode_id]);
+
+        return 1;
+    }
+	
 }
 
