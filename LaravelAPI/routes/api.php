@@ -53,16 +53,16 @@ Route::post('/currentbidprice', [ProductApi::class,'CurrentBidPrice']);
 Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
 Route::post('/changeproductstatus',[ProductAPI::class,'ChangeProductStatus']);
 
-
 //feedback
 Route::post('/addcomment',[FeedbackAPI::class,'AddComment']);
 Route::get('/showcomment',[FeedbackAPI::class,'ShowComment']);
-
 
 //BILL
 Route::post('/submitcart',[BillApi::class, 'InsertBill']);
 Route::post('/currentbill',[BillApi::class, 'CustomerPayBill']);
 
+//PAYMENT MODE
+Route::post('/paybill',[BillApi::class, 'PayBill']);
 
 //CUSTOMER
 Route::post('/customerregister',[CustomerApi::class, 'CustomerRegister']);

@@ -72,6 +72,7 @@ class TableProduct extends Component {
           }
         });
     };
+    
     return (
       <div className="container-fluid">
         <button

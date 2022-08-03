@@ -49,9 +49,8 @@ class HomePage extends Component {
     autionHistory: [],
     billHistory: [],
     newBill: [],
-    feedbacks:[],
+    feedbacks: [],
     hotAuctionProducts: [],
-    reloadProductExpired: []
   };
 
   componentDidMount() {
@@ -107,7 +106,7 @@ class HomePage extends Component {
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
     this.setState({
       userinfo: JSON.parse(localStorage.getItem("customer_info")),
     });
@@ -140,16 +139,39 @@ class HomePage extends Component {
         });
     };
 
-    const reloadProductExpired = () => {
-      fetch("http://127.0.0.1:8000/api/changeproductstatus", { method: "GET" })
+    const autionHistory = () => {
+      fetch("http://127.0.0.1:8000/api/customerautionhistory", {
+        method: "GET",
+      })
         .then((response) => response.json())
         .then((response) => {
-          this.setState({ reloadProductExpired: response });
+          this.setState({ autionHistory: response });
         })
         .catch((err) => {
           console.log(err);
         });
     };
+    const billHistory = () => {
+      fetch("http://127.0.0.1:8000/api/customerbillhistory", { method: "GET" })
+        .then((response) => response.json())
+        .then((response) => {
+          this.setState({ billHistory: response });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    const newBill = () => {
+      fetch("http://127.0.0.1:8000/api/customernewbill", { method: "GET" })
+        .then((response) => response.json())
+        .then((response) => {
+          this.setState({ newBill: response });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
     return (
       <div>
         <div id="data" hidden></div>
@@ -163,27 +185,44 @@ class HomePage extends Component {
           <Route path="/contactus" element={<Contact />}></Route>
 
           {/* UserAction  */}
-          <Route path="/login" element={
-            <Login customerLogin={customerLogin} />}>
-          </Route>
+          <Route
+            path="/login"
+            element={<Login customerLogin={customerLogin} />}
+          ></Route>
 
           <Route path="/register" element={<Register />}></Route>
 
-          <Route path="/userprofile" element={
-            <UserProfile
-              userinfo={this.state.userinfo}
-              autionHistory={this.state.autionHistory}
-              billHistory={this.state.billHistory}
-              newBill={this.state.newBill}
-              updateUserLogin={customerLogin}/>}>
-          </Route>
+          <Route
+            path="/userprofile"
+            element={
+              <UserProfile
+                userinfo={this.state.userinfo}
+                autionHistory={this.state.autionHistory}
+                billHistory={this.state.billHistory}
+                newBill={this.state.newBill}
+                updateAutionHistory={autionHistory}
+                updateBillHistory={billHistory}
+                updateNewBill={newBill}
+                updateUserLogin={customerLogin}
+              />
+            }
+          ></Route>
 
-          <Route path="/forgetpassword" element={
-              <ForgetPassword style={{ backgroundImage: "url(../../img/About/about2.jpg)" }} userinfo={this.state.userinfo}/>}>
-          </Route>
+          <Route
+            path="/forgetpassword"
+            element={
+              <ForgetPassword
+                style={{ backgroundImage: "url(../../img/About/about2.jpg)" }}
+                userinfo={this.state.userinfo}
+              />
+            }
+          ></Route>
 
           {/* <Route path="/paymentgateway" element={ <PayPals />}></Route> */}
-          <Route path="/paymentgateway/:billid/:customerid" element={ <PayPals />}></Route>
+          <Route
+            path="/paymentgateway/:billid/:customerid"
+            element={<PayPals newBill={newBill}/>}
+          ></Route>
 
           {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
@@ -208,7 +247,6 @@ class HomePage extends Component {
                   products={this.state.products}
                   category={category}
                   categories={this.state.categories}
-                  reloadProductExpired={this.state.reloadProductExpired}
                 />
               }
             ></Route>
@@ -257,9 +295,9 @@ export default HomePage;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <HomePage style={{ padding: "0px", margin: "0px" }} />
-  </BrowserRouter>
+    <BrowserRouter>
+      <HomePage style={{ padding: "0px", margin: "0px" }} />
+    </BrowserRouter>
 );
 
 reportWebVitals();

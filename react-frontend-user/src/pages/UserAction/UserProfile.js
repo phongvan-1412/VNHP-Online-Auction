@@ -13,7 +13,7 @@ class UserProfile extends Component {
     this.setState({ viewIndex: 1 });
   }
   render() {
-    const { userinfo, autionHistory, billHistory, newBill, updateUserLogin } =
+    const { userinfo, autionHistory, billHistory, newBill, updateUserLogin,updateAutionHistory,updateBillHistory,updateNewBill } =
       this.props;
 
     let currentUserInfo = userinfo;
@@ -95,6 +95,21 @@ class UserProfile extends Component {
           }
         });
     };
+
+    const btnAutionHistoryOnClick = () => {
+      this.setState({ viewIndex: 1 });
+      updateAutionHistory();
+    }
+
+    const btnBillHistoryOnClick = () => {
+      this.setState({ viewIndex: 2 });
+      updateBillHistory();
+    }
+
+    const btnNewBillOnClick = () => {
+      this.setState({ viewIndex: 3 });
+      updateNewBill();
+    }
 
     return (
       <div className="container">
@@ -241,19 +256,19 @@ class UserProfile extends Component {
         <div className="row btn-form-group">
           <button
             id={this.state.viewIndex == 1 ? "btn-fade-in" : "btn-fade-out"}
-            onClick={() => this.setState({ viewIndex: 1 })}
+            onClick={btnAutionHistoryOnClick}
           >
             <b>AUTION HISTORY</b>
           </button>
           <button
             id={this.state.viewIndex == 2 ? "btn-fade-in" : "btn-fade-out"}
-            onClick={() => this.setState({ viewIndex: 2 })}
+            onClick={btnBillHistoryOnClick}
           >
             <b>BILL HISTORY</b>
           </button>
           <button
             id={this.state.viewIndex == 3 ? "btn-fade-in" : "btn-fade-out"}
-            onClick={() => this.setState({ viewIndex: 3 })}
+            onClick={btnNewBillOnClick}
           >
             <b>NEW BILL</b>
           </button>
