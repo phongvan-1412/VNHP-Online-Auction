@@ -40,13 +40,17 @@ Route::get('/selectproductsbycate', [ProductAPI::class, 'SelectProductsByCategor
 Route::get('/selectproductsbystartdate', [ProductAPI::class, 'SelectProductsByStartDate']);
 Route::get('/selectproductsbyenddate', [ProductAPI::class, 'SelectProductsByEndDate']);
 Route::get('/selectproductstop15', [ProductAPI::class, 'SelectProductsTop15ByCountCustomerId']);
-Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
 Route::get('/addproducttable',[ProductAPI::class,'AddProductTable']);
+Route::get('/upcomingproducts',[ProductAPI::class,'UpComingProducts']);
+Route::get('/endingsoonproducts',[ProductAPI::class,'EndingSoonProducts']);
+Route::get('/hotauctionproducts',[ProductAPI::class,'HotAuctionProducts']);
+
 
 Route::post('/checkexistsproduct',[ProductAPI::class,'CheckExistsProduct']);
 Route::post('/editproduct',[ProductAPI::class,'EditProduct']);
 Route::post('/countdownend', [ProductApi::class,'CountdownEnd']);
 Route::post('/currentbidprice', [ProductApi::class,'CurrentBidPrice']);
+Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
 
 //feedback
 Route::post('/addcomment',[FeedbackAPI::class,'AddComment']);
