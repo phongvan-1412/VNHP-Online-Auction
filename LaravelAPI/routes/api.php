@@ -98,7 +98,7 @@ Route::post('/insertbill',[BillApi::class, 'InsertBill']);
 Route::get('/customerdata',[BillApi::class, 'CustomerData']);
 
 //FEEDBACK 
-Route::get('/showfeedback',[BillApi::class, 'ShowFeedback']);
+Route::get('/showfeedback',[FeedbackAPI::class, 'ShowFeedback']);
 
 //CHART
 Route::get('/revenueeachmonth', [BillApi::class, 'RevenueEachMonth']);
