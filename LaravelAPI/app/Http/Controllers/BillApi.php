@@ -74,10 +74,24 @@ class BillApi extends Controller
     public function CountCustomer(){
         return DB::select("Select count(customer_id) as amount from customer_account ");
     }
+    public function CountProduct(){
+        return DB::select("Select count(bill_id) as amount from bill");
+    }
+    public function CustomerData(){
+        return DB::select("Select c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,sum(b.bill_payment) as total_spending
+            from customer_account c 
+            join bill b 
+            on (b.customer_id = c.customer_id)
+            group by c.customer_name,c.customer_img_name, c.customer_contact,c.customer_email, c.customer_dob, c.customer_address 
+            union 
+            Select c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,0 as total_spending
+            from customer_account c 
+            group by c.customer_name,c.customer_img_name, c.customer_contact,c.customer_email, c.customer_dob, c.customer_address 
+        ");
+    }
 
     public function CustomerPayBill(Request $req){
         $bills = Bill::select()->where('customer_id', $req->customerid)->where('bill_id', $req->billid)->get();
-
         $currentBill = '';
         foreach($bills as $bill){
             $currentBill = $bill;

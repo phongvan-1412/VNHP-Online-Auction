@@ -93,15 +93,22 @@ Route::get('/getaccount',[AdminController::class, 'Getaccount']);
 // BILL
 Route::get('/selectbill',[BillApi::class, 'SelectBill']);
 Route::post('/insertbill',[BillApi::class, 'InsertBill']);
+ 
+//CUSTOMER 
+Route::get('/customerdata',[BillApi::class, 'CustomerData']);
+
+//FEEDBACK 
+Route::get('/showfeedback',[BillApi::class, 'ShowFeedback']);
 
 //CHART
 Route::get('/revenueeachmonth', [BillApi::class, 'RevenueEachMonth']);
 Route::get('/revenueeachyear', [BillApi::class, 'RevenueEachYear']);
 Route::get('/toployalcustomer', [BillApi::class, 'TopLoyalCustomer']);
 Route::get('/bestcategoryseller', [BillApi::class, 'BestCategorySeller']);
+Route::get('/earninglastmonth',[BillApi::class, 'EarningLastMonth']);
+Route::get('/countcustomer',[BillApi::class, 'CountCustomer']);
+Route::get('/countproduct', [BillApi::class, 'CountProduct']);
 //PROFILE
 Route::post('/changeavatar',[AdminController::class, 'ChangeAvatar']);
 Route::post('/changeprofile',[AdminController::class, 'ChangeProfile']);
 Route::post('/changepassword',[AdminController::class, 'ChangePassword']);
-Route::get('/earninglastmonth',[BillApi::class, 'EarningLastMonth']);
-Route::get('/countcustomer',[BillApi::class, 'CountCustomer']);

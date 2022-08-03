@@ -8,6 +8,8 @@ import Bill from '../components/Bill/Bill';
 import TableProduct from '../form/TableProduct';
 import TableCategory from '../form/TableCategory';
 import AdminProfile from "../components/Profile/AdminProfile";
+import Customer from "../components/Customer/Customer";
+import Feedback from "../components/Feedback/Feedback";
 import "../css/admin1.css";
 import "../css/sb-admin-2.min.css";
 import "../css/dataTables.bootstrap4.css";
@@ -45,7 +47,10 @@ export class Layout extends Component{
                               UpdateAdminLogin={adminLogin}
                             />
                         }>
+
                         </Route> 
+                        <Route path='/customer' element={<Customer />}></Route>
+                        <Route path='/feedback' element={<Feedback />}></Route>
                     </Routes>
                   </div>
               </div>

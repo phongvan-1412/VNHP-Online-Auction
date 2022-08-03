@@ -35,4 +35,10 @@ class FeedbackAPI extends Controller
 
     return $feedbacks;
     }
+    public function ShowFeedback(){
+        return DB::select("Select f.feedback_content, f.feedback_date, p.product_thumbnail_img_name, c.customer_img name
+            from feedback f 
+            join product p on (f.product_id = p.product_id)
+            join customer_account c on (f.customer_id = c.customer_id)");
+    }
 }

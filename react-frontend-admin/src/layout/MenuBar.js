@@ -37,7 +37,7 @@ class MenuBar extends Component {
         dataTarget: "#customer",
         ariaControl: "customer",
         id: "customer",
-        url: "#",
+        url: "/customer",
       },
       {
         title: "Product",
@@ -59,13 +59,13 @@ class MenuBar extends Component {
         url: "/addcategory",
       },
       {
-        title: "Payment",
+        title: "Feedback",
         item: "All Payment",
         icon: "fab fa-amazon-pay",
-        dataTarget: "#payment",
-        ariaControl: "payment",
-        id: "payment",
-        url: "#",
+        dataTarget: "#feedback",
+        ariaControl: "feedback",
+        id: "feedback",
+        url: "/feedback",
       },
       {
         title: "Bill",
