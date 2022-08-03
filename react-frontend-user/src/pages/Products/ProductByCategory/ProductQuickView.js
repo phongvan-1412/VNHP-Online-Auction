@@ -14,20 +14,21 @@ function ProductQuickView({ product }) {
 
   const settings = {
     dots: false,
-    infinite: false,
-    speed: 350,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed :2000,
+    fade: true,
+    arrows: false,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
 
   //COUNTDOWN
-  // var productEndDate = product.product_end_aution_day ;
+  var productStartDate = product.product_start_aution_day + " " + "00:00:00";
 
   // var countDownDate = new Date("product.product_end_aution_day").getTime();
-  var countDownDate = new Date(
-    new Date("8/2/2022, 11:26:00 PM").toLocaleString()
-  ).getTime();
-
+  var countDownDate = new Date(new Date(productStartDate).toLocaleString()).getTime();
+  console.log(countDownDate)
   var productNow = setInterval(function () {
     var now = new Date(new Date().toLocaleString()).getTime();
 

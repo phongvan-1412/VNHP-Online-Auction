@@ -12,24 +12,11 @@ use App\Models\AuctionPrice;
 class ProductAPI extends Controller
 {
 
-    public function SelectProducts()
+    public function SelectProductsByEndDate()
     {
-        $tmp_products = DB::select("select * from product p join category c on (p.category_id = c.category_id) join customer_account cc on (p.owner_id = cc.customer_id)");
-        return $tmp_products;
-    }
-
-    public function SelectProductsByCategory($id){
-        $tmp_products = DB::select("select * from product where category_id = $id");
-        return $tmp_products;
-    }
-
-    public function SelectProductsByStartDate($start_date){
-        $tmp_products = DB::select("select * from product where product_start_aution_day = $start_date");
-        return $tmp_products;
-    }
-
-    public function SelectProductsByEndDate($end_date){
-        $tmp_products = DB::select("select * from product where product_end_aution_day = $end_date");
+        $tmp_products = DB::select("select * from product p join category c 
+        on (p.category_id = c.category_id) join customer_account cc on (p.owner_id = cc.customer_id)
+        order by p.product_end_aution_day");
         return $tmp_products;
     }
 
