@@ -24,7 +24,7 @@
     --footerDateText: rgb(131,131,131);
     --categoryNameColor: #6F6F6F;
     --productPriceColor: #007a65;
-    --redPrimaryColor: #DC3545;
+    --countdownColor: #004BD6;
     --textHover: rgb(208, 75, 78);
     --iconHover: red;
     --tableColor: whitesmoke;
@@ -716,6 +716,7 @@
     margin-top: 100px;
 }
 .product-grid-wrapper{
+    position: relative;
     display: flex;
     justify-content: center;
     align-self: center;
@@ -1326,9 +1327,17 @@
 .product-detail-info-wrapper{
     padding: 0px 12px 0px 12px;
 }
-.countdowndate, .product-item-countdown{
-    color: red;
+.landingpage-countdown{
+    color: var(--countdownColor);
     font-weight: bold;
+}
+.countdowndate, .product-item-countdown{
+    color: var(--iconHover);
+    font-weight: bold;
+}
+.product-item-categoryname{
+    margin-top: 10px;
+    
 }
 .product-detail-product-name{
     font-weight: bolder;
@@ -1426,7 +1435,7 @@
     margin-top: 30px;
     font-size: 20px;
     font-weight: bold;
-    color: #004BD6;
+    color: var(--countdownColor);
 }
 .product-detail-product-owner,
 .product-detail-product-realtime-headtext{
@@ -1465,6 +1474,27 @@
     padding: 40px;
     font-size: 11px;
     line-height: 1.66;
+}
+/* -----Quick-View----- */
+#product-quick-view{
+    position: absolute;
+    top: 50%;
+}
+.product-quickviewbtn-wrapper{
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, .6);
+}
+.product-quickviewbtn-wrapper button{
+    width: 200px;
+    height: 40px;
+    border: none;
+    background-color: rgba(255, 255, 255, .4);
+    color: var(--iconHover);
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
 }
 /* -----Sidebar-Suggest----- */
 .sidebar-suggest-wrapper{

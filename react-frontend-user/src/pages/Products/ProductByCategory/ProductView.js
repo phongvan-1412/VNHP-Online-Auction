@@ -8,8 +8,8 @@ const ProductView = ({ product, categories }) => {
       className="product-grid-wrapper col-xl-3 col-md-4 col-xs-6"
       id="product-grid-wrapper"
     >
-      <div id="product-quick-view" style={{ position: "absolute" }}>
-        <div style={{ background: "red", textAlign: "center", width: "200px" }}>
+      <div id="product-quick-view">
+        <div className="product-quickviewbtn-wrapper">
           <button data-bs-toggle="modal" data-bs-target="#productQuickView">
             Quick View
           </button>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import $ from "jquery";
 
-const SliderItem1 = ({ product,updateComingProducts }) => {
+const SliderItem1 = ({ product, updateComingProducts }) => {
   const onProductClicked = (e) => {
     $("#data").data("productid", e.target.name);
   };
@@ -48,7 +48,7 @@ const SliderItem1 = ({ product,updateComingProducts }) => {
 
   return (
     <div className="product-grid">
-      <div id={"slider1" + product.product_id + product.product_name}></div>
+      <div id={"slider1" + product.product_id + product.product_name} className="landingpage-countdown"></div>
       <div>
         <Link
           to={`/${product.category_id}/${product.product_name}`}
@@ -65,7 +65,10 @@ const SliderItem1 = ({ product,updateComingProducts }) => {
           />
         </Link>
       </div>
-      <div className="category-name">{product.category_name}</div>
+
+      <div className="product-item-categoryname">
+        <Link to={`/category/${product.category_name}`}>{product.category_name.replace(/-/g, " ")}</Link>
+      </div>
 
       <div className="product-name">
         <Link
@@ -87,12 +90,11 @@ const SliderItem1 = ({ product,updateComingProducts }) => {
         </div>
 
         <div className="cart-icons">
-          <FaHeart className="meta-wishlist" style={{ cursor: "pointer" }} />
           <Link
             to={`/${product.category_id}/${product.product_name}`}
             className="btn-view"
           >
-            View
+            View Bidding
           </Link>
         </div>
       </div>
