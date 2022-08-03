@@ -6,24 +6,77 @@ import LandingPageCategories from "./LandingPageCategories";
 import TopSlider from "./TopSlider";
 
 class LandingPage extends Component {
+  state = {
+    updateComingProducts: [],
+    endingSoonProducts: [],
+  };
+
+  componentDidMount() {
+    fetch("http://127.0.0.1:8000/api/upcomingproducts", { method: "GET" })
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({ updateComingProducts: response });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    fetch("http://127.0.0.1:8000/api/endingsoonproducts", { method: "GET" })
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({ endingSoonProducts: response });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   render() {
-    const { products, categories } = this.props;
+    const { categories,hotAuctionProducts } = this.props;
+    const updateComingProducts = () => {
+      fetch("http://127.0.0.1:8000/api/upcomingproducts", { method: "GET" })
+        .then((response) => response.json())
+        .then((response) => {
+          this.setState({ updateComingProducts: response });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    const endingSoonProducts = () => {
+      fetch("http://127.0.0.1:8000/api/endingsoonproducts", { method: "GET" })
+        .then((response) => response.json())
+        .then((response) => {
+          this.setState({ endingSoonProducts: response });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    
 
     return (
-      <div className="row" style={{padding: '0px', margin: '0px'}}>
-          <TopSlider />
+      <div className="row" style={{ padding: "0px", margin: "0px" }}>
+        <TopSlider />
 
-          <div className="col-md-1" style={{padding: '0px', margin: '0px'}}></div>
+        <div
+          className="col-md-1"
+          style={{ padding: "0px", margin: "0px" }}
+        ></div>
 
-          <div className="col-md-10" style={{padding: '0px', margin: '0px'}}>
-            <LandingPageSlider1 products={products}/>
-            <LandingPageSlider2 products={products}/>
-            <LandingPageSlider3 products={products}/>
-            <LandingPageCategories categories={categories}/>
-          </div>
+        <div className="col-md-10" style={{ padding: "0px", margin: "0px" }}>
+          <LandingPageSlider1 products={this.state.updateComingProducts} updateComingProducts={updateComingProducts}/>
+          <LandingPageSlider2 products={this.state.endingSoonProducts} endingSoonProducts={endingSoonProducts}/>
+          <LandingPageSlider3 products={hotAuctionProducts} hotAuctionProducts={hotAuctionProducts}/>
+          <LandingPageCategories categories={categories} />
+        </div>
 
-          <div className="col-md-1" style={{padding: '0px', margin: '0px'}}></div>
-        
+        <div
+          className="col-md-1"
+          style={{ padding: "0px", margin: "0px" }}
+        ></div>
       </div>
     );
   }

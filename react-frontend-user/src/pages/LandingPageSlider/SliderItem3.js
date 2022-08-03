@@ -3,75 +3,63 @@ import { Link } from "react-router-dom";
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import $ from "jquery";
 
-const SliderItem3 = ({ product }) => {
-  const onProductClicked = (e) => {
-    $("#data").data("productid", e.target.name);
-  };
-  
-  var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
-  var x = setInterval(function() {
+const SliderItem3 = ({ product,hotAuctionProducts }) => {
+  var countDownDate = new Date(product.product_end_aution_day).getTime();
 
-  // Get today's date and time
-  var now = new Date().getTime();
+  var slider3 = setInterval(function () {
+    var now = new Date().getTime();
 
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
+    var distance = countDownDate - now;
 
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
 
-  // Display the result in the element with id="demo"
-  if (document.getElementById('slider1' + product.product_id + product.product_name) == null) return;
-  if (document.getElementById('slider1' + product.product_id + product.product_name) == null || distance < 0){
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the result in the element with id="demo"
+    if (
+      document.getElementById(
+        "slider3" + product.product_id + product.product_name
+      ) == null
+    )
+      return;
+    if (
+      document.getElementById(
+        "slider3" + product.product_id + product.product_name
+      ) == null ||
+      distance < 0
+    ) {
+      clearInterval(slider3);
+      document.getElementById("demo").innerHTML = "EXPIRED";
     }
-  }, 1000);
-
-  var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-  // Get today's date and time
-  var now = new Date().getTime();
-
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Display the result in the element with id="demo"
-  if (document.getElementById('slider2' + product.product_id + product.product_name) == null) return;
-  if (document.getElementById('slider2' + product.product_id + product.product_name) == null || distance < 0){
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
-    }
+    document.getElementById(
+      "slider3" + product.product_id + product.product_name
+    ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   }, 1000);
   return (
     <div className="product-grid">
-      <div id={product.product_id + product.product_name}></div>
+      <div id={"slider3" + product.product_id + product.product_name}></div>
       <Link
         to={`/${product.category_id}/${product.product_name}`}
         replace
         className="product-img"
-        onClick={onProductClicked}
       >
-        <img name={product.product_id}
-          src={require(`../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
-          />
+        <img
+          name={product.product_id}
+          src={
+            "http://localhost:8000/ProductImg/" +
+            product.product_thumbnail_img_name
+          }
+        />
       </Link>
 
-      <div className="category-name">
-        {product.category_name}
-      </div>
+      <div className="category-name">{product.category_name}</div>
 
       <div className="product-name">
         <Link
@@ -79,7 +67,6 @@ var x = setInterval(function() {
           name={product.product_id}
           replace
           className="product-name-item"
-          onClick={onProductClicked}
         >
           {product.product_name.replace(/-/g, " ")}
         </Link>
@@ -87,15 +74,21 @@ var x = setInterval(function() {
       <div className="product-metapane-wrapper">
         <div className="product-price">
           <span className="product-price-headtext">Start Price:</span>
-          <span className="product-price-value">${parseInt(product.product_start_price).toLocaleString()}</span>
+          <span className="product-price-value">
+            ${parseInt(product.product_start_price).toLocaleString()}
+          </span>
         </div>
 
         <div className="cart-icons">
           <FaHeart className="meta-wishlist" style={{ cursor: "pointer" }} />
-          <Link to={`/${product.category_id}/${product.product_name}`} className="btn-view">View</Link>
+          <Link
+            to={`/${product.category_id}/${product.product_name}`}
+            className="btn-view"
+          >
+            View
+          </Link>
         </div>
       </div>
-      
     </div>
   );
 };

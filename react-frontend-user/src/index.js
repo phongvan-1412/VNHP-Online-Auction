@@ -49,7 +49,8 @@ class HomePage extends Component {
     autionHistory: [],
     billHistory: [],
     newBill: [],
-    feedbacks:[]
+    feedbacks:[],
+    hotAuctionProducts: [],
   };
 
   componentDidMount() {
@@ -109,6 +110,15 @@ class HomePage extends Component {
     this.setState({
       userinfo: JSON.parse(localStorage.getItem("customer_info")),
     });
+
+    fetch("http://127.0.0.1:8000/api/hotauctionproducts", { method: "GET" })
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({ hotAuctionProducts: response });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -118,6 +128,16 @@ class HomePage extends Component {
       });
     };
 
+    const hotAuctionProducts = () => {
+      fetch("http://127.0.0.1:8000/api/hotauctionproducts", { method: "GET" })
+        .then((response) => response.json())
+        .then((response) => {
+          this.setState({ hotAuctionProducts: response });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     return (
       <div>
         <div id="data" hidden></div>
@@ -160,7 +180,7 @@ class HomePage extends Component {
             path="/"
             element={
               <LandingPage
-                products={this.state.products}
+                hotAuctionProducts={this.state.hotAuctionProducts}
                 categories={this.state.categories}
               />
             }
