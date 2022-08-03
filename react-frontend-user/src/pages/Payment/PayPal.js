@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 
 const PayPal = ({ totalPayment }) => {
-  const value = (totalPayment / 1000).toFixed(2);
   useEffect(() => {
+    let value = (totalPayment * 1).toFixed(2);
+    console.log(value)
     window.paypal
       .Buttons({
         // Sets up the transaction when a payment button is clicked
@@ -11,7 +12,8 @@ const PayPal = ({ totalPayment }) => {
             purchase_units: [
               {
                 amount: {
-                  value: "77.44", // Can also reference a variable or function
+                  currency_code: "USD",
+                  value: value // Can also reference a variable or function
                 },
               },
             ],

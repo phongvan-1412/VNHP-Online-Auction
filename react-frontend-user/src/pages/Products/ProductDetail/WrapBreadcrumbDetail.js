@@ -10,7 +10,7 @@ const WrapBreadcrumbDetail = ({ product, category }) => {
         </li>
 
         <li className="item-link categoryName" key={category.category_id}>
-          <Link to={`/category/${category.category_name}`}>{category.category_name}</Link>
+          <Link to={`/category/${category.category_name}`} replace>{product.category_name.replace(/-/g, " ")}</Link>
         </li>
 
         <li className="item-link" key={product.product_id}>

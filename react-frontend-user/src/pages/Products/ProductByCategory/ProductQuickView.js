@@ -26,9 +26,8 @@ function ProductQuickView({ product }) {
   //COUNTDOWN
   var productStartDate = product.product_start_aution_day + " " + "00:00:00";
 
-  // var countDownDate = new Date("product.product_end_aution_day").getTime();
   var countDownDate = new Date(new Date(productStartDate).toLocaleString()).getTime();
-  console.log(countDownDate)
+ 
   var productNow = setInterval(function () {
     var now = new Date(new Date().toLocaleString()).getTime();
 
@@ -55,30 +54,13 @@ function ProductQuickView({ product }) {
       var countdownCustomer = JSON.parse(
         localStorage.getItem("customer_info")
       ).customer_id;
-      // console.log(countdownCustomer)
 
       var days = 0;
       var hours = 0;
       var minutes = 0;
       var seconds = 0;
-      axios
-        .post("http://127.0.0.1:8000/api/countdownend", {
-          countdownProduct,
-          countdownCustomer,
-        })
-        .then(function (response) {
-          console.log(response.data);
-          // if (response.data.length > 0) {
-          //     result.text("Successful.");
-          //     result.css("color", "green");
-          // } else {
-          //     result.text("Failed.");
-          //     result.css("color", "red");
-          // }
-        });
     }
-    document.getElementById(
-      product.product_id + product.product_name
+    document.getElementById(product.product_id + product.product_name
     ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   }, 1000);
 

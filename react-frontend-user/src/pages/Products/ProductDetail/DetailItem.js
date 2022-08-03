@@ -27,9 +27,9 @@ const DetailItem = ({ product }) => {
       clearInterval(productNow);
       document.getElementById(product.product_id + product.product_name).innerHTML = "EXPIRED";
       
+      //
       var countdownProduct = product.product_id;
       var countdownCustomer = JSON.parse(localStorage.getItem("customer_info")).customer_id;
-      // console.log(countdownCustomer)
 
       var days = 0;
       var hours = 0;

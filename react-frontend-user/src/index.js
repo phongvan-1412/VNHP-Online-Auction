@@ -51,6 +51,7 @@ class HomePage extends Component {
     newBill: [],
     feedbacks:[],
     hotAuctionProducts: [],
+    reloadProductExpired: []
   };
 
   componentDidMount() {
@@ -138,6 +139,17 @@ class HomePage extends Component {
           console.log(err);
         });
     };
+
+    const reloadProductExpired = () => {
+      fetch("http://127.0.0.1:8000/api/changeproductstatus", { method: "GET" })
+        .then((response) => response.json())
+        .then((response) => {
+          this.setState({ reloadProductExpired: response });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     return (
       <div>
         <div id="data" hidden></div>
@@ -196,6 +208,7 @@ class HomePage extends Component {
                   products={this.state.products}
                   category={category}
                   categories={this.state.categories}
+                  reloadProductExpired={this.state.reloadProductExpired}
                 />
               }
             ></Route>

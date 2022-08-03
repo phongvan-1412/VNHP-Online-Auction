@@ -189,4 +189,5 @@ class ProductAPI extends Controller
         ,p.product_img_name2,p.product_img_name3,p.product_start_price,p.product_price_aution,p.product_start_aution_day,p.product_end_aution_day
         order by count(ap.aution_id)");
     }
+
 }

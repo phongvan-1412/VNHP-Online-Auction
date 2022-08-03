@@ -51,6 +51,8 @@ Route::post('/editproduct',[ProductAPI::class,'EditProduct']);
 Route::post('/countdownend', [ProductApi::class,'CountdownEnd']);
 Route::post('/currentbidprice', [ProductApi::class,'CurrentBidPrice']);
 Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
+Route::post('/changeproductstatus',[ProductAPI::class,'ChangeProductStatus']);
+
 
 //feedback
 Route::post('/addcomment',[FeedbackAPI::class,'AddComment']);
