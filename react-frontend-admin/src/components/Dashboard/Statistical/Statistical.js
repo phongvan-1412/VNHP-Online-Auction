@@ -6,14 +6,15 @@ class Statistical extends Component{
         this.state = {
             EarningData: [],
             CustomerData: [],
-            SellData: []
+            SellData: [],
+            FeedbackData: []
     }}    
     componentDidMount() {
         fetch("http://127.0.0.1:8000/api/earninglastmonth", {method: "GET",})
         .then((response) => response.json())
         .then((response) => {
             this.setState({
-            EarningData: response
+                EarningData: response
             }); 
         })
         .catch(err => {
@@ -23,7 +24,7 @@ class Statistical extends Component{
         .then((response) => response.json())
         .then((response) => {
             this.setState({
-            CustomerData: response
+                CustomerData: response
             }); 
         })
         .catch(err => {
@@ -33,7 +34,17 @@ class Statistical extends Component{
         .then((response) => response.json())
         .then((response) => {
             this.setState({
-            SellData: response
+                SellData: response
+            }); 
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        fetch("http://127.0.0.1:8000/api/countfeedback", {method: "GET",})
+        .then((response) => response.json())
+        .then((response) => {
+            this.setState({
+                FeedbackData: response
             }); 
         })
         .catch(err => {
@@ -122,9 +133,16 @@ class Statistical extends Component{
                         <div className="card-body">
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
-                                    <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                        Feedback</div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                    <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">Feedback</div>
+                                    <div className="h5 mb-0 font-weight-bold text-gray-800">
+                                    {this.state.FeedbackData.map((p,index)=>{
+                                        return(
+                                            <div key={index} className="h5 mb-0 font-weight-bold text-gray-800">
+                                                {p.amount}
+                                            </div>
+                                        )
+                                    })}
+                                    </div>
                                 </div>
                                 <div className="col-auto">
                                     <i className="fas fa-comments fa-2x text-gray-300"></i>

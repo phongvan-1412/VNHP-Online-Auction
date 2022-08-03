@@ -76,6 +76,10 @@ class BillApi extends Controller
     public function CountProduct(){
         return DB::select("Select count(bill_id) as amount from bill");
     }
+    public function CountFeedback(){
+        return DB::select("Select count(feedback_id) as amount from feedback");
+        
+    }
     public function CustomerData(){
         return DB::select("Select c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,sum(b.bill_payment) as total_spending
             from customer_account c 
@@ -133,25 +137,25 @@ class BillApi extends Controller
     }
 
 
-    public function VeritifitionPayment($customer_id,$product_id,$payment)
-    {
-        $billDate = date('Y-m-d h:m:s', time());
+    // public function VeritifitionPayment($customer_id,$product_id,$payment)
+    // {
+    //     $billDate = date('Y-m-d h:m:s', time());
             
-        $newBillId = Bill::select()->where('product_id', $product_id)->where('customer_id', $customer_id)->get();
+    //     $newBillId = Bill::select()->where('product_id', $product_id)->where('customer_id', $customer_id)->get();
 
-        $tmp = DB::select("select * 
-        from product p 
-        join aution_price ap on (p.product_id = ap.product_id)
-        where p.product_price_aution = ap.aution_price and p.product_status = 3 and ap.customer_id = ".$customer_id)
+    //     $tmp = DB::select("select * 
+    //     from product p 
+    //     join aution_price ap on (p.product_id = ap.product_id)
+    //     where p.product_price_aution = ap.aution_price and p.product_status = 3 and ap.customer_id = ".$customer_id)
 
 
-        if(count($newBillId) <= 0 && count($tmp) > 0){
-            DB::insert("insert into bill(product_id, bill_date, bill_payment, customer_id) values (?,?,?,?)",
-             [$product_id, $billDate, $payment, $req_product->countdownCustomer]);  
-             return 1;
-        }
-        return 0;
-    }
+    //     if(count($newBillId) <= 0 && count($tmp) > 0){
+    //         DB::insert("insert into bill(product_id, bill_date, bill_payment, customer_id) values (?,?,?,?)",
+    //          [$product_id, $billDate, $payment, $req_product->countdownCustomer]);  
+    //          return 1;
+    //     }
+    //     return 0;
+    // }
 
     public function CancelPayment($customer_id,$product_id)
     {

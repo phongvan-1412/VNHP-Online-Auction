@@ -53,8 +53,8 @@ class LoyalCustomer extends Component{
                                 <tbody>
                                     {this.state.CustomerData.map((p, index)=>{
                                         return(
-                                            <tr >
-                                                <td key={index}>{i}{Rank(i++)}</td>
+                                            <tr key={index}>
+                                                <td >{i}{Rank(i++)}</td>
                                                 <td>
                                                     <img className='mr-1' style={{height: "50px"}}
                                                     src={require(`../../../../../LaravelAPI/public/UserImage/${p.customer_img_name}`)}
