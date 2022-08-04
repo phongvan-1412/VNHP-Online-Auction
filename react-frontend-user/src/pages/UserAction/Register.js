@@ -12,6 +12,7 @@ class Register extends Component {
     checkValidPassword: false,
     checkValidConfirmPassword: false,
     checkValidPhoneNumber: false,
+    checkValidBirthday: false,
     loading: false,
   };
   render() {
@@ -123,6 +124,35 @@ class Register extends Component {
       return true;
     };
 
+    const onBirthdayOnBlur = (e) => {
+      const result = $("#birthdayResult");
+      var optimizedBirthday = e.target.value.replace(/-/g, "/");
+
+      //set date based on birthday at 01:00:00 hours GMT+0100 (CET)
+      var myBirthday = new Date(optimizedBirthday);
+
+      // set current day on 01:00:00 hours GMT+0100 (CET)
+      var currentDate = new Date().toJSON().slice(0, 10) + " 01:00:00";
+
+      // calculate age comparing current date and borthday
+      var myAge = ~~((Date.now(currentDate) - myBirthday) / 31557600000);
+
+      if (!e.target.value) {
+        result.text("Please insert your date of birth.");
+        result.css("color", "red");
+        this.setState({ checkValidBirthday: false });
+      } else {
+        if (myAge < 18) {
+          result.text("Date of birth is invalid.");
+          result.css("color", "red");
+          this.setState({ checkValidBirthday: false });
+        } else {
+          result.text("");
+          this.setState({ checkValidBirthday: true });
+        }
+      }
+    };
+
     const onPhoneNumberBlur = () => {
       const $result = $("#phonenumberResult");
       const phoneNumber = $("#phonenumber").val();
@@ -171,18 +201,15 @@ class Register extends Component {
         });
     };
 
-    function showTime() {
-      window.location.href = "http://localhost:3000/login";
-    }
-
     const buttonRegisterOnClick = () => {
       if (
         !$("#firstname").val() &&
         !$("#lastname").val() &&
         !$("#email").val() &&
         !$("#confirmpassword").val() &&
+        !$("#password").val() &&
         !$("#phonenumber").val() &&
-        !$("#phonenumber").val()
+        !$("#birthday").val()
       ) {
         $("#firstnameResult").text("Please enter your first name");
         $("#firstnameResult").css("color", "red");
@@ -198,6 +225,9 @@ class Register extends Component {
 
         $("#confirmPasswordResult").text("Please enter your confirm password");
         $("#confirmPasswordResult").css("color", "red");
+
+        $("#birthdayResult").text("Please enter your date of birth");
+        $("#birthdayResult").css("color", "red");
 
         $("#phonenumberResult").text("Please enter your phone number.");
         $("#phonenumberResult").css("color", "red");
@@ -228,19 +258,26 @@ class Register extends Component {
         return;
       }
 
+      if (!$("#birthday").val()) {
+        $("#birthdayResult").text("Please enter your date of birth");
+        $("#birthdayResult").css("color", "red");
+        return;
+      }
+
       if (!$("#phonenumber").val()) {
         $("#phonenumberResult").text("Please enter your phone number.");
         $("#phonenumberResult").css("color", "red");
         return;
       }
- 
+
       if (
         !this.state.checkValidFirstName ||
         !this.state.checkValidLastName ||
         !this.state.checkValidEmail ||
         !this.state.checkValidPassword ||
         !this.state.checkValidConfirmPassword ||
-        !this.state.checkValidPhoneNumber
+        !this.state.checkValidPhoneNumber ||
+        !this.state.checkValidBirthday
       ) {
         return;
       }
@@ -248,17 +285,19 @@ class Register extends Component {
       const customer_name = $("#firstname").val() + " " + $("#lastname").val();
       const customer_email = $("#email").val();
       const customer_pwd = $("#password").val();
+      const customer_dob = $("#birthday").val();
       const customer_contact = $("#phonenumber").val();
 
       const customer = {
         customer_name,
         customer_email,
         customer_pwd,
+        customer_dob,
         customer_contact,
       };
 
-      $("#btn-register").attr("disable", true);
-
+      this.setState({ loading: true });
+      const self = this;
       axios
         .post(`http://127.0.0.1:8000/api/customerregister`, customer)
         .then(function (response) {
@@ -278,16 +317,18 @@ class Register extends Component {
             $("#confirmpassword").val("");
             $("#confirmPasswordResult").text("");
 
+            $("#birthday").val("");
+            $("#birthdayResult").text("");
+
             $("#phonenumber").val("");
             $("#phonenumberResult").text("");
+
+            self.setState({ loading: false });
 
             $("#registerResult").text(
               "Register successfully. Please activate your email."
             );
             $("#registerResult").css("color", "green");
-            // setInterval(showTime, 5000);
-          } else {
-            // $("#btn-register").removeAttr("disable");
           }
         });
     };
@@ -312,7 +353,7 @@ class Register extends Component {
                 id="firstname"
                 name="firstname"
                 className="form-control"
-                placeholder="Enter your firstname"
+                placeholder="max length 10 character"
                 onBlur={onFirstNameBlur}
               />
               <div
@@ -326,7 +367,7 @@ class Register extends Component {
                 type="text"
                 id="lastname"
                 name="lastname"
-                placeholder="Enter your lastname"
+                placeholder="max length 10 character"
                 className="form-control"
                 onBlur={onLastNameBlur}
               />
@@ -378,6 +419,20 @@ class Register extends Component {
               ></div>
             </div>
             <div className="register-form-control">
+              <label>* Birthday</label>
+              <input
+                type="date"
+                id="birthday"
+                placeholder="example: 0355487651"
+                className="form-control"
+                onBlur={onBirthdayOnBlur}
+              />
+              <div
+                id="birthdayResult"
+                className="small font-italic form-waring-text"
+              ></div>
+            </div>
+            <div className="register-form-control">
               <label>* Mobile Number</label>
               <input
                 type="text"
@@ -425,6 +480,11 @@ class Register extends Component {
               >
                 <b>REGISTER</b>
               </button>
+              {this.state.loading && (
+                <div className="spinner-border text-light" id="register-loading-ring" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              )}
             </div>
           </div>
         </div>

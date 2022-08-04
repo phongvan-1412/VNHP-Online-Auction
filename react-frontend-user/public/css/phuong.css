@@ -113,9 +113,10 @@
 }
 
 /* register form */
+
 .register-form-group .register-img-form #overlay {
   position: absolute;
-  height: 796px;
+  height: 884px;
   width: 600px;
   border-radius: 5px;
   margin-top: 40px;
@@ -131,7 +132,7 @@
   margin-top: 40px;
   margin-bottom: 40px;
   border-radius: 5px;
-  height: 796px;
+  height: 884px;
   width: 600px;
   display: flex;
   opacity: 1;
@@ -166,13 +167,13 @@
 }
 .btn-register-group > #btn-register {
   background-color: var(--tableColor);
-  height: 35px;
-  width: 100px;
+  height: 40px;
+  width: 110px;
   border: 20px;
   border-radius: 6px;
   cursor: pointer;
   outline: none;
-  font-size: 16px;
+  font-size: 20px;
   -webkit-transform: translate(0);
   transform: translate(0);
   /* box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438); */
@@ -191,7 +192,7 @@
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
   box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
-  width: 110px;
+  width: 130px;
 }
 .btn-register-group > #btn-register b {
   cursor: pointer;
@@ -210,6 +211,15 @@
 
 .btn-register-group > #btn-register:hover b {
   padding-right: 25px;
+}
+
+#register-loading-ring{
+  position: absolute;
+  margin-left: 10px;
+}
+#register-loading-ring .visually-hidden{
+  position: absolute;
+  margin-top: 15px;
 }
 
 .btn-register-group > #btn-register:hover b:after {
