@@ -101,6 +101,7 @@ class BillApi extends Controller
         }
         return $currentBill;
     }
+
     public function PayBill(Request $request)
     {
         $newPayment = new PaymentMode();
@@ -129,7 +130,7 @@ class BillApi extends Controller
             {
                 $product = $tmp;
             }
-            
+
             Product::select()->where('product_id',$request->product_id)->update(['product_status'=>0]);
             return 1;
         }
@@ -137,25 +138,25 @@ class BillApi extends Controller
     }
 
 
-    // public function VeritifitionPayment($customer_id,$product_id,$payment)
-    // {
-    //     $billDate = date('Y-m-d h:m:s', time());
+    public function VeritifitionPayment($customer_id,$product_id,$payment)
+    {
+        $billDate = date('Y-m-d h:m:s', time());
             
-    //     $newBillId = Bill::select()->where('product_id', $product_id)->where('customer_id', $customer_id)->get();
+        $newBillId = Bill::select()->where('product_id', $product_id)->where('customer_id', $customer_id)->get();
 
-    //     $tmp = DB::select("select * 
-    //     from product p 
-    //     join aution_price ap on (p.product_id = ap.product_id)
-    //     where p.product_price_aution = ap.aution_price and p.product_status = 3 and ap.customer_id = ".$customer_id)
+        $tmp = DB::select("select * 
+        from product p 
+        join aution_price ap on (p.product_id = ap.product_id)
+        where p.product_price_aution = ap.aution_price and p.product_status = 3 and ap.customer_id = ".$customer_id);
 
-
-    //     if(count($newBillId) <= 0 && count($tmp) > 0){
-    //         DB::insert("insert into bill(product_id, bill_date, bill_payment, customer_id) values (?,?,?,?)",
-    //          [$product_id, $billDate, $payment, $req_product->countdownCustomer]);  
-    //          return 1;
-    //     }
-    //     return 0;
-    // }
+        if(count($newBillId) <= 0 && count($tmp) > 0){
+            DB::insert("insert into bill(product_id, bill_date, bill_payment, customer_id) values (?,?,?,?)",
+             [$product_id, $billDate, $payment, $customer_id]);  
+            $url = "http://localhost:3000/login";
+            return Redirect::intended($url);
+        }
+        return "Something wrong";
+    }
 
     public function CancelPayment($customer_id,$product_id)
     {
@@ -172,10 +173,12 @@ class BillApi extends Controller
                                     ->update(['product_price_aution'=>$product->product_start_price,
                                                 'product_status'=>2]);
 
-            return 1;
+            $url = "http://localhost:3000";
+            return Redirect::intended($url);
         }
-        return 0;
+        return "Something wrong";
     }
+    
     
 }
 

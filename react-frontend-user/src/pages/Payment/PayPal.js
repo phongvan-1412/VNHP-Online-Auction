@@ -1,6 +1,14 @@
-import React from "react";
-import { PayPalButton } from "react-paypal-button-v2";
+import React ,{useRef,useEffect}from "react";
+// import { PayPalButton } from "react-paypal-button-v2";
 import axios from "axios";
+import {
+  PayPalScriptProvider,
+  PayPalButtons,
+  usePayPalScriptReducer
+} from "@paypal/react-paypal-js";
+import ReactDOM from "react-dom";
+
+const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 const PayPal = ({ totalPayment, billId, newBill }) => {
   const value = totalPayment / 100;
@@ -49,23 +57,25 @@ const PayPal = ({ totalPayment, billId, newBill }) => {
   // }, []);
 
   // return <div id="paypal-button-container" ref={paypal}></div>;
-
+    var self = this;
   return (
+    
     <PayPalButton
+
       // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
       createOrder={function (data, actions) {
         return actions.order.create({
-          intent: "CAPTURE",
           purchase_units: [
             {
               amount: {
-                value: value,
+                currency: "USD",
+                value: 1,
               },
             },
           ],
         });
       }}
-      
+
       onSuccess={(details, data) => {
         const orderId = data.orderID;
         const payId = data.payerID;
@@ -79,28 +89,22 @@ const PayPal = ({ totalPayment, billId, newBill }) => {
           payment_mode_date,
         };
 
-
-        axios
-          .post(`http://127.0.0.1:8000/api/paybill`, paymentDetail)
-          .then(function (response) {
-            console.log(response.data);
-            if (response.data > 0) {
-              newBill();
-            } else {
-            }
-          });
-        // alert("Transaction completed by " + details.payer.name.given_name);
-        // OPTIONAL: Call your server to save the transaction
-        // return fetch("/paypal-transaction-complete", {
-        //   method: "post",
-        //   body: JSON.stringify({
-        //     orderID: data.orderID,
-        //   }),
-        // });
+        // axios
+        //   .post(`http://127.0.0.1:8000/api/paybill`, paymentDetail)
+        //   .then(function (response) {
+        //     console.log(response.data);
+        //     if (response.data > 0) {
+        //       newBill();
+        //     } else {
+        //     }
+        //   });
+        
       }}
-      options={{ clientId: "sb", currency: "USD" }}
+     
+      options={{ currency: "USD" }}
     />
   );
+  
 };
 
 export default PayPal;
