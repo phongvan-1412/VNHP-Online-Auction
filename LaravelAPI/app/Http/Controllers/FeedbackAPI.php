@@ -22,12 +22,12 @@ class FeedbackAPI extends Controller
         ->where('product_id', $request->product_id)
         ->where('customer_id', $request->customer_id)
         ->where('feedback_date', $request->feedback_date)
-        ->get(); 
+        ->get();
     }
 
     //Show Comment
     public function ShowComment(){
-        $feedbacks = DB::select("select f.product_id, ca.customer_img_name, ca.customer_name, f.feedback_date, f.feedback_content from customer_account ca join feedback f 
+        $feedbacks = DB::select("select f.product_id, ca.customer_img_name, ca.customer_name, f.feedback_date, f.feedback_content from customer_account ca join feedback f
         on (ca.customer_id = f.customer_id)
         where f.feedback_status=1
         group by ca.customer_img_name, ca.customer_name, f.feedback_date, f.feedback_content, f.product_id
@@ -37,7 +37,7 @@ class FeedbackAPI extends Controller
     }
     public function ShowFeedback(){
         return DB::select("Select f.feedback_content, f.feedback_date, c.customer_name, p.product_thumbnail_img_name, c.customer_img_name
-            from feedback f 
+            from feedback f
             join product p on (f.product_id = p.product_id)
             join customer_account c on (f.customer_id = c.customer_id)
             where f.feedback_content is not null");

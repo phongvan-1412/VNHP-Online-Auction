@@ -77,19 +77,19 @@ class BillApi extends Controller
         return DB::select("Select count(bill_id) as amount from bill");
     }
     public function CountFeedback(){
-        return DB::select("Select count(feedback_id) as amount from feedback");
-        
+        return DB::select("Select count(feedback_id) as amount from feedback where feedback_content is not null");
+
     }
     public function CustomerData(){
         return DB::select("Select c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,sum(b.bill_payment) as total_spending
-            from customer_account c 
-            join bill b 
+            from customer_account c
+            join bill b
             on (b.customer_id = c.customer_id)
-            group by c.customer_name,c.customer_img_name, c.customer_contact,c.customer_email, c.customer_dob, c.customer_address 
-            union 
+            group by c.customer_name,c.customer_img_name, c.customer_contact,c.customer_email, c.customer_dob, c.customer_address
+            union
             Select c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,0 as total_spending
-            from customer_account c 
-            group by c.customer_name,c.customer_img_name, c.customer_contact,c.customer_email, c.customer_dob, c.customer_address 
+            from customer_account c
+            group by c.customer_name,c.customer_img_name, c.customer_contact,c.customer_email, c.customer_dob, c.customer_address
         ");
     }
 
@@ -111,7 +111,7 @@ class BillApi extends Controller
         $newPayment->payment_mode_date = $request->payment_mode_date;
 
         $newPayment->save();
-        
+
         $payments = PaymentMode::select()->where('orderId', $request->orderId)->get();
 
         if(count($payments) > 0)
@@ -121,9 +121,9 @@ class BillApi extends Controller
             {
                 $tmp = $payment;
             }
-    
+
             Bill::where('bill_id', $request->billId)->update(['bill_status' => 1,'payment_mode_id'=>$tmp->payment_mode_id]);
-            
+
             $products = DB::select("select * from product p join bill b on(p.product_id = b.product_id) where p.product_id = ".$request->billId);
             $product = '';
             foreach($products as $tmp)
@@ -141,17 +141,17 @@ class BillApi extends Controller
     public function VeritifitionPayment($customer_id,$product_id,$payment)
     {
         $billDate = date('Y-m-d h:m:s', time());
-            
+
         $newBillId = Bill::select()->where('product_id', $product_id)->where('customer_id', $customer_id)->get();
 
-        $tmp = DB::select("select * 
-        from product p 
+        $tmp = DB::select("select *
+        from product p
         join aution_price ap on (p.product_id = ap.product_id)
         where p.product_price_aution = ap.aution_price and p.product_status = 3 and ap.customer_id = ".$customer_id);
 
         if(count($newBillId) <= 0 && count($tmp) > 0){
             DB::insert("insert into bill(product_id, bill_date, bill_payment, customer_id) values (?,?,?,?)",
-             [$product_id, $billDate, $payment, $customer_id]);  
+             [$product_id, $billDate, $payment, $customer_id]);
             $url = "http://localhost:3000/login";
             return Redirect::intended($url);
         }
@@ -178,7 +178,7 @@ class BillApi extends Controller
         }
         return "Something wrong";
     }
-    
-    
+
+
 }
 

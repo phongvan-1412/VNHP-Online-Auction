@@ -32,8 +32,8 @@ class BarChart extends Component{
       labels: labels,
       datasets: [
         {
-          label: "Revenue",
-          borderColor: "rgb(255, 99, 132, 0.5)",
+          label: "revenue",
+          borderColor: "#fff",
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',

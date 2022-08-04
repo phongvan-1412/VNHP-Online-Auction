@@ -73,7 +73,7 @@ class LoyalCustomer extends Component{
                                                     <span>{p.customer_name}</span> 
                                                 </td>
                                                 <td>{p.customer_contact}</td>
-                                                <td>{p.total_spending}</td>
+                                                <td>$ {parseInt(p.total_spending).toLocaleString()}</td>
                                             </tr>
                                         )
                                     })}
