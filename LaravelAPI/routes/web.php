@@ -20,6 +20,9 @@ Route::get('/', function () {
 });
 Route::get('/actived/{customer_id}/{customer_token}',[CustomerApi::class, 'CustomerActivedEmail'])->name('customer.actived');
 Route::get('/forgetpassword', [CustomerApi::class, 'CustomerForgetPasswordView'])->name('forgetpass');
-Route::get('/verifitionpayment/{customer_id}/{product_id}/{payment}', [BillApi::class, 'VeritifitionPayment'])->name('product.payment');
+Route::get('/verifitionpayment/{bill_payment}/{aution_id}', [BillApi::class, 'VeritifitionPayment'])->name('product.payment');
 Route::get('/cancelpayment/{customer_id}/{product_id}', [BillApi::class, 'CancelPayment'])->name('product.cancel');
+
+Route::get('/confirmPaymentSucess', [BillApi::class, 'SuccessConfirmPaymentView']);
+
 

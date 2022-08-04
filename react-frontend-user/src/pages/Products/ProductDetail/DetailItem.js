@@ -28,16 +28,16 @@ const DetailItem = ({ product }) => {
       
       //
       var countdownProduct = product.product_id;
-      var countdownCustomer = JSON.parse(localStorage.getItem("customer_info")).customer_id;
 
       var days = 0;
       var hours = 0;
       var minutes = 0;
       var seconds = 0;
+      
       axios
-        .post("http://127.0.0.1:8000/api/countdownend", {countdownProduct, countdownCustomer})
+        .post("http://127.0.0.1:8000/api/countdownend", {countdownProduct})
         .then(function (response) {
-          // console.log(response.data)
+          console.log(response.data)
             });
 
     }
@@ -61,7 +61,6 @@ const DetailItem = ({ product }) => {
             axios
                 .post("http://127.0.0.1:8000/api/currentbidprice", {realBidPrice, productId, customerId, auctionDay} )
                 .then(function (res) {
-                  console.log(res.data)
                     if (res.data > 0) {
                         setCurrentBid(realBidPrice)
                         result.text("Your price is acceptable");

@@ -139,24 +139,26 @@ class BillApi extends Controller
     }
 
 
-    public function VeritifitionPayment($customer_id,$product_id,$payment)
+    public function VeritifitionPayment($bill_payment,$aution_id)
     {
         $billDate = date('Y-m-d h:m:s', time());
 
-        $newBillId = Bill::select()->where('product_id', $product_id)->where('customer_id', $customer_id)->get();
+        $newBillId = Bill::select()->where('aution_id', $aution_id)->get();
 
-        $tmp = DB::select("select *
-        from product p
-        join aution_price ap on (p.product_id = ap.product_id)
-        where p.product_price_aution = ap.aution_price and p.product_status = 3 and ap.customer_id = ".$customer_id);
+        if(count($newBillId) <= 0){
+            DB::insert("insert into bill(bill_date, bill_payment,bill_status,aution_id) values (?,?,?,?)",
+             [$billDate, $bill_payment,0,$aution_id]);
 
-        if(count($newBillId) <= 0 && count($tmp) > 0){
-            DB::insert("insert into bill(product_id, bill_date, bill_payment, customer_id) values (?,?,?,?)",
-             [$product_id, $billDate, $payment, $customer_id]);
-            $url = "http://localhost:3000/login";
-            return Redirect::intended($url);
+            // $url = "http://localhost:3000/login";
+            // return Redirect::intended($url);
         }
         return "Something wrong";
     }
+
+    public function SuccessConfirmPaymentView()
+    {
+        return view("/confirmPaymentSucess");
+    }
+    
 }
 

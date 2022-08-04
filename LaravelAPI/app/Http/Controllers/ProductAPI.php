@@ -107,40 +107,41 @@ class ProductAPI extends Controller
         return 0;
     }
     
-    public function CountdownEnd(Request $req_product){
-        $product = Product::select()->where('product_id', $req_product->countdownProduct)->get();
-        
-        if(count($product) > 0)
+    public function CountdownEnd(Request $req_product)
+    {
+        $products = Product::select()->where('product_id', $req_product->countdownProduct)->get();
+
+        if(count($products) > 0)
         {
             $productItem = '';
-            foreach($product as $item){
+            foreach($products as $item){
                 $productItem = $item;
             }
 
-            if ($productItem->product_price_aution <= $productItem->product_start_price){
+            $autionPrices = AuctionPrice::where('product_id',$req_product->countdownProduct)->where('aution_status',1)->get();
+
+            $autionPrice = '';
+            foreach($autionPrices as $item){
+                $autionPrice = $item;
+            }
+
+            if ($autionPrice->aution_price <= $productItem->product_start_price){
                 Product::where('product_id', $req_product->countdownProduct)->update(['product_status' => 2]);
             }else{
                 Product::where('product_id', $req_product->countdownProduct)->update(['product_status' => 3]);
                 
-                $tmp = DB::table('aution_price')->select('customer_id',DB::raw("MAX(aution_price)as aution_price"))
-                                        ->where('product_id',$productItem->product_id)->groupBy('customer_id')->get();
-                     
-                $customer_id = '';
-                foreach($tmp as $customer)
-                {
-                    $customer_id = $customer->customer_id;
-                }
                 
-                $tmpCus = Customer::select()->where('customer_id', $customer_id)->get();
+                $tmpCus = Customer::select()->where('customer_id', $autionPrice->customer_id)->get();
                 $newCustomer = "";
     
                 foreach($tmpCus as $customer)
                 {
                     $newCustomer = $customer;
                 }
-
-                Mail::send('emailVeritifiPayment', compact('newCustomer','productItem'), function($email) use($newCustomer,$productItem){
-                    $email->subject('VNHP Aution - Verify account');
+                $payment = $autionPrice->aution_price;
+                $aution_id = 
+                Mail::send('emailVeritifiPayment', compact('newCustomer','productItem','autionPrice'), function($email) use($newCustomer,$productItem,$autionPrice){
+                    $email->subject('VNHP Aution - Verify your payment');
                     $email->to($newCustomer->customer_email, $newCustomer->customer_name);
                 });
                 
