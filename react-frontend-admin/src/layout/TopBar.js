@@ -40,7 +40,7 @@ class TopBar extends Component {
           </button>
         </form>
 
-        <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        {/* <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
           <div className="input-group">
             <input
               type="text"
@@ -55,7 +55,7 @@ class TopBar extends Component {
               </button>
             </div>
           </div>
-        </form>
+        </form> */}
 
         <ul className="navbar-nav ml-auto">
           <div className="topbar-divider d-none d-sm-block"></div>

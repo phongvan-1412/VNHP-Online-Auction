@@ -34,8 +34,22 @@ class BarChart extends Component{
         {
           label: "Revenue",
           borderColor: "rgb(255, 99, 132, 0.5)",
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
-          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor:[
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
           borderWidth: 1,
           data: this.state.RevenuesData
         }
@@ -46,7 +60,7 @@ class BarChart extends Component{
       <div className="col-xl-6 col-lg-6">
         <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 className="m-0 font-weight-bold text-primary">REVENUE 2021</h6>
+                <h6 className="m-0 font-weight-bold text-primary">REVENUE 2022</h6>
             </div>
             <div className="card-body">
               <Bar data={data} />

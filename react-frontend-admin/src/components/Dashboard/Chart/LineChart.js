@@ -35,7 +35,7 @@ class LineChart extends Component{
       datasets: [
         {
           fill: true,
-          label: 'Dataset 2',
+          label: 'Revenues',
           borderColor: 'rgb(53, 162, 235)',
           backgroundColor: 'rgba(53, 162, 235, 0.5)',
           data: this.state.RevenuesData
