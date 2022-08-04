@@ -23,7 +23,7 @@ class Footer extends Component{
                             <br /><br />
                             <Link to="#">
                                 <MdEmail /> 
-                                buffdog@gmail.com
+                                vnhpgrocery.aptech@gmail.com
                             </Link>
                         </div>
 
@@ -69,14 +69,14 @@ class Footer extends Component{
                         <h4>GALLERY</h4>
                         <div className="gallery1">
                             <img src={"http://localhost:8000/ProductImg/1659076532-product.jpg"} className="gallery1__img1" />
-                            <img src={"http://localhost:8000/ProductImg/1659069279-product.jpg"} className="gallery1__img2" />
-                            <img src={"http://localhost:8000/ProductImg/1659063527-product.jpg"} className="gallery1__img3" />
-                            <img src={"http://localhost:8000/ProductImg/1659065835-product.jpg"} className="gallery1__img4" />
-                            <img src={"http://localhost:8000/ProductImg/1659067084-product.jpg"} className="gallery1__img5" />
-                            <img src={"http://localhost:8000/ProductImg/1659076619-product.jpg"} className="gallery1__img6" />
-                            <img src={"http://localhost:8000/ProductImg/1659065591-product.jpg"} className="gallery1__img7" />
+                            <img src={"http://localhost:8000/ProductImg/1659076619-product.jpg"} className="gallery1__img2" />
+                            <img src={"http://localhost:8000/ProductImg/1659069718-product.jpg"} className="gallery1__img3" />
+                            <img src={"http://localhost:8000/ProductImg/1659077239-product1.jpg"} className="gallery1__img4" />
+                            <img src={"http://localhost:8000/ProductImg/1659069279-product.jpg"} className="gallery1__img5" />
+                            <img src={"http://localhost:8000/ProductImg/1659071594-product1.jpg"} className="gallery1__img6" />
+                            <img src={"http://localhost:8000/ProductImg/1659075965-product2.jpg"} className="gallery1__img7" />
                             <img src={"http://localhost:8000/ProductImg/1659066974-product.jpg"} className="gallery1__img8" />
-                            <img src={"http://localhost:8000/ProductImg/1659067213-product.jpg"} className="gallery1__img9" />
+                            <img src={"http://localhost:8000/ProductImg/1659071194-product3.jpg"} className="gallery1__img9" />
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@ class Footer extends Component{
                     </div>
 
                     <div id="sentence">
-                        @ 2017 VNHP's Grocery. <Link to="#">Get The Theme</Link>
+                        @ 2017 VNHP Online Auction. <Link to="#">Register Now</Link>
                     </div>
                 </div>
             </footer>
