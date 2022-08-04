@@ -196,6 +196,7 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
                     className="form-control"
                     id="editfullname"
                     type="text"
+                    placeholder="enter your full name"
                     onBlur={onFullNameBlur}
                   />
                   <div id="fullname-check-result"></div>
@@ -227,6 +228,7 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
                     className="form-control"
                     id="editaddress"
                     type="text"
+                    placeholder="example: 112 Commercial Rd, Footscray VIC 3011, Australia"
                   />
                 </div>
 
@@ -241,7 +243,7 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
                     <input
                       className="form-control"
                       id="editcontact"
-                      type="tel"
+                      placeholder="example: 0355487651"
                       onBlur={onContactBlur}
                     />
                     <div id="check-phonenumber-result"></div>

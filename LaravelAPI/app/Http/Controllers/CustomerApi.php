@@ -22,20 +22,23 @@ class CustomerApi extends Controller
             $tmpUser = $user;
         }
 
-        if($tmpUser->customer_status < 1){
-             return 2;
+        if(count($users) > 0){
+            if($tmpUser->customer_status < 1){
+                return 2;
+           }
+   
+           else{
+               if($tmpUser->customer_pwd != md5($request->customer_pwd))
+               {
+                   return 0;
+               }
+               else{
+                   Customer::select()->where('customer_email', $request->customer_email)->where('customer_pwd', md5($request->customer_pwd))->update(['customer_login_status'=>1]);
+                   return $tmpUser;
+               }
+           }
         }
-
-        else{
-            if($tmpUser->customer_pwd != md5($request->customer_pwd))
-            {
-                return 0;
-            }
-            else{
-                Customer::select()->where('customer_email', $request->customer_email)->where('customer_pwd', md5($request->customer_pwd))->update(['customer_login_status'=>1]);
-                return $tmpUser;
-            }
-        }
+        return 3;
     }
 
     public function CustomerLogOut(Request $request)
