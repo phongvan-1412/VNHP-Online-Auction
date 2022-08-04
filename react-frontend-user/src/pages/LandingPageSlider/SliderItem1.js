@@ -54,7 +54,7 @@ const SliderItem1 = ({ product, updateComingProducts }) => {
       </div>
 
       <div className="product-item-countdownend-wrapper">
-        <span className="product-item-countdownend-headtext">Timed out: </span>
+        <span className="product-item-countdownend-headtext">Start In: </span>
         <span id={"slider1" + product.product_id + product.product_name} className="product-item-countdownend"></span>
       </div>
 

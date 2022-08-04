@@ -155,14 +155,14 @@ const Products = ({ products, category, categories }) => {
                           onChange={updateRange}
                           valueLabelDisplay="auto"
                         />
-                        <span>
+                        <span className="price-slider-headtext">
                           Drag or pick price of product you want to look for.
                         </span>
                       </div>
                     </div>
                   </div>
                   <div className="widget mercado-widget filter-widget brand-widget">
-                    <h2 className="widget-title">DATE</h2>
+                    <h2 className="widget-title">CUSTOM CHOICES</h2>
                     <div className="widget-content-date">
                       <div className="range-date">
                         <select defaultValue="0" onChange={onChange}>
