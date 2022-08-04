@@ -32,8 +32,6 @@ class HomePage extends Component {
     customers: [],
     userinfo: {},
     autionHistory: [],
-    billHistory: [],
-    newBill: [],
     feedbacks: [],
     hotAuctionProducts: [],
   };
@@ -70,15 +68,6 @@ class HomePage extends Component {
       .then((bh) => bh.json())
       .then((bh) => {
         this.setState({ billHistory: bh });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    fetch("http://127.0.0.1:8000/api/customernewbill", { method: "GET" })
-      .then((nb) => nb.json())
-      .then((nb) => {
-        this.setState({ newBill: nb });
       })
       .catch((err) => {
         console.log(err);
@@ -136,26 +125,7 @@ class HomePage extends Component {
           console.log(err);
         });
     };
-    const billHistory = () => {
-      fetch("http://127.0.0.1:8000/api/customerbillhistory", { method: "GET" })
-        .then((response) => response.json())
-        .then((response) => {
-          this.setState({ billHistory: response });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    const newBill = () => {
-      fetch("http://127.0.0.1:8000/api/customernewbill", { method: "GET" })
-        .then((response) => response.json())
-        .then((response) => {
-          this.setState({ newBill: response });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
+    
 
     return (
       <div>
