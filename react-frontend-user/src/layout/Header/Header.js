@@ -1,10 +1,23 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Link } from "react-router-dom";
-import { FaFacebook, FaInstagramSquare, FaTwitter } from "react-icons/fa";
-import Dropdown from "./DropdownNavBar/Dropdown";
 import axios from "axios";
+import $ from 'jquery';
+import { FaFacebook, FaInstagramSquare, FaTwitter } from "react-icons/fa";
+
+import Dropdown from "./DropdownNavBar/Dropdown";
 
 const Header = ({ userinfo, categories }) => {
+
+  var showTime = setInterval(function () {
+    var date = new Date().toLocaleDateString('en-ZA');
+    var time = new Date().toLocaleTimeString();
+    var myElement = date + " " + time;
+    if (document.getElementById("showtime") == null) {
+      clearInterval(myElement);
+    }
+      document.getElementById("showtime").innerHTML = myElement;
+  }, 1000);
+
   let checkUser = false;
   let userName = "";
   let customer = {};
@@ -49,9 +62,8 @@ const Header = ({ userinfo, categories }) => {
           style={{ margin: "0px", padding: "0px" }}
           replace
         >
-          <span className="icon-split-text" data-text="VNHP">
-            VNHP
-          </span>
+          <span id="showtime"></span>
+          <span className="icon-split-text" data-text="VNHP">VNHP</span>
           <span className="icon-footer-text">@ONLINE AUCTION</span>
         </Link>
 

@@ -25,21 +25,6 @@ import PayPals from "./pages/Payment/PayPals";
 //Footer
 import Footer from "./layout/Footer";
 
-// const headerBody1 = ReactDOM.createRoot(document.getElementById("headerBody1"));
-
-// function showTime() {
-//   const myElement = (
-//     <div>
-//       <h2 style={{ marginLeft: "200px" }}>{new Date().toLocaleTimeString()}</h2>
-//     </div>
-//   );
-
-//   headerBody1.render(myElement);
-// }
-
-// setInterval(showTime, 1000);
-// localStorage.removeItem("customer_info");
-
 class HomePage extends Component {
   state = {
     products: [],

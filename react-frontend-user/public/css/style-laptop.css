@@ -211,6 +211,18 @@
 .menu .login:hover::after{
     transform: translateX(-50%) scaleX(1);
 }
+#showtime{
+    position: absolute;
+    width: 150px;
+    top: 10px;
+    right: 7px;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: .6px;
+}
+.icon-text:hover  #showtime{
+    right: 4px;
+}
 .icon-text{
     position: relative;
     text-align: center;
@@ -276,9 +288,9 @@
 .icon-footer-text{
     position: absolute;
     color: var(--textColor);
-    font-size: 6px;
+    font-size: 5px;
     letter-spacing: .8px;
-    bottom: 10px;
+    bottom: 13px;
     left: 80px;
 }
 .icon-text:hover .icon-footer-text{
