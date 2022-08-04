@@ -33,8 +33,9 @@ const Products = ({ products, category, categories }) => {
   const [categoryId, setCategoryId] = useState(category.category_id);
   const onChange = (e) => {
     let option = e.target.value;
+    console.log({option, categoryId})
     axios
-      .post("http://127.0.0.1:8000/api/sortproductselect", {
+      .post("http://127.0.0.1:8000/api/filterproductselect", {
         option,
         categoryId,
       })
