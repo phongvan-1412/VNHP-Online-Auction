@@ -10,8 +10,9 @@ const Comment = ({ productId, currentFeedback }) => {
         $("#result").text("")
     }
     const onKeyUp = (event) => {
+        const feedbackContent = event.target.value;
         if (event.key === "Enter") {
-            const feedbackContent = event.target.value;
+            console.log(feedbackContent)
             setFeedbackContent(feedbackContent);
 
             const product_id = productId;
