@@ -51,9 +51,9 @@ function ProductQuickView({ product }) {
       ).innerHTML = "EXPIRED";
 
       var countdownProduct = product.product_id;
-      var countdownCustomer = JSON.parse(
-        localStorage.getItem("customer_info")
-      ).customer_id;
+      // var countdownCustomer = JSON.parse(
+      //   localStorage.getItem("customer_info")
+      // ).customer_id;
 
       var days = 0;
       var hours = 0;

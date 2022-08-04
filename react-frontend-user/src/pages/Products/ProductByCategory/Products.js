@@ -93,7 +93,7 @@ const Products = ({ products, category, categories }) => {
 
   return (
     <div
-      className="container-fluid d-flex justify-content-center"
+      className="container-fluid"
       style={{ padding: "0px", margin: "0px" }}
     >
       <div className="row" style={{ padding: "0px", margin: "0px 30px" }}>
