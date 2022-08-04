@@ -24,6 +24,7 @@ const ProductItem = ({ product }) => {
     if (document.getElementById("product-item" + product.product_id + product.product_name) == null) return;
 
     //SHOW ANNOUCEMENT PROUCT IS ON BIDDING
+    var onBidding = [];
     if(countDownStartDate <= now && now <= countDownEndDate){
       document.getElementById("bidding-annoucement" + product.product_id + product.product_name).innerHTML = "Product is on bidding";
     }
@@ -40,9 +41,10 @@ const ProductItem = ({ product }) => {
       axios
         .post("http://127.0.0.1:8000/api/changeproductstatus", {product_id, product_status})
         .then(function (response) {
-          console.log(response.data)
             });
         return;
+
+      
     }
 
     document.getElementById("product-item" + product.product_id + product.product_name).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";}, 1000);
