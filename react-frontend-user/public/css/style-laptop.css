@@ -1322,7 +1322,8 @@
     font-weight: bold;
 }
 .countdowndate, .product-item-countdownend,
-.countDownEndDate, .countDownStartDate{
+.countDownEndDate, .countDownStartDate,
+.quickview-countdown{
     color: var(--iconHover);
     font-weight: bold;
 }

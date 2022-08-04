@@ -33,7 +33,6 @@ const Products = ({ products, category, categories }) => {
   const [categoryId, setCategoryId] = useState(category.category_id);
   const onChange = (e) => {
     let option = e.target.value;
-    console.log({option, categoryId})
     axios
       .post("http://127.0.0.1:8000/api/filterproductselect", {
         option,
@@ -43,13 +42,6 @@ const Products = ({ products, category, categories }) => {
         setTotalProducts(res.data);
       });
   };
-  // console.log(totalProducts);
-  // let totalProducts = [];
-  // products.forEach((product) => {
-  //   if (product.category_id === category.category_id && product.product_start_price >= test.min && product.product_start_price <= test.max){
-  //     totalProducts = [...totalProducts, product];
-  //   }
-  // });
 
   let filterProducts = [];
   totalProducts.forEach((product) => {

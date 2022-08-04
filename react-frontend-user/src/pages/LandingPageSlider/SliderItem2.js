@@ -23,10 +23,10 @@ const SliderItem2 = ({ product, endingSoonProducts }) => {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    //SHOW ANNOUCEMENT PROUCT IS ON BIDDING
-    if(countDownStartDate <= now && now <= countDownEndDate){
-      document.getElementById("bidding-annoucement" + product.product_id + product.product_name).innerHTML = "Product is on bidding";
-    }
+    // //SHOW ANNOUCEMENT PROUCT IS ON BIDDING
+    // if(countDownStartDate <= now && now <= countDownEndDate){
+    //   document.getElementById("bidding-annoucement" + product.product_id + product.product_name).innerHTML = "Product is on bidding";
+    // }
     if (
       document.getElementById(
         "slider2" + product.product_id + product.product_name

@@ -67,7 +67,10 @@ const ProductItem = ({ product }) => {
         className="product-img"
       >
         <img name={product.product_id}
-          src={require(`../../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
+          src={
+            "http://localhost:8000/ProductImg/" +
+            product.product_thumbnail_img_name
+          }
           />
       </Link>
 

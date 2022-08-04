@@ -6,14 +6,6 @@ function ProductQuickView({ product }) {
   console.log(product)
   const ref = useRef({});
 
-  const next = () => {
-    ref.current.slickNext();
-  };
-
-  const previous = () => {
-    ref.current.slickPrev();
-  };
-
   const settings = {
     dots: false,
     infinite: true,
@@ -26,11 +18,11 @@ function ProductQuickView({ product }) {
   };
 
   //COUNTDOWN
-  var productStartDate = product.product_start_aution_day + " " + "00:00:00";
+  var productEndDate = product.product_end_aution_day + " " + "00:00:00";
 
-  var countDownDate = new Date(new Date(productStartDate).toLocaleString()).getTime();
+  var countDownDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
  
-  var productNow = setInterval(function () {
+  var productQuickView = setInterval(function () {
     var now = new Date(new Date().toLocaleString()).getTime();
 
     var distance = countDownDate - now;
@@ -43,18 +35,15 @@ function ProductQuickView({ product }) {
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     if (
-      document.getElementById(product.product_id + product.product_name) == null
+      document.getElementById("quickview" + product.product_id + product.product_name) == null
     )
       return;
     if (distance <= 0) {
-      clearInterval(productNow);
-      document.getElementById(
-        product.product_id + product.product_name
-      ).innerHTML = "EXPIRED";
+      clearInterval(productQuickView);
+      document.getElementById("quickview" + product.product_id + product.product_name).innerHTML = "EXPIRED";
 
     }
-    document.getElementById(product.product_id + product.product_name
-    ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    document.getElementById("quickview" + product.product_id + product.product_name).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   }, 1000);
 
   return (
@@ -69,7 +58,7 @@ function ProductQuickView({ product }) {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
-              Modal title
+              {product.product_name}
             </h5>
             <button
               type="button"
@@ -85,29 +74,32 @@ function ProductQuickView({ product }) {
                   <div>
                     <img
                       id="product-quick-view-img"
-                      src={require(`../../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
+                      src={
+                        "http://localhost:8000/ProductImg/" +
+                        product.product_thumbnail_img_name
+                      }
                     />
                   </div>
                   <div>
                     <Slider ref={ref} {...settings}>
-                      {/* <img
+                      <img
                         id="product-quick-view-sub-img"
-                        src={require(`../../../../../LaravelAPI/public/ProductImg/${productImages.img1}`)}
+                        src={"http://localhost:8000/ProductImg/" + product.product_img_name1}
+                        
                       />
                       <img
                         id="product-quick-view-sub-img"
-                        src={require(`../../../../../LaravelAPI/public/ProductImg/${productImages.img2}`)}
+                        src={"http://localhost:8000/ProductImg/" + product.product_img_name2}
                       />
                       <img
                         id="product-quick-view-sub-img"
-                        src={require(`../../../../../LaravelAPI/public/ProductImg/${productImages.img3}`)}
-                      /> */}
+                        src={"http://localhost:8000/ProductImg/" + product.product_img_name3}
+                      />
                     </Slider>
                   </div>
                 </div>
                 <div className="card col-8">
-                  <div id={product.product_id + product.product_name}>countdown</div>
-                  <div>{product.product_name.replace(/-/g, " ")}</div>
+                  <div id={"quickview" + product.product_id + product.product_name} className="quickview-countdown"></div>
                   <div>{product.product_start_price}</div>
                   <div>{product.product_price_aution}</div>
                   <ProductQuickViewDetails product={product}/>
