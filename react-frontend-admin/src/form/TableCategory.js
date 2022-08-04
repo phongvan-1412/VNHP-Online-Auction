@@ -92,6 +92,12 @@ class Category extends Component {
           }
         });
     };
+    function Search() {
+      var value = $("#search").val().toLowerCase();
+      $("#category-records tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+    }
     return (
       <div className="container-fluid">
         <button
@@ -107,6 +113,13 @@ class Category extends Component {
             <h6 className="m-0 font-weight-bold text-primary">Category</h6>
           </div>
           <div className="card-body">
+            <input
+                className="form-control col-3 mb-3"
+                id="search"
+                type="text"
+                onKeyUp={Search}
+                placeholder="Search.."
+              />
             <div className="table-responsive">
               <table
                 className="table table-striped"
@@ -124,7 +137,7 @@ class Category extends Component {
                   </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="category-records">
                   {this.state.CategoryData.map((h, index) => {
                     return (
                       <tr key={index}>

@@ -72,7 +72,12 @@ class TableProduct extends Component {
           }
         });
     };
-    
+    function Search() {
+      var value = $("#search").val().toLowerCase();
+      $("#product-records tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+    }
     return (
       <div className="container-fluid">
         <button
@@ -88,6 +93,13 @@ class TableProduct extends Component {
             <h6 className="m-0 font-weight-bold text-primary">Product</h6>
           </div>
           <div className="card-body">
+            <input
+              className="form-control col-3 mb-3"
+              id="search"
+              type="text"
+              onKeyUp={Search}
+              placeholder="Search.."
+            />
             <div className="table-responsive">
               <table
                 className="table table-striped"
@@ -104,12 +116,13 @@ class TableProduct extends Component {
                     <th>End Price</th>
                     <th>Start Aution Day</th>
                     <th>End Aution Day</th>
+                    <th>Auction Status</th>
                     <th>Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="product-records">
                   {this.state.ProductData.map((h, index) => {
                     return (
                       <tr key={index}>
@@ -129,6 +142,25 @@ class TableProduct extends Component {
                         <td>{h.product_start_aution_day}</td>
                         <td>{h.product_end_aution_day}</td>
                         <td>
+                          {h.product_status == 0 ? (
+                            <h5>
+                              <span class="badge badge-secondary">Deactive</span>                           
+                            </h5>
+                          ) : h.product_status == 1 ? (
+                            <h5>
+                              <span class="badge badge-primary">Active</span>                           
+                            </h5>
+                          ): h.product_status == 2 ?(
+                            <h5>
+                              <span class="badge badge-warning">Pending</span>                           
+                            </h5>
+                          ) : (
+                            <h5>
+                              <span class="badge badge-success">Pending payment</span>                           
+                            </h5>
+                          )}
+                        </td>
+                        <td>
                           {h.product_status == 1 ? (
                             <label className="switch">
                               <input type="checkbox" defaultChecked />
@@ -136,9 +168,9 @@ class TableProduct extends Component {
                             </label>
                           ) : (
                             <label className="switch">
-                              <input type="checkbox" />
-                              <span className="slider round"></span>
-                            </label>
+                            <input type="checkbox" />
+                            <span className="slider round"></span>
+                          </label>
                           )}
                         </td>
                         <td>
