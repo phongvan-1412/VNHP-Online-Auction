@@ -59,7 +59,6 @@ const DetailItem = ({ product }) => {
             axios
                 .post("http://127.0.0.1:8000/api/currentbidprice", {realBidPrice, productId, customerId, auctionDay} )
                 .then(function (res) {
-                  console.log(res.data)
                     if (res.data > 0) {
                         setCurrentBid(realBidPrice)
                         result.text("Your price is acceptable");

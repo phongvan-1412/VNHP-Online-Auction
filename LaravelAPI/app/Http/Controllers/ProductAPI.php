@@ -213,6 +213,26 @@ class ProductAPI extends Controller
         order by count(ap.aution_id)");
     }
 
+    public function FilterProductSelect(Request $request){
+    // { return $request->now;
+        $date = date("Y-m-d");
+        
+        if($request->option == 0){
+            $product = Product::select()->where('category_id', $request->categoryId)->get();
+            return $product;
+        }
+        if($request->option == 1){
+            $product = Product::select()
+            ->where('category_id', $request->categoryId)
+            ->where('product_start_aution_day','<=',$date)
+            ->where('product_end_aution_day','>=',$date)
+            ->get();
+            return $product;      
+        }
 
+        
+        
+        return $product;
+    }
 
 }
