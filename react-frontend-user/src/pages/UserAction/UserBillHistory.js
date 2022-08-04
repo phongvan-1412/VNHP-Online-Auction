@@ -1,6 +1,6 @@
 import React from "react";
 
-function UserBillHistory({currentBillHistory}) {
+function UserBillHistory({ currentBillHistory }) {
   function Search() {
     var value = $("#search").val().toLowerCase();
     $("#bill-records tr").filter(function () {
@@ -8,6 +8,19 @@ function UserBillHistory({currentBillHistory}) {
     });
   }
   let i = 1;
+  if (currentBillHistory.length <= 0) {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-5"></div>
+          <div className="col-2">
+            <span>No record found</span>
+          </div>
+          <div className="col-5"></div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="container">
       <div className="card shadow mb-4">
@@ -53,18 +66,18 @@ function UserBillHistory({currentBillHistory}) {
             </tfoot> */}
               <tbody id="bill-records">
                 {currentBillHistory.map((bh, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{i++}</td>
-                    <td>{bh.bill_id}</td>
-                    <td>{bh.payment_mode_id}</td>
-                    <td>{bh.bill_payment}</td>
-                    <td>{bh.payment_mode_type}</td>
-                    <td>{bh.product_name}</td>
-                    <td>{bh.bill_date}</td>
-                  </tr>
-                );
-              })}
+                  return (
+                    <tr key={index}>
+                      <td>{i++}</td>
+                      <td>{bh.bill_id}</td>
+                      <td>{bh.payment_mode_id}</td>
+                      <td>{bh.bill_payment}</td>
+                      <td>{bh.payment_mode_type}</td>
+                      <td>{bh.product_name}</td>
+                      <td>{bh.bill_date}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

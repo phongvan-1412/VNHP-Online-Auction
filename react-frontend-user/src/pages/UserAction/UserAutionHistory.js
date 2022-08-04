@@ -1,6 +1,6 @@
 import React from "react";
 
-function UserAutionHistory({currentAutionHistory}) {
+function UserAutionHistory({ currentAutionHistory }) {
   function Search() {
     var value = $("#search").val().toLowerCase();
     $("#aution-history tr").filter(function () {
@@ -8,6 +8,19 @@ function UserAutionHistory({currentAutionHistory}) {
     });
   }
   let i = 1;
+  if (currentAutionHistory.length <= 0) {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-5"></div>
+          <div className="col-2">
+            <span>No record found</span>
+          </div>
+          <div className="col-5"></div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="container">
       <div className="card shadow mb-4">
@@ -50,15 +63,15 @@ function UserAutionHistory({currentAutionHistory}) {
             </tfoot> */}
               <tbody id="aution-history">
                 {currentAutionHistory.map((ah, index) => {
-                return (
-                  <tr key={index}>
-                    <td >{i++}</td>
-                    <td>{ah.product_name}</td>
-                    <td>{ah.aution_price}</td>
-                    <td>{ah.aution_day}</td>
-                  </tr>
-                );
-              })}
+                  return (
+                    <tr key={index}>
+                      <td>{i++}</td>
+                      <td>{ah.product_name}</td>
+                      <td>{ah.aution_price}</td>
+                      <td>{ah.aution_day}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
