@@ -28,10 +28,10 @@ class Feedback extends Component {
         <div className="row">
           {this.state.FeedbackData.map((p, index) => {
             return (
-              <div className="col-md-6" key={index}>
+              <div className="col-lg-6 col-sm-12" key={index}>
                 <div className="media g-mb-30 media-comment">
                   <img
-                    className="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
+                    className="d-flex g-width-50 g-height-50 auto rounded-circle g-mt-3 g-mr-15"
                     src={
                       "http://localhost:8000/UserImage/" + p.customer_img_name
                     }
@@ -57,7 +57,8 @@ class Feedback extends Component {
                             p.product_thumbnail_img_name
                           }
                           alt="Image Description"
-                          width={170}
+                          className="img-fluid"
+                          width="150" height="140"
                         />
                       </div>
                     </div>

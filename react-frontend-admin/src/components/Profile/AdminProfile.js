@@ -17,20 +17,7 @@ class AdminProfile extends Component{
             currentAdminInfo = JSON.parse(localStorage.getItem("admin_info"));
           }
         }
-        var check = true;
-        const ShowChangePwd = () =>{
-            if(check){
-                $('#account-detail').hide(100);
-                $('#changepwdform').show(200);
-                $('#changepwd').html("Change Profile");
-                check = false;
-            }else{
-                $('#changepwdform').hide(200);
-                $('#account-detail').show(100);
-                $('#changepwd').html("Change Password");
-                check = true;
-            }
-        } 
+
         
 
         function onAvatarChange() {
@@ -114,13 +101,15 @@ class AdminProfile extends Component{
                             onChange={onAvatarChange}                        
                         />
                         <div className="card mt-3">
-                            <span 
+                            <button 
                                 className="btn btn-primary"  
                                 id="changepwd"
-                                onClick={ShowChangePwd}
+                                data-toggle="modal"
+                                data-target="#con-close-modal"
+                                // onClick={ShowChangePwd}
                             >
                             Change Password
-                            </span>
+                            </button>
                         </div>
                         </div>
                     </div>

@@ -16,17 +16,25 @@ class LogIn extends Component{
             const pwd = $('#pwd').val();
             const admin = {email, pwd};
             const self=this;
-            axios.post("http://127.0.0.1:8000/api/login", admin)
-            .then(function(response){
-                if(response.data == 0){
-                    $('#msg').text('Wrong email or password').addClass('text-danger'); 
-                    self.setState({loading:false})
-                }else{
-                    localStorage.setItem("admin_info",JSON.stringify(response.data));
-                    self.setState({loading:false})
-                    setInterval(returnDashboard, 1000);
-                }
-            })
+            if(!email){
+                $('#email-msg').text('*email is required').addClass('text-danger text-small'); 
+                this.setState({loading:false})
+            } if(!pwd){
+                $('#msg').text('*password is required').addClass('text-danger text-small'); 
+                this.setState({loading:false})
+            }else{
+                axios.post("http://127.0.0.1:8000/api/login", admin)
+                .then(function(response){
+                    if(response.data == 0){
+                        $('#msg').text('*Wrong email or password').addClass('text-danger text-small'); 
+                        self.setState({loading:false})
+                    }else{
+                        localStorage.setItem("admin_info",JSON.stringify(response.data));
+                        setInterval(returnDashboard, 2000);
+                    }
+                })
+            }
+
         };
         const {loading} = this.state;
         return (
@@ -48,12 +56,12 @@ class LogIn extends Component{
                                                     <input type="email" className="form-control form-control-user"
                                                         id="email" aria-describedby="emailHelp"
                                                         placeholder="Email..."/>
+                                                        <em id="email-msg"></em>
                                                 </div>
                                                 <div className="form-group mt-4">
                                                     <input type="password" className="form-control form-control-user"
                                                         id="pwd" placeholder="Password..."/>
-                                                <span id='msg'></span>
-
+                                                    <em id='msg'></em>
                                                 </div>
 
                                                 <button 

@@ -60,7 +60,7 @@ class MenuBar extends Component {
       },
       {
         title: "Feedback",
-        item: "All Payment",
+        item: "All feedback ",
         icon: "fab fa-amazon-pay",
         dataTarget: "#feedback",
         ariaControl: "feedback",
@@ -82,7 +82,7 @@ class MenuBar extends Component {
   render() {
     return (
       <ul
-        className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        className="navbar-nav bg-gradient sidebar sidebar-dark accordion"
         id="accordionSidebar"
       >
         <Link
@@ -92,7 +92,7 @@ class MenuBar extends Component {
           <div className="sidebar-brand-icon rotate-n-15">
             <i className="fas fa-pen-fancy"></i>
           </div>
-          <div className="sidebar-brand-text mx-3">BuffDog News</div>
+          <div className="sidebar-brand-text mx-3">VNHP Auction</div>
         </Link>
 
         <hr className="sidebar-divider my-0" />
