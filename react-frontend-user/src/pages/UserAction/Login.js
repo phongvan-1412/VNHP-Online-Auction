@@ -94,14 +94,17 @@ class Login extends Component {
           } else if (response.data == 0) {
             passwordResult.text("Please check your pasword");
             passwordResult.css("color", "red");
-          } else {
+          } else if(response.data == 3){
+            passwordResult.text("Please check you email");
+            passwordResult.css("color", "red");
+          }else {
             passwordResult.text("Login successfully. Redirect to Home");
             localStorage.setItem(
               "customer_info",
               JSON.stringify(response.data)
             );
             customerLogin();
-            // setInterval(returnHome, 3000);
+            setInterval(returnHome, 3000);
           }
         })
         .catch((err) => {

@@ -312,7 +312,7 @@ class Register extends Component {
                 id="firstname"
                 name="firstname"
                 className="form-control"
-                placeholder="John"
+                placeholder="Enter your firstname"
                 onBlur={onFirstNameBlur}
               />
               <div
@@ -326,7 +326,7 @@ class Register extends Component {
                 type="text"
                 id="lastname"
                 name="lastname"
-                placeholder="Nathan"
+                placeholder="Enter your lastname"
                 className="form-control"
                 onBlur={onLastNameBlur}
               />
@@ -340,7 +340,7 @@ class Register extends Component {
               <input
                 type="text"
                 id="email"
-                placeholder="johnnaton@gmail.com"
+                placeholder="example: johnnaton@gmail.com"
                 className="form-control"
                 onBlur={isEmailExists}
               />
@@ -354,6 +354,7 @@ class Register extends Component {
               <input
                 type="password"
                 id="password"
+                placeholder="enter 6 or more character"
                 className="form-control"
                 onBlur={onPasswordBlur}
               />
@@ -367,6 +368,7 @@ class Register extends Component {
               <input
                 type="password"
                 id="confirmpassword"
+                placeholder="enter same password"
                 className="form-control"
                 onBlur={onConfirmPasswordBlur}
               />
@@ -380,6 +382,7 @@ class Register extends Component {
               <input
                 type="text"
                 id="phonenumber"
+                placeholder="example: 0355487651"
                 className="form-control"
                 onBlur={onPhoneNumberBlur}
               />
