@@ -111,18 +111,6 @@ const Header = ({ userinfo, categories }) => {
               </Link>
           </div>
         )}
-
-        <a href="https://www.facebook.com/" className="meta-facebook">
-          <FaFacebook />
-        </a>
-
-        <a href="https://www.instagram.com/?hl=en" className="meta-instagram">
-          <FaInstagramSquare />
-        </a>
-
-        <a href="https://twitter.com/" className="meta-twitter">
-          <FaTwitter />
-        </a>
       </header>
     </div>
   );
