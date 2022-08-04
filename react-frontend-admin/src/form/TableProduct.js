@@ -144,19 +144,19 @@ class TableProduct extends Component {
                         <td>
                           {h.product_status == 0 ? (
                             <h5>
-                              <span class="badge badge-secondary">Deactive</span>                           
+                              <span className="badge badge-secondary">Deactive</span>                           
                             </h5>
                           ) : h.product_status == 1 ? (
                             <h5>
-                              <span class="badge badge-primary">Active</span>                           
+                              <span className="badge badge-primary">Active</span>                           
                             </h5>
                           ): h.product_status == 2 ?(
                             <h5>
-                              <span class="badge badge-warning">Pending</span>                           
+                              <span className="badge badge-warning">Pending</span>                           
                             </h5>
                           ) : (
                             <h5>
-                              <span class="badge badge-success">Pending payment</span>                           
+                              <span className="badge badge-success">Pending payment</span>                           
                             </h5>
                           )}
                         </td>

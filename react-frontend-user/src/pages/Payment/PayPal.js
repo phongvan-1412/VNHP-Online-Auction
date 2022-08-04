@@ -11,7 +11,7 @@ import ReactDOM from "react-dom";
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 const PayPal = ({ totalPayment, billId, newBill }) => {
-  const value = totalPayment / 100;
+  const value1 = (totalPayment / 100).toFixed(2);
 
   // const paypal = useRef();
   // useEffect(() => {
@@ -69,7 +69,7 @@ const PayPal = ({ totalPayment, billId, newBill }) => {
             {
               amount: {
                 currency: "USD",
-                value: 1,
+                value: value1,
               },
             },
           ],

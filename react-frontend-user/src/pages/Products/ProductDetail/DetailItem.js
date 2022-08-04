@@ -8,7 +8,7 @@ import { BsFillBagCheckFill } from "react-icons/bs";
 const DetailItem = ({ product }) => { 
   //COUNTDOWN
   var productEndDate = product.product_end_aution_day + " " + "00:00:00";
-  var countDownDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
+  var countDownDate = new Date(new Date("2022/08/04 20:48:00").toLocaleString()).getTime();
 
   var productNow = setInterval(function() {
     var now = new Date(new Date().toLocaleString()).getTime();
