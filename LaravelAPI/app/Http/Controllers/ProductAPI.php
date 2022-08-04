@@ -216,7 +216,6 @@ class ProductAPI extends Controller
     public function FilterProductSelect(Request $request){
     // { return $request->now;
         $date = date("Y-m-d");
-        
         if($request->option == 0){
             $product = Product::select()->where('category_id', $request->categoryId)->get();
             return $product;
@@ -229,8 +228,6 @@ class ProductAPI extends Controller
             ->get();
             return $product;      
         }
-
-        
         
         return $product;
     }
