@@ -7,10 +7,8 @@ import { BsFillBagCheckFill } from "react-icons/bs";
 
 const DetailItem = ({ product }) => { 
   //COUNTDOWN
-  // var productEndDate = product.product_end_aution_day ;
-  
-  // var countDownDate = new Date("product.product_end_aution_day").getTime();
-  var countDownDate = new Date(new Date("8/3/2022, 2:26:00 PM").toLocaleString()).getTime();
+  var productEndDate = product.product_end_aution_day + " " + "00:00:00";
+  var countDownDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
 
   var productNow = setInterval(function() {
     var now = new Date(new Date().toLocaleString()).getTime();
@@ -48,7 +46,7 @@ const DetailItem = ({ product }) => {
     //BIDDING PRICE
     const [currentBid, setCurrentBid] = useState(product.product_price_aution);
     const setTime = () => {
-      $("#result").text("")
+      $(".result-bidprice").text("")
   }
     const onKeyUp = (event) => {
         if (event.key === "Enter") {
@@ -57,7 +55,7 @@ const DetailItem = ({ product }) => {
             const auctionDay = new Date(new Date().toLocaleString());
             const realBidPrice = event.target.value;
 
-            const result = $("#result-bidprice");
+            const result = $(".result-bidprice");
 
             axios
                 .post("http://127.0.0.1:8000/api/currentbidprice", {realBidPrice, productId, customerId, auctionDay} )
@@ -66,7 +64,6 @@ const DetailItem = ({ product }) => {
                         setCurrentBid(realBidPrice)
                         result.text("Your price is acceptable");
                         result.css("color", "green");
-                        $("#result-bidprice");
                         $("#input-bidprice").val("");
                         setInterval(setTime, 2000)
                     } else {
@@ -93,7 +90,7 @@ const DetailItem = ({ product }) => {
       </div>
 
       <div className="col-md-6 product-detail-info-wrapper">
-        <div id={ product.product_id + product.product_name}></div>
+        <div id={ product.product_id + product.product_name} className="product-detail-countdown"></div>
         <div className="product-detail-product-name">
           <h3>{product.product_name.replace(/-/g, " ")}</h3>
         </div>
@@ -122,7 +119,7 @@ const DetailItem = ({ product }) => {
             </div>
           </div>
 
-          <div id="result-bidprice"></div>
+          <div className="result-bidprice"></div>
 
           <div className="product-detail-product-bidprice-wrapper">
             <input id="input-bidprice" className="product-detail-product-bidprice" type="number" min={product.product_start_price} step="10" placeholder="Your Max Bid" onKeyUp={onKeyUp} />

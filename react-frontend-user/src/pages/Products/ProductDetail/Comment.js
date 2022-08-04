@@ -60,8 +60,8 @@ const Comment = ({ productId, currentFeedback }) => {
                 </div>
             </div>
 
-            <div className="row input-text" id="input-text">
-                <input placeholder="What do you think?" cols="30" rows="10" onKeyUp={onKeyUp} />
+            <div className="row input-text">
+                <input id="input-text" placeholder="Tell us what you think?" cols="30" rows="10" onKeyUp={onKeyUp} />
             </div>
 
             <div id="result"></div>

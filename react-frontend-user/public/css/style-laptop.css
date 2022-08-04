@@ -1285,23 +1285,6 @@
     border: var(--border);
     border-radius: 3px;
 }
-/* .widget-content-date .range-date .rdrCalendarWrapper{
-    width: 100%;
-    background-color: whitesmoke;
-    align-self: center;
-}
-.widget-content-date .range-date .rdrCalendarWrapper .rdrMonth{
-    width: 95% ;
-    align-self: center;
-}
-.widget-content-date .range-date .rdrCalendarWrapper .rdrMonthAndYearWrapper,
-.widget-content-date .range-date .rdrCalendarWrapper .rdrMonthAndYearWrapper .rdrNextPrevButton,
-.widget-content-date .range-date .rdrCalendarWrapper .rdrMonthAndYearWrapper .rdrNextPrevButton{
-    width: 80% ;
-}
-.widget-content-date button .rdrNextPrevButton .rdrNextButton{
-    background-color: black;
-} */
 
 /* ----------Display-Product---------- */
 .pagination{
@@ -1327,7 +1310,7 @@
 }
 .countdowndate, .product-item-countdownend,
 .countDownEndDate, .countDownStartDate,
-.quickview-countdown{
+.quickview-countdown, .product-detail-countdown{
     color: var(--iconHover);
     font-weight: bold;
 }
