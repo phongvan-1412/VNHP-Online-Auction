@@ -68,15 +68,15 @@ class Footer extends Component{
                     <div className="footer-container1-col3">
                         <h4>GALLERY</h4>
                         <div className="gallery1">
-                            <img src={require('../img/Footer/image-1.jpg')} className="gallery1__img1" />
-                            <img src={require('../img/Footer/image-2.jpg')} className="gallery1__img2" />
-                            <img src={require('../img/Footer/image-3.jpg')} className="gallery1__img3" />
-                            <img src={require('../img/Footer/image-7.jpg')} className="gallery1__img4" />
-                            <img src={require('../img/Footer/image-5.jpg')} className="gallery1__img5" />
-                            <img src={require('../img/Footer/image-9.jpg')} className="gallery1__img6" />
-                            <img src={require('../img/Footer/image-4.jpg')} className="gallery1__img7" />
-                            <img src={require('../img/Footer/image-8.jpg')} className="gallery1__img8" />
-                            <img src={require('../img/Footer/image-6.jpg')} className="gallery1__img9" />
+                            <img src={"http://localhost:8000/ProductImg/1659076532-product.jpg"} className="gallery1__img1" />
+                            <img src={"http://localhost:8000/ProductImg/1659069279-product.jpg"} className="gallery1__img2" />
+                            <img src={"http://localhost:8000/ProductImg/1659063527-product.jpg"} className="gallery1__img3" />
+                            <img src={"http://localhost:8000/ProductImg/1659065835-product.jpg"} className="gallery1__img4" />
+                            <img src={"http://localhost:8000/ProductImg/1659067084-product.jpg"} className="gallery1__img5" />
+                            <img src={"http://localhost:8000/ProductImg/1659076619-product.jpg"} className="gallery1__img6" />
+                            <img src={"http://localhost:8000/ProductImg/1659065591-product.jpg"} className="gallery1__img7" />
+                            <img src={"http://localhost:8000/ProductImg/1659066974-product.jpg"} className="gallery1__img8" />
+                            <img src={"http://localhost:8000/ProductImg/1659067213-product.jpg"} className="gallery1__img9" />
                         </div>
                     </div>
                 </div>

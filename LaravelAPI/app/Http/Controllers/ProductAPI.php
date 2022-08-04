@@ -201,15 +201,15 @@ class ProductAPI extends Controller
 
     public function HotAuctionProducts()
     {
-        return DB::select("select p.product_id,count(ap.aution_id) as count_auction,p.product_name,p.category_id,p.owner_id,
+        return DB::select("select p.product_id,count(ap.aution_id) as count_auction,max(ap.aution_price) as current_bid,p.product_name,p.category_id,p.owner_id,
         p.product_information,p.product_ingredients,p.product_instruction_store,p.product_thumbnail_img_name,p.product_img_name1
-        ,p.product_img_name2,p.product_img_name3,p.product_start_price,p.product_price_aution,p.product_start_aution_day,p.product_end_aution_day,c.category_name from product p
+        ,p.product_img_name2,p.product_img_name3,p.product_start_price,p.product_start_aution_day,p.product_end_aution_day,c.category_name from product p
         join category c on (p.category_id = c.category_id)
         join aution_price ap on(p.product_id = ap.product_id)
         where p.product_status = 1 and convert(datetime, product_end_aution_day, 120) > getdate() 
         group by p.product_id,p.product_name,p.category_id,p.owner_id, c.category_name,
         p.product_information,p.product_ingredients,p.product_instruction_store,p.product_thumbnail_img_name,p.product_img_name1
-        ,p.product_img_name2,p.product_img_name3,p.product_start_price,p.product_price_aution,p.product_start_aution_day,p.product_end_aution_day
+        ,p.product_img_name2,p.product_img_name3,p.product_start_price,p.product_start_aution_day,p.product_end_aution_day
         order by count(ap.aution_id)");
     }
 

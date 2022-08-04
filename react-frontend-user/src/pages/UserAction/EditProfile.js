@@ -75,23 +75,25 @@ function EditProfile({ currentUserInfo, updateUserLogin }) {
   };
 
   const onDobBlur = (e) => {
-    const inputDob = e.targete.value;
-    const currentDate = convertDatetime(
-      new Date(new Date().toLocaleString().substring(0, 9))
-    );
-    const dob = convertDatetime(new Date(new Date(inputDob)));
+    var optimizedBirthday = e.target.value.replace(/-/g, "/");
 
-    const currentDateTimestamp = new Date(currentDate).getTime();
-    const dobTimestamp = new Date(dob).getTime();
+    //set date based on birthday at 01:00:00 hours GMT+0100 (CET)
+    var myBirthday = new Date(optimizedBirthday);
+
+    // set current day on 01:00:00 hours GMT+0100 (CET)
+    var currentDate = new Date().toJSON().slice(0, 10) + " 01:00:00";
+
+    // calculate age comparing current date and borthday
+    var myAge = ~~((Date.now(currentDate) - myBirthday) / 31557600000);
 
     const result = $("#check-dob-result");
 
-    if (!inputDob) {
+    if (!e.target.value) {
       result.text("Please insert your date of birth.");
       result.css("color", "red");
       checkValidDob = false;
     } else {
-      if (currentDateTimestamp < dobTimestamp) {
+      if (myAge < 18) {
         result.text("Date of birth is invalid.");
         result.css("color", "red");
         checkValidDob = false;

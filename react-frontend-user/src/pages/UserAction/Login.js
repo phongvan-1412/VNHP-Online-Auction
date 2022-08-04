@@ -7,6 +7,7 @@ import axios from "axios";
 class Login extends Component {
   constructor(props) {
     super(props);
+    this.state = { loading: false };
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
   }
@@ -84,7 +85,8 @@ class Login extends Component {
       }
 
       const customer = { customer_email, customer_pwd };
-
+      this.setState({ loading: true });
+      const self = this;
       axios
         .post(`http://127.0.0.1:8000/api/customerlogin`, customer)
         .then((response) => {
@@ -94,17 +96,19 @@ class Login extends Component {
           } else if (response.data == 0) {
             passwordResult.text("Please check your pasword");
             passwordResult.css("color", "red");
-          } else if(response.data == 3){
+          } else if (response.data == 3) {
             passwordResult.text("Please check you email");
             passwordResult.css("color", "red");
-          }else {
+          } else {
             passwordResult.text("Login successfully. Redirect to Home");
+            passwordResult.css("color", "green");
             localStorage.setItem(
               "customer_info",
               JSON.stringify(response.data)
             );
+            self.setState({ loading: false });
             customerLogin();
-            setInterval(returnHome, 3000);
+            setInterval(returnHome, 15000);
           }
         })
         .catch((err) => {
@@ -185,6 +189,15 @@ class Login extends Component {
               >
                 <b>LOGIN</b>
               </button>
+              {this.state.loading && (
+                <div
+                  className="spinner-border text-light"
+                  id="register-loading-ring"
+                  role="status"
+                >
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -28,9 +28,9 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     //SHOW ANNOUCEMENT PROUCT IS ON BIDDING
-    if(countDownStartDate <= now && now <= countDownEndDate){
-      document.getElementById("bidding-annoucement" + product.product_id + product.product_name).innerHTML = "Product is on bidding";
-    }
+    // if(countDownStartDate <= now && now <= countDownEndDate){
+    //   document.getElementById("bidding-annoucement" + product.product_id + product.product_name).innerHTML = "Product is on bidding";
+    // }
 
     if (
       document.getElementById(
