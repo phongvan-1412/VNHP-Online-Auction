@@ -7,8 +7,8 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
   var countDownDate = new Date(product.product_end_aution_day).getTime();
 
   var slider3 = setInterval(function () {
-    var productStartDate = product.product_start_aution_day + " " + "00:00:00";
-    var productEndDate = product.product_end_aution_day + " " + "00:00:00";
+    var productStartDate = product.product_start_aution_day;
+    var productEndDate = product.product_end_aution_day;
 
     var countDownStartDate = new Date(new Date(productStartDate).toLocaleString()).getTime();
     var countDownEndDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
