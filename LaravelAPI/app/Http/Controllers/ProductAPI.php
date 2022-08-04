@@ -15,9 +15,27 @@ class ProductAPI extends Controller
 
     public function SelectProductsByEndDate()
     {
-        $tmp_products = DB::select("select * from product p join category c 
-        on (p.category_id = c.category_id) join customer_account cc on (p.owner_id = cc.customer_id)
-		where p.product_status = 1
+        $tmp_products = DB::select("select p.product_id,p.product_end_aution_day,p.product_img_name1,p.product_img_name2,p.product_img_name3,p.product_information,
+        p.product_ingredients,p.product_instruction_store,p.product_name,p.product_start_aution_day,p.product_start_price,p.product_status,p.product_thumbnail_img_name,
+        c.category_name,c.category_status,c.category_id,max(ap.aution_price) as current_bid
+        from product p 
+        join category c on (p.category_id = c.category_id) 
+        join customer_account ca on (p.owner_id = ca.customer_id)
+        join aution_price ap on (p.product_id = ap.product_id)
+        where p.product_status = 1 and c.category_status = 1
+        group by p.product_id,p.product_end_aution_day,p.product_img_name1,p.product_img_name2,p.product_img_name3,p.product_information,
+        p.product_ingredients,p.product_instruction_store,p.product_name,p.product_start_aution_day,p.product_start_price,p.product_status,p.product_thumbnail_img_name,
+        c.category_name,c.category_status,c.category_id
+        
+        union
+        
+        select p.product_id,p.product_end_aution_day,p.product_img_name1,p.product_img_name2,p.product_img_name3,p.product_information,
+        p.product_ingredients,p.product_instruction_store,p.product_name,p.product_start_aution_day,p.product_start_price,p.product_status,p.product_thumbnail_img_name,
+        c.category_name,c.category_status,c.category_id,0
+        from product p 
+        join category c on (p.category_id = c.category_id) 
+        join customer_account ca on (p.owner_id = ca.customer_id)
+        where p.product_status = 1 and c.category_status = 1
         order by p.product_end_aution_day");
         return $tmp_products;
     }
@@ -132,8 +150,10 @@ class ProductAPI extends Controller
         return 0;
     }
       
-    public function CurrentBidPrice(Request $req){
-        $products = Product::where('product_id', $req->productId)->get();
+    public function CurrentBidPrice(Request $req)
+    {
+        $tmp = DB::table('aution_price')->select('product_id',DB::raw("MAX(aution_price) as aution_price"))
+        ->where('product_id',$req->productId)->groupBy('product_id')->get();
 
         $productItem = "";
         foreach($products as $product){
@@ -142,8 +162,6 @@ class ProductAPI extends Controller
 
         if ($req->realBidPrice <= $productItem->product_price_aution)
             return 0;
-
-            Product::select()->where('product_id',$req->productId)->update(['product_price_aution'=> $req->realBidPrice]);
 
             DB::insert("insert into aution_price(customer_id, product_id, aution_price, aution_day) values (?,?,?,?)", 
             [$req->customerId, $req->productId, $req->realBidPrice, $req->auctionDay]);  
@@ -194,7 +212,7 @@ class ProductAPI extends Controller
     {
         return DB::select("select * from product p join category c 
         on (p.category_id = c.category_id)
-        where p.product_status = 1 and convert(datetime, product_end_aution_day, 120) > getdate() 
+        where p.product_status = 1 and convert(datetime, product_end_aution_day, 120) < getdate() 
         order by p.product_end_aution_day
         ");
     }
