@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import $ from "jquery";
 
-const SliderItem2 = ({ product, endingSoonProducts }) => {
+const SliderItem2 = ({ product }) => {
   var countDownDate = new Date(product.product_end_aution_day).getTime();
 
   var slider2 = setInterval(function () {
@@ -43,7 +43,6 @@ const SliderItem2 = ({ product, endingSoonProducts }) => {
       document.getElementById(
         "slider2" + product.product_id + product.product_name
       ).innerHTML = "EXPIRED";
-      endingSoonProducts();
     }
     document.getElementById(
       "slider2" + product.product_id + product.product_name

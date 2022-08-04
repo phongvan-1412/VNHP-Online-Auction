@@ -7,8 +7,9 @@ import { BsFillBagCheckFill } from "react-icons/bs";
 
 const DetailItem = ({ product }) => { 
   //COUNTDOWN
-  var productEndDate = product.product_end_aution_day + " " + "00:00:00";
-  var countDownDate = new Date(new Date("2022/08/04 20:48:00").toLocaleString()).getTime();
+  var productEndDate = product.product_end_aution_day;
+  // var countDownDate = new Date(new Date("2022/08/04 20:48:00").toLocaleString()).getTime();
+  var countDownDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
 
   var productNow = setInterval(function() {
     var now = new Date(new Date().toLocaleString()).getTime();
@@ -36,7 +37,7 @@ const DetailItem = ({ product }) => {
       axios
         .post("http://127.0.0.1:8000/api/countdownend", {countdownProduct, countdownCustomer})
         .then(function (response) {
-          console.log(response.data)
+          // console.log(response.data)
             });
 
     }
@@ -44,32 +45,33 @@ const DetailItem = ({ product }) => {
     
 
     //BIDDING PRICE
-    const [currentBid, setCurrentBid] = useState(product.product_price_aution);
+    const [currentBid, setCurrentBid] = useState(product.current_bid);
     const setTime = () => {
       $(".result-bidprice").text("")
   }
     const onKeyUp = (event) => {
+      const realBidPrice = event.target.value;
+
         if (event.key === "Enter") {
             const productId = product.product_id;
             const customerId = JSON.parse(localStorage.getItem("customer_info")).customer_id;
             const auctionDay = new Date(new Date().toLocaleString());
-            const realBidPrice = event.target.value;
 
             const result = $(".result-bidprice");
-
             axios
                 .post("http://127.0.0.1:8000/api/currentbidprice", {realBidPrice, productId, customerId, auctionDay} )
                 .then(function (res) {
+                  console.log(res.data)
                     if (res.data > 0) {
                         setCurrentBid(realBidPrice)
                         result.text("Your price is acceptable");
                         result.css("color", "green");
-                        $("#input-bidprice").val("");
-                        setInterval(setTime, 2000)
                     } else {
                         result.text("Your price is invalid");
                         result.css("color", "red");
                     }
+                    $("#input-bidprice").val("");
+                    setInterval(setTime, 2000)
                 });
         }
     }
@@ -130,7 +132,7 @@ const DetailItem = ({ product }) => {
 
           <div className="product-detail-product-categoryname">{product.category_name.replace(/-/g, " ")}</div>
 
-          <div className="product-detail-product-owner"> by {product.customer_name.replace(/-/g, " ")}</div>
+          <div className="product-detail-product-owner"> by {product.customer_name}</div>
 
           <div className="product-detail-product-info-realtime-wrapper">
             <div className="product-detail-product-realdate"><b>{product.product_end_aution_day}</b></div>

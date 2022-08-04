@@ -158,28 +158,5 @@ class BillApi extends Controller
         }
         return "Something wrong";
     }
-
-    public function CancelPayment($customer_id,$product_id)
-    {
-        $products = Product::select()->where('product_id', $product_id)->get();
-
-        if(count($products) > 0)
-        {
-            $product = '';
-            foreach($products as $pro)
-            {
-                $product = $pro;
-            }
-            Product::select()->where('product_id',$product_id)
-                                    ->update(['product_price_aution'=>$product->product_start_price,
-                                                'product_status'=>2]);
-
-            $url = "http://localhost:3000";
-            return Redirect::intended($url);
-        }
-        return "Something wrong";
-    }
-
-
 }
 

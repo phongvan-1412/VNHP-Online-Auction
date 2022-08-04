@@ -154,19 +154,43 @@ class ProductAPI extends Controller
     {
         $tmp = DB::table('aution_price')->select('product_id',DB::raw("MAX(aution_price) as aution_price"))
         ->where('product_id',$req->productId)->groupBy('product_id')->get();
+        $products = Product::select()->where('product_id',$req->productId)->get();
 
         $productItem = "";
         foreach($products as $product){
             $productItem = $product;
         }
 
-        if ($req->realBidPrice <= $productItem->product_price_aution)
-            return 0;
+        $autionPrices = "";
+        foreach($tmp as $ap){
+            $autionPrices = $ap;
+        }
+        if(count($tmp) <= 0)
+        {
+            if(count($products) > 0)
+            {
+                if($req->realBidPrice >= $productItem->product_start_price)
+                {
+                    DB::insert("insert into aution_price(customer_id, product_id, aution_price, aution_day,aution_status) values (?,?,?,?,?)", 
+                    [$req->customerId, $req->productId, $req->realBidPrice, $req->auctionDay,1]);  
+                    return 1;
+                }
+            }
+        }
+        else{
+            if(count($products) > 0)
+            {
+                if($req->realBidPrice > $autionPrices->aution_price)
+                {
+                    AuctionPrice::where('product_id',$req->productId)->update(['aution_status'=>0]);
 
-            DB::insert("insert into aution_price(customer_id, product_id, aution_price, aution_day) values (?,?,?,?)", 
-            [$req->customerId, $req->productId, $req->realBidPrice, $req->auctionDay]);  
-
-            return 1;
+                    DB::insert("insert into aution_price(customer_id, product_id, aution_price, aution_day,aution_status) values (?,?,?,?,?)", 
+                    [$req->customerId, $req->productId, $req->realBidPrice, $req->auctionDay,1]);  
+                    return 1;
+                }
+            }
+        }
+        return 0;
     }
     
     public function ChangeProductStatus(Request $request)
@@ -212,7 +236,7 @@ class ProductAPI extends Controller
     {
         return DB::select("select * from product p join category c 
         on (p.category_id = c.category_id)
-        where p.product_status = 1 and convert(datetime, product_end_aution_day, 120) < getdate() 
+        where p.product_status = 1 and convert(datetime, product_end_aution_day, 120) > getdate() 
         order by p.product_end_aution_day
         ");
     }
