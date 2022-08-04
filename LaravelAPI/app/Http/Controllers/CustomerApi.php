@@ -251,23 +251,21 @@ class CustomerApi extends Controller
     }
 
     public function CustomerBillHistory(){
-        return DB::select("select ca.customer_id,b.bill_id,pm.payment_mode_id,b.bill_payment,pm.payment_mode_type,p.product_name,b.bill_date 
+        return DB::select("select b.bill_id,pm.payId,b.bill_payment,p.product_name,b.bill_date 
         from bill b
-        join product p on (p.product_id = b.product_id)
+		join aution_price ap on(b.aution_id = ap.aution_id)
+        join product p on (p.product_id = ap.product_id)
         join payment_mode pm on (b.payment_mode_id = pm.payment_mode_id)
-        join customer_account ca on (b.customer_id = ca.customer_id)
         where b.bill_status = 1
-        order by b.bill_date");
+        order by b.bill_id desc");
     }
 
     public function CustomerNewBill(){
-        return DB::select("select ca.customer_id,b.bill_id,b.bill_payment,p.product_name,b.bill_date 
+        return DB::select("select b.bill_payment,p.product_name,b.bill_date 
         from bill b
-        join product p on (p.product_id = b.product_id)
-        join customer_account ca on (b.customer_id = ca.customer_id)
+		join aution_price ap on(b.aution_id = ap.aution_id)
+        join product p on (p.product_id = ap.product_id)
         where b.bill_status = 0
-        order by b.bill_date");
+        order by b.bill_id desc");
     }
-
-    
 }
