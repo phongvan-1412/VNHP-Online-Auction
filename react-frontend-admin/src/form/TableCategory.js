@@ -242,18 +242,7 @@ class Category extends Component {
                                           />
                                           <div id="category-edit-img-check"></div>
                                         </div>
-                                        <div className="form-group">
-                                          <label className="control-lable admin-category-label">
-                                            Status
-                                          </label>
-                                          <label className="switch">
-                                            <input
-                                              type="checkbox"
-                                              id="edit-category-check-box"
-                                            />
-                                            <span className="slider round"></span>
-                                          </label>
-                                        </div>
+
                                       </div>
                                     </div>
 
