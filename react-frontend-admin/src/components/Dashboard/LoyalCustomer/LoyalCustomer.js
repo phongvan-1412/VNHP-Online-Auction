@@ -31,6 +31,14 @@ class LoyalCustomer extends Component{
             else {rank = "th"};
             return rank;
         }
+        function Medal(i){
+            let medal = "";
+            if (i == 1) {medal = "gold.png"}
+            else if(i == 2) {medal = "silver.png"}
+            else if(i == 3) {medal = "bronze.png"}
+            else {medal = "medal.png"};
+            return medal;
+        }
 
 
         return (
@@ -54,7 +62,10 @@ class LoyalCustomer extends Component{
                                     {this.state.CustomerData.map((p, index)=>{
                                         return(
                                             <tr key={index}>
-                                                <td >{i}{Rank(i++)}</td>
+                                                <td>
+                                                    <img className='img-fluid' src={"http://localhost:8000/AdminImage/"+Medal(i)} width="50"></img>
+                                                    {i}{Rank(i++)}
+                                                </td>
                                                 <td>
                                                     <img className='mr-1' style={{height: "50px"}}
                                                     src={require(`../../../../../LaravelAPI/public/UserImage/${p.customer_img_name}`)}
