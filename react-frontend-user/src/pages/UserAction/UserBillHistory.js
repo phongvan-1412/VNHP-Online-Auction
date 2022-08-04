@@ -51,17 +51,6 @@ function UserBillHistory({ billHistory }) {
                   <th>Pay Day</th>
                 </tr>
               </thead>
-              {/* <tfoot>
-              <tr>
-                <th></th>
-                <th>Product</th>
-                <th>Date</th>
-                <th>Total</th>
-                <th>Customer</th>
-                <th>Payment code</th>
-                <th>Status</th>
-              </tr>
-            </tfoot> */}
               <tbody id="bill-records">
                 {billHistory.map((bh, index) => {
                   return (

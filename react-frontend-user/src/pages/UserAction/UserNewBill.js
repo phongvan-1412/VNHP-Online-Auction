@@ -52,17 +52,6 @@ const UserNewBill = ({ newBill }) => {
                   <th>Pay Now</th>
                 </tr>
               </thead>
-              {/* <tfoot>
-              <tr>
-                <th></th>
-                <th>Product</th>
-                <th>Date</th>
-                <th>Total</th>
-                <th>Customer</th>
-                <th>Payment code</th>
-                <th>Status</th>
-              </tr>
-            </tfoot> */}
               <tbody id="bill-records">
                 {newBill.map((nb, index) => {
                   return (
@@ -73,7 +62,7 @@ const UserNewBill = ({ newBill }) => {
                       <td>{nb.bill_date}</td>
                       <td>
                         <Link
-                          to={`/paymentgateway/${nb.bill_id}/${nb.customer_id}`}
+                          to={`/paymentgateway/${nb.bill_id}`}
                           id="btn-payment"
                         >
                           Payment

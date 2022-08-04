@@ -115,8 +115,11 @@ class BillApi extends Controller
         ");
     }
 
-    public function CustomerPayBill(Request $req){
-        $bills = Bill::select()->where('customer_id', $req->customerid)->where('bill_id', $req->billid)->get();
+    public function CurrentBill(Request $req)
+    {
+        $bills = DB::table('bill')
+        ->join('aution_price', 'aution_price.aution_id','=','bill.aution_id')
+            ->where('bill.bill_id',$req->billid)->get();
         $currentBill = '';
         foreach($bills as $bill){
             $currentBill = $bill;
@@ -131,7 +134,7 @@ class BillApi extends Controller
         $newPayment->orderId = $request->orderId;
         $newPayment->payId = $request->payId;
         $newPayment->payment_mode_date = $request->payment_mode_date;
-
+        return $newPayment;
         $newPayment->save();
 
         $payments = PaymentMode::select()->where('orderId', $request->orderId)->get();
@@ -146,14 +149,21 @@ class BillApi extends Controller
 
             Bill::where('bill_id', $request->billId)->update(['bill_status' => 1,'payment_mode_id'=>$tmp->payment_mode_id]);
 
-            $products = DB::select("select * from product p join bill b on(p.product_id = b.product_id) where p.product_id = ".$request->billId);
+            // $products = DB::select("select * from product p join bill b on(p.product_id = b.product_id) where p.product_id = ".$request->billId);
+            $products = DB::table('bill')
+                    ->join('aution_price', 'aution_price.aution_id','=','bill.aution_id')
+                    ->join('product','aution_price.product_id','=','product.product_id')
+                    ->join('payment_mode','bill.payment_mode_id','=','payment_mode.payment_mode_id')
+                    ->where('aution_price.customer_id',$request->customer_id)
+                    ->where('bill.bill_status',1)
+                    ->get();
             $product = '';
             foreach($products as $tmp)
             {
                 $product = $tmp;
             }
 
-            Product::select()->where('product_id',$request->product_id)->update(['product_status'=>0]);
+            Product::select()->where('product_id',$request->product_id)->update(['product_status'=>4]);
             return 1;
         }
         return 0;

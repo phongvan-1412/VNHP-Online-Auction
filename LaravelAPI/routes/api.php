@@ -61,7 +61,7 @@ Route::get('/showcomment',[FeedbackAPI::class,'ShowComment']);
 
 //BILL
 Route::post('/submitcart',[BillApi::class, 'InsertBill']);
-Route::post('/currentbill',[BillApi::class, 'CustomerPayBill']);
+Route::post('/currentbill',[BillApi::class, 'CurrentBill']);
 Route::post('/getnewbill',[BillApi::class, 'GetNewBill']);
 Route::post('/getbillhistory',[BillApi::class, 'GetBillHistory']);
 

@@ -121,7 +121,6 @@ class UserProfile extends Component {
           customer_id: currentUserInfo.customer_id,
         })
         .then((response) => {
-          console.log(response.data);
           self.setState({ newBill: response.data });
         })
         .catch((err) => {
