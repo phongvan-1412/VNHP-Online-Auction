@@ -24,7 +24,6 @@ const ProductItem = ({ product }) => {
     if (document.getElementById("product-item" + product.product_id + product.product_name) == null) return;
 
     //SHOW ANNOUCEMENT PROUCT IS ON BIDDING
-    var onBidding = [];
     if(countDownStartDate <= now && now <= countDownEndDate){
       document.getElementById("bidding-annoucement" + product.product_id + product.product_name).innerHTML = "Product is on bidding";
     }

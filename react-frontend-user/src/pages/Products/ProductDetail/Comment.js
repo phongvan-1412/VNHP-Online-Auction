@@ -6,6 +6,9 @@ import $ from 'jquery';
 const Comment = ({ productId, currentFeedback }) => {
     const [feedback_content, setFeedbackContent] = useState("");
 
+    const setTime = () => {
+        $("#result").text("")
+    }
     const onKeyUp = (event) => {
         if (event.key === "Enter") {
             const feedbackContent = event.target.value;
@@ -13,20 +16,26 @@ const Comment = ({ productId, currentFeedback }) => {
 
             const product_id = productId;
             const customer_id = JSON.parse(localStorage.getItem("customer_info")).customer_id;
+            const result = $("#result")
+
+            if (customer_id == null){
+                result.text("You have to login first");
+            }
             const feedback_date = new Date().toLocaleString();
 
             const feedback = { product_id, feedback_content, customer_id, feedback_date }
            
 
-            const result = $("#result")
             axios
                 .post("http://127.0.0.1:8000/api/addcomment", feedback)
                 .then(function (response) {
                     if (response.data.length > 0) {
-                        result.text(" just added.");
+                        result.text("Your comment just added.");
                         result.css("color", "green");
+                        $("#input-text").val("");
+                        setInterval(setTime, 3000)
                     } else {
-                        result.text(" added failed.");
+                        result.text("Your comment added failed.");
                         result.css("color", "red");
                     }
                 });
@@ -51,7 +60,7 @@ const Comment = ({ productId, currentFeedback }) => {
                 </div>
             </div>
 
-            <div className="row input-text">
+            <div className="row input-text" id="input-text">
                 <input placeholder="What do you think?" cols="30" rows="10" onKeyUp={onKeyUp} />
             </div>
 

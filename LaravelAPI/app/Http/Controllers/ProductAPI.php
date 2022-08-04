@@ -222,6 +222,7 @@ class ProductAPI extends Controller
         }
         if($request->option == 1){
             $product = Product::select()
+            ->join('customer_account', 'product.product_id','=','customer_account.product_id')
             ->where('category_id', $request->categoryId)
             ->where('product_start_aution_day','<=',$date)
             ->where('product_end_aution_day','>=',$date)

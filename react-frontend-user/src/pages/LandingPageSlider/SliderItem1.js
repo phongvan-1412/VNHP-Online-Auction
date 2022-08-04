@@ -48,24 +48,31 @@ const SliderItem1 = ({ product, updateComingProducts }) => {
 
   return (
     <div className="product-grid">
-      <div id={"slider1" + product.product_id + product.product_name} className="landingpage-countdown"></div>
-      <div>
-        <Link
-          to={`/${product.category_id}/${product.product_name}`}
-          replace
-          className="product-img"
-          onClick={onProductClicked}
-        >
-          <img
-            name={product.product_id}
-            src={
-              "http://localhost:8000/ProductImg/" +
-              product.product_thumbnail_img_name
-            }
-          />
-        </Link>
+      <div className="product-item-countdownstart-wrapper">
+        <span className="product-item-countdownstart-headtext">Auction Start Date: </span>
+        <span className="product-item-countdownstart-time">{product.product_start_aution_day}</span>
       </div>
 
+      <div className="product-item-countdownend-wrapper">
+        <span className="product-item-countdownend-headtext">Timed out: </span>
+        <span id={"slider1" + product.product_id + product.product_name} className="product-item-countdownend"></span>
+      </div>
+
+      <Link
+        to={`/${product.category_id}/${product.product_name}`}
+        replace
+        className="product-img"
+        onClick={onProductClicked}
+      >
+        <img
+          name={product.product_id}
+          src={
+            "http://localhost:8000/ProductImg/" +
+            product.product_thumbnail_img_name
+          }
+        />
+      </Link>
+      
       <div className="product-item-categoryname">
         <Link to={`/category/${product.category_name}`}>{product.category_name.replace(/-/g, " ")}</Link>
       </div>
@@ -90,12 +97,8 @@ const SliderItem1 = ({ product, updateComingProducts }) => {
         </div>
 
         <div className="cart-icons">
-          <Link
-            to={`/${product.category_id}/${product.product_name}`}
-            className="btn-view"
-          >
-            View Bidding
-          </Link>
+          <div id={"bidding-annoucement" + product.product_id + product.product_name} className="bidding-annoucement"></div>
+          <Link to={`/${product.category_id}/${product.product_name}`} className="btn-view">View Bidding</Link>
         </div>
       </div>
     </div>

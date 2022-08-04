@@ -9,6 +9,7 @@ import { Slider } from "@material-ui/core";
 import ProductView from "./ProductView";
 
 const Products = ({ products, category, categories }) => {
+
   //Filter by Price
   const [value, setVal] = useState([0, 20000]);
 

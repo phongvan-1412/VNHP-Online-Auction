@@ -21,7 +21,6 @@ class Customer extends Model
         'customer_address',
         'customer_status',
         'customer_token',
-        'customer_login_status',
-        'customer_ip'
+        'customer_login_status'
     ];
 }

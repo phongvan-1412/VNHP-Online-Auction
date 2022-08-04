@@ -7,6 +7,11 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
   var countDownDate = new Date(product.product_end_aution_day).getTime();
 
   var slider3 = setInterval(function () {
+    var productStartDate = product.product_start_aution_day + " " + "00:00:00";
+    var productEndDate = product.product_end_aution_day + " " + "00:00:00";
+
+    var countDownStartDate = new Date(new Date(productStartDate).toLocaleString()).getTime();
+    var countDownEndDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
     var now = new Date().getTime();
 
     var distance = countDownDate - now;
@@ -22,7 +27,11 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Display the result in the element with id="demo"
+    //SHOW ANNOUCEMENT PROUCT IS ON BIDDING
+    if(countDownStartDate <= now && now <= countDownEndDate){
+      document.getElementById("bidding-annoucement" + product.product_id + product.product_name).innerHTML = "Product is on bidding";
+    }
+
     if (
       document.getElementById(
         "slider3" + product.product_id + product.product_name
@@ -44,7 +53,16 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
   }, 1000);
   return (
     <div className="product-grid">
-      <div id={"slider3" + product.product_id + product.product_name} className="landingpage-countdown"></div>
+      <div className="product-item-countdownstart-wrapper">
+        <span className="product-item-countdownstart-headtext">Auction Start Date: </span>
+        <span className="product-item-countdownstart-time">{product.product_start_aution_day}</span>
+      </div>
+
+      <div className="product-item-countdownend-wrapper">
+        <span className="product-item-countdownend-headtext">Timed out: </span>
+        <span id={"slider3" + product.product_id + product.product_name} className="product-item-countdownend"></span>
+      </div>
+
       <Link
         to={`/${product.category_id}/${product.product_name}`}
         replace
@@ -82,13 +100,10 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
         </div>
 
         <div className="cart-icons">
-          <Link
-            to={`/${product.category_id}/${product.product_name}`}
-            className="btn-view"
-          >
-            View Bidding
-          </Link>
+          <div id={"bidding-annoucement" + product.product_id + product.product_name} className="bidding-annoucement"></div>
+          <Link to={`/${product.category_id}/${product.product_name}`} className="btn-view">View Bidding</Link>
         </div>
+
       </div>
     </div>
   );

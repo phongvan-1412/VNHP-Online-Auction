@@ -1,7 +1,9 @@
 import React, { Component, useRef } from "react";
 import Slider from "react-slick";
 import ProductQuickViewDetails from "./ProductQuickViewDetails";
+
 function ProductQuickView({ product }) {
+  console.log(product)
   const ref = useRef({});
 
   const next = () => {
@@ -50,25 +52,10 @@ function ProductQuickView({ product }) {
         product.product_id + product.product_name
       ).innerHTML = "EXPIRED";
 
-      var countdownProduct = product.product_id;
-      // var countdownCustomer = JSON.parse(
-      //   localStorage.getItem("customer_info")
-      // ).customer_id;
-
-      var days = 0;
-      var hours = 0;
-      var minutes = 0;
-      var seconds = 0;
     }
     document.getElementById(product.product_id + product.product_name
     ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   }, 1000);
-
-  const productImages = {
-    img1: product.product_img_name1,
-    img2: product.product_img_name2,
-    img3: product.product_img_name3,
-  };
 
   return (
     <div
@@ -103,7 +90,7 @@ function ProductQuickView({ product }) {
                   </div>
                   <div>
                     <Slider ref={ref} {...settings}>
-                      <img
+                      {/* <img
                         id="product-quick-view-sub-img"
                         src={require(`../../../../../LaravelAPI/public/ProductImg/${productImages.img1}`)}
                       />
@@ -114,7 +101,7 @@ function ProductQuickView({ product }) {
                       <img
                         id="product-quick-view-sub-img"
                         src={require(`../../../../../LaravelAPI/public/ProductImg/${productImages.img3}`)}
-                      />
+                      /> */}
                     </Slider>
                   </div>
                 </div>

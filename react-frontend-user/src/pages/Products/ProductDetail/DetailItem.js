@@ -47,6 +47,9 @@ const DetailItem = ({ product }) => {
 
     //BIDDING PRICE
     const [currentBid, setCurrentBid] = useState(product.product_price_aution);
+    const setTime = () => {
+      $("#result").text("")
+  }
     const onKeyUp = (event) => {
         if (event.key === "Enter") {
             const productId = product.product_id;
@@ -65,6 +68,7 @@ const DetailItem = ({ product }) => {
                         result.css("color", "green");
                         $("#result-bidprice");
                         $("#input-bidprice").val("");
+                        setInterval(setTime, 2000)
                     } else {
                         result.text("Your price is invalid");
                         result.css("color", "red");

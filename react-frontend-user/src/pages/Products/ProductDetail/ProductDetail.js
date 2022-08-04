@@ -5,9 +5,6 @@ import SidebarSuggest from "./SidebarSuggest";
 import DisplayProductDetail from "./DisplayProductDetail";
 
 const ProductDetail = ({ product, products, categories, feedbacks }) => {
-  // const products = $("#data").data("products");
-  // const product_id = $("#data").data("productid");
-  // const categories = $("#data").data("categories");
 
   let suggestProducts = [];
   products.forEach(product => {
