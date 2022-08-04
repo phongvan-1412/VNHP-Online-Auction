@@ -6,6 +6,8 @@
 .form-waring-text {
   position: absolute;
 }
+.no-record-found{
+}
 /* login form */
 .login-form {
   margin-top: 20px;
