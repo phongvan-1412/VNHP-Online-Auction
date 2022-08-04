@@ -153,11 +153,7 @@ class HomePage extends Component {
               <UserProfile
                 userinfo={this.state.userinfo}
                 autionHistory={this.state.autionHistory}
-                billHistory={this.state.billHistory}
-                newBill={this.state.newBill}
                 updateAutionHistory={autionHistory}
-                updateBillHistory={billHistory}
-                updateNewBill={newBill}
                 updateUserLogin={customerLogin}
               />
             }
@@ -176,7 +172,7 @@ class HomePage extends Component {
           {/* <Route path="/paymentgateway" element={ <PayPals />}></Route> */}
           <Route
             path="/paymentgateway/:billid/:customerid"
-            element={<PayPals newBill={newBill}/>}
+            element={<PayPals/>}
           ></Route>
 
           {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}

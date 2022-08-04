@@ -7,17 +7,17 @@ import UserAutionHistory from "./UserAutionHistory";
 import UserBillHistory from "./UserBillHistory";
 
 class UserProfile extends Component {
-  state = { viewIndex: 1 };
+  state = { viewIndex: 1, billHistory: [], newBill: [] };
 
   componentDidMount() {
     this.setState({ viewIndex: 1 });
   }
   render() {
-    const { userinfo, autionHistory, billHistory, newBill, updateUserLogin,updateAutionHistory,updateBillHistory,updateNewBill } =
+    const { userinfo, autionHistory, updateUserLogin, updateAutionHistory } =
       this.props;
 
     let currentUserInfo = userinfo;
-    if(performance.navigation.type === 1) {
+    if (performance.navigation.type === 1) {
       if (localStorage.getItem("customer_info") == null) {
         window.location.href = "http://localhost:3000/login";
       } else {
@@ -31,12 +31,6 @@ class UserProfile extends Component {
 
     const currentAutionHistory = autionHistory.filter(
       (ah) => ah.customer_id == currentUserInfo.customer_id
-    );
-    const currentBillHistory = billHistory.filter(
-      (bh) => bh.customer_id == currentUserInfo.customer_id
-    );
-    const currentNewBill = newBill.filter(
-      (nb) => nb.customer_id == currentUserInfo.customer_id
     );
 
     function onAvatarChange() {
@@ -99,17 +93,41 @@ class UserProfile extends Component {
     const btnAutionHistoryOnClick = () => {
       this.setState({ viewIndex: 1 });
       updateAutionHistory();
-    }
+    };
+
+    const self = this;
 
     const btnBillHistoryOnClick = () => {
       this.setState({ viewIndex: 2 });
-      updateBillHistory();
-    }
+      
+      axios
+        .post(`http://127.0.0.1:8000/api/getbillhistory`, {
+          customer_id: currentUserInfo.customer_id,
+        })
+        .then((response) => {
+          console.log(response.data);
+          self.setState({ billHistory: response.data });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
 
     const btnNewBillOnClick = () => {
       this.setState({ viewIndex: 3 });
-      updateNewBill();
-    }
+      
+      axios
+        .post(`http://127.0.0.1:8000/api/getnewbill`, {
+          customer_id: currentUserInfo.customer_id,
+        })
+        .then((response) => {
+          console.log(response.data);
+          self.setState({ newBill: response.data });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
 
     return (
       <div className="container">
@@ -127,7 +145,10 @@ class UserProfile extends Component {
                     <img
                       className="img-user-account-profile rounded-circle"
                       id="avatar-img"
-                      src={"http://localhost:8000/UserImage/" + currentUserInfo.customer_img_name}
+                      src={
+                        "http://localhost:8000/UserImage/" +
+                        currentUserInfo.customer_img_name
+                      }
                     />
                   </div>
 
@@ -288,14 +309,14 @@ class UserProfile extends Component {
               this.state.viewIndex == 2 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            <UserBillHistory currentBillHistory={currentBillHistory} />
+            <UserBillHistory billHistory={this.state.billHistory} />
           </div>
           <div
             className={
               this.state.viewIndex == 3 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            <UserNewBill currentNewBill={currentNewBill} />
+            <UserNewBill newBill={this.state.newBill} />
           </div>
         </div>
         <ChangePassword

@@ -18,7 +18,28 @@ class BillApi extends Controller
         $bill = DB::select("select * from bill")->get();
         return $bill;
     }
+    
+    public function GetNewBill(Request $request)
+    {
+        return DB::table('bill')
+        ->join('aution_price', 'aution_price.aution_id','=','bill.aution_id')
+        ->join('product','aution_price.product_id','=','product.product_id')
+        ->where('aution_price.customer_id',$request->customer_id)
+        ->where('bill.bill_status',0)
+        ->get();
+    }
 
+    public function GetBillHistory(Request $request)
+    {
+        return DB::table('bill')
+        ->join('aution_price', 'aution_price.aution_id','=','bill.aution_id')
+        ->join('product','aution_price.product_id','=','product.product_id')
+        ->join('payment_mode','bill.payment_mode_id','=','payment_mode.payment_mode_id')
+        ->where('aution_price.customer_id',$request->customer_id)
+        ->where('bill.bill_status',1)
+        ->get();
+    }
+    
     public function SelectBill()
     {
         // $bills = Bill::select()->get();
@@ -152,7 +173,7 @@ class BillApi extends Controller
             // $url = "http://localhost:3000/login";
             // return Redirect::intended($url);
         }
-        return "Something wrong";
+        return "Something wrong in server. Please contact admin to have further details";
     }
 
     public function SuccessConfirmPaymentView()

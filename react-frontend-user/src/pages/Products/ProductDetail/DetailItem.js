@@ -56,7 +56,6 @@ const DetailItem = ({ product }) => {
             const productId = product.product_id;
             const customerId = JSON.parse(localStorage.getItem("customer_info")).customer_id;
             const auctionDay = new Date(new Date().toLocaleString());
-
             const result = $(".result-bidprice");
             axios
                 .post("http://127.0.0.1:8000/api/currentbidprice", {realBidPrice, productId, customerId, auctionDay} )

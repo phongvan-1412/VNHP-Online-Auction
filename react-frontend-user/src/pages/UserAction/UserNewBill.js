@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const UserNewBill = ({ currentNewBill }) => {
+const UserNewBill = ({ newBill }) => {
   function Search() {
     var value = $("#search").val().toLowerCase();
     $("#bill-records tr").filter(function () {
@@ -9,7 +9,7 @@ const UserNewBill = ({ currentNewBill }) => {
     });
   }
   let i = 1;
-  if (currentNewBill.length <= 0) {
+  if (newBill.length <= 0) {
     return (
       <div className="container">
         <div className="row">
@@ -64,7 +64,7 @@ const UserNewBill = ({ currentNewBill }) => {
               </tr>
             </tfoot> */}
               <tbody id="bill-records">
-                {currentNewBill.map((nb, index) => {
+                {newBill.map((nb, index) => {
                   return (
                     <tr key={index}>
                       <td>{i++}</td>
