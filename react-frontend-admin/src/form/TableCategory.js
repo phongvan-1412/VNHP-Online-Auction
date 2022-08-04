@@ -199,7 +199,7 @@ class Category extends Component {
                                 <div className="modal-content">
                                   <div className="modal-header">
                                     <h4 className="modal-title">
-                                      Change Category
+                                      Edit Category
                                     </h4>
                                     <button
                                       type="button"
