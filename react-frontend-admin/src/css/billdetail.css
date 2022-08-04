@@ -66,6 +66,21 @@
     font-size:15px;
     color:#fff;
 }
+.ribbon-inner-1{
+    text-align:center;
+    -webkit-transform:rotate(45deg);
+    -moz-transform:rotate(45deg);
+    -ms-transform:rotate(45deg);
+    -o-transform:rotate(45deg);
+    position:relative;
+    padding:7px 0;
+    left:-5px;
+    top:11px;
+    width:120px;
+    background-color:#be1e1e;
+    font-size:15px;
+    color:#fff;
+}
 
 .ribbon-inner:before,.ribbon-inner:after {
     content:"";
