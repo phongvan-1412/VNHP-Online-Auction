@@ -43,7 +43,7 @@ const LandingPageSlider3 = ({products}) => {
           </div>
 
           <Slider ref={ref} {...settings}>
-            {products.slice(0, 15).filter((val) => {
+            {products.slice(0, 35).filter((val) => {
                 if(filters === ""){
                   return val;
                 }else if((val.product_name.replace(/-/g, " ").toLowerCase()).includes(filters.toLowerCase())){
