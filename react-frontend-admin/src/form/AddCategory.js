@@ -35,7 +35,7 @@ function AddCategory() {
   const onCategoryImageChange = (e) => {
     const img = e.target.files[0];
     const result = $("#check-img-result");
-    
+
     if (img != null) {
       result.text("");
       category_img = e.target.files[0];
@@ -99,17 +99,16 @@ function AddCategory() {
 
   return (
     <div
-      className="modal fade bd-example-modal-lg"
+      className="modal fade"
       id="add-category-modal"
       tabIndex="-1"
-      role="dialog"
       aria-labelledby="myLargeModalLabel"
       aria-hidden="true"
     >
       <div className="modal-dialog modal-lg">
         <div className="modal-content">
           <div className="modal-header">
-            <h4 className="modal-title">Add Category</h4>
+            <h4 className="modal-title" id="myLargeModalLabel">Add Category</h4>
             <button
               type="button"
               className="close"
@@ -163,9 +162,10 @@ function AddCategory() {
                 Close
               </button>
               <button
+                type="submit"
                 className="btn btn-info waves-effect waves-light"
+                data-bs-dismiss=""
                 onClick={buttononclick}
-                value="Create"
               >
                 Create
               </button>

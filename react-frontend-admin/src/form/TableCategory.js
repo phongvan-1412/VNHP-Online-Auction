@@ -65,7 +65,7 @@ class Category extends Component {
         $("#category-edit-img-check").text("");
         checkImg = true;
       } else {
-        $("#category-edit-img-check").text("Invaid image.");
+        $("#category-edit-img-check").text("Please choose image.");
         $("#category-edit-img-check").css("color", "red");
         checkImg = false;
       }
@@ -86,9 +86,12 @@ class Category extends Component {
       axios
         .post(`http://127.0.0.1:8000/api/updatecategory`, formData)
         .then(function (response) {
-          console.log(response.data);
           if (response.data > 0) {
+            $('#edit-category-result').text('Update category succesfull.');
+            $('#edit-category-result').css('color','green');
           } else {
+            $('#edit-category-result').text('Update category fail.');
+            $('#edit-category-result').css('color','red');
           }
         });
     };
@@ -213,6 +216,7 @@ class Category extends Component {
                                   <div className="modal-body p-4">
                                     <div className="row">
                                       <div className="container">
+                                        <div id="edit-category-result"></div>
                                         <div className="form-group">
                                           <label
                                             className="control-lable admin-category-label"
