@@ -14,7 +14,7 @@ const Comment = ({ productId, currentFeedback }) => {
         const result = $("#result")
 
         if (event.key === "Enter") {
-            if (JSON.parse(localStorage.getItem("customer_info")) != null) {
+            if (JSON.parse(localStorage.getItem("customer_info")) == null) {
                 result.text("Please login before comment.");
                 result.css("color", "red");
                 setInterval(setTime, 5000)
