@@ -47,24 +47,21 @@ const [filter, setFilter] = useState("")
 
       <Slider ref={ref} {...settings}>
         {products.filter((val) => {
-          if(filter == ""){
-            return val;
-          }else if((
-            val.category_name.toLowerCase() ||
-            val.product_name.toLowerCase() 
-           ).includes(filter.toLowerCase())){
-            return val;
-          }
-          return val;
-        
-        }).map((val) => {
-          return(
-            <div className="product-grid-wrapper" key={val.product_id} >
-              <SliderItem1 product={val}></SliderItem1>
-            </div>
-          )
-        })
-      }
+            if(filter == ""){
+              return val;
+            }else if((val.product_name.toLowerCase() ||
+            val.category_name.toLowerCase()).includes(filter.toLowerCase())){
+              return val;
+            }
+          
+          }).map((val) => {
+            return(
+              <div className="product-grid-wrapper" key={val.product_id} >
+                <SliderItem1 product={val}></SliderItem1>
+              </div>
+            )
+          })
+        }
       </Slider>
 
       <div className="btn-click">

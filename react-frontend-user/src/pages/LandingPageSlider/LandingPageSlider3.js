@@ -46,8 +46,8 @@ const LandingPageSlider3 = ({products}) => {
             {products.filter((val) => {
                 if(filters == ""){
                   return val;
-                }else if((val.category_name.toLowerCase() ||
-                val.product_name.toLowerCase()).includes(filters.toLowerCase())){
+                }else if((val.product_name.toLowerCase() ||
+                val.category_name.toLowerCase()).includes(filters.toLowerCase())){
                   return val;
                 }
               

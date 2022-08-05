@@ -77,18 +77,18 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
         />
       </Link>
 
-      <div replace className="product-item-categoryname">
-        <Link to={`/category/${product.category_name}`}>{product.category_name.replace(/-/g, " ")}</Link>
+      <div replace="true" className="product-item-categoryname">
+        <Link to={`/category/${product.category_name}`}>{product.category_name.replace(/-/g," ")}</Link>
       </div>
 
       <div className="product-name">
         <Link
           to={`/${product.category_id}/${product.product_name}`}
           name={product.product_id}
-          replace
+          replace="true"
           className="product-name-item"
         >
-          {product.product_name.replace(/-/g, " ")}
+          {product.product_name.replace(/-/g," ")}
         </Link>
       </div>
       <div className="product-metapane-wrapper">
