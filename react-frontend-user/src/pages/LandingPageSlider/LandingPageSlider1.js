@@ -1,5 +1,4 @@
 import React, { Component, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -28,32 +27,9 @@ const LandingPageSlider1 = ({ products }) => {
     slidesToScroll: 5,
   };
 
-  const [horizontalState, setHorizontalState] = useState(1);
-
-  const horizontalTab = (index) => {
-    setHorizontalState(index.target.value);
-  };
 
   //SEARCH PRODUCT BY SLIDER
-  const [filter, setFilter] = useState("");
-  let tmpProduct = [];
-
-  if (filter == "" || tmpProduct == []) {
-    tmpProduct = products;
-  }
-  products.forEach((product) => {
-    if (
-      (
-        product.product_start_price.toLowerCase() ||
-        product.product_name.toLowerCase() ||
-        product.category_name.toLowerCase() ||
-        product.product_end_aution_day.toLowerCase()
-      ).includes(filter.toLowerCase())
-    ) {
-      tmpProduct = [...tmpProduct, product];
-    }
-  });
-
+const [filter, setFilter] = useState("")
   return (
     <div className=" landingpage-slider slide-title">
       <div className="slide-title top-content">
@@ -62,7 +38,7 @@ const LandingPageSlider1 = ({ products }) => {
         </h4>
         <input
           id="searchproduct"
-          placeholder="Search..."
+          placeholder="Search Product..."
           onKeyUp={(e) => {
             setFilter(e.target.value);
           }}
@@ -70,13 +46,25 @@ const LandingPageSlider1 = ({ products }) => {
       </div>
 
       <Slider ref={ref} {...settings}>
-        {tmpProduct.map((val) => {
-          return (
-            <div className="product-grid-wrapper" key={val.product_id}>
+        {products.filter((val) => {
+          if(filter == ""){
+            return val;
+          }else if((
+            val.category_name.toLowerCase() ||
+            val.product_name.toLowerCase() 
+           ).includes(filter.toLowerCase())){
+            return val;
+          }
+          return val;
+        
+        }).map((val) => {
+          return(
+            <div className="product-grid-wrapper" key={val.product_id} >
               <SliderItem1 product={val}></SliderItem1>
             </div>
-          );
-        })}
+          )
+        })
+      }
       </Slider>
 
       <div className="btn-click">

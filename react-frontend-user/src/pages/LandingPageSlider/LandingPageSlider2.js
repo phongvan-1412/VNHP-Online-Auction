@@ -27,13 +27,6 @@ const LandingPageSlider2 = ({products}) => {
     slidesToShow: 5, 
     slidesToScroll: 5,
   };
-  
-  const [horizontalState, setHorizontalState] = useState(1);
-
-  const horizontalTab = (index) => { 
-    setHorizontalState(index.target.value);
-  };
-  
   //SEARCH PRODUCT BY SLIDER
   // function Search() {
   //   var value = $("#search").val().toLowerCase();
@@ -59,9 +52,8 @@ const LandingPageSlider2 = ({products}) => {
             {products.filter((val) => {
                 if(filterProduct == ""){
                   return val;
-                }else if((
-                val.product_name.toLowerCase() 
-                || val.category_name.toLowerCase()).includes(filterProduct.toLowerCase())){
+                }else if((val.category_name.toLowerCase() ||
+                val.product_name.toLowerCase()).includes(filterProduct.toLowerCase())){
                   return val;
                 }
               

@@ -52,7 +52,7 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
     ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   }, 1000);
   return (
-    <div className="product-grid" id="hot-auction">
+    <div className="product-grid">
       <div className="product-item-countdownstart-wrapper">
         <span className="product-item-countdownstart-headtext">Auction Start Date: </span>
         <span className="product-item-countdownstart-time">{product.product_start_aution_day}</span>
@@ -78,7 +78,7 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
       </Link>
 
       <div replace className="product-item-categoryname">
-        <Link to={`/category/${product.category_name}`}>{product.category_name}</Link>
+        <Link to={`/category/${product.category_name}`}>{product.category_name.replace(/-/g, " ")}</Link>
       </div>
 
       <div className="product-name">
@@ -88,7 +88,7 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
           replace
           className="product-name-item"
         >
-          {product.product_name}
+          {product.product_name.replace(/-/g, " ")}
         </Link>
       </div>
       <div className="product-metapane-wrapper">

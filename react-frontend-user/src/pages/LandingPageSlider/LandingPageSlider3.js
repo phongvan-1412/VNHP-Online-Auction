@@ -1,5 +1,4 @@
 import React, { Component, useState, useRef } from "react";
-import { useDispatch, useSelector } from 'react-redux';
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -21,12 +20,6 @@ const LandingPageSlider3 = ({products}) => {
   };
 
   const settings = { dots: false, infinite: false, speed: 250, slidesToShow: 5, slidesToScroll: 5};
-  
-  const [horizontalState, setHorizontalState] = useState(1);
-
-  const horizontalTab = (index) => { 
-    setHorizontalState(index.target.value);
-  };
   
   //SEARCH PRODUCT BY SLIDER
   // function Search() {
@@ -53,9 +46,8 @@ const LandingPageSlider3 = ({products}) => {
             {products.filter((val) => {
                 if(filters == ""){
                   return val;
-                }else if((
-                val.product_name.toLowerCase() 
-                || val.category_name.toLowerCase()).includes(filters.toLowerCase())){
+                }else if((val.category_name.toLowerCase() ||
+                val.product_name.toLowerCase()).includes(filters.toLowerCase())){
                   return val;
                 }
               
