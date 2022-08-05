@@ -19,6 +19,8 @@ class CategoryAPI extends Controller
         order by c.category_name");
         return $categories;
     }
+    
+
     public function AddCategory(Request $request){
         $newCategory = new Category();
         $newCategory->category_name =  $request->category_name;

@@ -2,7 +2,7 @@ import React from "react";
 import $ from "jquery";
 import axios from "axios";
 
-function AddCategory() {
+function AddCategory({updateCategoryTable}) {
   let checkCategory = false;
   let checkCategoryImage = false;
 
@@ -90,6 +90,7 @@ function AddCategory() {
         if (response.data > 0) {
           addCategoryResult.text("Insert new category succesfully.");
           addCategoryResult.css("color", "green");
+          updateCategoryTable();
         } else {
           addCategoryResult.text("Insert new category fail");
           addCategoryResult.css("color", "red");
@@ -161,14 +162,12 @@ function AddCategory() {
               >
                 Close
               </button>
-              <button
+              <input
                 type="submit"
                 className="btn btn-info waves-effect waves-light"
-                data-bs-dismiss=""
                 onClick={buttononclick}
-              >
-                Create
-              </button>
+                value="Create"
+              />
             </div>
           </div>
         </div>
