@@ -118,25 +118,25 @@ class HomePage extends Component {
         });
     };
     // const self = this;
-    const getVisitor = () => {
-      fetch("http://127.0.0.1:8000/api/getonlinevisitor", {
-        method: "GET",
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          this.setState({ getOnlineVisitor: response });
-        })
+    // const getVisitor = () => {
+    //   fetch("http://127.0.0.1:8000/api/getonlinevisitor", {
+    //     method: "GET",
+    //   })
+    //     .then((response) => response.json())
+    //     .then((response) => {
+    //       this.setState({ getOnlineVisitor: response });
+    //     })
 
-        .catch((err) => {
+    //     .catch((err) => {
 
-        });    
-    const countOnlineVisitor = this.state.getOnlineVisitor.length;
-      // if (document.getElementById("countVisitorDisplay") == null) {
-      //   return;
-      // }
-        document.getElementById("countVisitorDisplay").innerHTML = countOnlineVisitor;
-    }
-    const OnlineVisitor = setInterval (getVisitor,20000)
+    //     });    
+    // const countOnlineVisitor = this.state.getOnlineVisitor.length;
+    //   // if (document.getElementById("countVisitorDisplay") == null) {
+    //   //   return;
+    //   // }
+    //     document.getElementById("countVisitorDisplay").innerHTML = countOnlineVisitor;
+    // }
+    // const OnlineVisitor = setInterval (getVisitor,20000)
     
     return (
       <div>

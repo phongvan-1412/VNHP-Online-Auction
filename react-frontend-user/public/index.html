@@ -103,26 +103,11 @@
       </script>
 
       <!-- Show visitor online  -->
-      <div class="visitor">
+      <!-- <div class="visitor">
         <span>Online Visitor: </span>
         <span id="countVisitorDisplay"> </span>
-      </div>
+      </div> -->
 
-      <!-- <script>
-        const countVisitor = [];
-        let visitor = JSON.parse(localStorage.getItem("customer_info")).customer_id;
-        if ( visitor != null){
-          countVisitor.push(visitor)
-        }
-
-        let length = countVisitor.length;
-
-        if ( length > 0 ){
-          document.getElementById("countVisitorDisplay").innerHTML = length;
-        }
-      </script> -->
-
-      <!-- Force page when reload always back to top -->
       <script>  
         window.onbeforeunload = function () {
             window.scrollTo(0, 0);
