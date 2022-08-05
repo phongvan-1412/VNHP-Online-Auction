@@ -47,7 +47,9 @@ const ProductItem = ({ product }) => {
 
     
   return (
+    
     <div className="product-grid">
+      
       <div className="product-item-countdownstart-wrapper">
         <span className="product-item-countdownstart-headtext">Auction Start Date: </span>
         <span className="product-item-countdownstart-time">{product.product_start_aution_day}</span>
