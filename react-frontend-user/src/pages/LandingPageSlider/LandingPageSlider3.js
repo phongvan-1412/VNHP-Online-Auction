@@ -9,6 +9,7 @@ import { GiNextButton, GiPreviousButton} from 'react-icons/gi'
 import SliderItem3 from "./SliderItem3";
 
 const LandingPageSlider3 = ({products}) => {
+  //SLIDER
   const ref = useRef({})
 
   const next = () =>{
@@ -27,21 +28,43 @@ const LandingPageSlider3 = ({products}) => {
     setHorizontalState(index.target.value);
   };
   
+  //SEARCH PRODUCT BY SLIDER
+  function Search() {
+    var value = $("#search").val().toLowerCase();
+    $("#hot-auction div").filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    });
+  }
     return (
         <div className=" landingpage-slider slide-title">
           <div className="slide-title top-content">
-            <h4>
-              <b>HOT AUCTIONS</b>
-            </h4>
+            <h4><b>HOT AUCTIONS</b></h4>
+            <input 
+            id="searchproduct" 
+            placeholder="Search..." 
+            onKeyUp={(e) => {
+              setFilter(e.target.value);
+            }}/>
           </div>
 
           <Slider ref={ref} {...settings}>
-            {products.map((product) => (
-               <SliderItem3
-               key={product.product_id}
-               product={product}
-             ></SliderItem3>
-            ))}
+            {products.filter((val) => {
+                if(filter == ""){
+                  return val;
+                }else if((
+                val.product_name.toLowerCase() 
+                || val.category_name.toLowerCase()).includes(filter.toLowerCase())){
+                  return val;
+                }
+              
+              }).map((val) => {
+                return(
+                  <div className="product-grid-wrapper" key={val.product_id} >
+                    <SliderItem1 product={val}></SliderItem1>
+                  </div>
+                )
+              })
+            }
           </Slider>
           
           <div className="btn-click">

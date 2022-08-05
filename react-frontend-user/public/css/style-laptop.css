@@ -704,9 +704,16 @@
 }
 .top-content{
     display: flex;
+    justify-content: space-between;
     align-items: center;
     border-bottom: var(--border);
+    padding-bottom: 10px;
     margin-bottom: 20px;
+}
+.top-content input{
+    padding: 5px 80px 5px 5px;
+    border: var(--border);
+    border-radius: 5px;
 }
 .product-img img{
     width: 200px;

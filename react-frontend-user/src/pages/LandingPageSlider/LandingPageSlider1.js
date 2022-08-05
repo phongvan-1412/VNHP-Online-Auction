@@ -9,6 +9,8 @@ import { GiNextButton, GiPreviousButton} from 'react-icons/gi'
 import SliderItem1 from "./SliderItem1";
 
 const LandingPageSlider1 = ({products}) => {
+
+  //SLIDER
   const ref = useRef({})
 
   const next = () =>{
@@ -28,21 +30,39 @@ const LandingPageSlider1 = ({products}) => {
     setHorizontalState(index.target.value);
   };
 
+  //SEARCH PRODUCT BY SLIDER
+  const [filter, setFilter] = useState("");
+
     return (
         <div className=" landingpage-slider slide-title">
           <div className="slide-title top-content">
-            <div id="timer"></div>
-            <h4>
-              <b>UPCOMING AUCTIONS</b>
-            </h4>
+            <h4><b>UPCOMING AUCTIONS</b></h4>
+            <input 
+            id="searchproduct" 
+            placeholder="Search..." 
+            onKeyUp={(e) => {
+              setFilter(e.target.value);
+            }}/>
           </div>
 
           <Slider ref={ref} {...settings}>
-            {products.map((product) => (
-            <div className="product-grid-wrapper" key={product.product_id}>
-               <SliderItem1 product={product}></SliderItem1>
-            </div>
-            ))}
+            {products.filter((val) => {
+              if(filter == ""){
+                return val;
+              }else if((
+              val.product_name.toLowerCase() 
+              || val.category_name.toLowerCase()).includes(filter.toLowerCase())){
+                return val;
+              }
+            
+            }).map((val) => {
+              return(
+                <div className="product-grid-wrapper" key={val.product_id} >
+                  <SliderItem1 product={val}></SliderItem1>
+                </div>
+              )
+            })
+          }
           </Slider>
           
           <div className="btn-click">

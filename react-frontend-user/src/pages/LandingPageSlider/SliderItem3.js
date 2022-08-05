@@ -52,7 +52,7 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
     ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   }, 1000);
   return (
-    <div className="product-grid">
+    <div className="product-grid" id="hot-auction">
       <div className="product-item-countdownstart-wrapper">
         <span className="product-item-countdownstart-headtext">Auction Start Date: </span>
         <span className="product-item-countdownstart-time">{product.product_start_aution_day}</span>
