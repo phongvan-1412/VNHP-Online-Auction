@@ -29,12 +29,14 @@ const LandingPageSlider3 = ({products}) => {
   };
   
   //SEARCH PRODUCT BY SLIDER
-  function Search() {
-    var value = $("#search").val().toLowerCase();
-    $("#hot-auction div").filter(function () {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-    });
-  }
+  // function Search() {
+  //   var value = $("#search").val().toLowerCase();
+  //   $("#hot-auction div").filter(function () {
+  //     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+  //   });
+  // }
+  const [filters, setFilters] = useState("");
+
     return (
         <div className=" landingpage-slider slide-title">
           <div className="slide-title top-content">
@@ -43,24 +45,24 @@ const LandingPageSlider3 = ({products}) => {
             id="searchproduct" 
             placeholder="Search..." 
             onKeyUp={(e) => {
-              setFilter(e.target.value);
+              setFilters(e.target.value);
             }}/>
           </div>
 
           <Slider ref={ref} {...settings}>
             {products.filter((val) => {
-                if(filter == ""){
+                if(filters == ""){
                   return val;
                 }else if((
                 val.product_name.toLowerCase() 
-                || val.category_name.toLowerCase()).includes(filter.toLowerCase())){
+                || val.category_name.toLowerCase()).includes(filters.toLowerCase())){
                   return val;
                 }
               
               }).map((val) => {
                 return(
                   <div className="product-grid-wrapper" key={val.product_id} >
-                    <SliderItem1 product={val}></SliderItem1>
+                    <SliderItem3 product={val}></SliderItem3>
                   </div>
                 )
               })
