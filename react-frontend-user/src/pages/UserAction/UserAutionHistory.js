@@ -1,6 +1,6 @@
 import React from "react";
 
-function UserAutionHistory({ currentAutionHistory }) {
+function UserAutionHistory({ autionHistory }) {
   function Search() {
     var value = $("#search").val().toLowerCase();
     $("#aution-history tr").filter(function () {
@@ -8,7 +8,7 @@ function UserAutionHistory({ currentAutionHistory }) {
     });
   }
   let i = 1;
-  if (currentAutionHistory.length <= 0) {
+  if (autionHistory.length <= 0) {
     return (
       <div className="container">
         <div className="row">
@@ -50,19 +50,8 @@ function UserAutionHistory({ currentAutionHistory }) {
                   <th>Date</th>
                 </tr>
               </thead>
-              {/* <tfoot>
-              <tr>
-                <th></th>
-                <th>Product</th>
-                <th>Date</th>
-                <th>Total</th>
-                <th>Customer</th>
-                <th>Payment code</th>
-                <th>Status</th>
-              </tr>
-            </tfoot> */}
               <tbody id="aution-history">
-                {currentAutionHistory.map((ah, index) => {
+                {autionHistory.map((ah, index) => {
                   return (
                     <tr key={index}>
                       <td>{i++}</td>

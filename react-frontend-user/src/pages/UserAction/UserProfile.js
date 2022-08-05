@@ -7,14 +7,19 @@ import UserAutionHistory from "./UserAutionHistory";
 import UserBillHistory from "./UserBillHistory";
 
 class UserProfile extends Component {
-  state = { viewIndex: 1, billHistory: [], newBill: [] };
+  state = {
+    viewIndex: 1,
+    autionHistory: [],
+    billHistory: [],
+    newBill: [],
+    loading: false,
+  };
 
   componentDidMount() {
     this.setState({ viewIndex: 1 });
   }
   render() {
-    const { userinfo, autionHistory, updateUserLogin, updateAutionHistory } =
-      this.props;
+    const { userinfo, updateUserLogin } = this.props;
 
     let currentUserInfo = userinfo;
     if (performance.navigation.type === 1) {
@@ -28,10 +33,6 @@ class UserProfile extends Component {
     if (currentUserInfo.customer_img_name == null) {
       window.location.href = "http://localhost:3000";
     }
-
-    const currentAutionHistory = autionHistory.filter(
-      (ah) => ah.customer_id == currentUserInfo.customer_id
-    );
 
     function onAvatarChange() {
       $("#avatar-img-result").text("");
@@ -89,24 +90,34 @@ class UserProfile extends Component {
           }
         });
     };
+    const self = this;
 
     const btnAutionHistoryOnClick = () => {
       this.setState({ viewIndex: 1 });
-      updateAutionHistory();
+      this.setState({ loading: true });
+      axios
+        .post(`http://127.0.0.1:8000/api/getautionhistory`, {
+          customer_id: currentUserInfo.customer_id,
+        })
+        .then((response) => {
+          self.setState({ autionHistory: response.data });
+          self.setState({ loading: false });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
-
-    const self = this;
 
     const btnBillHistoryOnClick = () => {
       this.setState({ viewIndex: 2 });
-      
+      this.setState({ loading: true });
       axios
         .post(`http://127.0.0.1:8000/api/getbillhistory`, {
           customer_id: currentUserInfo.customer_id,
         })
         .then((response) => {
-          console.log(response.data);
           self.setState({ billHistory: response.data });
+          self.setState({ loading: false });
         })
         .catch((err) => {
           console.log(err);
@@ -115,13 +126,15 @@ class UserProfile extends Component {
 
     const btnNewBillOnClick = () => {
       this.setState({ viewIndex: 3 });
-      
+      this.setState({ loading: true });
+
       axios
         .post(`http://127.0.0.1:8000/api/getnewbill`, {
           customer_id: currentUserInfo.customer_id,
         })
         .then((response) => {
           self.setState({ newBill: response.data });
+          self.setState({ loading: false });
         })
         .catch((err) => {
           console.log(err);
@@ -301,21 +314,69 @@ class UserProfile extends Component {
               this.state.viewIndex == 1 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            <UserAutionHistory currentAutionHistory={currentAutionHistory} />
+            {this.state.loading ? (
+              <div className="container">
+                <div className="row">
+                  <div className="col-5"></div>
+                  <div
+                    className="spinner-border text-light col-2"
+                    id="user-info-loading-ring"
+                    role="status"
+                  >
+                    <span className="visually-hidden ">Loading...</span>
+                  </div>
+                  <div className="col-5"></div>
+                </div>
+              </div>
+            ) : (
+              <UserAutionHistory autionHistory={this.state.autionHistory} />
+            )}
           </div>
           <div
             className={
               this.state.viewIndex == 2 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            <UserBillHistory billHistory={this.state.billHistory} />
+            {this.state.loading ? (
+              <div className="container">
+                <div className="row">
+                  <div className="col-5"></div>
+                  <div
+                    className="spinner-border text-light col-2"
+                    id="user-info-loading-ring"
+                    role="status"
+                  >
+                    <span className="visually-hidden ">Loading...</span>
+                  </div>
+                  <div className="col-5"></div>
+                </div>
+              </div>
+            ) : (
+              <UserBillHistory billHistory={this.state.billHistory} />
+            )}
           </div>
           <div
             className={
               this.state.viewIndex == 3 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            <UserNewBill newBill={this.state.newBill} />
+            {this.state.loading ? (
+              <div className="container">
+                <div className="row">
+                  <div className="col-5"></div>
+                  <div
+                    className="spinner-border text-light col-2"
+                    id="user-info-loading-ring"
+                    role="status"
+                  >
+                    <span className="visually-hidden ">Loading...</span>
+                  </div>
+                  <div className="col-5"></div>
+                </div>
+              </div>
+            ) : (
+              <UserNewBill newBill={this.state.newBill} />
+            )}
           </div>
         </div>
         <ChangePassword

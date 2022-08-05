@@ -6,7 +6,12 @@
 .form-waring-text {
   position: absolute;
 }
-.no-record-found{
+#user-info-loading-ring{
+  background-image: linear-gradient(red,black);
+}
+.popup-fade-in #user-info-loading-ring span{
+  color: rebeccapurple;
+  background-image: linear-gradient(blue,white);
 }
 /* login form */
 .login-form {
