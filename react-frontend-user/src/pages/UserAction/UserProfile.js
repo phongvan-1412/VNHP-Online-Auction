@@ -12,11 +12,25 @@ class UserProfile extends Component {
     autionHistory: [],
     billHistory: [],
     newBill: [],
-    loading: false,
+    autionloading: false,
+    billloading: false,
+    newbillloading: false,
   };
 
   componentDidMount() {
     this.setState({ viewIndex: 1 });
+    this.setState({ autionloading: true });
+      axios
+        .post(`http://127.0.0.1:8000/api/getautionhistory`, {
+          customer_id: JSON.parse(localStorage.getItem("customer_info")).customer_id,
+        })
+        .then((response) => {
+          this.setState({ autionHistory: response.data });
+          this.setState({ autionloading: false });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }
   render() {
     const { userinfo, updateUserLogin } = this.props;
@@ -33,7 +47,7 @@ class UserProfile extends Component {
     if (currentUserInfo.customer_img_name == null) {
       window.location.href = "http://localhost:3000";
     }
-
+    
     function onAvatarChange() {
       $("#avatar-img-result").text("");
       const file = $("#user-avatar-img").prop("files")[0];
@@ -94,14 +108,14 @@ class UserProfile extends Component {
 
     const btnAutionHistoryOnClick = () => {
       this.setState({ viewIndex: 1 });
-      this.setState({ loading: true });
+      this.setState({ autionloading: true });
       axios
         .post(`http://127.0.0.1:8000/api/getautionhistory`, {
           customer_id: currentUserInfo.customer_id,
         })
         .then((response) => {
           self.setState({ autionHistory: response.data });
-          self.setState({ loading: false });
+          self.setState({ autionloading: false });
         })
         .catch((err) => {
           console.log(err);
@@ -110,14 +124,14 @@ class UserProfile extends Component {
 
     const btnBillHistoryOnClick = () => {
       this.setState({ viewIndex: 2 });
-      this.setState({ loading: true });
+      this.setState({ billloading: true });
       axios
         .post(`http://127.0.0.1:8000/api/getbillhistory`, {
           customer_id: currentUserInfo.customer_id,
         })
         .then((response) => {
           self.setState({ billHistory: response.data });
-          self.setState({ loading: false });
+          self.setState({ billloading: false });
         })
         .catch((err) => {
           console.log(err);
@@ -126,7 +140,7 @@ class UserProfile extends Component {
 
     const btnNewBillOnClick = () => {
       this.setState({ viewIndex: 3 });
-      this.setState({ loading: true });
+      this.setState({ newbillloading: true });
 
       axios
         .post(`http://127.0.0.1:8000/api/getnewbill`, {
@@ -134,7 +148,7 @@ class UserProfile extends Component {
         })
         .then((response) => {
           self.setState({ newBill: response.data });
-          self.setState({ loading: false });
+          self.setState({ newbillloading: false });
         })
         .catch((err) => {
           console.log(err);
@@ -314,7 +328,7 @@ class UserProfile extends Component {
               this.state.viewIndex == 1 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            {this.state.loading ? (
+            {this.state.autionloading ? (
               <div className="container">
                 <div className="row">
                   <div className="col-5"></div>
@@ -337,7 +351,7 @@ class UserProfile extends Component {
               this.state.viewIndex == 2 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            {this.state.loading ? (
+            {this.state.billloading ? (
               <div className="container">
                 <div className="row">
                   <div className="col-5"></div>
@@ -360,7 +374,7 @@ class UserProfile extends Component {
               this.state.viewIndex == 3 ? "popup-fade-in" : "popup-fade-out"
             }
           >
-            {this.state.loading ? (
+            {this.state.newbillloading ? (
               <div className="container">
                 <div className="row">
                   <div className="col-5"></div>
