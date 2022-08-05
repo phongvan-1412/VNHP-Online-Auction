@@ -212,7 +212,7 @@ function AddProduct({ categories }) {
         result.css("color", "red");
         validProductStartAutionDay = false;
       } else {
-        result.text("Start aution day is valid.");
+        result.text("");
         result.css("color", "green");
         validProductStartAutionDay = true;
       }
@@ -245,7 +245,7 @@ function AddProduct({ categories }) {
         result.css("color", "red");
         validProductEndAutionDay = false;
       } else {
-        result.text("End aution day is valid.");
+        result.text("");
         result.css("color", "green");
         validProductEndAutionDay = true;
       }
@@ -253,6 +253,12 @@ function AddProduct({ categories }) {
   };
 
   const productElement = () => {
+   
+    const input_imgs_product = $("#input-imgs-product").prop('files')[0];
+    const input_img1_product = $("#input-img1-product").prop('files')[0];
+    const input_img2_product = $("#input-img2-product").prop('files')[0];
+    const input_img3_product = $("#input-img3-product").prop('files')[0];
+
     const checkProductName = $("#check-product-name-result");
     const checkProductThmbnailImg = $("#product-thumbnail-img-check-result");
     const checkProductImg1 = $("#product-img1-check-result");
@@ -412,12 +418,12 @@ function AddProduct({ categories }) {
     formData.set("product_end_autio_day", end_aution_day);
     formData.set("product_information", information);
     formData.set("product_ingredients", ingredients);
-    formData.set("product_instruction_use", instruction_use);
     formData.set("product_instruction_store", instruction_store);
-
+    
     axios
       .post(`http://127.0.0.1:8000/api/addproduct`, formData)
       .then(function (response) {
+        console.log(response.data)
         if (response.data > 0) {
           $("#add-product-result").text("Add new product successfully.");
           $("#add-product-result").css("color", "green");

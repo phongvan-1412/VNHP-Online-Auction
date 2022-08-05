@@ -6,6 +6,7 @@ function AddCategory() {
   let checkCategory = false;
   let checkCategoryImage = false;
 
+
   const onCategoryNameBlur = (e) => {
     const category_name = e.target.value.trim().replace(/ /g, "-");
     const result = $("#check-category-result");
@@ -17,11 +18,11 @@ function AddCategory() {
           result.css("color", "red");
           checkCategory = false;
         } else {
-          if (category_name != "" && category_name.length >= 3 && category_name.length <= 20) {
+          if (category_name != "" && category_name.length <= 200) {
             result.text("");
             checkCategory = true;
           } else {
-            result.text("Invalid category name");
+            result.text("error: max length 200 character");
             result.css("color", "red");
             checkCategory = false;
           }
@@ -34,6 +35,7 @@ function AddCategory() {
   const onCategoryImageChange = (e) => {
     const img = e.target.files[0];
     const result = $("#check-img-result");
+
     if (img != null) {
       result.text("");
       category_img = e.target.files[0];
@@ -97,17 +99,16 @@ function AddCategory() {
 
   return (
     <div
-      className="modal fade bd-example-modal-lg"
+      className="modal fade"
       id="add-category-modal"
       tabIndex="-1"
-      role="dialog"
       aria-labelledby="myLargeModalLabel"
       aria-hidden="true"
     >
       <div className="modal-dialog modal-lg">
         <div className="modal-content">
           <div className="modal-header">
-            <h4 className="modal-title">Add Category</h4>
+            <h4 className="modal-title" id="myLargeModalLabel">Add Category</h4>
             <button
               type="button"
               className="close"
@@ -131,6 +132,7 @@ function AddCategory() {
                   <input
                     className="form-control"
                     id="input-add-category"
+                    placeholder="max length 200 character"
                     onBlur={onCategoryNameBlur}
                   />
                   <div id="check-category-result"></div>
@@ -160,9 +162,10 @@ function AddCategory() {
                 Close
               </button>
               <button
+                type="submit"
                 className="btn btn-info waves-effect waves-light"
+                data-bs-dismiss=""
                 onClick={buttononclick}
-                value="Create"
               >
                 Create
               </button>
