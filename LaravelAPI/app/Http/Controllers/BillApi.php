@@ -40,6 +40,15 @@ class BillApi extends Controller
         ->get();
     }
     
+    public function GetAutionHistory(Request $request)
+    {
+        return DB::table('product')
+        ->join('aution_price','aution_price.product_id','=','product.product_id')
+        ->where('aution_price.customer_id',$request->customer_id)
+        ->where('aution_price.aution_status',1)
+        ->get();
+    }
+
     public function SelectBill()
     {
         // $bills = Bill::select()->get();
