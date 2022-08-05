@@ -277,18 +277,4 @@ class ProductAPI extends Controller
         return $product;
     }
 
-
-    // public function ChangeProductStatus(Request $request)
-    // {
-    //     $tmp = Product::where('product_id',$request->product_id)->get();
-
-    //     if(count($tmp) > 0)
-    //     {
-    //         Product::select()->where('product_id',$request->product_id)
-    //                             ->update(['product_status'=>$request->product_status]);
-    //         return 1;
-    //     }
-
-    //     return 0;
-    // }
 }
