@@ -31,7 +31,8 @@ const ProductDetailItemSlide = ({ product }) => {
             </Link>
           </div>
 
-          <div className="sidebar-suggest-product-price">$ {product.product_start_price}</div>
+          <div className="sidebar-suggest-product-price"><b>Start price</b> $ {product.product_start_price}</div>
+          <div className="sidebar-suggest-product-price"><b>Current bid</b>$ {product.current_bid}</div>
         </div>
       </div>
     );

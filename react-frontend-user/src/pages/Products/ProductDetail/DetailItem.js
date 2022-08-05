@@ -1,31 +1,44 @@
 import React, { useState } from "react";
-import axios from 'axios';
-import $ from 'jquery';
+import axios from "axios";
+import $ from "jquery";
 import { Link } from "react-router-dom";
 
 import { BsFillBagCheckFill } from "react-icons/bs";
 
-const DetailItem = ({ product }) => { 
+const DetailItem = ({ product }) => {
+  let checkUser = false;
+  if (JSON.parse(localStorage.getItem("customer_info")) != null) {
+    checkUser = true;
+  }
   //COUNTDOWN
   var productEndDate = product.product_end_aution_day;
   // var countDownDate = new Date(new Date("2022/08/04 20:48:00").toLocaleString()).getTime();
-  var countDownDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
+  var countDownDate = new Date(
+    new Date(productEndDate).toLocaleString()
+  ).getTime();
 
-  var productNow = setInterval(function() {
+  var productNow = setInterval(function () {
     var now = new Date(new Date().toLocaleString()).getTime();
-  
+
     var distance = countDownDate - now;
-    
+
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    if (document.getElementById(product.product_id + product.product_name) == null) return;
-    if (distance <= 0){
+    if (
+      document.getElementById(product.product_id + product.product_name) == null
+    )
+      return;
+    if (distance <= 0) {
       clearInterval(productNow);
-      document.getElementById(product.product_id + product.product_name).innerHTML = "EXPIRED";
-      
+      document.getElementById(
+        product.product_id + product.product_name
+      ).innerHTML = "EXPIRED";
+
       //
       var countdownProduct = product.product_id;
 
@@ -33,56 +46,63 @@ const DetailItem = ({ product }) => {
       var hours = 0;
       var minutes = 0;
       var seconds = 0;
-      
+
       axios
-        .post("http://127.0.0.1:8000/api/countdownend", {countdownProduct})
+        .post("http://127.0.0.1:8000/api/countdownend", { countdownProduct })
         .then(function (response) {
           // console.log(response.data)
-            });
-
+        });
     }
-    document.getElementById(product.product_id + product.product_name).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";}, 1000);
-    
+    document.getElementById(
+      product.product_id + product.product_name
+    ).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+  }, 1000);
 
-    //BIDDING PRICE
-    const [currentBid, setCurrentBid] = useState(product.current_bid);
-    const setTime = () => {
-      $(".result-bidprice").text("")
-  }
-    const onKeyUp = (event) => {
-      const realBidPrice = event.target.value;
+  //BIDDING PRICE
+  const [currentBid, setCurrentBid] = useState(product.current_bid);
+  const setTime = () => {
+    $(".result-bidprice").text("");
+  };
+  const onKeyUp = (event) => {
+    const realBidPrice = event.target.value;
 
-        if (event.key === "Enter") {
-            const productId = product.product_id;
-            const customerId = JSON.parse(localStorage.getItem("customer_info")).customer_id;
-            console.log(customerId)
-            const auctionDay = new Date(new Date().toLocaleString());
-            const result = $(".result-bidprice");
-            axios
-                .post("http://127.0.0.1:8000/api/currentbidprice", {realBidPrice, productId, customerId, auctionDay} )
-                .then(function (res) {
-                    if (res.data > 0) {
-                        setCurrentBid(realBidPrice)
-                        result.text("Your price is acceptable");
-                        result.css("color", "green");
-                    } else {
-                        result.text("Your price is invalid");
-                        result.css("color", "red");
-                    }
-                    $("#input-bidprice").val("");
-                    setInterval(setTime, 2000)
-                });
-        }
+    if (event.key === "Enter") {
+      const productId = product.product_id;
+      const customerId = JSON.parse(
+        localStorage.getItem("customer_info")
+      ).customer_id;
+      console.log(customerId);
+      const auctionDay = new Date(new Date().toLocaleString());
+      const result = $(".result-bidprice");
+      axios
+        .post("http://127.0.0.1:8000/api/currentbidprice", {
+          realBidPrice,
+          productId,
+          customerId,
+          auctionDay,
+        })
+        .then(function (res) {
+          if (res.data > 0) {
+            setCurrentBid(realBidPrice);
+            result.text("Your price is acceptable");
+            result.css("color", "green");
+          } else {
+            result.text("Your price is invalid");
+            result.css("color", "red");
+          }
+          $("#input-bidprice").val("");
+          setInterval(setTime, 2000);
+        });
     }
+  };
 
-    //CLEAR ANNOUCEMENT
-    // const onChange = () => {
-    //   $("#input-bidprice").val("") ;
-    // }
-    
-    return (
+  //CLEAR ANNOUCEMENT
+  // const onChange = () => {
+  //   $("#input-bidprice").val("") ;
+  // }
+
+  return (
     <div className="row">
-
       <div className="col-md-6 product-detail-img-wrapper">
         <img
           className="product-detail-img"
@@ -91,7 +111,10 @@ const DetailItem = ({ product }) => {
       </div>
 
       <div className="col-md-6 product-detail-info-wrapper">
-        <div id={ product.product_id + product.product_name} className="product-detail-countdown"></div>
+        <div
+          id={product.product_id + product.product_name}
+          className="product-detail-countdown"
+        ></div>
         <div className="product-detail-product-name">
           <h3>{product.product_name.replace(/-/g, " ")}</h3>
         </div>
@@ -110,40 +133,77 @@ const DetailItem = ({ product }) => {
 
           <div className="product-detail-price-wrapper">
             <div className="product-detail-product-price-wrapper">
-              <span className="product-detail-product-price-headtext">Start Price: </span>
-              <span className="product-detail-product-price">$ {parseInt(product.product_start_price).toLocaleString()}</span>
+              <span className="product-detail-product-price-headtext">
+                Start Price:{" "}
+              </span>
+              <span className="product-detail-product-price">
+                $ {parseInt(product.product_start_price).toLocaleString()}
+              </span>
             </div>
 
             <div className="product-detail-product-currentprice-wrapper">
-              <span className="product-detail-product-currentprice-headtext">Current Bid: </span>
-              <span className="product-detail-product-currentprice">$ {parseInt(currentBid).toLocaleString()}</span>
+              <span className="product-detail-product-currentprice-headtext">
+                Current Bid:{" "}
+              </span>
+              <span className="product-detail-product-currentprice">
+                $ {parseInt(currentBid).toLocaleString()}
+              </span>
             </div>
           </div>
 
           <div className="result-bidprice"></div>
 
           <div className="product-detail-product-bidprice-wrapper">
-            <input id="input-bidprice" className="product-detail-product-bidprice" type="number" min={product.product_start_price} step="10" placeholder="Your Max Bid" onKeyUp={onKeyUp} />
-            <Link to="/register" className="product-detail-product-bidprice-register">Register to Bid</Link>
+            {checkUser ? (
+              <input
+                id="input-bidprice"
+                className="product-detail-product-bidprice"
+                type="number"
+                min={product.product_start_price}
+                step="10"
+                placeholder="Your Max Bid"
+                onKeyUp={onKeyUp}
+              />
+            ):null}
+
+            <Link
+              to="/login"
+              className="product-detail-product-bidprice-register"
+            >
+              Login to Bid
+            </Link>
           </div>
 
-          <div className="product-detail-product-bidprice-headtext"><i className="fa-solid fa-lock"/> Secure Bidding</div>
+          <div className="product-detail-product-bidprice-headtext">
+            <i className="fa-solid fa-lock" /> Secure Bidding
+          </div>
 
-          <div className="product-detail-product-categoryname">{product.category_name.replace(/-/g, " ")}</div>
+          <div className="product-detail-product-categoryname">
+            {product.category_name.replace(/-/g, " ")}
+          </div>
 
-          <div className="product-detail-product-owner"> by {product.customer_name}</div>
+          <div className="product-detail-product-owner">
+            {" "}
+            by {product.customer_name}
+          </div>
 
           <div className="product-detail-product-info-realtime-wrapper">
-            <div className="product-detail-product-realdate"><b>{product.product_end_aution_day}</b></div>
+            <div className="product-detail-product-realdate">
+              <b>{product.product_end_aution_day}</b>
+            </div>
             <div className="product-detail-product-realtime"></div>
-            <div className="product-detail-product-realtime-headtext"><i className="fa-solid fa-clock"/> Timed Auction</div>
+            <div className="product-detail-product-realtime-headtext">
+              <i className="fa-solid fa-clock" /> Timed Auction
+            </div>
           </div>
 
-          <div className="product-detail-product-owner-address">{product.customer_address}</div>
+          <div className="product-detail-product-owner-address">
+            {product.customer_address}
+          </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default DetailItem;

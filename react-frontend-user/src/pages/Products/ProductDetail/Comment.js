@@ -11,13 +11,20 @@ const Comment = ({ productId, currentFeedback }) => {
     }
     const onKeyUp = (event) => {
         const feedbackContent = event.target.value;
+        const result = $("#result")
+
         if (event.key === "Enter") {
-            console.log(feedbackContent)
+            if (JSON.parse(localStorage.getItem("customer_info")) != null) {
+                result.text("Please login before comment.");
+                result.css("color", "red");
+                setInterval(setTime, 5000)
+                return;
+            }
+
             setFeedbackContent(feedbackContent);
 
             const product_id = productId;
             const customer_id = JSON.parse(localStorage.getItem("customer_info")).customer_id;
-            const result = $("#result")
 
             if (customer_id == null){
                 result.text("You have to login first");
@@ -34,7 +41,7 @@ const Comment = ({ productId, currentFeedback }) => {
                         result.text("Your comment just added.");
                         result.css("color", "green");
                         $("#input-text").val("");
-                        setInterval(setTime, 3000)
+                        setInterval(setTime, 3000);
                     } else {
                         result.text("Your comment added failed.");
                         result.css("color", "red");
