@@ -64,7 +64,7 @@ Route::post('/submitcart',[BillApi::class, 'InsertBill']);
 Route::post('/currentbill',[BillApi::class, 'CurrentBill']);
 Route::post('/getnewbill',[BillApi::class, 'GetNewBill']);
 Route::post('/getbillhistory',[BillApi::class, 'GetBillHistory']);
-
+Route::post('/getautionhistory',[BillApi::class, 'GetAutionHistory']);
 //PAYMENT MODE
 Route::post('/paybill',[BillApi::class, 'PayBill']);
 

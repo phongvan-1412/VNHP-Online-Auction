@@ -31,7 +31,6 @@ class HomePage extends Component {
     categories: [],
     customers: [],
     userinfo: {},
-    autionHistory: [],
     feedbacks: [],
     hotAuctionProducts: [],
     getOnlineVisitor: [],
@@ -51,15 +50,6 @@ class HomePage extends Component {
       .then((categories) => categories.json())
       .then((categories) => {
         this.setState({ categories: categories });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    fetch("http://127.0.0.1:8000/api/customerautionhistory", { method: "GET" })
-      .then((ah) => ah.json())
-      .then((ah) => {
-        this.setState({ autionHistory: ah });
       })
       .catch((err) => {
         console.log(err);
