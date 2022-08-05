@@ -22,7 +22,7 @@ const LandingPageSlider2 = ({products}) => {
 
   const settings = {
     dots: false, 
-    infinite: false, 
+    infinite: true, 
     speed: 250, 
     slidesToShow: 5, 
     slidesToScroll: 5,
@@ -49,14 +49,16 @@ const LandingPageSlider2 = ({products}) => {
           </div>
 
           <Slider ref={ref} {...settings}>
-            {products.filter((val) => {
-                if(filterProduct == ""){
+            {products.slice(0, 15).filter((val) => {
+                if(filterProduct === ""){
                   return val;
-                }else if((val.product_name.toLowerCase() ||
-                val.category_name.toLowerCase()).includes(filterProduct.toLowerCase())){
+                }else if((val.product_name.replace(/-/g, " ").toLowerCase()).includes(filterProduct.toLowerCase())){
+                  return val;
+                }else if((val.category_name.replace(/-/g, " ").toLowerCase()).includes(filterProduct.toLowerCase())){
+                  return val;
+                }else if((val.product_start_price.toLowerCase()).includes(filterProduct.toLowerCase())){
                   return val;
                 }
-              
               }).map((val) => {
                 return(
                   <div className="product-grid-wrapper" key={val.product_id} >

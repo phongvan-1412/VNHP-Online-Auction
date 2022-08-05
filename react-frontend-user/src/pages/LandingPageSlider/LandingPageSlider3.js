@@ -1,6 +1,6 @@
 import React, { Component, useState, useRef } from "react";
-
 import Slider from "react-slick";
+import $ from 'jquery';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GiNextButton, GiPreviousButton} from 'react-icons/gi'
@@ -19,7 +19,7 @@ const LandingPageSlider3 = ({products}) => {
     ref.current.slickPrev();
   };
 
-  const settings = { dots: false, infinite: false, speed: 250, slidesToShow: 5, slidesToScroll: 5};
+  const settings = { dots: false, infinite: true, speed: 250, slidesToShow: 5, slidesToScroll: 5};
   
   //SEARCH PRODUCT BY SLIDER
   // function Search() {
@@ -43,14 +43,16 @@ const LandingPageSlider3 = ({products}) => {
           </div>
 
           <Slider ref={ref} {...settings}>
-            {products.filter((val) => {
-                if(filters == ""){
+            {products.slice(0, 15).filter((val) => {
+                if(filters === ""){
                   return val;
-                }else if((val.product_name.toLowerCase() ||
-                val.category_name.toLowerCase()).includes(filters.toLowerCase())){
+                }else if((val.product_name.replace(/-/g, " ").toLowerCase()).includes(filters.toLowerCase())){
+                  return val;
+                }else if((val.category_name.replace(/-/g, " ").toLowerCase()).includes(filters.toLowerCase())){
+                  return val;
+                }else if((val.product_start_price.toLowerCase()).includes(filters.toLowerCase())){
                   return val;
                 }
-              
               }).map((val) => {
                 return(
                   <div className="product-grid-wrapper" key={val.product_id} >

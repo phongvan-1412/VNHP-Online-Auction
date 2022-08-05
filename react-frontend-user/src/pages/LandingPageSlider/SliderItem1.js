@@ -4,9 +4,6 @@ import { FaHeart } from "react-icons/fa";
 import $ from "jquery";
 
 const SliderItem1 = ({ product, updateComingProducts }) => {
-  const onProductClicked = (e) => {
-    $("#data").data("productid", e.target.name);
-  };
 
   //COUNTDOWN
   var countDownDate = new Date(product.product_start_aution_day).getTime();
@@ -62,7 +59,6 @@ const SliderItem1 = ({ product, updateComingProducts }) => {
         to={`/${product.category_id}/${product.product_name}`}
         replace
         className="product-img"
-        onClick={onProductClicked}
       >
         <img
           name={product.product_id}
@@ -83,7 +79,6 @@ const SliderItem1 = ({ product, updateComingProducts }) => {
           name={product.product_id}
           replace
           className="product-name-item"
-          onClick={onProductClicked}
         >
           {product.product_name.replace(/-/g, " ")}
         </Link>

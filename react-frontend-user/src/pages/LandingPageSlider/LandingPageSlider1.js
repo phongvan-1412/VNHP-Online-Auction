@@ -21,7 +21,7 @@ const LandingPageSlider1 = ({ products }) => {
 
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 250,
     slidesToShow: 5,
     slidesToScroll: 5,
@@ -46,22 +46,24 @@ const [filter, setFilter] = useState("")
       </div>
 
       <Slider ref={ref} {...settings}>
-        {products.filter((val) => {
-            if(filter == ""){
-              return val;
-            }else if((val.product_name.toLowerCase() ||
-            val.category_name.toLowerCase()).includes(filter.toLowerCase())){
-              return val;
-            }
-          
-          }).map((val) => {
-            return(
-              <div className="product-grid-wrapper" key={val.product_id} >
-                <SliderItem1 product={val}></SliderItem1>
-              </div>
-            )
-          })
-        }
+        {products.slice(0, 15).filter((val) => {
+          if(filter === ""){
+            return val;
+          }else if((val.product_name.replace(/-/g, " ").toLowerCase()).includes(filter.toLowerCase())){
+            return val;
+          }else if((val.category_name.replace(/-/g, " ").toLowerCase()).includes(filter.toLowerCase())){
+            return val;
+          }else if((val.product_start_price.toLowerCase()).includes(filter.toLowerCase())){
+            return val;
+          }
+        }).map((val) => {
+          return(
+            <div className="product-grid-wrapper" key={val.product_id} >
+              <SliderItem1 product={val}></SliderItem1>
+            </div>
+          )
+        })
+      }
       </Slider>
 
       <div className="btn-click">
