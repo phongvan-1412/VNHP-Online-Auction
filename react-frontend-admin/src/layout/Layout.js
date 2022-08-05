@@ -10,6 +10,7 @@ import TableCategory from '../form/TableCategory';
 import AdminProfile from "../components/Profile/AdminProfile";
 import Customer from "../components/Customer/Customer";
 import Feedback from "../components/Feedback/Feedback";
+import Feedbacks from "../components/Feedback/Feedbacks";
 import "../css/admin1.css";
 import "../css/sb-admin-2.min.css";
 import "../css/dataTables.bootstrap4.css";
@@ -50,7 +51,7 @@ export class Layout extends Component{
 
                         </Route> 
                         <Route path='/customer' element={<Customer />}></Route>
-                        <Route path='/feedback' element={<Feedback />}></Route>
+                        <Route path='/feedback' element={<Feedbacks />}></Route>
                     </Routes>
                   </div>
               </div>

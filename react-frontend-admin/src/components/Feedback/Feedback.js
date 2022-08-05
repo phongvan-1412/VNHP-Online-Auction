@@ -23,8 +23,7 @@ class Feedback extends Component {
   }
   render() {
     return (
-      <>
-        <h3>FEEDBACK</h3>
+
         <div className="row">
           {this.state.FeedbackData.map((p, index) => {
             return (
@@ -68,7 +67,6 @@ class Feedback extends Component {
             );
           })}
         </div>
-      </>
     );
   }
 }

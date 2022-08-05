@@ -36,10 +36,17 @@ class FeedbackAPI extends Controller
     return $feedbacks;
     }
     public function ShowFeedback(){
-        return DB::select("Select f.feedback_content, f.feedback_date, c.customer_name, p.product_thumbnail_img_name, c.customer_img_name
-            from feedback f
-            join product p on (f.product_id = p.product_id)
-            join customer_account c on (f.customer_id = c.customer_id)
-            where f.feedback_content is not null");
+        return DB::table('product as p')
+        ->join('feedback as f','f.product_id','=','p.product_id')
+        ->join('customer_account as c','c.customer_id','=','f.customer_id')
+        ->whereNotNull('f.feedback_content')->get();
+    }
+    public function ProductHasFeedback(){
+        return DB::select("select c.category_name,p.product_id,p.product_name, p.product_thumbnail_img_name,count(f.product_id) as amount 
+        from product as p
+        join feedback as f on f.product_id = p.product_id 
+        join category as c on c.category_id = p.category_id
+        where f.feedback_content is not null 
+        group by c.category_name, p.product_id, p.product_name, p.product_thumbnail_img_name");
     }
 }

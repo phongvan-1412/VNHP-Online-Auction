@@ -103,7 +103,7 @@ Route::get('/customerdata',[BillApi::class, 'CustomerData']);
 
 //FEEDBACK 
 Route::get('/showfeedback',[FeedbackAPI::class, 'ShowFeedback']);
-
+Route::get('/producthasfeedback',[FeedbackAPI::class, 'ProductHasFeedback']);
 //CHART
 Route::get('/revenueeachmonth', [BillApi::class, 'RevenueEachMonth']);
 Route::get('/revenueeachyear', [BillApi::class, 'RevenueEachYear']);

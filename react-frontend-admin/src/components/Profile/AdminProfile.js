@@ -191,6 +191,7 @@ class AdminProfile extends Component{
                                 className="form-control"
                                 id="dateofbirth"
                                 type="date"
+                                data-date-format="YYYY MM DD"
                                 name="dateofbirth"
                                 placeholder="Enter your birthday"
                                 defaultValue={currentAdminInfo.emp_dob}
