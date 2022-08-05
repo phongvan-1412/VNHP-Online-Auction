@@ -170,23 +170,21 @@ class BillApi extends Controller
     }
 
 
-    public function VeritifitionPayment($bill_payment,$aution_id)
+    public function VeritifitionPayment($aution_id)
     {
         $billDate = date('Y-m-d h:m:s', time());
 
         $newBillId = Bill::select()->where('aution_id', $aution_id)->get();
 
         if(count($newBillId) <= 0){
-            DB::insert("insert into bill(bill_date, bill_payment,bill_status,aution_id) values (?,?,?,?)",
-             [$billDate, $bill_payment,0,$aution_id]);
-
-            // $url = "http://localhost:3000/login";
-            // return Redirect::intended($url);
+            DB::insert("insert into bill(bill_date,bill_status,aution_id) values (?,?,?)",
+             [$billDate,0,$aution_id]);
+            return redirect('/confirmPaymentSucess');
         }
         return "Something wrong in server. Please contact admin to have further details";
     }
 
-    public function SuccessConfirmPaymentView()
+    public function ConfirmPaymentView()
     {
         return view("/confirmPaymentSucess");
     }
