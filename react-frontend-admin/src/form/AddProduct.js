@@ -438,7 +438,6 @@ function AddProduct({ categories }) {
     <div
       className="modal fade bd-example-modal-lg"
       tabIndex="-1"
-      role="dialog"
       id="add-product-modal"
       aria-labelledby="myLargeModalLabel"
       aria-hidden="true"
@@ -544,7 +543,7 @@ function AddProduct({ categories }) {
                   <input
                     className="form-control "
                     id="input-start-aution-product"
-                    type="date"
+                    type="datetime-local"
                     onBlur={onProductStartAutionDayOnBlur}
                   />
                   <div id="product-start-aution-day-check-result"></div>
@@ -573,7 +572,7 @@ function AddProduct({ categories }) {
                     className="form-control"
                     id="input-end-aution-product"
                     onBlur={onProductEndAutionDayOnBlur}
-                    type="date"
+                    type="datetime-local"
                   />
                   <div id="product-end-aution-day-check-result"></div>
                 </div>

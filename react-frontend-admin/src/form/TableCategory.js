@@ -29,6 +29,20 @@ class Category extends Component {
   render() {
     let i = 1;
 
+    const updateCategoryTable = () => {
+      fetch("http://127.0.0.1:8000/api/addcategorytable", {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          this.setState({
+            CategoryData: response,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     const onClick = (e) => {
       const category = {
         category_name: e.target.name,
@@ -87,11 +101,11 @@ class Category extends Component {
         .post(`http://127.0.0.1:8000/api/updatecategory`, formData)
         .then(function (response) {
           if (response.data > 0) {
-            $('#edit-category-result').text('Update category succesfull.');
-            $('#edit-category-result').css('color','green');
+            $("#edit-category-result").text("Update category succesfull.");
+            $("#edit-category-result").css("color", "green");
           } else {
-            $('#edit-category-result').text('Update category fail.');
-            $('#edit-category-result').css('color','red');
+            $("#edit-category-result").text("Update category fail.");
+            $("#edit-category-result").css("color", "red");
           }
         });
     };
@@ -117,12 +131,12 @@ class Category extends Component {
           </div>
           <div className="card-body">
             <input
-                className="form-control col-3 mb-3"
-                id="search"
-                type="text"
-                onKeyUp={Search}
-                placeholder="Search.."
-              />
+              className="form-control col-3 mb-3"
+              id="search"
+              type="text"
+              onKeyUp={Search}
+              placeholder="Search.."
+            />
             <div className="table-responsive">
               <table
                 className="table table-striped"
@@ -246,7 +260,6 @@ class Category extends Component {
                                           />
                                           <div id="category-edit-img-check"></div>
                                         </div>
-
                                       </div>
                                     </div>
 
@@ -279,7 +292,7 @@ class Category extends Component {
             </div>
           </div>
         </div>
-        <AddCategory />
+        <AddCategory updateCategoryTable={updateCategoryTable}/>
       </div>
     );
   }

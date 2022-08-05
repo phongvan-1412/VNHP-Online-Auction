@@ -10,7 +10,8 @@ class TableProduct extends Component {
     this.state = {
       ProductData: [],
       categories: [],
-      productName: "",
+      currentProduct: {},
+      currentCategory: "",
     };
   }
   componentDidMount() {
@@ -38,13 +39,25 @@ class TableProduct extends Component {
   render() {
     let i = 1;
     const onClick = (a) => {
-      this.setState({ productName: a.target.value });
+      this.state.ProductData.map((product) => {
+        if (product.product_id == a.target.value) {
+          this.setState({ currentProduct: product });
+          this.state.categories.map((category) => {
+            if (product.category_id == category.category_id) {
+              this.setState({ currentCategory: category.category_name });
+            }
+          });
+        }
+      });
     };
+
     let category_id = "";
 
     const categoryOnChange = (e) => {
       this.state.categories.forEach((category) => {
-        if (category.category_name == e.target.value.trim().replace(/ /g, "-")) {
+        if (
+          category.category_name == e.target.value.trim().replace(/ /g, "-")
+        ) {
           category_id = category.category_id;
           $("#check-category-name-result").text("");
           // validCategoryName = true;
@@ -52,13 +65,38 @@ class TableProduct extends Component {
         }
       });
     };
-    const changeproduct = () => {
-      const product_name = $('#edit-product-name').val().replace(/ /g,"-");
-      const product_start_price = $('#edit-product-start-price').val();
-      const product_start_aution_day = $('#edit-product-start-aution-day').val();
-      const product_end_aution_day = $('#edit-product-end-aution-day').val();
 
-      const product = {product_name,category_id,product_start_price,product_start_aution_day,product_end_aution_day};
+    const updateProduct = () => {
+      fetch("http://127.0.0.1:8000/api/addproducttable", {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          this.setState({
+            ProductData: response,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    const changeproduct = (e) => {
+      const product_id = e.target.name;
+      const product_name = $("#edit-product-name").val().replace(/ /g, "-");
+      const product_start_price = $("#edit-product-start-price").val();
+      const product_start_aution_day = $(
+        "#edit-product-start-aution-day"
+      ).val();
+      const product_end_aution_day = $("#edit-product-end-aution-day").val();
+
+      const product = {
+        product_id,
+        product_name,
+        category_id,
+        product_start_price,
+        product_start_aution_day,
+        product_end_aution_day,
+      };
 
       axios
         .post(`http://127.0.0.1:8000/api/editproduct`, product)
@@ -66,6 +104,7 @@ class TableProduct extends Component {
           if (response.data > 0) {
             $("#edit-product-result").text("Edit product successfully.");
             $("#edit-product-result").css("color", "green");
+            updateProduct();
           } else {
             $("#edit-product-result").text("Edit product fail.");
             $("#edit-product-result").css("color", "red");
@@ -75,15 +114,18 @@ class TableProduct extends Component {
 
     const onStatusChange = (e) => {
       axios
-        .post(`http://127.0.0.1:8000/api/changeproductstatus`, {product_id : e.target.value,product_status: e.target.checked ? 1: 0})
+        .post(`http://127.0.0.1:8000/api/changeproductstatus`, {
+          product_id: e.target.value,
+          product_status: e.target.checked ? 1 : 0,
+        })
         .then(function (response) {
           if (response.data > 0) {
-            alert("Enable product successfully.")
+            updateProduct();
           } else {
-            alert("Disable product successfully.")
+            
           }
         });
-    }
+    };
 
     function Search() {
       var value = $("#search").val().toLowerCase();
@@ -91,12 +133,13 @@ class TableProduct extends Component {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
       });
     }
+
     return (
       <div className="container-fluid">
         <button
           className="btn btn-success mb-3 "
           data-toggle="modal"
-          data-target=".bd-example-modal-lg"
+          data-target="#add-product-modal"
         >
           Add new
         </button>
@@ -152,38 +195,61 @@ class TableProduct extends Component {
                         <td>{h.product_name.replace(/-/g, " ")}</td>
                         <td>{h.product_start_price}</td>
                         <td>{h.product_price_aution}</td>
-                        <td>{h.product_start_aution_day}</td>
-                        <td>{h.product_end_aution_day}</td>
+                        <td>
+                          {new Date(
+                            h.product_start_aution_day
+                          ).toLocaleString()}
+                        </td>
+                        <td>
+                          {new Date(h.product_end_aution_day).toLocaleString()}
+                        </td>
                         <td>
                           {h.product_status == 0 ? (
                             <h5>
-                              <span className="badge badge-secondary">Deactive</span>                           
+                              <span className="badge badge-secondary">
+                                Deactive
+                              </span>
                             </h5>
                           ) : h.product_status == 1 ? (
                             <h5>
-                              <span className="badge badge-primary">Active</span>                           
+                              <span className="badge badge-primary">
+                                Active
+                              </span>
                             </h5>
-                          ): h.product_status == 2 ?(
+                          ) : h.product_status == 2 ? (
                             <h5>
-                              <span className="badge badge-warning">Pending</span>                           
+                              <span className="badge badge-warning">
+                                Pending
+                              </span>
                             </h5>
                           ) : (
                             <h5>
-                              <span className="badge badge-success">Pending payment</span>                           
+                              <span className="badge badge-success">
+                                Pending payment
+                              </span>
                             </h5>
                           )}
                         </td>
                         <td>
                           {h.product_status == 1 ? (
                             <label className="switch">
-                              <input type="checkbox" defaultChecked  onChange={onStatusChange} value={h.product_id}/>
+                              <input
+                                type="checkbox"
+                                defaultChecked
+                                onChange={onStatusChange}
+                                value={h.product_id}
+                              />
                               <span className="slider round"></span>
                             </label>
                           ) : (
                             <label className="switch">
-                            <input type="checkbox"  onChange={onStatusChange} value={h.product_id}/>
-                            <span className="slider round"></span>
-                          </label>
+                              <input
+                                type="checkbox"
+                                onChange={onStatusChange}
+                                value={h.product_id}
+                              />
+                              <span className="slider round"></span>
+                            </label>
                           )}
                         </td>
                         <td>
@@ -194,7 +260,7 @@ class TableProduct extends Component {
                               data-toggle="modal"
                               data-target="#con-close-modal2"
                               id="btn-edit-product"
-                              value={h.product_name}
+                              value={h.product_id}
                               onClick={onClick}
                               style={{ color: "white" }}
                             >
@@ -236,12 +302,16 @@ class TableProduct extends Component {
                                         <input
                                           type="text"
                                           className="form-control"
-                                          value={this.state.productName.replace(
-                                            /-/g,
-                                            " "
-                                          )}
+                                          defaultValue={
+                                            this.state.currentProduct
+                                              .product_name
+                                              ? this.state.currentProduct.product_name.replace(
+                                                  /-/g,
+                                                  " "
+                                                )
+                                              : ""
+                                          }
                                           id="edit-product-name"
-                                          disabled
                                         />
                                       </div>
                                     </div>
@@ -256,21 +326,30 @@ class TableProduct extends Component {
                                         <select
                                           className="form-control"
                                           onChange={categoryOnChange}
-                                          defaultValue={"Choose Category"}
                                         >
-                                          <option hidden>
-                                            Please Choose Category...{" "}
+                                          <option>
+                                            {this.state.currentCategory
+                                              ? this.state.currentCategory.replace(
+                                                  /-/g,
+                                                  " "
+                                                )
+                                              : "Please choose category ..."}
                                           </option>
                                           {this.state.categories.map(
-                                            (category,index) => {
-                                              return (
-                                                <option key={index} >
-                                                  {category.category_name.replace(
-                                                    /-/g,
-                                                    " "
-                                                  )}
-                                                </option>
-                                              );
+                                            (category, index) => {
+                                              if (
+                                                category.category_name !=
+                                                this.state.currentCategory
+                                              ) {
+                                                return (
+                                                  <option key={index}>
+                                                    {category.category_name.replace(
+                                                      /-/g,
+                                                      " "
+                                                    )}
+                                                  </option>
+                                                );
+                                              }
                                             }
                                           )}
                                         </select>
@@ -285,6 +364,10 @@ class TableProduct extends Component {
                                       <input
                                         type="text"
                                         className="form-control "
+                                        defaultValue={
+                                          this.state.currentProduct
+                                            .product_start_price
+                                        }
                                         id="edit-product-start-price"
                                       />
                                     </div>
@@ -298,7 +381,17 @@ class TableProduct extends Component {
                                         <input
                                           className="form-control "
                                           id="edit-product-start-aution-day"
-                                          type="date"
+                                          defaultValue={
+                                            this.state.currentProduct
+                                              .product_start_aution_day
+                                              ? new Date(
+                                                  this.state.currentProduct.product_start_aution_day
+                                                )
+                                                  .toISOString()
+                                                  .slice(0, 16)
+                                              : ""
+                                          }
+                                          type="datetime-local"
                                         />
                                       </div>
                                     </div>
@@ -312,12 +405,22 @@ class TableProduct extends Component {
                                         <input
                                           className="form-control "
                                           id="edit-product-end-aution-day"
-                                          type="date"
+                                          defaultValue={
+                                            this.state.currentProduct
+                                              .product_end_aution_day
+                                              ? new Date(
+                                                  this.state.currentProduct.product_end_aution_day
+                                                )
+                                                  .toISOString()
+                                                  .slice(0, 16)
+                                              : ""
+                                          }
+                                          type="datetime-local"
                                         />
                                       </div>
                                     </div>
                                   </div>
-                                
+
                                   <div className="modal-footer">
                                     <button
                                       className="btn btn-secondary waves-effect"
@@ -329,6 +432,7 @@ class TableProduct extends Component {
                                       type="submit"
                                       className="btn btn-info waves-effect waves-light"
                                       onClick={changeproduct}
+                                      name={this.state.currentProduct.product_id}
                                       value="Update Product"
                                     />
                                   </div>

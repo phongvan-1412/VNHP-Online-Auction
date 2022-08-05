@@ -106,10 +106,10 @@ class Login extends Component {
               "customer_info",
               JSON.stringify(response.data)
             );
-            self.setState({ loading: false });
             customerLogin();
             setInterval(returnHome, 15000);
           }
+          self.setState({ loading: false });
         })
         .catch((err) => {
           console.log(err);
