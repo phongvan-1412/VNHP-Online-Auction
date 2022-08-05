@@ -181,7 +181,7 @@ const Products = ({ products, category, categories }) => {
               <div className="row">
                 {currentProducts.map((product) => {
                   return (
-                    <ProductView key={product.product_id} product={product} />
+                    <ProductView key={product.product_id} product={product} products={products} />
                   );
                 })}
               </div>

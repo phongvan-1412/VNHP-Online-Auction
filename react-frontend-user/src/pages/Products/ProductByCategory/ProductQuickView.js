@@ -1,14 +1,15 @@
-import React, { Component, useRef } from "react";
+import React, { Component, useRef, useState } from "react";
 import Slider from "react-slick";
 import ProductQuickViewDetails from "./ProductQuickViewDetails";
 
-const ProductQuickView = ({ product }) =>{
-  // console.log(product)
-  const currentProducts = [];
-  // product.forEach((productItem) => {
-  //   currentProducts = [...currentProducts, product];
-  //   }
-  // });
+const ProductQuickView = ({ products, id }) =>{
+  console.log(id)
+  let currentProduct ={};
+  products.forEach((productItem) => {
+    if(productItem.product_id == id){
+      currentProduct = productItem;
+    }
+  })
   const ref = useRef({});
 
   const settings = {
@@ -23,7 +24,7 @@ const ProductQuickView = ({ product }) =>{
   };
 
   //COUNTDOWN
-  var countDownDate = new Date(new Date(product.product_end_aution_day).toLocaleString()).getTime();
+  var countDownDate = new Date(new Date(currentProduct.product_end_aution_day).toLocaleString()).getTime();
  
   var productQuickView = setInterval(function () {
     var now = new Date(new Date().toLocaleString()).getTime();
@@ -38,15 +39,15 @@ const ProductQuickView = ({ product }) =>{
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     if (
-      document.getElementById("quickview" + product.product_id + product.product_name) == null
+      document.getElementById("quickview" + currentProduct.product_id + currentProduct.product_name) == null
     )
       return;
     if (distance <= 0) {
       clearInterval(productQuickView);
-      document.getElementById("quickview" + product.product_id + product.product_name).innerHTML = "EXPIRED";
+      document.getElementById("quickview" + currentProduct.product_id + currentProduct.product_name).innerHTML = "EXPIRED";
 
     }
-    document.getElementById("quickview" + product.product_id + product.product_name).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    document.getElementById("quickview" + currentProduct.product_id + currentProduct.product_name).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   }, 1000);
 
   return (
@@ -56,12 +57,13 @@ const ProductQuickView = ({ product }) =>{
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
+        key={"1000" + currentProduct.product_id}
       >
         <div className="modal-dialog modal-xl modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                {product.product_name.replace(/-/g, " ")}
+                {currentProduct.product_name.replace(/-/g, " ")}
               </h5>
               <button
                 type="button"
@@ -79,7 +81,7 @@ const ProductQuickView = ({ product }) =>{
                         id="product-quick-view-img"
                         src={
                           "http://localhost:8000/ProductImg/" +
-                          product.product_thumbnail_img_name
+                          currentProduct.product_thumbnail_img_name
                         }
                       />
                     </div>
@@ -87,28 +89,28 @@ const ProductQuickView = ({ product }) =>{
                       <Slider ref={ref} {...settings}>
                         <img
                           id="product-quick-view-sub-img"
-                          src={"http://localhost:8000/ProductImg/" + product.product_img_name1}
+                          src={"http://localhost:8000/ProductImg/" + currentProduct.product_img_name1}
                           
                         />
                         <img
                           id="product-quick-view-sub-img"
-                          src={"http://localhost:8000/ProductImg/" + product.product_img_name2}
+                          src={"http://localhost:8000/ProductImg/" + currentProduct.product_img_name2}
                         />
                         <img
                           id="product-quick-view-sub-img"
-                          src={"http://localhost:8000/ProductImg/" + product.product_img_name3}
+                          src={"http://localhost:8000/ProductImg/" + currentProduct.product_img_name3}
                         />
                       </Slider>
                     </div>
                   </div>
                   <div className="card col-8">
-                    <div id={"quickview" + product.product_id + product.product_name} className="quickview-countdown"></div>
+                    <div id={"quickview" + currentProduct.product_id + currentProduct.product_name} className="quickview-countdown"></div>
                     <div className="product-price">
                       <span className="product-price-headtext">Start Price:</span>
-                      <span className="product-price-value">${parseInt(product.product_start_price).toLocaleString()}</span>
+                      <span className="product-price-value">${parseInt(currentProduct.product_start_price).toLocaleString()}</span>
                     </div>
-                    <div>{product.product_price_aution}</div>
-                    <ProductQuickViewDetails product={product}/>
+                    <div>{currentProduct.product_price_aution}</div>
+                    <ProductQuickViewDetails product={currentProduct}/>
                   </div>
                 </div>
               </div>
