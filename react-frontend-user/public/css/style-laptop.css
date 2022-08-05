@@ -36,18 +36,20 @@
 }
 #btn-back-to-top{
     position: fixed;
-    right: 20px;
+    right: 35px;
     bottom: 30px;
     border-radius: 100px;
     z-index: 10;
 }
-#visitor{
+.visitor{
     position: fixed;
-    right: 40px;
+    right: 15px;
     bottom: 5px;
     color: var(--iconHover);
+    font-weight: bold;
     z-index: 10;
 }
+
 /* ---------------LAYOUT--------------- */
 /* ----------HEADER---------- */
 .header-menu{

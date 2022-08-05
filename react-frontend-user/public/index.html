@@ -103,9 +103,12 @@
       </script>
 
       <!-- Show visitor online  -->
-      <div id="visitor"></div>
+      <div class="visitor">
+        <span>Online Visitor: </span>
+        <span id="countVisitorDisplay"> </span>
+      </div>
 
-      <script>
+      <!-- <script>
         const countVisitor = [];
         let visitor = JSON.parse(localStorage.getItem("customer_info")).customer_id;
         if ( visitor != null){
@@ -115,9 +118,9 @@
         let length = countVisitor.length;
 
         if ( length > 0 ){
-          document.getElementById("visitor").innerHTML = length;
+          document.getElementById("countVisitorDisplay").innerHTML = length;
         }
-      </script>
+      </script> -->
 
       <!-- Force page when reload always back to top -->
       <script>  

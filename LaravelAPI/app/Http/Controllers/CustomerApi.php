@@ -268,4 +268,9 @@ class CustomerApi extends Controller
         where b.bill_status = 0
         order by b.bill_id desc");
     }
+
+    public function GetOnlineVisitor(){
+        $customer = DB::select("select customer_id from customer_account where customer_login_status = 1");
+    return $customer;
+    }
 }
