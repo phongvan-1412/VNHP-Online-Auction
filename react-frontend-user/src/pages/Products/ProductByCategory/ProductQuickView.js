@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import ProductQuickViewDetails from "./ProductQuickViewDetails";
 
 function ProductQuickView({ product }) {
-  console.log(product)
+  // console.log(product)
   const ref = useRef({});
 
   const settings = {

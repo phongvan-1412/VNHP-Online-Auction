@@ -37,8 +37,15 @@
 #btn-back-to-top{
     position: fixed;
     right: 20px;
-    bottom: 20px;
+    bottom: 30px;
     border-radius: 100px;
+    z-index: 10;
+}
+#visitor{
+    position: fixed;
+    right: 40px;
+    bottom: 5px;
+    color: var(--iconHover);
     z-index: 10;
 }
 /* ---------------LAYOUT--------------- */
