@@ -58,6 +58,8 @@ const LandingPageSlider2 = ({products}) => {
                   return val;
                 }else if((val.product_start_price.toLowerCase()).includes(filterProduct.toLowerCase())){
                   return val;
+                }else if((val.product_start_aution_day.toLocaleString()).includes(filterProduct.toLocaleString())){
+                  return val;
                 }
               }).map((val) => {
                 return(

@@ -55,7 +55,10 @@ const [filter, setFilter] = useState("")
             return val;
           }else if((val.product_start_price.toLowerCase()).includes(filter.toLowerCase())){
             return val;
+          }else if((val.product_start_aution_day.toLocaleString()).includes(filter.toLocaleString())){
+            return val;
           }
+          
         }).map((val) => {
           return(
             <div className="product-grid-wrapper" key={val.product_id} >

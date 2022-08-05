@@ -52,6 +52,8 @@ const LandingPageSlider3 = ({products}) => {
                   return val;
                 }else if((val.product_start_price.toLowerCase()).includes(filters.toLowerCase())){
                   return val;
+                }else if((val.product_start_aution_day.toLocaleString()).includes(filters.toLocaleString())){
+                  return val;
                 }
               }).map((val) => {
                 return(
