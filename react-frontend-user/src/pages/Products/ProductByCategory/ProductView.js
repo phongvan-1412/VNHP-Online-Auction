@@ -6,9 +6,8 @@ const ProductView = ({ products, product, categories }) => {
   const [currentProduct, setCurrentProduct] = useState();
   
   const onClick = (e) =>{
-    console.log(e.target.name)
     let tmp = {};
-    products.forEach(product => {
+    products.forEach((product) => {
       if(product.product_id == e.target.name){
         tmp = product;
       }
@@ -23,7 +22,7 @@ const ProductView = ({ products, product, categories }) => {
     >
       <div id="product-quick-view">
         <div className="product-quickviewbtn-wrapper">
-          <button data-bs-toggle="modal" data-bs-target="#productQuickView" name={product.product_id} onClick={onClick}>
+          <button data-bs-toggle="modal" data-bs-target="#productQuickView" name={product.product_id} onClick={onClick} >
             Quick View
           </button>
         </div>

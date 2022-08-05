@@ -35,10 +35,9 @@ Route::post('/changecategorystatus',[CategoryAPI::class,'UpdateCategoryStatus'])
 Route::post('/checkexistscategory',[CategoryAPI::class,'CheckExistsCategory']);
 
 //PRODUCTS
-Route::get('/selectallproducts',[ProductAPI::class, 'SelectProductsByEndDate']);
+Route::get('/selectallproducts',[ProductAPI::class, 'SelectAllProducts']);
 Route::get('/selectproductsbycate', [ProductAPI::class, 'SelectProductsByCategory']);
 Route::get('/selectproductsbystartdate', [ProductAPI::class, 'SelectProductsByStartDate']);
-Route::get('/selectproductsbyenddate', [ProductAPI::class, 'SelectProductsByEndDate']);
 Route::get('/selectproductstop15', [ProductAPI::class, 'SelectProductsTop15ByCountCustomerId']);
 Route::get('/addproducttable',[ProductAPI::class,'AddProductTable']);
 Route::get('/upcomingproducts',[ProductAPI::class,'UpComingProducts']);

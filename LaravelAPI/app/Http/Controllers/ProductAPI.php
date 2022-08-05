@@ -13,7 +13,7 @@ use Mail;
 class ProductAPI extends Controller
 {
 
-    public function SelectProductsByEndDate()
+    public function SelectAllProducts()
     {
         $tmp_products = DB::select("select p.product_id,p.product_end_aution_day,p.product_img_name1,p.product_img_name2,p.product_img_name3,p.product_information,
         p.product_ingredients,p.product_instruction_store,p.product_name,p.product_start_aution_day,p.product_start_price,p.product_status,p.product_thumbnail_img_name,

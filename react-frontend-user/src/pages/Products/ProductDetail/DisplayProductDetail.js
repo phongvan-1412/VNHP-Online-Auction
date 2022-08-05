@@ -31,6 +31,7 @@ const DisplayProductDetail = ({ product, currentFeedback }) => {
                   id="v-pills-tab"
                   role="tablist"
                   aria-orientation="vertical"
+          
                 >
                   <Link
                     className={
@@ -43,6 +44,7 @@ const DisplayProductDetail = ({ product, currentFeedback }) => {
                     role="tab"
                     aria-controls="product-information"
                     aria-selected="true"
+                    style={{height: "auto"}}
                   >
                     DETAILS
                   </Link>
@@ -58,6 +60,7 @@ const DisplayProductDetail = ({ product, currentFeedback }) => {
                     role="tab"
                     aria-controls="product-materials"
                     aria-selected="false"
+                    style={{height: "auto"}}
                   >
                     MATERIALS
                   </Link>
@@ -67,27 +70,13 @@ const DisplayProductDetail = ({ product, currentFeedback }) => {
                       verticalState === 3 ? "nav-link active show" : "nav-link"
                     }
                     onClick={() => verticalTab(3)}
-                    id="product-instructions-tab"
-                    data-toggle="pill"
-                    to="#product-instructions"
-                    role="tab"
-                    aria-controls="product-instructions"
-                    aria-selected="false"
-                  >
-                    INSTRUCTIONS FOR USE
-                  </Link>
-
-                  <Link
-                    className={
-                      verticalState === 4 ? "nav-link active show" : "nav-link"
-                    }
-                    onClick={() => verticalTab(4)}
                     id="product-storage-instructions-tab"
                     data-toggle="pill"
                     to="#product-storage-instructions"
                     role="tab"
                     aria-controls="product-storage-instructions"
                     aria-selected="false"
+                    style={{height: "auto"}}
                   >
                     STORAGE INSTRUCTIONS
                   </Link>
@@ -115,15 +104,6 @@ const DisplayProductDetail = ({ product, currentFeedback }) => {
 
                   <div
                     className={verticalState === 3 ? "tab-pane fade active show" : "tab-pane fade"}
-                    id="product-instructions"
-                    role="tabpanel"
-                    aria-labelledby="product-instructions-tab"
-                  >
-                    <span>{product.product_instruction_use}</span>
-                  </div>
-
-                  <div
-                    className={verticalState === 4 ? "tab-pane fade active show" : "tab-pane fade"}
                     id="product-storage-instructions"
                     role="tabpanel"
                     aria-labelledby="product-storage-instructions-tab"

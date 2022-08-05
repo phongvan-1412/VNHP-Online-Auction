@@ -21,18 +21,27 @@ const ProductDetailItemSlide = ({ product }) => {
         </div>
 
         <div className="col-md-6 product-detail-item slide-content">
-          <div className="product-name">
+          <div className="sidebar-suggest-product-name">
             <Link
               to={`/${product.category_id}/${product.product_name}`}
               replace
-              className="product-detail-item-name"
             >
-              {product.product_name}
+              {product.product_name.replace(/-/g, " ")}
             </Link>
           </div>
 
-          <div className="sidebar-suggest-product-price"><b>Start price</b> $ {product.product_start_price}</div>
-          <div className="sidebar-suggest-product-price"><b>Current bid</b>$ {product.current_bid}</div>
+          <div className="sidebar-suggest-product-price-wrapper">
+            <div className="sidebar-suggest-product-price">
+              <b className="sidebar-suggest-startprice-headtext">Start price: </b> 
+              <span className="sidebar-suggest-startprice">$ {parseInt(product.product_start_price).toLocaleString()}</span>
+            </div>
+
+            <div className="sidebar-suggest-product-price">
+              <b className="sidebar-suggest-currentprice-headtext">Current bid: </b> 
+              <span className="sidebar-suggest-currentprice">$ {parseInt(product.current_bid).toLocaleString()}</span>
+            </div>
+          </div>
+          
         </div>
       </div>
     );

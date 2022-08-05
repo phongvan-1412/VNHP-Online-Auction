@@ -5,8 +5,8 @@ import ProductQuickViewDetails from "./ProductQuickViewDetails";
 const ProductQuickView = ({ currentProduct }) => {
   console.log(currentProduct);
   if(currentProduct == null) return;
-  // let currentProduct ={};
-  // products.forEach((productItem) => {
+
+  let [itemProduct, setItemProduct] = useState({});
   //   if(productItem.product_id == id){
   //     currentProduct = productItem;
   //   }
@@ -70,7 +70,7 @@ const ProductQuickView = ({ currentProduct }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
-              {currentProduct.product_name}
+              {currentProduct.product_name.replace(/-/g, " ")}
             </h5>
             <button
               type="button"
