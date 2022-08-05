@@ -39,7 +39,7 @@ class CategoryAPI extends Controller
 
     // table add category
     public function AddCategoryTable(){
-        $getcategory = Category::select()->get();
+        $getcategory = Category::select()->orderBy('category_id','desc')->get();
         return $getcategory;
 
     }

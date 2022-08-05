@@ -21,7 +21,6 @@ function AddProduct({ categories }) {
   let input_img2_product = "";
   let input_img3_product = "";
   let information = "";
-  let instruction_use = "";
   let ingredients = "";
   let instruction_store = "";
   let start_price = "";
@@ -54,13 +53,17 @@ function AddProduct({ categories }) {
           if (!product_name) {
             result.text("Please enter product name");
             result.css("color", "red");
-          } else if (product_name.length >= 15 && product_name.length <= 200) {
-            result.text("");
-            validProductName = true;
-          } else {
-            result.text("Invalid product name.");
+          } else if (product_name.length < 15) {
+            result.text("error: min 15 character");
             result.css("color", "red");
             validProductName = false;
+          }else if (product_name.length > 200) {
+            result.text("error: max 200 character");
+            result.css("color", "red");
+            validProductName = false;
+          } else {
+            result.text("");
+            validProductName = true;
           }
         }
       });
@@ -154,14 +157,14 @@ function AddProduct({ categories }) {
     } else {
       if (start_price <= 0) {
         result.text(
-          "Price cant small than or equal 0."
+          "error: min $1."
         );
         result.css("color", "red");
         validProductPrice = false;
         e.target.value = 0;
-      } else if (start_price > 1000000) {
+      } else if (start_price > 100000) {
         result.text(
-          "Price cant lager than 1 Milion Dola."
+          "error: max $100k."
         );
         result.css("color", "red");
         validProductPrice = false;
@@ -182,9 +185,6 @@ function AddProduct({ categories }) {
 
   const onIngredientOnBlur = (e) => {
     ingredients = e.target.value;
-  };
-  const onInstructionUseOnBlur = (e) => {
-    instruction_use = e.target.value;
   };
   const onInstructionStoreOnBlur = (e) => {
     instruction_store = e.target.value;
@@ -467,6 +467,7 @@ function AddProduct({ categories }) {
                     type="text"
                     className="form-control"
                     id="input-product_name"
+                    placeholder="max 200 character"
                     onBlur={onProductNameBlur}
                   />
                   <div id="check-product-name-result"></div>
@@ -515,6 +516,7 @@ function AddProduct({ categories }) {
                 <input
                   className="form-control "
                   id="input-price-product"
+                  placeholder="max 100k"
                   onBlur={onProductPriceOnBlur}
                   type="number"
                 />
@@ -603,6 +605,7 @@ function AddProduct({ categories }) {
                   <textarea
                     className="form-control"
                     id="input-information-product"
+                    placeholder="max 4000 character"
                     onBlur={onProductInfoOnBlur}
                   ></textarea>
                   <div id="product-info-check-result"></div>
@@ -616,22 +619,12 @@ function AddProduct({ categories }) {
                   <textarea
                     className="form-control "
                     id="input-ingredients-product"
+                    placeholder="max 4000 character"
                     onBlur={onIngredientOnBlur}
                   />
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label" htmlFor="id">
-                    Instruction use
-                  </label>
-                  <textarea
-                    className="form-control "
-                    id="input-instruction-use-product"
-                    onBlur={onInstructionUseOnBlur}
-                  />
-                </div>
-              </div>
+              
               <div className="col-md-6">
                 <div className="form-group">
                   <label className="control-label" htmlFor="id">
@@ -640,6 +633,7 @@ function AddProduct({ categories }) {
                   <textarea
                     className="form-control "
                     id="input-instruction-store-product"
+                    placeholder="max 4000 character"
                     onBlur={onInstructionStoreOnBlur}
                   />
                 </div>

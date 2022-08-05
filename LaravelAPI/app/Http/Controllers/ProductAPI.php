@@ -91,8 +91,8 @@ class ProductAPI extends Controller
     }
     // table
     public function AddProductTable(){
-        $getProduct = Product::select()->get();
-        return ( $getProduct);
+        $getProduct = Product::select()->orderBy('product_id','desc')->get();
+        return $getProduct;
     }
 
     public function CheckExistsProduct(Request $request)
@@ -276,4 +276,18 @@ class ProductAPI extends Controller
         return $product;
     }
 
+
+    // public function ChangeProductStatus(Request $request)
+    // {
+    //     $tmp = Product::where('product_id',$request->product_id)->get();
+
+    //     if(count($tmp) > 0)
+    //     {
+    //         Product::select()->where('product_id',$request->product_id)
+    //                             ->update(['product_status'=>$request->product_status]);
+    //         return 1;
+    //     }
+
+    //     return 0;
+    // }
 }

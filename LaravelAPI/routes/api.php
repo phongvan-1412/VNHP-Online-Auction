@@ -48,6 +48,7 @@ Route::get('/hotauctionproducts',[ProductAPI::class,'HotAuctionProducts']);
 Route::post('/checkexistsproduct',[ProductAPI::class,'CheckExistsProduct']);
 Route::post('/editproduct',[ProductAPI::class,'EditProduct']);
 Route::post('/countdownend', [ProductApi::class,'CountdownEnd']);
+Route::post('/changeproductstatus',[ProductAPI::class,'ChangeProductStatus']);
 Route::post('/currentbidprice', [ProductApi::class,'CurrentBidPrice']);
 Route::post('/addproduct',[ProductAPI::class,'AddProduct']);
 Route::post('/changeproductstatus',[ProductAPI::class,'ChangeProductStatus']);

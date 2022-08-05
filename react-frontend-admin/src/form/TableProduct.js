@@ -72,6 +72,19 @@ class TableProduct extends Component {
           }
         });
     };
+
+    const onStatusChange = (e) => {
+      axios
+        .post(`http://127.0.0.1:8000/api/changeproductstatus`, {product_id : e.target.value,product_status: e.target.checked ? 1: 0})
+        .then(function (response) {
+          if (response.data > 0) {
+            alert("Enable product successfully.")
+          } else {
+            alert("Disable product successfully.")
+          }
+        });
+    }
+
     function Search() {
       var value = $("#search").val().toLowerCase();
       $("#product-records tr").filter(function () {
@@ -163,12 +176,12 @@ class TableProduct extends Component {
                         <td>
                           {h.product_status == 1 ? (
                             <label className="switch">
-                              <input type="checkbox" defaultChecked />
+                              <input type="checkbox" defaultChecked  onChange={onStatusChange} value={h.product_id}/>
                               <span className="slider round"></span>
                             </label>
                           ) : (
                             <label className="switch">
-                            <input type="checkbox" />
+                            <input type="checkbox"  onChange={onStatusChange} value={h.product_id}/>
                             <span className="slider round"></span>
                           </label>
                           )}
