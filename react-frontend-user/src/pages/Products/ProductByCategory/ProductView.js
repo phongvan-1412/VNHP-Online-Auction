@@ -3,11 +3,12 @@ import ProductItem from "./ProductItem";
 import ProductQuickView from "./ProductQuickView";
 
 const ProductView = ({ products, product, categories }) => {
-  console.log(products)
-  const [currentProduct, setCurrentProduct] = useState();
+
+  const [currentProduct, setCurrentProduct] = useState("");
+  // const [id, setId] = useState("");
   
   const onClick = (e) =>{
-    let tmp = {};
+    let tmp = [];
     products.forEach((product) => {
       if(product.product_id == e.target.name){
         tmp = product;
@@ -16,6 +17,7 @@ const ProductView = ({ products, product, categories }) => {
     });
     setCurrentProduct(tmp);
   }
+
   return (
     <div
       className="product-grid-wrapper col-xl-3 col-md-4 col-xs-6"

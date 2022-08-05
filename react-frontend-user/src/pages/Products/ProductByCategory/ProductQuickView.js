@@ -3,14 +3,12 @@ import Slider from "react-slick";
 import ProductQuickViewDetails from "./ProductQuickViewDetails";
 
 const ProductQuickView = ({ currentProduct }) => {
-  console.log(currentProduct);
+
   if(currentProduct == null) return;
 
-  let [itemProduct, setItemProduct] = useState({});
-  //   if(productItem.product_id == id){
-  //     currentProduct = productItem;
-  //   }
-  // })
+  console.log(currentProduct);
+
+  //QUICKVIEW SLIDER
   const ref = useRef({});
 
   const settings = {
@@ -70,7 +68,7 @@ const ProductQuickView = ({ currentProduct }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
-              {currentProduct.product_name.replace(/-/g, " ")}
+              {currentProduct.product_name}
             </h5>
             <button
               type="button"
