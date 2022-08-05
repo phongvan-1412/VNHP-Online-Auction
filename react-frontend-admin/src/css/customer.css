@@ -1,0 +1,82 @@
+#record-hover:hover{
+    background-color:beige;
+    cursor: pointer;
+}
+/* .btn-custom{
+    background: rgb(252,70,107);
+    background: linear-gradient(to bottom right, rgba(252,70,107,1) 0%, rgba(63,94,251,1) 99%);
+    opacity: 1;
+    transition: 0.3s;
+}
+.btn-custom:hover {opacity: 0.6} */
+
+.btn-hover {
+    /* width: 200px; */
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    /* height: 55px; */
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+
+.btn-hover.color-8 {
+    background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+    box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+}
+.btn-hovol.color-10 {
+    background-image: linear-gradient(to right, #5a6794, #d8cdb0, #8794c0 , #e7e9ee);
+box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+}
+.btn-hovol.color-11 {
+    background-image: linear-gradient(to right, #5d7599 ,#c2c4b6, #abb6c8,#dadada);
+box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+}
+
+.btn-hovol:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hovol {
+    /* width: 200px; */
+    /* font-size: 16px;
+    /* cursor: pointer; */
+    /* margin: 20px; */
+    /* height: 55px; */
+    /* text-align:center; */
+    color: #fff;
+    font-weight: 500; 
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 60%;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}

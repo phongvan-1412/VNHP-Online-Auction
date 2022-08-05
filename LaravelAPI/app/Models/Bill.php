@@ -12,11 +12,9 @@ class Bill extends Model
     protected $primaryKey = 'bill_id';
     public $timestamps = false;
     protected $fillable = [
-        'product_id',
         'bill_date',
-        'bill_payment',
-        'customer_id',
         'payment_mode_id',
         'bill_status',
+        'aution_id'
     ];
 }

@@ -45,7 +45,6 @@ class Feedbacks extends Component {
         }
       });
       this.setState({ DetailComment: detail });
-      console.log(this.state.DetailComment);
     };
     return (
       <section>

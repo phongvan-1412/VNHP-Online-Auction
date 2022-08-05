@@ -101,6 +101,7 @@ Route::post('/insertbill',[BillApi::class, 'InsertBill']);
  
 //CUSTOMER 
 Route::get('/customerdata',[BillApi::class, 'CustomerData']);
+Route::get('/customerhistorydata',[BillApi::class, 'CustomerHistoryData']);
 
 //FEEDBACK 
 Route::get('/showfeedback',[FeedbackAPI::class, 'ShowFeedback']);
