@@ -13,7 +13,7 @@ const Header = ({ userinfo, categories }) => {
     var time = new Date().toLocaleTimeString();
     var myElement = date + " " + time;
     if (document.getElementById("showtime") == null) {
-      clearInterval(myElement);
+      return;
     }
       document.getElementById("showtime").innerHTML = myElement;
   }, 1000);

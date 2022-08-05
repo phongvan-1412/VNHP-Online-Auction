@@ -3,9 +3,18 @@ import ProductItem from "./ProductItem";
 import ProductQuickView from "./ProductQuickView";
 
 const ProductView = ({ products, product, categories }) => {
-  const [id, setId] = useState();
+  const [currentProduct, setCurrentProduct] = useState();
+  
   const onClick = (e) =>{
-    setId(e.target.name);
+    console.log(e.target.name)
+    let tmp = {};
+    products.forEach(product => {
+      if(product.product_id == e.target.name){
+        tmp = product;
+      }
+
+    });
+    setCurrentProduct(tmp);
   }
   return (
     <div
@@ -20,7 +29,7 @@ const ProductView = ({ products, product, categories }) => {
         </div>
       </div>
 
-      <ProductQuickView products={products} id={id}/>
+      <ProductQuickView currentProduct={currentProduct}/>
       <ProductItem product={product} categories={categories} />
     </div>
   );

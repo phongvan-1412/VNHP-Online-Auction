@@ -123,9 +123,9 @@ const Products = ({ products, category, categories }) => {
                       className="list-style vertical-list list-limited"
                       data-show="6"
                     >
-                      {categoryItems.map((item) => {
+                      {categoryItems.map((item,index) => {
                         return (
-                          <li className="list-item" key={item.category_id}>
+                          <li className="list-item" key={index}>
                             <Link
                               className="filter-link"
                               to={`/category/${item.category_name}`}
@@ -179,9 +179,9 @@ const Products = ({ products, category, categories }) => {
 
             <div className="col-md-10">
               <div className="row">
-                {currentProducts.map((product) => {
+                {currentProducts.map((product,index) => {
                   return (
-                    <ProductView key={product.product_id} product={product} products={products} />
+                    <ProductView key={index} product={product} products={products} />
                   );
                 })}
               </div>
@@ -197,8 +197,8 @@ const Products = ({ products, category, categories }) => {
 
           <div className="col-md-10" style={{ padding: "0px", margin: "0px" }}>
             <ul className="pagination">
-              {pageNumbers.map((number) => (
-                <li key={number} className="page-item">
+              {pageNumbers.map((number,index) => (
+                <li key={index} className="page-item">
                   <Link
                     to="#"
                     className="page-link"
