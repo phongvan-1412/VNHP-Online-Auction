@@ -5,9 +5,8 @@ import $ from "jquery";
 
 export const AddBill = () => {
     function Create(){
-        const product_id = $('#product_id').val();
+        const aution_id = $('#aution_id').val();
         const bill_date = $('#bill_date').val();
-        const bill_payment = $('#bill_payment').val();
         const customer_id = $('#customer_id').val();
         const payment_mode_id = $('#payment_mode_id').val();
 
@@ -16,9 +15,8 @@ export const AddBill = () => {
             bill_status = 1;
         }
         const bill = {
-            product_id,
+            aution_id,
             bill_date,
-            bill_payment,
             customer_id,
             payment_mode_id,
             bill_status
@@ -56,40 +54,15 @@ export const AddBill = () => {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-12">
                                 <div className="form-group">
-                                    <label htmlFor="field-1" className="control-label">Total</label>
-                                    <input type="text" className="form-control" id="bill_payment" />
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="form-group">
-                                <label className="control-label" htmlFor="id">Customer </label>
-                                    <select id='customer_id' className="form-control " >
-                                        <option>{4}</option>
-                                        <option>{5}</option>
-                                        <option>{6}</option>
-                                        <option>{7}</option>
-                                        <option>{8}</option>
-                                        <option>{9}</option>
-                                        <option>{10}</option>
-                                        <option>{11}</option>
-                                        <option>{12}</option>
-                                        <option>{13}</option>
-                                        <option>{14}</option>
-                                        <option>{15}</option>
-                                    </select>
+                                <label className="control-label" htmlFor="id">Aution id </label>
+                                <input type="text" className="form-control" id="aution_id"/>
                                 </div>
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-6">
-                                <div className="form-group">
-                                    <label htmlFor="product_ingredients" className="control-label">Payment</label>
-                                    <input type="text" className="form-control" id="payment_mode_id" />
-                                </div>
-                            </div>
-                            <div className="col-md-6">
+                            <div className="col-md-12">
                                 <div className="form-group">
                                     <label htmlFor="product_ingredients" className="control-label">Status</label>
                                     <input type="checkbox" className="form-control" id="bill_status" />

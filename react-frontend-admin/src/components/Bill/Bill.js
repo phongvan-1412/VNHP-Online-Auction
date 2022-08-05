@@ -30,8 +30,8 @@ class Bill extends Component {
 
   render() {
     let i = 1;
-    let subtotal = Number(this.state.Detail.bill_payment);
-    let vat = Number(this.state.Detail.bill_payment/10);
+    let subtotal = Number(this.state.Detail.aution_price);
+    let vat = Number(this.state.Detail.aution_price/10);
     let total = subtotal + vat
     function Search() {
       var value = $("#search").val().toLowerCase();
@@ -104,15 +104,15 @@ class Bill extends Component {
                         <td key={index}>{i++}</td>
                         <td>{p.product_name}</td>
                         <td>{p.bill_date}</td>
-                        <td>{p.bill_payment}</td>
+                        <td>{p.aution_price}</td>
                         <td>{p.customer_name}</td>
                         <td className="text-center">{p.bill_status == 1 ? (
                           <h5>
-                            <span class="badge badge-success">PAID</span>                           
+                            <span className="badge badge-success">PAID</span>                           
                           </h5>
                         ) : (
                           <h5>
-                            <span class="badge badge-danger">UNPAID</span>
+                            <span className="badge badge-danger">UNPAID</span>
                           </h5>
                         )}
                         </td>
@@ -217,8 +217,8 @@ class Bill extends Component {
                                                                                                      
                                                     </td>
                                                     <td className="text-right">1</td>
-                                                    <td className="text-right">{this.state.Detail.bill_payment}</td>
-                                                    <td className="text-right">{this.state.Detail.bill_payment}</td>
+                                                    <td className="text-right">{this.state.Detail.aution_price}</td>
+                                                    <td className="text-right">{this.state.Detail.aution_price}</td>
                                                   </tr>
                                                 </tbody>
                                               </table>
@@ -229,8 +229,8 @@ class Bill extends Component {
                                                 <h5 className="text-bottom">VNHP Auction Team</h5>
                                               </div>
                                               <div className="col-sm-6 text-right float-end pull-right invoice-total">
-                                                <p>Subtotal :${this.state.Detail.bill_payment}</p>
-                                                <p>VAT (10%) : ${this.state.Detail.bill_payment /10} </p>
+                                                <p>Subtotal :${this.state.Detail.aution_price}</p>
+                                                <p>VAT (10%) : ${this.state.Detail.aution_price /10} </p>
                                                 <p>Total : ${total} </p>
                                               </div>
                                             </div>

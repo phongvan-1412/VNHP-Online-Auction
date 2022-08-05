@@ -43,39 +43,52 @@ class BillApi extends Controller
     public function SelectBill()
     {
         // $bills = Bill::select()->get();
-        // $bills = DB::delete("delete from bill where bill_payment = 1257000000");
-        $bills = DB::table('bill')
-            ->join('product', 'product.product_id','=','bill.product_id')
-            ->join('customer_account','customer_account.customer_id','=','bill.customer_id')
+        // $bills = DB::table('customer_account')->select()->get();
+        // $bills = DB::delete("delete from bill where bill_id > 1023");
+        // $bills = DB::table('customer_account')->where('customer_id',4)->update(['customer_img_name'=>"4567898765-user.jpg"])->get();
+
+
+        $bills = DB::table('bill as b')
+            ->join('aution_price as a', 'a.aution_id','=','b.aution_id')
+            // ->join('payment_mode as pm','pm.payment_mode_id','=','b.payment_mode_id')
+            ->join('product as p','p.product_id','=','a.product_id')
+            ->join('customer_account as ca','ca.customer_id','=','a.customer_id')
+            ->where('aution_status',1)
+            ->select()
             ->get();
         return $bills;
     }
 
     public function InsertBill(Request $request){
         $bill = new Bill();
-        $bill->product_id = $request->product_id;
         $bill->bill_date = $request->bill_date;
-        $bill->bill_payment = $request->bill_payment;
-        $bill->customer_id = $request->customer_id;
         $bill->payment_mode_id = $request->payment_mode_id;
         $bill->bill_status = $request->bill_status;
+        $bill->aution_id = $request->aution_id;
         $bill->save();
         return 1;
     }
     public function RevenueEachMonth(){
-        return DB::select("Select month(convert(datetime, bill_date, 120)) as months, sum(bill_payment) as revenues
-                            from bill where year(convert(datetime, bill_date, 120)) = ? group by month(convert(datetime, bill_date, 120))",[2022]);
+        return DB::select("Select month(convert(datetime, b.bill_date, 120)) as months, sum(a.aution_price) as revenues
+            from bill b join aution_price a on (a.aution_id = b.aution_id)
+            where year(convert(datetime, b.bill_date, 120)) = 2022 
+            and a.aution_status = 1
+            group by month(convert(datetime, b.bill_date, 120))");
     }
 
     public function RevenueEachYear(){
-        return DB::select("Select year(convert(datetime, bill_date, 120)) as years, sum(bill_payment) as revenues
-                            from bill where year(convert(datetime, bill_date, 120)) between ? and ? group by year(convert(datetime, bill_date, 120))",[2018,2022]);
+        return DB::select("Select year(convert(datetime, b.bill_date, 120)) as years, sum(a.aution_price) as revenues
+            from bill b join aution_price a on (a.aution_id = b.aution_id)
+            where year(convert(datetime, bill_date, 120)) between 2018 and 2022
+            and a.aution_status = 1
+            group by year(convert(datetime, b.bill_date, 120))");
     }
     public function TopLoyalCustomer(){
-        return  DB::select("Select top 5 c.customer_img_name,
-            c.customer_name, customer_contact, sum(b.bill_payment) as total_spending
-            from customer_account c join bill b on (b.customer_id = c.customer_id)
-            group by c.customer_name,c.customer_img_name,
+        return  DB::select("Select top 5 c.customer_id, c.customer_img_name, c.customer_name, c.customer_contact, sum(a.aution_price) as total_spending
+            from customer_account c 
+            join aution_price a on (a.customer_id = c.customer_id)
+            join bill b on (b.aution_id = a.aution_id)
+            group by c.customer_id, c.customer_name,c.customer_img_name,
             customer_contact order by total_spending desc");
     }
 
