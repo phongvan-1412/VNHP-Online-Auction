@@ -6,6 +6,7 @@ function AddCategory() {
   let checkCategory = false;
   let checkCategoryImage = false;
 
+
   const onCategoryNameBlur = (e) => {
     const category_name = e.target.value.trim().replace(/ /g, "-");
     const result = $("#check-category-result");
@@ -17,11 +18,11 @@ function AddCategory() {
           result.css("color", "red");
           checkCategory = false;
         } else {
-          if (category_name != "" && category_name.length >= 3 && category_name.length <= 20) {
+          if (category_name != "" && category_name.length <= 200) {
             result.text("");
             checkCategory = true;
           } else {
-            result.text("Invalid category name");
+            result.text("error: max length 200 character");
             result.css("color", "red");
             checkCategory = false;
           }
@@ -34,6 +35,7 @@ function AddCategory() {
   const onCategoryImageChange = (e) => {
     const img = e.target.files[0];
     const result = $("#check-img-result");
+    
     if (img != null) {
       result.text("");
       category_img = e.target.files[0];
@@ -131,6 +133,7 @@ function AddCategory() {
                   <input
                     className="form-control"
                     id="input-add-category"
+                    placeholder="max length 200 character"
                     onBlur={onCategoryNameBlur}
                   />
                   <div id="check-category-result"></div>
