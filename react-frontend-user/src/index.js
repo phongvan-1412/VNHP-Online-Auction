@@ -4,9 +4,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Router, Routes, Route } from "react-router-dom";
 import $ from "jquery";
 import axios from "axios";
+import ScrollToTop from './ScrollToTop';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 //Header
 import Header from "./layout/Header/Header";
 //Side Pages
@@ -75,6 +77,7 @@ class HomePage extends Component {
       .catch((err) => {
         console.log(err);
       });
+
   }
 
   render() {
@@ -248,7 +251,8 @@ export default HomePage;
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <BrowserRouter>
-      <HomePage style={{ padding: "0px", margin: "0px" }} />
+        <ScrollToTop/>
+        <HomePage style={{ padding: "0px", margin: "0px" }} />
     </BrowserRouter>
 );
 

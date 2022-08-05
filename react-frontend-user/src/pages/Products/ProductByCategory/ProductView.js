@@ -3,6 +3,7 @@ import ProductItem from "./ProductItem";
 import ProductQuickView from "./ProductQuickView";
 
 const ProductView = ({ products, product, categories }) => {
+  console.log(products)
   const [currentProduct, setCurrentProduct] = useState();
   
   const onClick = (e) =>{

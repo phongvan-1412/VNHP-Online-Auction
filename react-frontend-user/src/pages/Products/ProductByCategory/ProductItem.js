@@ -4,7 +4,7 @@ import axios from "axios";
 import $ from "jquery";
 
 const ProductItem = ({ product }) => {
-  
+  console.log(product)
   //COUNTDOWN
   var countDownStartDate = new Date(new Date(product.product_start_aution_day).toLocaleString()).getTime();
   var countDownEndDate = new Date(new Date(product.product_end_aution_day).toLocaleString()).getTime();
