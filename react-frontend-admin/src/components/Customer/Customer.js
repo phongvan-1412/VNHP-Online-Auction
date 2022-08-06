@@ -151,7 +151,7 @@ class Customer extends Component {
                         <td className="align-middle">{p.customer_contact}</td>
                         <td className="align-middle">{p.customer_dob}</td>
                         <td className="align-middle">{p.customer_address}</td>
-                        <td className="align-middle">{p.total_spending}</td>
+                        <td className="align-middle">$ {parseInt(p.total_spending).toLocaleString()}</td>
                         <td className="align-middle">
                           <button 
                             className="btn text-light btn-hover color-8"
@@ -234,8 +234,8 @@ class Customer extends Component {
                                     />
                                   </div>
                                   <div className="border rounded  btn-hovol color-11 shadow p-3 ml-3 ">
-                                    <strong>{h.customer_name}</strong> auctioned the item <strong>{h.product_name}</strong> 
-                                     in the <strong>{h.category_name}</strong> catefory for <strong>${h.aution_price}</strong>
+                                    <strong>{h.customer_name ? h.customer_name.replace(/-/g, " "): null}</strong> auctioned the item <strong>{h.product_name ? h.product_name.replace(/-/g, " "): null}</strong> 
+                                      in the <strong>{h.category_name ? h.category_name.replace(/-/g, " "): null}</strong> catefory for <strong>$ {parseInt(h.aution_price).toLocaleString()}</strong>
                                   </div>
                                 </div>
                                 )
@@ -258,7 +258,7 @@ class Customer extends Component {
                                     />
                                   </div>
                                   <div style={{width: "100%"}} id="color-10" className="border rounded btn-hovol color-10 shadow p-3 ml-3 ">
-                                    <span>{h.customer_name}</span> got <span>{h.product_name}</span> for <strong>${h.aution_price}</strong> at aution
+                                    <strong>{h.customer_name ? h.customer_name.replace(/-/g, " "): null}</strong> got <strong>{h.product_name ? h.product_name.replace(/-/g, " "): null}</strong> for <strong>$ {parseInt(h.aution_price).toLocaleString()}</strong> at aution
                                   </div>                                
                                 </div>
                                 )

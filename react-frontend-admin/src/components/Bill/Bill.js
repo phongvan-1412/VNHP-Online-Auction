@@ -117,9 +117,10 @@ class Bill extends Component {
                     return (
                       <tr>
                         <td key={index}>{i++}</td>
-                        <td>{p.product_name}</td>
+                        <td>{p.product_name ? p.product_name.replace(/-/g, " "): null}</td>
+
                         <td>{p.bill_date}</td>
-                        <td>{p.aution_price}</td>
+                        <td>${parseInt(p.aution_price).toLocaleString()}</td>
                         <td>{p.customer_name}</td>
                         <td className="text-center">{p.bill_status == 1 ? (
                           <h5>
@@ -227,14 +228,14 @@ class Bill extends Component {
                                                           width={60}
                                                         />
                                                         <div className="col-8">
-                                                          {this.state.Detail.product_name}
+                                                          {this.state.Detail.product_name ? this.state.Detail.product_name.replace(/-/g, " "): null}
                                                         </div>  
                                                       </div>
                                                                                                      
                                                     </td>
                                                     <td className="text-right">1</td>
-                                                    <td className="text-right">{this.state.Detail.aution_price}</td>
-                                                    <td className="text-right">{this.state.Detail.aution_price}</td>
+                                                    <td className="text-right">{parseInt(this.state.Detail.aution_price).toLocaleString()}</td>
+                                                    <td className="text-right">{parseInt(this.state.Detail.aution_price).toLocaleString()}</td>
                                                   </tr>
                                                 </tbody>
                                               </table>
@@ -245,9 +246,9 @@ class Bill extends Component {
                                                 <h5 className="text-bottom">VNHP Auction Team</h5>
                                               </div>
                                               <div className="col-sm-6 text-right float-end pull-right invoice-total">
-                                                <p>Subtotal :${this.state.Detail.aution_price}</p>
-                                                <p>VAT (10%) : ${this.state.Detail.aution_price /10} </p>
-                                                <p>Total : ${total} </p>
+                                                <p>Subtotal :${parseInt(this.state.Detail.aution_price).toLocaleString()}</p>
+                                                <p>VAT (10%) : ${this.state.Detail.aution_price /10 } </p>
+                                                <p>Total : ${parseInt(total).toLocaleString()} </p>
                                               </div>
                                             </div>
                                           </div>

@@ -71,8 +71,10 @@ class Feedbacks extends Component {
                       />
                     </div>
                     <div className="card-body">
-                      <h6 className="card-title mb-3">{p.product_name}</h6>
-                      <small>{p.category_name}</small>
+                      <h6 className="card-title mb-3">{p.product_name ? p.product_name.replace(/-/g, " "): null}</h6>
+
+                      <small>{p.category_name ? p.category_name.replace(/-/g, " "): null}</small>
+
                       <button
                         type="button"
                         className="btn btn-outline-primary position-relative float-right"
