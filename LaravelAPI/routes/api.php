@@ -104,6 +104,8 @@ Route::get('/getaccount',[AdminController::class, 'Getaccount']);
 // BILL
 Route::get('/selectbill',[BillApi::class, 'SelectBill']);
 Route::post('/insertbill',[BillApi::class, 'InsertBill']);
+Route::get('/addbilltable',[BillApi::class,'AddBillTable']);
+Route::post('/paginatebilltable',[BillApi::class,'PaginateBillTable']);
 
 //CUSTOMER
 Route::get('/customerdata',[BillApi::class, 'CustomerData']);

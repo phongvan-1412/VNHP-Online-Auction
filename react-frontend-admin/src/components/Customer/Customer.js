@@ -6,7 +6,6 @@ class Customer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      CustomerData: [],
       HistoryData: [],
       DetailAution: [],
       DetailPayment: [],
@@ -36,18 +35,6 @@ class Customer extends Component {
           
         });
         console.log(response.data)
-      });
-    fetch("http://127.0.0.1:8000/api/customerdata", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        this.setState({
-          CustomerData: response,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
       });
     fetch("http://127.0.0.1:8000/api/customerhistorydata", {
       method: "GET",
@@ -181,7 +168,7 @@ class Customer extends Component {
               </table>
                 {this.state.CustomerPaginate.map((paginate, index) => {
                   return (
-                    <button className="btn btn-outline-light" key={index} value={paginate} onClick={onPaginate}>
+                    <button className="btn btn-outline-dark align-center" key={index} value={paginate} onClick={onPaginate}>
                       {paginate}
                     </button>
                   );

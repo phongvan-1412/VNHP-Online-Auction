@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\DB;
 class BillApi extends Controller
 {
     public function SelectAllBill(){
-        $bill = DB::select("select * from bill")->get();
+        $bill = DB::select("select * from bill");
         return $bill;
     }
-    
+
     public function GetNewBill(Request $request)
     {
         return DB::table('bill')
@@ -39,7 +39,7 @@ class BillApi extends Controller
         ->where('bill.bill_status',1)
         ->get();
     }
-    
+
     public function GetAutionHistory(Request $request)
     {
         return DB::table('product')
@@ -51,21 +51,21 @@ class BillApi extends Controller
 
     public function SelectBill()
     {
-        // $bills = DB::table('bill')->select()->get();
+        $bills = DB::table('aution_price')->select()->get();
         // $bills = DB::delete("delete from bill where bill_id > 1023");
         // $bills = DB::table('bill')->insert([
         //     'bill_date'=>"2021-07-22",
         //     'bill_status'=>0,
         //     'aution_id'=>1146,
         // ])->get();
-        $bills = DB::table('bill as b')
-            ->join('aution_price as a', 'a.aution_id','=','b.aution_id')
-            // ->join('payment_mode as pm','pm.payment_mode_id','=','b.payment_mode_id')
-            ->join('product as p','p.product_id','=','a.product_id')
-            ->join('customer_account as ca','ca.customer_id','=','a.customer_id')
-            ->where('aution_status',1)
-            ->select()
-            ->get();
+        // $bills = DB::table('bill as b')
+        //     ->join('aution_price as a', 'a.aution_id','=','b.aution_id')
+        //     ->join('payment_mode as pm','pm.payment_mode_id','=','b.payment_mode_id')
+        //     ->join('product as p','p.product_id','=','a.product_id')
+        //     ->join('customer_account as ca','ca.customer_id','=','a.customer_id')
+        //     ->where('aution_status',1)
+        //     ->select()
+        //     ->get();
         return $bills;
     }
 
@@ -81,7 +81,7 @@ class BillApi extends Controller
     public function RevenueEachMonth(){
         return DB::select("Select month(convert(datetime, b.bill_date, 120)) as months, sum(a.aution_price) as revenues
             from bill b join aution_price a on (a.aution_id = b.aution_id)
-            where year(convert(datetime, b.bill_date, 120)) = 2022 
+            where year(convert(datetime, b.bill_date, 120)) = 2022
             and a.aution_status = 1
             group by month(convert(datetime, b.bill_date, 120))");
     }
@@ -95,7 +95,7 @@ class BillApi extends Controller
     }
     public function TopLoyalCustomer(){
         return  DB::select("Select top 5 c.customer_id, c.customer_img_name, c.customer_name, c.customer_contact, sum(a.aution_price) as total_spending
-            from customer_account c 
+            from customer_account c
             join aution_price a on (a.customer_id = c.customer_id)
             join bill b on (b.aution_id = a.aution_id)
             group by c.customer_id, c.customer_name,c.customer_img_name,
@@ -112,7 +112,7 @@ class BillApi extends Controller
             order by c.category_name");
     }
     public function EarningLastMonth(){
-        return DB::select("Select month(convert(datetime, b.bill_date, 120)) as month, sum(a.aution_price) as revenues 
+        return DB::select("Select month(convert(datetime, b.bill_date, 120)) as month, sum(a.aution_price) as revenues
         from bill b join aution_price a on (a.aution_id = b.aution_id)
         where  DATEDIFF(month, convert(datetime, b.bill_date, 120), getdate()) = 1 and year(convert(datetime, b.bill_date, 120)) = year(GETDATE())
         group by month(convert(datetime, b.bill_date, 120))");
@@ -127,18 +127,7 @@ class BillApi extends Controller
         return DB::select("Select count(feedback_id) as amount from feedback where feedback_content is not null");
 
     }
-    public function CustomerData(){
-        return DB::select("Select c.customer_id, c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,sum(a.aution_price) as total_spending
-        from customer_account c 
-        join aution_price a on (a.customer_id = c.customer_id)
-        where aution_status = 1  
-        group by c.customer_id, c.customer_name,c.customer_img_name, c.customer_contact,c.customer_email, c.customer_dob, c.customer_address      
-        union
-        Select c.customer_id, c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,0 as total_spending
-        from customer_account c 
-        where c.customer_id not in (select customer_id from aution_price)");
-    }
-    
+
     public function CustomerHistoryData(){
         return DB::table('product as p')
             ->join('aution_price as a','a.product_id','=','p.product_id')
@@ -220,6 +209,55 @@ class BillApi extends Controller
     {
         return view("/confirmPaymentSucess");
     }
-    
+
+    public function AddBillTable(){
+        $customer = DB::select("Select * from bill b join aution_price a on a.aution_id = b.aution_id
+        join payment_mode pm on pm.payment_mode_id = b.payment_mode_id
+        join product p on p.product_id = a.product_id
+        join customer_account ca on ca.customer_id = a.customer_id
+        where aution_status = 1");
+        $paginate = [];
+
+        for($i = 1; $i <= count($customer)/10 + 1; $i++){
+            $paginate[] = $i;
+        }
+        return $paginate;
+    }
+    public function PaginateBillTable(Request $request){
+        $customers = DB::select("Select * from bill b join aution_price a on a.aution_id = b.aution_id
+        join payment_mode pm on pm.payment_mode_id = b.payment_mode_id
+        join product p on p.product_id = a.product_id
+        join customer_account ca on ca.customer_id = a.customer_id
+        where aution_status = 1");
+
+        $currentCustomer = [];
+        $tmp = 1;
+        if($request->paginate > count($customers)/10){
+
+            $tmp = (count($customers)/10 - $request->paginate + 1) * 10;
+            foreach($customers as $customer){
+                $currentCustomer[] = $customer;
+                if(count($currentCustomer) > $tmp){
+                    break;
+                }
+            }
+        }else{
+            $tmp = $request->paginate*10;
+            $getCustomer = DB::select("Select top ".$tmp." * from bill b join aution_price a on a.aution_id = b.aution_id
+            join payment_mode pm on pm.payment_mode_id = b.payment_mode_id
+            join product p on p.product_id = a.product_id
+            join customer_account ca on ca.customer_id = a.customer_id
+            where aution_status = 1");
+
+            foreach(array_reverse($getCustomer) as $product){
+                $currentCustomer[] = $product;
+                if(count($currentCustomer) >= 10){
+                    break;
+                }
+            }
+        }
+        return array_reverse($currentCustomer);
+    }
+
 }
 

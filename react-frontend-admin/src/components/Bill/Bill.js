@@ -2,30 +2,41 @@ import React, { Component } from "react";
 import { AddBill } from "./AddBill";
 // import BillDetail from "./BillDetail";
 import $ from "jquery";
-import "../../css/billdetail.css";
+import "../../css/billdetail1.css";
+import axios from "axios";
 
 class Bill extends Component {
   constructor(props) {
     super(props);
     this.state = {
       BillData: [],
+      BillPaginate: [],
       Detail: {},
 
     };
   }
   componentDidMount() {
-    fetch("http://127.0.0.1:8000/api/selectbill", {
+    fetch("http://127.0.0.1:8000/api/addbilltable", {
       method: "GET",
     })
       .then((response) => response.json())
       .then((response) => {
         this.setState({
-          BillData: response,
+          BillPaginate: response,
         });
       })
       .catch((err) => {
         console.log(err);
       });
+    const self = this;
+    axios
+      .post(`http://127.0.0.1:8000/api/paginatebilltable`, { paginate: 1 })
+      .then(function (response) {
+        self.setState({
+          BillData: response.data,         
+        });
+      });
+
   }
 
   render() {
@@ -46,16 +57,20 @@ class Bill extends Component {
         }
       })
     };
+    const onPaginate = (e) => {
+      const self = this;
+      axios
+        .post(`http://127.0.0.1:8000/api/paginatebilltable`, {
+          paginate: e.target.value,
+        })
+        .then(function (response) {
+          self.setState({
+            BillData: response.data,
+          });
+        });
+    };
     return (
       <div className="container-fluid">
-        <button
-          className="btn btn-success mb-3 "
-          data-toggle="modal"
-          data-target="#con-close-modal"
-        >
-          Add new
-        </button>
-
         <div className="card shadow mb-4">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-primary">Bill</h6>
@@ -175,6 +190,7 @@ class Bill extends Component {
                                                 <small>Phone: {this.state.Detail.customer_contact}</small><br/>
                                                 <small>Email: {this.state.Detail.customer_email}</small><br/>
                                                 <small>Date: {this.state.Detail.bill_date}</small><br/>
+                                                <small>Payment: {this.state.Detail.payId}</small>
                                               </div>
                                             </div>
                                             <div className="row table-row">
@@ -249,11 +265,16 @@ class Bill extends Component {
                   })}
                 </tbody>
               </table>
+              {this.state.BillPaginate.map((paginate, index) => {
+                  return (
+                    <button className="btn btn-outline-dark align-center" key={index} value={paginate} onClick={onPaginate}>
+                      {paginate}
+                    </button>
+                  );
+                })}
             </div>
           </div>
         </div>
-        <AddBill />
-        {/* <BillDetail /> */}
       </div>
     );
   }
