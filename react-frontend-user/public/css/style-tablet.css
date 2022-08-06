@@ -36,6 +36,9 @@
     .landingpage-category-name-wrapper{
         bottom: 105px;
     }
+    .button-showmore{
+        margin-left: 150px;
+    }
 }
 @media(max-width: 650px){
     .product-per-page{

@@ -1166,11 +1166,11 @@
     padding: 0px;
     margin: 0px;
 }
-.item-link{
+.item-link, .item-link-home{
     padding: 0px;
     margin: 0px;
 }
-.item-link>a{
+.item-link>a, .item-link-home>a{
     background-color: var(--componentBackground);
     color: black;
     font-size: 15px;
@@ -1185,10 +1185,10 @@
     padding: 15px;
     text-transform: uppercase;
 }
-.item-link>a:hover{
+.item-link>a:hover, .item-link-home>a:hover{
     color: var(--iconHover);
 }
-.item-link>span{
+.item-link>span, .item-link-home>span{
     background-color: var(--buttonColor);
     color: var(--textColor);
     font-size: 15px;
@@ -1198,6 +1198,7 @@
 .wrap-breadcrumb ul li a{
     text-decoration: none;
 }
+
 .categoryRoot-link, .categoryName{
     text-transform: uppercase;
 }
@@ -1472,6 +1473,8 @@
     margin-top: 30px;
     font-size: 20px;
     font-weight: bold;
+}
+.product-detail-product-categoryname a{
     color: var(--countdownColor);
 }
 .product-detail-product-owner,
@@ -1783,6 +1786,15 @@
         background-color: rgba(255, 255, 255, .6);
         font-size: 25px;
     }
+    #product-item-link{
+        display: none;
+    }
+    .services-submenu{
+        right: -300px;
+    }
+    .button-showmore{
+        width: 200px;
+    }
 }
 @media screen and (max-width: 1350px){
 
@@ -1805,6 +1817,9 @@
         height: 303px;
         background-color: rgba(255, 255, 255, .6);
         font-size: 20px;
+    }
+    .button-showmore{
+        margin-top: 20px;
     }
 }
 @media screen and (max-width: 1250px){
@@ -1855,6 +1870,10 @@
     .product-quickview-price-wrapper, .product-quickview-product-name{
         margin-top: 30px;
     }
+    .sidebar-suggest-wrapper{
+        display: none;
+    }
+    
 }
 @media screen and (max-width: 1100px){
     .footer-container1-col1, .footer-container1-col2, .footer-container1-col3{
@@ -1895,6 +1914,9 @@
     .item-link{
         margin-left: 120px;
     }
+    #product-detail-category{
+        display: none;
+    }
 }
 @media screen and (max-width: 1024px){
     .footer-container1-col1, .footer-container1-col2, .footer-container1-col3{
@@ -1926,7 +1948,10 @@
         font-size: 15px;
     }
     .item-link{
-        margin-left: 100px;
+        margin-left: -500px;
+    }
+    .services-submenu{
+        left: -100px;
     }
 }
 @media screen and (max-width: 950px){
@@ -1960,6 +1985,9 @@
     }
     .landingpage-category-name-wrapper{
         bottom: 120px;
+    }
+    .services-submenu{
+        left: -110px;
     }
 }
 @media screen and (max-width: 850px){
@@ -2009,6 +2037,10 @@
     .item-link{
         margin-left: 60px;
     }
+    .services-submenu{
+        display: none;
+    }
+
 }
 @media screen and (max-width: 768px){
     .logo{

@@ -201,7 +201,9 @@ const DetailItem = ({ product,updateProduct }) => {
           </div>
 
           <div className="product-detail-product-categoryname">
-            {product.category_name.replace(/-/g, " ")}
+            <Link to={`/category/${product.category_name}`}>
+              {product.category_name.replace(/-/g, " ")}
+            </Link>
           </div>
 
           <div className="product-detail-product-owner">
