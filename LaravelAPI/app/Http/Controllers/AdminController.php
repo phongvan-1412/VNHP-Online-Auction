@@ -118,18 +118,20 @@ class AdminController extends Controller
         $currentCustomer = [];
         $tmp = 1;
         if($request->paginate > count($customers)/10){
+
+            $tmp = (count($customers)/10 - $request->paginate + 1) * 10;
             foreach($customers as $customer){
-                $currentCustomer[] = $customers;
+                $currentCustomer[] = $customer;
                 if(count($currentCustomer) > $tmp){
                     break;
                 }
             }
         }else{
             $tmp = $request->paginate*10;
-            $getCustomer = DB::select("Select top".$tmp." * from customer order by customer_id desc");
+            $getCustomer = DB::select("Select top".$tmp." * from customer_account order by customer_id desc");
 
             foreach(array_reverse($getCustomer) as $product){
-                $currentProducts[] = $product;
+                $currentCustomer[] = $product;
                 if(count($currentCustomer) >= 10){
                     break;
                 }
