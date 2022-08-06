@@ -9,6 +9,7 @@ class TableProduct extends Component {
     super(props);
     this.state = {
       ProductData: [],
+      productPaginate: [],
       categories: [],
       currentProduct: {},
       currentCategory: "",
@@ -21,12 +22,21 @@ class TableProduct extends Component {
       .then((response) => response.json())
       .then((response) => {
         this.setState({
-          ProductData: response,
+          productPaginate: response,
         });
       })
       .catch((err) => {
         console.log(err);
       });
+    const self = this;
+    axios
+      .post(`http://127.0.0.1:8000/api/paginateproducttable`, { paginate: 1 })
+      .then(function (response) {
+        self.setState({
+          ProductData: response.data,
+        });
+      });
+
     fetch("http://127.0.0.1:8000/api/selectcategories", { method: "GET" })
       .then((categories) => categories.json())
       .then((categories) => {
@@ -66,6 +76,18 @@ class TableProduct extends Component {
       });
     };
 
+    const onPaginate = (e) => {
+      const self = this;
+      axios
+        .post(`http://127.0.0.1:8000/api/paginateproducttable`, {
+          paginate: e.target.value,
+        })
+        .then(function (response) {
+          self.setState({
+            ProductData: response.data,
+          });
+        });
+    };
     const updateProduct = () => {
       fetch("http://127.0.0.1:8000/api/addproducttable", {
         method: "GET",
@@ -122,7 +144,6 @@ class TableProduct extends Component {
           if (response.data > 0) {
             updateProduct();
           } else {
-            
           }
         });
     };
@@ -432,7 +453,9 @@ class TableProduct extends Component {
                                       type="submit"
                                       className="btn btn-info waves-effect waves-light"
                                       onClick={changeproduct}
-                                      name={this.state.currentProduct.product_id}
+                                      name={
+                                        this.state.currentProduct.product_id
+                                      }
                                       value="Update Product"
                                     />
                                   </div>
@@ -446,9 +469,17 @@ class TableProduct extends Component {
                   })}
                 </tbody>
               </table>
+              {this.state.productPaginate.map((paginate,index) => {
+                return (
+                  <button key={index}value={paginate} onClick={onPaginate}>
+                    {paginate}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
+
         <AddProduct categories={this.state.categories} />
       </div>
     );

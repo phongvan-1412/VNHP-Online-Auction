@@ -3,6 +3,9 @@
 }
 
 /* all form */
+.slick-slider .slick-list .slick-track .slick-cloned{
+  display: none;
+}
 .form-waring-text {
   position: absolute;
 }

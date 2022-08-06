@@ -100,9 +100,49 @@ class ProductAPI extends Controller
     }
     // table
     public function AddProductTable(){
-        $getProduct = Product::select()->orderBy('product_id','desc')->get();
-        return $getProduct;
+        $products = Product::select()->get();
+        $paginate = [];
+
+        for($i = 1; $i <= count($products)/10 + 1;$i++ )
+        {
+            $paginate[] = $i;
+        }
+        return $paginate;
     }
+
+    public function PaginateProductTable(Request $request)
+    {
+        $products = Product::select()->get();
+        $currentProducts = [];
+        $tmp = 1;
+        if($request->paginate > count($products)/10)
+        {
+            $tmp = (count($products)/10 - $request->paginate + 1) * 10;
+            foreach($products as $product){
+                $currentProducts[] = $product;
+                if(count($currentProducts) > $tmp)
+                {
+                    break;
+                }
+            }
+        }
+        else
+        {
+            $tmp = $request->paginate*10;
+            $getProduct = DB::select("select top ".$tmp." * from product order by product_id desc");
+    
+            foreach(array_reverse($getProduct) as $product){
+                $currentProducts[] = $product;
+                if(count($currentProducts) >= 10)
+                {
+                    break;
+                }
+            }
+        }
+        // return  response()->json(['data'=>array_reverse($currentProducts),'paginate'=>count($products)/10]);
+        return array_reverse($currentProducts);
+    }
+    
 
     public function CheckExistsProduct(Request $request)
     {

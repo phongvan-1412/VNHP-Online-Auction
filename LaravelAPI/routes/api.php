@@ -41,6 +41,8 @@ Route::get('/selectproductsbycate', [ProductAPI::class, 'SelectProductsByCategor
 Route::get('/selectproductsbystartdate', [ProductAPI::class, 'SelectProductsByStartDate']);
 Route::get('/selectproductstop15', [ProductAPI::class, 'SelectProductsTop15ByCountCustomerId']);
 Route::get('/addproducttable',[ProductAPI::class,'AddProductTable']);
+Route::post('/paginateproducttable',[ProductAPI::class,'PaginateProductTable']);
+
 Route::get('/upcomingproducts',[ProductAPI::class,'UpComingProducts']);
 Route::get('/endingsoonproducts',[ProductAPI::class,'EndingSoonProducts']);
 Route::get('/hotauctionproducts',[ProductAPI::class,'HotAuctionProducts']);
