@@ -1,21 +1,22 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { BrowserRouter as Router, Routes, Link } from "react-router-dom";
 import axios from "axios";
-import $ from 'jquery';
+import $ from "jquery";
 import { FaFacebook, FaInstagramSquare, FaTwitter } from "react-icons/fa";
 
 import Dropdown from "./DropdownNavBar/Dropdown";
 
 const Header = ({ userinfo, categories }) => {
+  const [loading, setLoading] = useState(false);
 
   var showTime = setInterval(function () {
-    var date = new Date().toLocaleDateString('en-ZA');
+    var date = new Date().toLocaleDateString("en-ZA");
     var time = new Date().toLocaleTimeString();
     var myElement = date + " " + time;
     if (document.getElementById("showtime") == null) {
       return;
     }
-      document.getElementById("showtime").innerHTML = myElement;
+    document.getElementById("showtime").innerHTML = myElement;
   }, 1000);
 
   let checkUser = false;
@@ -34,6 +35,8 @@ const Header = ({ userinfo, categories }) => {
 
   const buttonLogOutClick = () => {
     const customer_id = customer.customer_id;
+    setLoading(true);
+
     axios
       .post(`http://127.0.0.1:8000/api/customerlogout`, { customer_id })
       .then(function (response) {
@@ -41,6 +44,7 @@ const Header = ({ userinfo, categories }) => {
           localStorage.removeItem("customer_info");
           window.location.href = "http://localhost:3000/";
         }
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -63,7 +67,9 @@ const Header = ({ userinfo, categories }) => {
           replace
         >
           <span id="showtime"></span>
-          <span className="icon-split-text" data-text="VNHP">VNHP</span>
+          <span className="icon-split-text" data-text="VNHP">
+            VNHP
+          </span>
           <span className="icon-footer-text">@ONLINE AUCTION</span>
         </Link>
 
@@ -93,22 +99,51 @@ const Header = ({ userinfo, categories }) => {
 
         {checkUser ? (
           <div>
-            <Link to="/userprofile" className="userprofile" replace style={{marginRight:"70px"}}>
-              {userName}
-            </Link>
-
-            <Link to="/" replace className="logout" onClick={buttonLogOutClick}>
-              Log Out
-            </Link>
+            {loading ? (
+              <div className="container">
+                <div className="row">
+                  <div className="d-flex justify-content-center">
+                    <div className="spinner-border  text-light" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div>
+                {" "}
+                <Link
+                  to="/userprofile"
+                  className="userprofile"
+                  replace
+                  style={{ marginRight: "70px" }}
+                >
+                  {userName}
+                </Link>
+                <Link
+                  to="/"
+                  replace
+                  className="logout"
+                  onClick={buttonLogOutClick}
+                >
+                  Log Out
+                </Link>
+              </div>
+            )}
           </div>
         ) : (
           <div>
-              <Link to="/login" replace className="login" style={{marginRight:"70px"}}>
-                Login
-              </Link>
-              <Link to="/register" replace className="register-link">
-                Register
-              </Link>
+            <Link
+              to="/login"
+              replace
+              className="login"
+              style={{ marginRight: "70px" }}
+            >
+              Login
+            </Link>
+            <Link to="/register" replace className="register-link">
+              Register
+            </Link>
           </div>
         )}
       </header>

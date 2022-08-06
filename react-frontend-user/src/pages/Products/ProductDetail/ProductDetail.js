@@ -4,7 +4,7 @@ import WrapBreadcrumbDetail from "./WrapBreadcrumbDetail";
 import SidebarSuggest from "./SidebarSuggest";
 import DisplayProductDetail from "./DisplayProductDetail";
 
-const ProductDetail = ({ product, products, categories, feedbacks }) => {
+const ProductDetail = ({ product, products, categories, feedbacks,updateProduct }) => {
 
   let suggestProducts = [];
   products.forEach(product => {
@@ -35,7 +35,7 @@ const ProductDetail = ({ product, products, categories, feedbacks }) => {
         style={{ padding: "0px", margin: "0px" }}
       >
         <WrapBreadcrumbDetail product={product} category={currentCategory} />
-        <DisplayProductDetail product={product} currentFeedback={currentFeedback} />
+        <DisplayProductDetail product={product} currentFeedback={currentFeedback} updateProduct={updateProduct}/>
       </div>
       <div className="col-lg-3 col-md-3 col-sm-12" style={{ padding: "0px", margin: "0px" }}>
         <SidebarSuggest products={products} style={{ padding: "0px", margin: "0px" }} />

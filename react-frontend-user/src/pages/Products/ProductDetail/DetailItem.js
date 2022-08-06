@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 
 import { BsFillBagCheckFill } from "react-icons/bs";
 
-const DetailItem = ({ product }) => {
+const DetailItem = ({ product,updateProduct }) => {
   let checkUser = false;
+  const [loading, setLoading] = useState(false);
+  const [validBidding, setValidBidding] = useState(false);
+
   if (JSON.parse(localStorage.getItem("customer_info")) != null) {
     checkUser = true;
   }
@@ -65,15 +68,21 @@ const DetailItem = ({ product }) => {
   };
   const onKeyUp = (event) => {
     const realBidPrice = event.target.value;
+    const result = $(".result-bidprice");
 
+    if (realBidPrice > 100000) {
+      result.text("Max bid $100k");
+      result.css("color", "red");
+      return;
+    }
+    setValidBidding(realBidPrice > 100000)
     if (event.key === "Enter") {
       const productId = product.product_id;
       const customerId = JSON.parse(
         localStorage.getItem("customer_info")
       ).customer_id;
-      console.log(customerId);
       const auctionDay = new Date(new Date().toLocaleString());
-      const result = $(".result-bidprice");
+      setLoading(true);
       axios
         .post("http://127.0.0.1:8000/api/currentbidprice", {
           realBidPrice,
@@ -92,6 +101,8 @@ const DetailItem = ({ product }) => {
           }
           $("#input-bidprice").val("");
           setInterval(setTime, 2000);
+          updateProduct();
+          setLoading(false);
         });
     }
   };
@@ -155,16 +166,33 @@ const DetailItem = ({ product }) => {
 
           <div className="product-detail-product-bidprice-wrapper">
             {checkUser ? (
-              <input
-                id="input-bidprice"
-                className="product-detail-product-bidprice"
-                type="number"
-                min={product.product_start_price}
-                step="10"
-                placeholder="Your Max Bid"
-                onKeyUp={onKeyUp}
-              />
-            ):null}
+              <div>
+                {loading ? (
+                  <div className="container">
+                    <div className="row">
+                      <div className="justify-content-center">
+                        <div
+                          className="spinner-border  spinner-border-sm"
+                          role="status"
+                        >
+                          <span className="visually-hidden">Loading...</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+                <input
+                  id="input-bidprice"
+                  className="product-detail-product-bidprice"
+                  type="number"
+                  min={product.product_start_price}
+                  step="10"
+                  placeholder="Your Max Bid"
+                  onKeyUp={onKeyUp}
+                  disabled={validBidding || loading}
+                />
+              </div>
+            ) : null}
 
             <Link
               to="/login"

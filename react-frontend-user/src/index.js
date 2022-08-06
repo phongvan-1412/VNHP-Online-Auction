@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import reportWebVitals from "./reportWebVitals";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Router, Routes, Route } from "react-router-dom";
-import $ from "jquery";
-import axios from "axios";
-import ScrollToTop from './ScrollToTop';
-
+import { BrowserRouter, Router, Routes, Route,Navigate  } from "react-router-dom";
+import ScrollToTop from "./ScrollToTop";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -26,6 +23,8 @@ import UserProfile from "./pages/UserAction/UserProfile";
 import PayPals from "./pages/Payment/PayPals";
 //Footer
 import Footer from "./layout/Footer";
+
+import PageNotFound from "./layout/Header/PageNotFound";
 
 class HomePage extends Component {
   state = {
@@ -77,7 +76,6 @@ class HomePage extends Component {
       .catch((err) => {
         console.log(err);
       });
-
   }
 
   render() {
@@ -122,7 +120,7 @@ class HomePage extends Component {
 
     //     .catch((err) => {
 
-    //     });    
+    //     });
     // const countOnlineVisitor = this.state.getOnlineVisitor.length;
     //   // if (document.getElementById("countVisitorDisplay") == null) {
     //   //   return;
@@ -130,7 +128,17 @@ class HomePage extends Component {
     //     document.getElementById("countVisitorDisplay").innerHTML = countOnlineVisitor;
     // }
     // const OnlineVisitor = setInterval (getVisitor,20000)
-    
+
+    const updateProduct = () => {
+      fetch("http://127.0.0.1:8000/api/selectallproducts", { method: "GET" })
+      .then((products) => products.json())
+      .then((products) => {
+        this.setState({ products: products });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
     return (
       <div>
         <div id="data" hidden></div>
@@ -139,7 +147,7 @@ class HomePage extends Component {
         <Header categories={this.state.categories} />
 
         <Routes>
-          <Route path="/*/reload" component={null} />
+          
           <Route path="/about" element={<About />}></Route>
           <Route path="/contactus" element={<Contact />}></Route>
 
@@ -174,10 +182,7 @@ class HomePage extends Component {
           ></Route>
 
           {/* <Route path="/paymentgateway" element={ <PayPals />}></Route> */}
-          <Route
-            path="/paymentgateway/:billid"
-            element={<PayPals/>}
-          ></Route>
+          <Route path="/paymentgateway/:billid" element={<PayPals />}></Route>
 
           {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
 
@@ -218,25 +223,14 @@ class HomePage extends Component {
                   categories={this.state.categories}
                   product={product}
                   feedbacks={this.state.feedbacks}
+                  updateProduct={updateProduct}
                 />
               }
             ></Route>
           ))}
 
-          {/* Product Detail   */}
-          {this.state.products.map((product) => (
-            <Route
-              key={product.product_id}
-              path={`/${product.category_id}/${product.product_name}`}
-              element={
-                <ProductDetail
-                  products={this.state.products}
-                  categories={this.state.categories}
-                  product={product}
-                />
-              }
-            ></Route>
-          ))}
+          {/* <Route path="/*" element={<Navigate  to="/pagenotfound" />}/>
+          <Route path="/pagenotfound" element={<PageNotFound />}></Route> */}
         </Routes>
 
         {/* Footer  */}
@@ -250,10 +244,10 @@ export default HomePage;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <BrowserRouter>
-        <ScrollToTop/>
-        <HomePage style={{ padding: "0px", margin: "0px" }} />
-    </BrowserRouter>
+  <BrowserRouter>
+    <ScrollToTop />
+    <HomePage style={{ padding: "0px", margin: "0px" }} />
+  </BrowserRouter>
 );
 
 reportWebVitals();

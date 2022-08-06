@@ -20,17 +20,18 @@ class UserProfile extends Component {
   componentDidMount() {
     this.setState({ viewIndex: 1 });
     this.setState({ autionloading: true });
-      axios
-        .post(`http://127.0.0.1:8000/api/getautionhistory`, {
-          customer_id: JSON.parse(localStorage.getItem("customer_info")).customer_id,
-        })
-        .then((response) => {
-          this.setState({ autionHistory: response.data });
-          this.setState({ autionloading: false });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    axios
+      .post(`http://127.0.0.1:8000/api/getautionhistory`, {
+        customer_id: JSON.parse(localStorage.getItem("customer_info"))
+          .customer_id,
+      })
+      .then((response) => {
+        this.setState({ autionHistory: response.data });
+        this.setState({ autionloading: false });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   render() {
     const { userinfo, updateUserLogin } = this.props;
@@ -47,7 +48,7 @@ class UserProfile extends Component {
     if (currentUserInfo.customer_img_name == null) {
       window.location.href = "http://localhost:3000";
     }
-    
+
     function onAvatarChange() {
       $("#avatar-img-result").text("");
       const file = $("#user-avatar-img").prop("files")[0];
@@ -331,15 +332,11 @@ class UserProfile extends Component {
             {this.state.autionloading ? (
               <div className="container">
                 <div className="row">
-                  <div className="col-5"></div>
-                  <div
-                    className="spinner-border text-light col-2"
-                    id="user-info-loading-ring"
-                    role="status"
-                  >
-                    <span className="visually-hidden ">Loading...</span>
+                  <div className="d-flex justify-content-center">
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
                   </div>
-                  <div className="col-5"></div>
                 </div>
               </div>
             ) : (
@@ -354,15 +351,11 @@ class UserProfile extends Component {
             {this.state.billloading ? (
               <div className="container">
                 <div className="row">
-                  <div className="col-5"></div>
-                  <div
-                    className="spinner-border text-light col-2"
-                    id="user-info-loading-ring"
-                    role="status"
-                  >
-                    <span className="visually-hidden ">Loading...</span>
+                  <div className="d-flex justify-content-center">
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
                   </div>
-                  <div className="col-5"></div>
                 </div>
               </div>
             ) : (
@@ -377,15 +370,11 @@ class UserProfile extends Component {
             {this.state.newbillloading ? (
               <div className="container">
                 <div className="row">
-                  <div className="col-5"></div>
-                  <div
-                    className="spinner-border text-light col-2"
-                    id="user-info-loading-ring"
-                    role="status"
-                  >
-                    <span className="visually-hidden ">Loading...</span>
+                  <div className="d-flex justify-content-center">
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
                   </div>
-                  <div className="col-5"></div>
                 </div>
               </div>
             ) : (
