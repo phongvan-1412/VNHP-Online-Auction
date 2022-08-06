@@ -279,7 +279,7 @@ class ProductAPI extends Controller
         return DB::select("select * from product p join category c
         on (p.category_id = c.category_id)
         where p.product_status = 1 and convert(datetime, product_start_aution_day, 120) > getdate()
-        order by p.product_start_aution_day");
+        order by p.product_start_aution_day desc");
     }
 
     public function EndingSoonProducts()
@@ -287,7 +287,7 @@ class ProductAPI extends Controller
         return DB::select("select * from product p join category c
         on (p.category_id = c.category_id)
         where p.product_status = 1 and convert(datetime, product_end_aution_day, 120) > getdate()
-        order by p.product_end_aution_day
+        order by p.product_end_aution_day desc
         ");
     }
 
@@ -302,7 +302,7 @@ class ProductAPI extends Controller
         group by p.product_id,p.product_name,p.category_id,p.owner_id, c.category_name,
         p.product_information,p.product_ingredients,p.product_instruction_store,p.product_thumbnail_img_name,p.product_img_name1
         ,p.product_img_name2,p.product_img_name3,p.product_start_price,p.product_start_aution_day,p.product_end_aution_day
-        order by count(ap.aution_id)");
+        order by count(ap.aution_id) desc");
     }
 
     public function FilterProductSelect(Request $request){

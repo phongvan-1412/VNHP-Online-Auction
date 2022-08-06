@@ -344,6 +344,7 @@ class TableProduct extends Component {
                                         <select
                                           className="form-control"
                                           onChange={categoryOnChange}
+                                          id='edit-product-category'
                                           defaultVal={
                                             this.state.currentCategory
                                               ? this.state.currentCategory.replace(
