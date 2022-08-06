@@ -42,5 +42,23 @@
 
     <script src="./js/jquery.dataTables.min.js"></script>
     <script src="./js/dataTables.bootstrap4.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#con-close-modal2").on("hide.bs.modal", function () {
+          $("#edit-product-result").text("");
+  
+          $("#edit-product-name").val("");
+  
+          $("#edit-product-category").val("");
+
+          $("#edit-product-start-price").val("");
+  
+          $("#edit-product-start-aution-day").val("");
+
+          $("#edit-product-end-aution-day").val("");
+
+        });
+      });
+    </script>
   </body>
 </html>

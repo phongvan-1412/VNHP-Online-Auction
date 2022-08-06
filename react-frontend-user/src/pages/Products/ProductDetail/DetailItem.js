@@ -9,6 +9,8 @@ const DetailItem = ({ product,updateProduct }) => {
   let checkUser = false;
   const [loading, setLoading] = useState(false);
   const [validBidding, setValidBidding] = useState(false);
+  const [inStock, setInstock] = useState(1);
+  const [inputStatus, setInputStatus] = useState(false);
 
   if (JSON.parse(localStorage.getItem("customer_info")) != null) {
     checkUser = true;
@@ -49,7 +51,8 @@ const DetailItem = ({ product,updateProduct }) => {
       var hours = 0;
       var minutes = 0;
       var seconds = 0;
-
+    
+      setInputStatus(true);
       axios
         .post("http://127.0.0.1:8000/api/countdownend", { countdownProduct })
         .then(function (response) {
@@ -132,7 +135,7 @@ const DetailItem = ({ product,updateProduct }) => {
 
             <div className="stock">
               <BsFillBagCheckFill className="meta-instock" />
-              <span>{product.product_status == 1 ? "In Stock" : "Sold"}</span>
+              <span id={inStock}>{inStock == 1 ? "In Stock" : "Time Out"}</span>
             </div>
           </div>
 
@@ -183,7 +186,8 @@ const DetailItem = ({ product,updateProduct }) => {
                   step="10"
                   placeholder="Your Max Bid"
                   onKeyUp={onKeyUp}
-                  disabled={validBidding || loading}
+                  disabled={validBidding || loading || inputStatus}
+                
                 />
               </div>
             ) : null}

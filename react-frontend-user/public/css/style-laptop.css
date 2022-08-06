@@ -90,7 +90,6 @@
 .menu .about:hover::after{
     transform: translateX(-50%) scaleX(1);
 }
-
 .menu .contact{
     position: relative;
 	padding: 1rem 0 0.5rem;
@@ -111,6 +110,28 @@
 		transition: transform 250ms;
 }
 .menu .contact:hover::after{
+    transform: translateX(-50%) scaleX(1);
+}
+.menu .needhelp{
+    position: relative;
+	padding: 1rem 0 0.5rem;
+	margin: 0 1.5rem;
+	color: white;
+	text-decoration: none;
+}
+.menu .needhelp::after{
+    content: '';
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		transform: translateX(-50%) scaleX(0);
+		transform-origin: 50% 50%;
+		width: 100%;
+		height: 1px;
+		background-color: rgba(255,255,255,0.8);
+		transition: transform 250ms;
+}
+.menu .needhelp:hover::after{
     transform: translateX(-50%) scaleX(1);
 }
 .menu .product{
@@ -1153,7 +1174,10 @@
 .content{
     font-size: 13px;
 }
-
+/* ---------------TERM & POLICY--------------- */
+.term-wrapper{
+    margin: 50px auto;
+}
 /* ---------------PRODUCT--------------- */
 /* ----------Wrapcrumb---------- */
 .wrap-breadcrumb{
@@ -1528,6 +1552,10 @@
     text-transform: uppercase;
     background-color: rgba(255, 255, 255, .6);
     color: var(--countdownColor);
+    opacity: 0;
+}
+#product-quick-view:hover{
+    opacity: 1;
 }
 #quickview-slider .slick-slider .slick-list .slick-track{
     width: 500px;
@@ -1726,7 +1754,20 @@
     color: var(--buttonColor);
     font-weight: bold;
 }
-/* ---------------USERACTION--------------- */
+---------------USERACTION---------------
+.slick-slider .slick-list .slick-track .slick-cloned{
+    display: none;
+  }
+  .form-waring-text {
+    position: absolute;
+  }
+  #user-info-loading-ring{
+    background-image: linear-gradient(red,black);
+  }
+  .popup-fade-in #user-info-loading-ring span{
+    color: rebeccapurple;
+    background-image: linear-gradient(blue,white);
+  }
 /* -----Forget-password-form----- */
 .forget-password-background{
     position: relative;
@@ -1743,7 +1784,81 @@
     padding: 0px 50px;
     background-color: #212529;
 }
-
+/* button change password*/
+#btn-change-password {
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    height: 35px;
+    width: 200px;
+    border: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    -webkit-transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  #btn-change-password:hover {
+    color: var(--textColor);
+    background-image: linear-gradient(90deg, #4568dc, var(--buttonColor));
+    background-position: 100% 0;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+    width: 220px;
+  }
+  #btn-change-password b {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  #btn-change-password b:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  #btn-change-password:hover b {
+    padding-right: 25px;
+  }
+  
+  #btn-change-password:hover b:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  #btn-change-password:after {
+    content: "";
+    border-radius: 50px;
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 150%;
+    padding-left: 250%;
+    margin-left: -50px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 0.8s;
+  }
+  #btn-change-password:active:after {
+    opacity: 1;
+    transition: 0s;
+  }
+  #btn-change-password:active {
+    opacity: 1;
+    transition: 0s;
+  }
 /* -----Login----- */
 .user-logged{
     margin: 0px;
@@ -1755,6 +1870,256 @@
 .user-logged .userprofile, .user-logged .logout .user-login .login, .user-login .register{
     margin: 0px 10px;
 }
+.login-form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 350px;
+    background-color: var(--footerBackground);
+  }
+  .login-form-group {
+    padding: 25px;
+  }
+  .login-form-group label {
+    color: var(--textColor);
+  }
+  .link-group #dont-have-account {
+    color: var(--textColor);
+  }
+  
+  .btn-login-group #btn-login {
+    background-color: var(--tableColor);
+    height: 35px;
+    width: 100px;
+    border: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    -webkit-transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  .btn-login-group #btn-login:hover {
+    color: var(--textColor);
+    background-image: linear-gradient(90deg, #4568dc, var(--buttonColor));
+    background-position: 100% 0;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+    width: 110px;
+  }
+  .btn-login-group #btn-login b {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  .btn-login-group #btn-login b:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  .btn-login-group #btn-login:hover b {
+    padding-right: 25px;
+  }
+  .btn-login-group #btn-login:hover b:after {
+    opacity: 1;
+    right: 0;
+  }
+  .btn-login-group #btn-login:after {
+    content: "";
+    border-radius: 50px;
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 150%;
+    padding-left: 250%;
+    margin-left: -50px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 0.8s;
+  }
+  .btn-login-group #btn-login:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+  }
+  .btn-login-group #btn-login:active {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+  }
+  .link-group p .login-link {
+    color: cornflowerblue;
+  }
+  .link-group p .login-link:hover {
+    color: lightskyblue;
+  }
+  .page-content {
+    margin-top: 3px;
+    height: 350px;
+  }
+
+ /* -----Register----- */
+  .register-form-group .register-img-form #overlay {
+    position: absolute;
+    height: 884px;
+    width: 600px;
+    border-radius: 5px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    opacity: 0;
+    -o-transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    display: none;
+  }
+  
+  .register-form-group .register-img-form #register-img {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 5px;
+    height: 884px;
+    width: 600px;
+    display: flex;
+    opacity: 1;
+  }
+  
+  .register-img-form:hover #register-img {
+    display: none;
+  }
+  
+  .register-img-form:hover #overlay {
+    display: inline-flex;
+    opacity: 1;
+  }
+  
+  .form-register {
+    padding: 50px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background-color: var(--footerBackground);
+  }
+  .register-form-control label {
+    color: var(--textColor);
+  }
+  .register-term {
+    color: var(--textColor);
+  }
+  #mostro {
+    color: var(--textColor);
+  }
+  #mos {
+    color: var(--textColor);
+  }
+  .btn-register-group > #btn-register {
+    background-color: var(--tableColor);
+    height: 40px;
+    width: 110px;
+    border: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    font-size: 20px;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    -webkit-transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  .btn-register-group > #btn-register:hover {
+    color: var(--textColor);
+    background-image: linear-gradient(90deg, #4568dc, var(--buttonColor));
+    background-position: 100% 0;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+    width: 130px;
+  }
+  .btn-register-group > #btn-register b {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  .btn-register-group > #btn-register b:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .btn-register-group > #btn-register:hover b {
+    padding-right: 25px;
+  }
+  
+  #register-loading-ring{
+    position: absolute;
+    margin-left: 10px;
+  }
+  #register-loading-ring .visually-hidden{
+    position: absolute;
+    margin-top: 15px;
+  }
+  
+  .btn-register-group > #btn-register:hover b:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  .btn-register-group > #btn-register:after {
+    content: "";
+    border-radius: 50px;
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 150%;
+    padding-left: 250%;
+    margin-left: -50px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 0.8s;
+  }
+  .btn-register-group > #btn-register:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+  }
+  .btn-register-group > #btn-register:active {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+  }
+  
+  #btn-register b {
+    font-size: 14px;
+  }
+  .register-term .term-link {
+    color: cornflowerblue;
+  }
+  .register-term .term-link:hover {
+    color: lightskyblue;
+  }
+  .form-register > .register-form-control {
+    padding-bottom: 20px;
+  }
 /* -----User-Profile----- */
 .img-user-account-profile{
     width: 150px;
@@ -1764,7 +2129,722 @@
     background-color: #0d6efd;
     border-radius: 800px;
 }
-
+  #user-profile-hr {
+    border: 0;
+    height: 0.35rem;
+    margin: 1em auto;
+    display: block;
+    background-image: -webkit-linear-gradient(
+      0deg,
+      transparent,
+      #f29c38,
+      #ea3329,
+      #ff034a,
+      #e532ad,
+      #0c8cfe,
+      transparent
+    );
+    clear: both;
+  }
+  
+  .user-account-profile {
+    padding: 30px;
+  }
+  
+  .profile-img-form > .img-user-account-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .profile-img-form #user-avatar-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  #user-avatar-img-wraper #avatar-img-result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .profile-img-form #user-avatar-img-wraper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /*btn fade in out*/
+  .btn-form-group #btn-fade-in {
+    background-color: white;
+    color: rgba(0, 0, 0, 0.75);
+    border-radius: 6px;
+    height: 35px;
+    width: 150px;
+    margin-left: 20px;
+  }
+  .btn-form-group #btn-fade-in:hover {
+    color: var(--textColor);
+    background-image: linear-gradient(90deg, #4568dc, var(--buttonColor));
+    border-radius: 6px;
+    height: 35px;
+    width: 150px;
+    margin-left: 20px;
+    background-position: 100% 0;
+  }
+  
+  /* in*/
+  .btn-form-group #btn-fade-out {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    border-radius: 6px;
+    height: 35px;
+    width: 150px;
+    margin-left: 20px;
+    -webkit-transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  .btn-form-group #btn-fade-out:hover {
+    color: var(--textColor);
+    background-image: linear-gradient(90deg, #4568dc, var(--buttonColor));
+    border-radius: 6px;
+    height: 35px;
+    width: 150px;
+    margin-left: 20px;
+    background-position: 100% 0;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+  }
+  
+  /*popup fade in out*/
+  .popup-fade-in {
+    display: flex;
+  }
+  .popup-fade-out {
+    display: none;
+  }
+  /* button change avatar*/
+  #btn-change-avatar {
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    height: 35px;
+    width: 180px;
+    border: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    /* box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438); */
+    -webkit-transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  #btn-change-avatar:hover {
+    /* background-color: var(--iconHover); */
+    color: var(--textColor);
+    background-image: linear-gradient(90deg, #4568dc, var(--buttonColor));
+    background-position: 100% 0;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+    width: 200px;
+  }
+  #btn-change-avatar b {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  #btn-change-avatar b:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  #btn-change-avatar:hover b {
+    padding-right: 25px;
+  }
+  
+  #btn-change-avatar:hover b:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  #btn-change-avatar:after {
+    content: "";
+    border-radius: 50px;
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 150%;
+    padding-left: 250%;
+    margin-left: -50px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 0.8s;
+  }
+  #btn-change-avatar:active:after {
+    opacity: 1;
+    transition: 0s;
+  }
+  #btn-change-avatar:active {
+    opacity: 1;
+    transition: 0s;
+  }
+  
+  /*button edit open edit profile popup*/
+  #btn-edit {
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    height: 35px;
+    width: 80px;
+    border: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    -webkit-transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  #btn-edit:hover {
+    color: var(--textColor);
+    background-image: linear-gradient(90deg, #4568dc, var(--buttonColor));
+    background-position: 100% 0;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+    width: 100px;
+  }
+  #btn-edit b {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  #btn-edit b:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  #btn-edit:hover b {
+    padding-right: 25px;
+  }
+  
+  #btn-edit:hover b:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  #btn-edit:after {
+    content: "";
+    border-radius: 50px;
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 150%;
+    padding-left: 250%;
+    margin-left: -50px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 0.8s;
+  }
+  #btn-edit:active:after {
+    opacity: 1;
+    transition: 0s;
+  }
+  #btn-edit:active {
+    opacity: 1;
+    transition: 0s;
+  }
+  #btn-payment{
+    padding: 8px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.75);
+    font-size: 11px;
+    color: var(--textColor);
+  }
+  /* change password popup*/
+  .change-password-body .change-password-form-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .change-password-form {
+    margin: 8px;
+  }
+  #staticBackdropLabel #title {
+    color: var(--textColor);
+  }
+  .change-password-form label b {
+    color: var(--textColor);
+    font-size: 14px;
+  }
+  .change-password-form label {
+    margin-bottom: -10px;
+  }
+  .change-password-form input {
+    width: 450px;
+  }
+  #customer-old-password-result {
+    position: absolute;
+    left: 5%;
+    margin-top: -5px;
+  }
+  #customer-new-password-result {
+    position: absolute;
+    left: 5%;
+    margin-top: -5px;
+  }
+  #customer-confirm-new-password-result {
+    position: absolute;
+    left: 5%;
+    margin-top: -5px;
+  }
+  .change-password-form-group {
+    margin-bottom: 10px;
+  }
+  
+  /* button cancel change password*/
+  #btn-cancel-save-change-pasword {
+    margin-top: 10px;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.75);
+    height: 35px;
+    width: 80px;
+    border: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    -webkit-transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  #btn-cancel-save-change-pasword:hover {
+    color: var(--textColor);
+    background-image: linear-gradient(90deg, #4568dc, var(--buttonColor));
+    background-position: 100% 0;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+    width: 100px;
+  }
+  #btn-cancel-save-change-pasword b {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  #btn-cancel-save-change-pasword b:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  #btn-cancel-save-change-pasword:hover b {
+    padding-right: 25px;
+  }
+  
+  #btn-cancel-save-change-pasword:hover b:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  #btn-cancel-save-change-pasword:after {
+    content: "";
+    border-radius: 50px;
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 150%;
+    padding-left: 250%;
+    margin-left: -50px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 0.8s;
+  }
+  #btn-cancel-save-change-pasword:active:after {
+    opacity: 1;
+    transition: 0s;
+  }
+  #btn-cancel-save-change-pasword:active {
+    opacity: 1;
+    transition: 0s;
+  }
+  /* button save change password*/
+  #btn-save-change-pasword {
+    margin-top: 10px;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.75);
+    height: 35px;
+    width: 80px;
+    border: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    -webkit-transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  #btn-save-change-pasword:hover {
+    color: var(--textColor);
+    background-image: linear-gradient(90deg, #4568dc, var(--buttonColor));
+    background-position: 100% 0;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+    width: 100px;
+  }
+  #btn-save-change-pasword b {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  #btn-save-change-pasword b:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  #btn-save-change-pasword:hover b {
+    padding-right: 25px;
+  }
+  
+  #btn-save-change-pasword:hover b:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  #btn-save-change-pasword:after {
+    content: "";
+    border-radius: 50px;
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 150%;
+    padding-left: 250%;
+    margin-left: -50px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 0.8s;
+  }
+  #btn-save-change-pasword:active:after {
+    opacity: 1;
+    transition: 0s;
+  }
+  #btn-save-change-pasword:active {
+    opacity: 1;
+    transition: 0s;
+  }
+  
+  /**/
+  #btn-close-popup-change-password {
+    background-color: var(--buttonColor);
+  }
+  
+  /* edit form*/
+  #edit-profile-body {
+    background-color: var(--categoryNameColor);
+  }
+  #staticBackdropLabel .title {
+    color: var(--textColor);
+  }
+  .edit-profile-form b {
+    color: var(--textColor);
+  }
+  #fullname-check-result {
+    position: absolute;
+  }
+  #check-phonenumber-result {
+    position: absolute;
+  }
+  #check-dob-result {
+    position: absolute;
+  }
+  .edit-profile-form-input {
+    padding-bottom: 10px;
+  }
+  #form2 .edit-profile-form-btn {
+    margin-top: -20px;
+  }
+  #btn-close-edit-profile {
+    background-color: var(--buttonColor);
+  }
+  /*button save change edit profile popup*/
+  #btn-save-change-edit {
+    margin-top: 10px;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.75);
+    height: 35px;
+    width: 150px;
+    border: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    -webkit-transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  #btn-save-change-edit:hover {
+    color: var(--textColor);
+    background-image: linear-gradient(90deg, #4568dc, var(--buttonColor));
+    background-position: 100% 0;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+    width: 170px;
+  }
+  #btn-save-change-edit b {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  #btn-save-change-edit b:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  #btn-save-change-edit:hover b {
+    padding-right: 25px;
+  }
+  
+  #btn-save-change-edit:hover b:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  #btn-save-change-edit:after {
+    content: "";
+    border-radius: 50px;
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 150%;
+    padding-left: 250%;
+    margin-left: -50px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 0.8s;
+  }
+  #btn-save-change-edit:active:after {
+    opacity: 1;
+    transition: 0s;
+  }
+  #btn-save-change-edit:active {
+    opacity: 1;
+    transition: 0s;
+  }
+  /*button close edit profile popup*/
+  #btn-close-edit-popup {
+    margin-top: 10px;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.75);
+    height: 35px;
+    width: 80px;
+    border: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    -webkit-transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  #btn-close-edit-popup:hover {
+    color: var(--textColor);
+    background-image: linear-gradient(90deg, #4568dc, var(--buttonColor));
+    background-position: 100% 0;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+    width: 100px;
+  }
+  #btn-close-edit-popup b {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  #btn-close-edit-popup b:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  #btn-close-edit-popup:hover b {
+    padding-right: 25px;
+  }
+  
+  #btn-close-edit-popup:hover b:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  #btn-close-edit-popup:after {
+    content: "";
+    border-radius: 50px;
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 150%;
+    padding-left: 250%;
+    margin-left: -50px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 0.8s;
+  }
+  #btn-close-edit-popup:active:after {
+    opacity: 1;
+    transition: 0s;
+  }
+  #btn-close-edit-popup:active {
+    opacity: 1;
+    transition: 0s;
+  }
+  /* forget pasword popup*/
+  #check-customer-email-result {
+    position: absolute;
+    margin-top: -50px;
+  }
+  
+  #btn-reset-password {
+    background-color: var(--tableColor);
+    height: 35px;
+    width: 180px;
+    border: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    -webkit-transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  #btn-reset-password:hover {
+    color: var(--textColor);
+    background-image: linear-gradient(90deg, #4568dc, var(--buttonColor));
+    background-position: 100% 0;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+    width: 200px;
+  }
+  #btn-reset-password b {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  #btn-reset-password b:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  #btn-reset-password:hover b {
+    padding-right: 25px;
+  }
+  
+  #btn-reset-password:hover b:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  #btn-reset-password:after {
+    content: "";
+    border-radius: 50px;
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 150%;
+    padding-left: 250%;
+    margin-left: -50px !important;
+    margin-top: -100%;
+    opacity: 0;
+    transition: all 0.8s;
+  }
+  #btn-reset-password:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+  }
+  #btn-reset-password:active {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+  }
+  
+ 
 /* ---------------RESPONSIVE--------------- */
 @media screen and (max-width: 2560px){
 }

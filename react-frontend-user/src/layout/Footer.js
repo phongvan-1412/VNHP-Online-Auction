@@ -58,7 +58,7 @@ class Footer extends Component{
                                 <br />
                                 <span id="blog">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, est labore deleniti eligendi officiis facere.</span> 
                                 <br />
-                                <Link to="/term-and-policy" id="link">https://buff.ly/2zaSfAQ</Link>
+                                <Link to="/termandpolicy" id="link">https://buff.ly/2zaSfAQ</Link>
                                 <br />
                                 <span id="date">12 May 2022</span> 
                             </span>

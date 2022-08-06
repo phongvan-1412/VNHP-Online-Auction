@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Bill;
 use App\Models\AuctionPrice;
+use Carbon\Carbon;
 class ProductAPI extends Controller
 {
 
@@ -79,8 +80,8 @@ class ProductAPI extends Controller
         $newProduct->product_ingredients =  $request->product_ingredients;
         $newProduct->product_instruction_store =  $request->product_instruction_store;
         $newProduct->product_start_price =  $request->product_start_price;
-        $newProduct->product_start_aution_day=  $request->product_start_aution_day;
-        $newProduct->product_end_aution_day=  $request->product_end_aution_day;
+        $newProduct->product_start_aution_day=  new Carbon($request->product_start_aution_day);
+        $newProduct->product_end_aution_day=  new Carbon($request->product_end_aution_day);
 
         $isExist = Product::select()->where('product_name',$newProduct->product_name)->exists();
 
@@ -266,8 +267,8 @@ class ProductAPI extends Controller
                                     ->update(['product_name'=>$request->product_name,
                                     'category_id'=>$request->category_id,
                                     'product_start_price'=>$request->product_start_price,
-                                    'product_start_aution_day'=>$request->product_start_aution_day,
-                                    'product_end_aution_day'=>$request->product_end_aution_day]);
+                                    'product_start_aution_day'=>new Carbon($request->product_start_aution_day),
+                                    'product_end_aution_day'=>new Carbon($request->product_end_aution_day)]);
 
             return 1;
         }
@@ -278,7 +279,7 @@ class ProductAPI extends Controller
         return DB::select("select * from product p join category c
         on (p.category_id = c.category_id)
         where p.product_status = 1 and convert(datetime, product_start_aution_day, 120) > getdate()
-        order by p.product_start_aution_day");
+        order by p.product_start_aution_day desc");
     }
 
     public function EndingSoonProducts()
@@ -301,7 +302,7 @@ class ProductAPI extends Controller
         group by p.product_id,p.product_name,p.category_id,p.owner_id, c.category_name,
         p.product_information,p.product_ingredients,p.product_instruction_store,p.product_thumbnail_img_name,p.product_img_name1
         ,p.product_img_name2,p.product_img_name3,p.product_start_price,p.product_start_aution_day,p.product_end_aution_day
-        order by count(ap.aution_id)");
+        order by count(ap.aution_id) desc");
     }
 
     public function FilterProductSelect(Request $request){
