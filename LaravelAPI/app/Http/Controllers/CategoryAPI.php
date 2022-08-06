@@ -39,8 +39,11 @@ class CategoryAPI extends Controller
         return 0;  
     }
 
-    // table add category
- 
+   public function SelectAllCategories()
+   {
+        return Category::select()->get();
+   }
+   
 
     public function AddCategoryTable(){
         $products = Category::select()->get();

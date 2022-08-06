@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //CATEGORIES
 Route::get('/selectcategories',[CategoryAPI::class, 'SelectCategories']);
-
+Route::get('/selectallcategories',[CategoryAPI::class, 'SelectAllCategories']);
 Route::post('/addcategory',[CategoryAPI::class,'AddCategory']);
 Route::get('/addcategorytable',[CategoryAPI::class,'AddCategoryTable']);
 Route::post('/paginatecategorytable',[CategoryAPI::class,'PaginateCategoryTable']);
