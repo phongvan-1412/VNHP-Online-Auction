@@ -255,20 +255,19 @@ class ProductAPI extends Controller
 
     public function EditProduct(Request $request)
     {
-        $product = Product::select()->where('product_id', $request->product_id)->get();
-
+        $products = Product::select()->where('product_id', $request->product_id)->get();
         $productItem = '';
-        foreach($product as $item){
+        foreach($products as $item){
             $productItem = $item;
         }
-        if(count($product) > 0){
+        if(count($products) > 0){
             
-                    Product::select()->where('product_id',$request->product_id)
-                                            ->update(['product_name',$request->product_name,
-                                            'category_id'=>$request->category_id,
-                                            'product_start_price'=>$request->product_start_price,
-                                            'product_start_aution_day'=>$request->product_start_aution_day,
-                                            'product_end_aution_day'=>$request->product_end_aution_day]);
+            Product::select()->where('product_id',$request->product_id)
+                                    ->update(['product_name'=>$request->product_name,
+                                    'category_id'=>$request->category_id,
+                                    'product_start_price'=>$request->product_start_price,
+                                    'product_start_aution_day'=>$request->product_start_aution_day,
+                                    'product_end_aution_day'=>$request->product_end_aution_day]);
 
             return 1;
         }
