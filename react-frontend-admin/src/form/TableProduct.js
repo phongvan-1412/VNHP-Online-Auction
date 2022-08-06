@@ -89,17 +89,13 @@ class TableProduct extends Component {
         });
     };
     const updateProduct = () => {
-      fetch("http://127.0.0.1:8000/api/addproducttable", {
-        method: "GET",
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          this.setState({
-            ProductData: response,
+      const self = this;
+      axios
+        .post(`http://127.0.0.1:8000/api/paginateproducttable`, { paginate: 1 })
+        .then(function (response) {
+          self.setState({
+            ProductData: response.data,
           });
-        })
-        .catch((err) => {
-          console.log(err);
         });
     };
     const changeproduct = (e) => {
@@ -123,6 +119,7 @@ class TableProduct extends Component {
       axios
         .post(`http://127.0.0.1:8000/api/editproduct`, product)
         .then(function (response) {
+          console.log(response.data);
           if (response.data > 0) {
             $("#edit-product-result").text("Edit product successfully.");
             $("#edit-product-result").css("color", "green");
@@ -469,9 +466,9 @@ class TableProduct extends Component {
                   })}
                 </tbody>
               </table>
-              {this.state.productPaginate.map((paginate,index) => {
+              {this.state.productPaginate.map((paginate, index) => {
                 return (
-                  <button key={index}value={paginate} onClick={onPaginate}>
+                  <button key={index} value={paginate} onClick={onPaginate}>
                     {paginate}
                   </button>
                 );
