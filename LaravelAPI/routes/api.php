@@ -30,6 +30,7 @@ Route::get('/selectcategories',[CategoryAPI::class, 'SelectCategories']);
 
 Route::post('/addcategory',[CategoryAPI::class,'AddCategory']);
 Route::get('/addcategorytable',[CategoryAPI::class,'AddCategoryTable']);
+Route::post('/paginatecategorytable',[CategoryAPI::class,'PaginateCategoryTable']);
 
 Route::post('/updatecategory',[CategoryAPI::class,'UpdateCategory']);
 Route::post('/changecategorystatus',[CategoryAPI::class,'UpdateCategoryStatus']);
