@@ -51,7 +51,29 @@ class AdminProfile extends Component{
                 })
             
         }
-
+        const onBirthdayOnBlur = (e) => {
+            const result = $("#birthdayResult");
+            var optimizedBirthday = e.target.value.replace(/-/g, "/");
+      
+            //set date based on birthday at 01:00:00 hours GMT+0100 (CET)
+            var myBirthday = new Date(optimizedBirthday);
+      
+            // set current day on 01:00:00 hours GMT+0100 (CET)
+            var currentDate = new Date().toJSON().slice(0, 10) + " 01:00:00";
+      
+            // calculate age comparing current date and borthday
+            var myAge = ~~((Date.now(currentDate) - myBirthday) / 31557600000);
+      
+            if (!e.target.value) {
+              result.text("*Please insert your date of birth.").addClass('text-danger');
+            } else {
+              if (myAge < 18) {
+                result.text("*Date of birth is invalid.").addClass('text-danger');
+              } else {
+                result.text("");
+              }
+            }
+          };
         const ChangeProfile = () => {
             this.setState({ loading:true })    
 
@@ -188,6 +210,7 @@ class AdminProfile extends Component{
                                 Birthday
                             </label>
                             <input
+                                onBlur={onBirthdayOnBlur}
                                 className="form-control"
                                 id="dateofbirth"
                                 type="date"
@@ -197,6 +220,7 @@ class AdminProfile extends Component{
                                 defaultValue={currentAdminInfo.emp_dob}
                             />
                             </div>
+                            <div id="birthdayResult"></div>
                         </div>
                         <button  className="btn btn-primary" onClick={ChangeProfile} disabled={loading} type="submit">
                             { loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> }

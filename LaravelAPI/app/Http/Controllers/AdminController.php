@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Customer;
 use App\Models\Product;
-use File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 
 
@@ -105,7 +105,15 @@ class AdminController extends Controller
 
     }
     public function AddCustomerTable(){
-        $customer = Customer::select()->get();
+        $customer = DB::select("Select c.customer_id, c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,sum(a.aution_price) as total_spending
+        from customer_account c
+        join aution_price a on (a.customer_id = c.customer_id)
+        where aution_status = 1
+        group by c.customer_id, c.customer_name,c.customer_img_name, c.customer_contact,c.customer_email, c.customer_dob, c.customer_address
+        union
+        Select c.customer_id, c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,0 as total_spending
+        from customer_account c
+        where c.customer_id not in (select customer_id from aution_price)");
         $paginate = [];
 
         for($i = 1; $i <= count($customer)/10 + 1; $i++){
@@ -114,7 +122,16 @@ class AdminController extends Controller
         return $paginate;
     }
     public function PaginateCustomerTable(Request $request){
-        $customers = Customer::select()->get();
+        $customers = DB::select("Select c.customer_id, c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,sum(a.aution_price) as total_spending
+        from customer_account c
+        join aution_price a on (a.customer_id = c.customer_id)
+        where aution_status = 1
+        group by c.customer_id, c.customer_name,c.customer_img_name, c.customer_contact,c.customer_email, c.customer_dob, c.customer_address
+        union
+        Select c.customer_id, c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,0 as total_spending
+        from customer_account c
+        where c.customer_id not in (select customer_id from aution_price)");
+
         $currentCustomer = [];
         $tmp = 1;
         if($request->paginate > count($customers)/10){
@@ -128,7 +145,15 @@ class AdminController extends Controller
             }
         }else{
             $tmp = $request->paginate*10;
-            $getCustomer = DB::select("Select top".$tmp." * from customer_account order by customer_id desc");
+            $getCustomer = DB::select("Select top ".$tmp." c.customer_id, c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,sum(a.aution_price) as total_spending
+            from customer_account c
+            join aution_price a on (a.customer_id = c.customer_id)
+            where aution_status = 1
+            group by c.customer_id, c.customer_name,c.customer_img_name, c.customer_contact,c.customer_email, c.customer_dob, c.customer_address
+            union
+            Select top ".$tmp." c.customer_id, c.customer_name, c.customer_img_name, c.customer_contact, c.customer_email, c.customer_dob, c.customer_address ,0 as total_spending
+            from customer_account c
+            where c.customer_id not in (select customer_id from aution_price)");
 
             foreach(array_reverse($getCustomer) as $product){
                 $currentCustomer[] = $product;

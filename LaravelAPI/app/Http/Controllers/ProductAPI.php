@@ -7,9 +7,9 @@ use App\Models\NameSetting as Name;
 use App\Models\Product;
 use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Bill;
 use App\Models\AuctionPrice;
-use Mail;
 class ProductAPI extends Controller
 {
 
@@ -18,28 +18,28 @@ class ProductAPI extends Controller
         $tmp_products = DB::select("select p.product_id,p.product_end_aution_day,p.product_img_name1,p.product_img_name2,p.product_img_name3,p.product_information,
         p.product_ingredients,p.product_instruction_store,p.product_name,p.product_start_aution_day,p.product_start_price,p.product_status,p.product_thumbnail_img_name,
         c.category_name,c.category_status,c.category_id,max(ap.aution_price) as current_bid,ca.customer_name
-        from product p 
-        join category c on (p.category_id = c.category_id) 
+        from product p
+        join category c on (p.category_id = c.category_id)
         join customer_account ca on (p.owner_id = ca.customer_id)
         join aution_price ap on (p.product_id = ap.product_id)
         where p.product_status = 1 and c.category_status = 1
         group by p.product_id,p.product_end_aution_day,p.product_img_name1,p.product_img_name2,p.product_img_name3,p.product_information,
         p.product_ingredients,p.product_instruction_store,p.product_name,p.product_start_aution_day,p.product_start_price,p.product_status,p.product_thumbnail_img_name,
         c.category_name,c.category_status,c.category_id,ca.customer_name
-        
+
         union
-        
+
         select p.product_id,p.product_end_aution_day,p.product_img_name1,p.product_img_name2,p.product_img_name3,p.product_information,
         p.product_ingredients,p.product_instruction_store,p.product_name,p.product_start_aution_day,p.product_start_price,p.product_status,p.product_thumbnail_img_name,
         c.category_name,c.category_status,c.category_id,0,ca.customer_name
-        from product p 
-        join category c on (p.category_id = c.category_id) 
+        from product p
+        join category c on (p.category_id = c.category_id)
         join customer_account ca on (p.owner_id = ca.customer_id)
         where p.product_status = 1 and c.category_status = 1 and
 
 		p.product_id not in (select p.product_id
-        from product p 
-        join category c on (p.category_id = c.category_id) 
+        from product p
+        join category c on (p.category_id = c.category_id)
         join customer_account ca on (p.owner_id = ca.customer_id)
         join aution_price ap on (p.product_id = ap.product_id)
         where p.product_status = 1 and c.category_status = 1
@@ -51,14 +51,14 @@ class ProductAPI extends Controller
 
     public function SelectProductsTop15ByCountCustomerId(){
         $tmp_products = DB::select("select top 15 * from product p join auction_price a on (
-            p.product_id = a.product_id) 
+            p.product_id = a.product_id)
             group by p.product_id
             order by count(a.customer_id)");
         return $tmp_products;
     }
-    
+
     public function AddProduct(Request $request){
-        
+
         $newProduct = new Product();
         $newProduct->product_name =  $request->product_name;
         $newProduct->category_id =  $request->category_id;
@@ -87,7 +87,7 @@ class ProductAPI extends Controller
         if(!$isExist)
         {
             $newProduct->save();
-            
+
             $product_thumbnail_img->move(public_path('ProductImg'), $newProduct->product_thumbnail_img_name);
             $product_img_name1->move(public_path('ProductImg'),  $newProduct->product_img_name1);
             $product_img_name2->move(public_path('ProductImg'), $newProduct->product_img_name2);
@@ -95,8 +95,8 @@ class ProductAPI extends Controller
 
             return 1;
         }
-       
-        return 0;         
+
+        return 0;
     }
     // table
     public function AddProductTable(){
@@ -130,7 +130,7 @@ class ProductAPI extends Controller
         {
             $tmp = $request->paginate*10;
             $getProduct = DB::select("select top ".$tmp." * from product order by product_id desc");
-    
+
             foreach(array_reverse($getProduct) as $product){
                 $currentProducts[] = $product;
                 if(count($currentProducts) >= 10)
@@ -142,7 +142,7 @@ class ProductAPI extends Controller
         // return  response()->json(['data'=>array_reverse($currentProducts),'paginate'=>count($products)/10]);
         return array_reverse($currentProducts);
     }
-    
+
 
     public function CheckExistsProduct(Request $request)
     {
@@ -154,7 +154,7 @@ class ProductAPI extends Controller
         }
         return 0;
     }
-    
+
     public function CountdownEnd(Request $req_product)
     {
         $products = Product::select()->where('product_id', $req_product->countdownProduct)->get();
@@ -177,28 +177,28 @@ class ProductAPI extends Controller
                 Product::where('product_id', $req_product->countdownProduct)->update(['product_status' => 2]);
             }else{
                 Product::where('product_id', $req_product->countdownProduct)->update(['product_status' => 3]);
-                
-                
+
+
                 $tmpCus = Customer::select()->where('customer_id', $autionPrice->customer_id)->get();
                 $newCustomer = "";
-    
+
                 foreach($tmpCus as $customer)
                 {
                     $newCustomer = $customer;
                 }
                 $payment = $autionPrice->aution_price;
-                $aution_id = 
+                $aution_id =
                 Mail::send('emailVeritifiPayment', compact('newCustomer','productItem','autionPrice'), function($email) use($newCustomer,$productItem,$autionPrice){
                     $email->subject('VNHP Aution - Verify your payment');
                     $email->to($newCustomer->customer_email, $newCustomer->customer_name);
                 });
-                
+
                 return 1;
             }
         }
         return 0;
     }
-      
+
     public function CurrentBidPrice(Request $req)
     {
         $tmp = DB::table('aution_price')->select('product_id',DB::raw("MAX(aution_price) as aution_price"))
@@ -220,8 +220,8 @@ class ProductAPI extends Controller
             {
                 if($req->realBidPrice >= $productItem->product_start_price)
                 {
-                    DB::insert("insert into aution_price(customer_id, product_id, aution_price, aution_day,aution_status) values (?,?,?,?,?)", 
-                    [$req->customerId, $req->productId, $req->realBidPrice, $req->auctionDay,1]);  
+                    DB::insert("insert into aution_price(customer_id, product_id, aution_price, aution_day,aution_status) values (?,?,?,?,?)",
+                    [$req->customerId, $req->productId, $req->realBidPrice, $req->auctionDay,1]);
                     return 1;
                 }
             }
@@ -233,15 +233,15 @@ class ProductAPI extends Controller
                 {
                     AuctionPrice::where('product_id',$req->productId)->update(['aution_status'=>0]);
 
-                    DB::insert("insert into aution_price(customer_id, product_id, aution_price, aution_day,aution_status) values (?,?,?,?,?)", 
-                    [$req->customerId, $req->productId, $req->realBidPrice, $req->auctionDay,1]);  
+                    DB::insert("insert into aution_price(customer_id, product_id, aution_price, aution_day,aution_status) values (?,?,?,?,?)",
+                    [$req->customerId, $req->productId, $req->realBidPrice, $req->auctionDay,1]);
                     return 1;
                 }
             }
         }
         return 0;
     }
-    
+
     public function ChangeProductStatus(Request $request)
     {
         $product = Product::select()->where('product_id', $request->product_id)->get();
@@ -261,7 +261,7 @@ class ProductAPI extends Controller
             $productItem = $item;
         }
         if(count($products) > 0){
-            
+
             Product::select()->where('product_id',$request->product_id)
                                     ->update(['product_name'=>$request->product_name,
                                     'category_id'=>$request->category_id,
@@ -275,17 +275,17 @@ class ProductAPI extends Controller
     }
     public function UpComingProducts()
     {
-        return DB::select("select * from product p join category c 
+        return DB::select("select * from product p join category c
         on (p.category_id = c.category_id)
-        where p.product_status = 1 and convert(datetime, product_start_aution_day, 120) > getdate() 
+        where p.product_status = 1 and convert(datetime, product_start_aution_day, 120) > getdate()
         order by p.product_start_aution_day");
     }
 
     public function EndingSoonProducts()
     {
-        return DB::select("select * from product p join category c 
+        return DB::select("select * from product p join category c
         on (p.category_id = c.category_id)
-        where p.product_status = 1 and convert(datetime, product_end_aution_day, 120) > getdate() 
+        where p.product_status = 1 and convert(datetime, product_end_aution_day, 120) > getdate()
         order by p.product_end_aution_day
         ");
     }
@@ -297,7 +297,7 @@ class ProductAPI extends Controller
         ,p.product_img_name2,p.product_img_name3,p.product_start_price,p.product_start_aution_day,p.product_end_aution_day,c.category_name from product p
         join category c on (p.category_id = c.category_id)
         join aution_price ap on(p.product_id = ap.product_id)
-        where p.product_status = 1 and convert(datetime, product_end_aution_day, 120) > getdate() 
+        where p.product_status = 1 and convert(datetime, product_end_aution_day, 120) > getdate()
         group by p.product_id,p.product_name,p.category_id,p.owner_id, c.category_name,
         p.product_information,p.product_ingredients,p.product_instruction_store,p.product_thumbnail_img_name,p.product_img_name1
         ,p.product_img_name2,p.product_img_name3,p.product_start_price,p.product_start_aution_day,p.product_end_aution_day
@@ -319,9 +319,9 @@ class ProductAPI extends Controller
             ->where('product_start_aution_day','<=',$date)
             ->where('product_end_aution_day','>=',$date)
             ->get();
-            return $product;      
+            return $product;
         }
-        
+
         return $product;
     }
 

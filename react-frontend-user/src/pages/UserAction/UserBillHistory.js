@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component, useState } from "react";
+import { Link } from "react-router-dom";
 
 function UserBillHistory({ billHistory }) {
   function Search() {
@@ -8,6 +9,30 @@ function UserBillHistory({ billHistory }) {
     });
   }
   let i = 1;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  if(currentPage > 1)
+  {
+    i = 1;
+  }
+  const productsPerPage = 10;
+
+  const indexOfLastPage = currentPage * productsPerPage;
+  const indexOfFirstPage = indexOfLastPage - productsPerPage;
+  const currentProducts = billHistory.slice(
+    indexOfFirstPage,
+    indexOfLastPage
+  );
+
+  let pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(billHistory.length / productsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  const paginate = (number) => {
+    setCurrentPage(number);
+  };
+
   if (billHistory.length <= 0) {
     return (
       <div className="container">
@@ -52,19 +77,34 @@ function UserBillHistory({ billHistory }) {
                 </tr>
               </thead>
               <tbody id="bill-records">
-                {billHistory.map((bh, index) => {
+                {currentProducts.map((bh, index) => {
                   return (
                     <tr key={index}>
-                      <td>{i++}</td>
+                      <td>{(currentPage - 1) * 10 + i++}</td>
                       <td>{bh.payment_mode_id}</td>
-                      <td>{bh.bill_payment}</td>
-                      <td>{bh.product_name}</td>
-                      <td>{bh.bill_date}</td>
+                      <td>$ {parseInt(bh.aution_price).toLocaleString()}</td>
+                      <td>{bh.product_name ? bh.product_name.replace(/-/g," ") : null}</td>
+                      <td>{new Date(bh.bill_date).toLocaleString()}</td>
                     </tr>
                   );
                 })}
               </tbody>
             </table>
+          </div>
+          <div className="col-md-10" style={{ padding: "0px", margin: "0px" }}>
+            <ul className="pagination">
+              {pageNumbers.map((number, index) => (
+                <li key={index} className="page-item">
+                  <Link
+                    to="#"
+                    className="page-link"
+                    onClick={() => paginate(number)}
+                  >
+                    {number}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
