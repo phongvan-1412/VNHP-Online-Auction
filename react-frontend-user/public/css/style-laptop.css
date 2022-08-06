@@ -1174,7 +1174,10 @@
 .content{
     font-size: 13px;
 }
-
+/* ---------------TERM & POLICY--------------- */
+.term-wrapper{
+    margin: 50px auto;
+}
 /* ---------------PRODUCT--------------- */
 /* ----------Wrapcrumb---------- */
 .wrap-breadcrumb{
