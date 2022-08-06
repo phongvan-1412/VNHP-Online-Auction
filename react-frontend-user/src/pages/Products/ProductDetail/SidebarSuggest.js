@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GiNextButton, GiPreviousButton} from 'react-icons/gi'
 
-import ProductDetailItemSlide from "./ProductDetailItemSlide";
+import ProductSuggestSideBar from "./ProductSuggestSideBar";
 
 
 const SidebarSuggest = ({ products }) => {
@@ -19,7 +19,7 @@ const SidebarSuggest = ({ products }) => {
     ref.current.slickPrev();
   };
    
-  const settings = { dots: false, infinite: false, speed: 500, slidesToShow: 1, rows: 3, slidesToScroll: 1, arrows: false };
+  const settings = { dots: false, infinite: false, speed: 500, slidesToShow: 1, rows: 3, slidesToScroll: 1, arrows: false};
 
     return (
       <div className="sidebar-suggest-wrapper">
@@ -34,7 +34,7 @@ const SidebarSuggest = ({ products }) => {
             <Slider ref={ref} {...settings}>
               {products.map((product) => (
                 <div className="product-grid-wrapper" key={product.product_id}>
-                  <ProductDetailItemSlide product={product}/>
+                  <ProductSuggestSideBar product={product}/>
                 </div>
               ))}
           </Slider>

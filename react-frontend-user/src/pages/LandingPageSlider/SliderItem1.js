@@ -83,6 +83,7 @@ const SliderItem1 = ({ product, updateComingProducts }) => {
           {product.product_name.replace(/-/g, " ")}
         </Link>
       </div>
+
       <div className="product-metapane-wrapper">
         <div className="product-price">
           <span className="product-price-headtext">Start Price:</span>
