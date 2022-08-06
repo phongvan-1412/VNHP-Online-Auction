@@ -177,7 +177,7 @@ const Products = ({ products, category, categories }) => {
             </div>
             {/* display-products  */}
 
-            <div className="col-md-10">
+            <div className="col-md-10 display-products-wrapper">
               <div className="row">
                 {currentProducts.map((product,index) => {
                   return (

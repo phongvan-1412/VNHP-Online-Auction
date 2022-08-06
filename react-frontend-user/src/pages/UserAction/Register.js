@@ -339,9 +339,9 @@ class Register extends Component {
         <div className="col-xl-5 col-lg-4 col-md-4 register-img-form">
           <img
             id="register-img"
-            src={require("../../img/Footer/image-9.jpg")}
+            src={require(`../../img/Login-Register/Login4.jpg`)}
           />
-          <img id="overlay" src={require("../../img/Footer/image-8.jpg")} />
+          <img id="overlay" src={require(`../../img/Login-Register/Register1.jpg`)} />
         </div>
 
         <div className="col-xl-5 col-lg-6 col-md-8">

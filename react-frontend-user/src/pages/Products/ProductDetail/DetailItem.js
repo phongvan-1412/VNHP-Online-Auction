@@ -107,18 +107,12 @@ const DetailItem = ({ product,updateProduct }) => {
     }
   };
 
-  //CLEAR ANNOUCEMENT
-  // const onChange = () => {
-  //   $("#input-bidprice").val("") ;
-  // }
-
   return (
     <div className="row">
       <div className="col-md-6 product-detail-img-wrapper">
         <img
           className="product-detail-img"
-          src={require(`../../../../../LaravelAPI/public/ProductImg/${product.product_thumbnail_img_name}`)}
-        />
+          src={ "http://localhost:8000/ProductImg/" + product.product_thumbnail_img_name}/>
       </div>
 
       <div className="col-md-6 product-detail-info-wrapper">

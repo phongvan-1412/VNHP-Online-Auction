@@ -205,15 +205,15 @@ class Login extends Component {
           <Slider ref={(c) => (this.slider = c)} {...settings}>
             <img
               className="page-content row-panel-img"
-              src={require(`../../img/Footer/image-1.jpg`)}
+              src={require(`../../img/Login-Register/Login5.jpg`)}
             />
             <img
               className="page-content row-panel-img"
-              src={require(`../../img/Footer/image-2.jpg`)}
+              src={require(`../../img/Login-Register/Register4.jpg`)}
             />
             <img
               className="page-content row-panel-img"
-              src={require(`../../img/Footer/image-3.jpg`)}
+              src={require(`../../img/Login-Register/Login6.jpg`)}
             />
           </Slider>
         </div>

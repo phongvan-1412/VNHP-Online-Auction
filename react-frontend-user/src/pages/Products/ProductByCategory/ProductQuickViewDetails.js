@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
     setVerticalState(index);
   };
   return (
-    <div className="container mb-5 product-detail-item-more-info" style={{ margin: "0px", padding: "0px" }}>
+    <div className="container mb-5 product-quickview-item-more-info" style={{ margin: "0px", padding: "0px" }}>
           <div className="card-box">
             <div className="row">
               <div
@@ -55,21 +55,6 @@ import { Link } from "react-router-dom";
                       verticalState === 3 ? "nav-link active show" : "nav-link"
                     }
                     onClick={() => verticalTab(3)}
-                    id="product-instructions-tab"
-                    data-toggle="pill"
-                    to="#product-instructions"
-                    role="tab"
-                    aria-controls="product-instructions"
-                    aria-selected="false"
-                  >
-                    INSTRUCTIONS FOR USE
-                  </Link>
-
-                  <Link
-                    className={
-                      verticalState === 4 ? "nav-link active show" : "nav-link"
-                    }
-                    onClick={() => verticalTab(4)}
                     id="product-storage-instructions-tab"
                     data-toggle="pill"
                     to="#product-storage-instructions"
@@ -103,15 +88,6 @@ import { Link } from "react-router-dom";
 
                   <div
                     className={verticalState === 3 ? "tab-pane fade active show" : "tab-pane fade"}
-                    id="product-instructions"
-                    role="tabpanel"
-                    aria-labelledby="product-instructions-tab"
-                  >
-                    <span>{product.product_instruction_use}</span>
-                  </div>
-
-                  <div
-                    className={verticalState === 4 ? "tab-pane fade active show" : "tab-pane fade"}
                     id="product-storage-instructions"
                     role="tabpanel"
                     aria-labelledby="product-storage-instructions-tab"
