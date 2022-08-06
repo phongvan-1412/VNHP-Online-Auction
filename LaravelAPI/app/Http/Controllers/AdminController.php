@@ -73,6 +73,7 @@ class AdminController extends Controller
         $admins = Admin::select()->where('emp_email',$request->email)->get();
         if(count($admins) > 0){
             Admin::select()->where('emp_email',$request->email)->update([
+                'emp_email'=>$request->email,
                 'emp_name'=> $request->fullname,
                 'emp_contact'=>$request->phonenumber,
                 'emp_address'=>$request->address,
