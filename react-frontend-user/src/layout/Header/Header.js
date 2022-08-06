@@ -76,17 +76,14 @@ const Header = ({ userinfo, categories }) => {
         <Link to="/about" replace className="about">
           About
         </Link>
-        {/* <Link to="/blog" replace className="blog">
-              Blog
-            </Link> */}
 
         <Link to="/contactus" replace className="contact">
           Contact
         </Link>
 
-        {/* <Link to="#" replace className="needhelp">
+        <Link to="/termandpolicy" replace className="needhelp">
           Needhelp
-        </Link> */}
+        </Link>
 
         <Link to="#" className="product" replace>
           Product

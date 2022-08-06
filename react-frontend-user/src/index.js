@@ -11,6 +11,8 @@ import Header from "./layout/Header/Header";
 //Side Pages
 import About from "./pages/AboutUs/About";
 import Contact from "./pages/Contact/Contact";
+import TermAndPolicy from "./pages/TermAndPolicy/TermAndPolicy";
+
 //Product
 import LandingPage from "./pages/LandingPageSlider/LandingPage";
 import ProductByCategory from "./pages/Products/ProductByCategory/ProductByCategory";
@@ -184,7 +186,7 @@ class HomePage extends Component {
           {/* <Route path="/paymentgateway" element={ <PayPals />}></Route> */}
           <Route path="/paymentgateway/:billid" element={<PayPals />}></Route>
 
-          {/* <Route path="/term-and-policy" element={<TermAndPolicy />}></Route>  */}
+          <Route path="/termandpolicy" element={<TermAndPolicy />}></Route> 
 
           {/* LandingPage  */}
           <Route
