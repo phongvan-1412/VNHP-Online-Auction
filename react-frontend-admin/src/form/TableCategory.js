@@ -10,6 +10,8 @@ class Category extends Component {
       CategoryData: [],
       categoryName: "",
       categoryPaginate: [],
+      currentCategory: {},
+      checkCategory: false,
     };
   }
   componentDidMount() {
@@ -42,21 +44,20 @@ class Category extends Component {
     let i = 1;
 
     const updateCategoryTable = () => {
-      fetch("http://127.0.0.1:8000/api/addcategorytable", {
-        method: "GET",
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          this.setState({
-            CategoryData: response,
-          });
+      const self = this;
+      axios
+        .post(`http://127.0.0.1:8000/api/paginatecategorytable`, {
+          paginate: 1,
         })
-        .catch((err) => {
-          console.log(err);
+        .then(function (response) {
+          self.setState({
+            CategoryData: response.data,
+          });
         });
     };
+
     const onPaginate = (e) => {
-      console.log(e.target.value)
+      console.log(e.target.value);
       const self = this;
       axios
         .post(`http://127.0.0.1:8000/api/paginatecategorytable`, {
@@ -93,7 +94,12 @@ class Category extends Component {
         });
     };
     const onEditClick = (e) => {
-      this.setState({ categoryName: e.target.value.replace(/-/g, " ") });
+      this.state.CategoryData.map((category) => {
+        if (category.category_id == e.target.value) {
+          this.setState({ currentCategory: category });
+          this.setState({ categoryName: e.target.value });
+        }
+      });
     };
 
     let checkImg = false;
@@ -111,24 +117,60 @@ class Category extends Component {
       }
     };
 
+    const onCategoryNameBlur = (e) => {
+      const category_name = e.target.value.trim().replace(/ /g, "-");
+      const result = $("#check-edit-category-result");
+      const self = this;
+      axios
+        .post("http://127.0.0.1:8000/api/checkexistscategory", {
+          category_name,
+        })
+        .then(function (response) {
+          if (response.data > 0) {
+            result.text("Category name already exists");
+            result.css("color", "red");
+            self.state.checkCategory = false;
+          } else {
+            if (category_name != "" && category_name.length <= 200) {
+              result.text("");
+              self.state.checkCategory = true;
+            } else {
+              result.text("error: max length 200 character");
+              result.css("color", "red");
+              self.state.checkCategory = false;
+            }
+          }
+        });
+    };
+
     const onSaveEditClick = () => {
-      const category_name = this.state.categoryName.replace(/ /g, "-");
+      const category_id = this.state.categoryName;
+      const category_name = $("#category_edit_name").val().replace(/ /g, "-");
       const fileImg = $("#edit-img-category").prop("files")[0];
-      const img_extension = "." + fileImg.name.split(".")[1];
+
+      let img_extension = "";
+      if (fileImg == null) {
+        img_extension = "";
+      } else {
+        img_extension = "." + fileImg.name.split(".")[1];
+      }
       const category_status = $("#edit-category-check-box").prop("checked");
 
       let formData = new FormData();
       formData.set("category_img", fileImg);
       formData.set("img_extension", img_extension);
+      formData.set("category_id", category_id);
       formData.set("category_name", category_name);
       formData.set("category_status", category_status);
 
       axios
         .post(`http://127.0.0.1:8000/api/updatecategory`, formData)
         .then(function (response) {
+          console.log(response.data)
           if (response.data > 0) {
             $("#edit-category-result").text("Update category succesfull.");
             $("#edit-category-result").css("color", "green");
+            updateCategoryTable();
           } else {
             $("#edit-category-result").text("Update category fail.");
             $("#edit-category-result").css("color", "red");
@@ -225,7 +267,7 @@ class Category extends Component {
                               data-toggle="modal"
                               data-target="#con-close-modal1"
                               id="btn-edit-category"
-                              value={h.category_name}
+                              value={h.category_id}
                               onClick={onEditClick}
                               style={{ color: "white" }}
                             >
@@ -268,9 +310,18 @@ class Category extends Component {
                                           <input
                                             className="form-control"
                                             id="category_edit_name"
-                                            value={this.state.categoryName}
-                                            disabled
+                                            onBlur={onCategoryNameBlur}
+                                            defaultValue={
+                                              this.state.currentCategory
+                                                .category_name
+                                                ? this.state.currentCategory.category_name.replace(
+                                                    /-/g,
+                                                    " "
+                                                  )
+                                                : null
+                                            }
                                           />
+                                          <div id="check-edit-category-result"></div>
                                         </div>
                                         <div className="form-group">
                                           <label
@@ -301,8 +352,11 @@ class Category extends Component {
                                       <input
                                         type="submit"
                                         className="btn btn-info waves-effect waves-light"
+                                        name={
+                                          this.state.currentCategory.category_id
+                                        }
                                         onClick={onSaveEditClick}
-                                        value="Save Edit"
+                                        value="Save"
                                       />
                                     </div>
                                   </div>
@@ -318,7 +372,13 @@ class Category extends Component {
               </table>
               {this.state.categoryPaginate.map((paginate, index) => {
                 return (
-                  <button key={index} value={paginate} onClick={onPaginate}>
+                  <button
+                    className="btn btn-outline-dark align-center
+                  "
+                    key={index}
+                    value={paginate}
+                    onClick={onPaginate}
+                  >
                     {paginate}
                   </button>
                 );

@@ -37,7 +37,7 @@ class TableProduct extends Component {
         });
       });
 
-    fetch("http://127.0.0.1:8000/api/selectcategories", { method: "GET" })
+    fetch("http://127.0.0.1:8000/api/selectallcategories", { method: "GET" })
       .then((categories) => categories.json())
       .then((categories) => {
         this.setState({ categories: categories });
@@ -344,14 +344,17 @@ class TableProduct extends Component {
                                         <select
                                           className="form-control"
                                           onChange={categoryOnChange}
-                                        >
-                                          <option>
-                                            {this.state.currentCategory
+                                          defaultVal={
+                                            this.state.currentCategory
                                               ? this.state.currentCategory.replace(
                                                   /-/g,
                                                   " "
                                                 )
-                                              : "Please choose category ..."}
+                                              : "Please choose category ..."
+                                          }
+                                        >
+                                          <option disabled>
+                                            {"Please choose category ..."}
                                           </option>
                                           {this.state.categories.map(
                                             (category, index) => {
@@ -468,7 +471,13 @@ class TableProduct extends Component {
               </table>
               {this.state.productPaginate.map((paginate, index) => {
                 return (
-                  <button key={index} value={paginate} onClick={onPaginate}>
+                  <button
+                    className="btn btn-outline-dark align-center
+                  "
+                    key={index}
+                    value={paginate}
+                    onClick={onPaginate}
+                  >
                     {paginate}
                   </button>
                 );
