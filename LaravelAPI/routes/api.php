@@ -59,6 +59,7 @@ Route::post('/filterproductselect',[ProductAPI::class,'FilterProductSelect']);
 
 //feedback
 Route::post('/addcomment',[FeedbackAPI::class,'AddComment']);
+Route::post('/addfeedback',[FeedbackAPI::class,'AddFeedback']);
 Route::get('/showcomment',[FeedbackAPI::class,'ShowComment']);
 
 //BILL

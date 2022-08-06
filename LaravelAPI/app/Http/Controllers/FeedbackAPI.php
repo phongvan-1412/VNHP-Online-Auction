@@ -25,6 +25,20 @@ class FeedbackAPI extends Controller
         ->get();
     }
 
+    public function AddFeedback(Request $request){
+        $newFeedback = new Feedback();
+        $newFeedback->customer_id =  $request->customer_id;
+        $newFeedback->feedback_content =  $request->feedback_content;
+        $newFeedback->feedback_date =  $request->feedback_date;
+
+        $newFeedback->save();
+
+        return Feedback::select()->where('feedback_content', $request->feedback_content)
+        ->where('customer_id', $request->customer_id)
+        ->where('feedback_date', $request->feedback_date)
+        ->get();
+    }
+
     //Show Comment
     public function ShowComment(){
         $feedbacks = DB::select("select f.product_id, ca.customer_img_name, ca.customer_name, f.feedback_date, f.feedback_content from customer_account ca join feedback f

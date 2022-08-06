@@ -1,9 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from 'react-router-dom';
+import axios from "axios";
+
 import { BsClockFill } from 'react-icons/bs';
 import { MdLocationOn } from 'react-icons/md';
 import { FaPhoneAlt } from 'react-icons/fa';
 
 const Contact = () => {
+    const [feedback_content, setFeedbackContent] = useState("");
+    const result = $("#result")
+
+    const setTime = () => {
+        $("#result").text("")
+    }
+    const onKeyUp = (e) => {
+        const feedbackContent = e.target.value;
+        
+        if(feedbackContent.length > 0){
+            setFeedbackContent(feedbackContent);
+        }
+    }
+
+    const onClick = (e) => {
+        const click = e.target.name;
+
+        if (click === "submit") {
+            if (JSON.parse(localStorage.getItem("customer_info")) == null) {
+                result.text("Please login before comment.");
+                result.css("color", "red");
+                setInterval(setTime, 5000)
+                return;
+            }
+            
+            const customer_id = JSON.parse(localStorage.getItem("customer_info")).customer_id;
+
+            if (customer_id == null){
+                result.text("You have to login first");
+            }
+            const feedback_date = new Date().toLocaleString();
+
+            const feedback = {  feedback_content, customer_id, feedback_date }
+           
+
+            axios
+                .post("http://127.0.0.1:8000/api/addfeedback", feedback)
+                .then(function (response) {
+                    if (response.data.length > 0) {
+                        result.css("color", "green");
+                        alert("Your response was recorded.");
+                        $("#message-text").val("");
+                        setInterval(setTime, 3000);
+                    } else {
+                        result.text("Please try again.");
+                        result.css("color", "red");
+                    }
+                });
+        }
+    }
     return(
         <div className="row contact-wrapper" style={{margin: "0px", padding: "0px"}}>
             <div className="col-md-1" style={{margin: "0px", padding: "0px"}}></div>
@@ -16,27 +69,15 @@ const Contact = () => {
 
         
                 <div className="contact-send-massage">
-                    <div className="message">SEND US A MESSAGE</div>
+                    
                     <div className="form">
-                        <div className="message-info">
-                            <div className="name">
-                                <span>Name</span>
-                                <input type="text" placeholder="Name" />
-                            </div>
-                            <div className="email">
-                                <span>Email</span>
-                                <input type="email" placeholder="Email" />
-                            </div>
-                            <div className="phone">
-                                <span>Phone</span>
-                                <input type="text" placeholder="Phone" />
-                            </div>
-                        </div>
+                        <div className="message">SEND US A MESSAGE</div>
                         <div className="message-content">
                             <span>Message</span>
-                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                            <span id="result"></span>
+                            <textarea name="feedback" id="message-text" cols="30" rows="10" placeholder="Tell us what you think..." onKeyUp={onKeyUp}></textarea>
                         </div>
-                        <button type="submit">SUBMIT</button>
+                        <button type="submit" name="submit" onClick={onClick}>SUBMIT</button>
                     </div>
                 </div>
 
@@ -66,10 +107,16 @@ const Contact = () => {
                         </div>
                     </div>
                 </div>
+
+                
   
             </div>
-
             <div className="col-md-1" style={{margin: "0px", padding: "0px"}}></div>
+            <div className="about-register">
+            <div className="register-content">SPECIALS SIGN UP</div>
+                <input type="email" name="email" id="email" placeholder="Enter your email" />
+                <Link to="./register">SIGN-UP</Link>
+            </div>
         </div>
     );
 }

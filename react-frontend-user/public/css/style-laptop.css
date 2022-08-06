@@ -1071,7 +1071,7 @@
     position: relative !important;
     margin-top: 20px !important;
     text-align: center !important;
-    margin-bottom: 100px !important;
+    margin-bottom: 50px !important;
 }
 .embed-responsive-item{
     width: 1000px;
@@ -1122,6 +1122,10 @@
 .message-content{
     display: grid;
     grid-template-rows: 25px, 250px;
+}
+.message-content textarea::placeholder{
+    padding-left: 10px;
+    padding-top: 5px;
 }
 .message-content>textarea{
     width: 1000px;

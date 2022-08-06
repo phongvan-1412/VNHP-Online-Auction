@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 
 import AboutStory from "./AboutStory";
@@ -39,12 +38,6 @@ class About extends Component {
             </Slider>
 
             <AboutFounder />
-
-            <div className="about-register">
-                <div className="register-content">SPECIALS SIGN UP</div>
-                <input type="email" name="email" id="email" placeholder="Enter your email" />
-                <Link to="../register">SIGN-UP</Link>
-            </div>
         </div>
       )
     }
