@@ -35,7 +35,16 @@ class ProductAPI extends Controller
         from product p 
         join category c on (p.category_id = c.category_id) 
         join customer_account ca on (p.owner_id = ca.customer_id)
+        where p.product_status = 1 and c.category_status = 1 and
+
+		p.product_id not in (select p.product_id
+        from product p 
+        join category c on (p.category_id = c.category_id) 
+        join customer_account ca on (p.owner_id = ca.customer_id)
+        join aution_price ap on (p.product_id = ap.product_id)
         where p.product_status = 1 and c.category_status = 1
+        )
+
         order by p.product_end_aution_day");
         return $tmp_products;
     }
