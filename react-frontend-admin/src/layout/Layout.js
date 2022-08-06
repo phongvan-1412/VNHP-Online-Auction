@@ -9,7 +9,6 @@ import TableProduct from '../form/TableProduct';
 import TableCategory from '../form/TableCategory';
 import AdminProfile from "../components/Profile/AdminProfile";
 import Customer from "../components/Customer/Customer";
-import Feedback from "../components/Feedback/Feedback";
 import Feedbacks from "../components/Feedback/Feedbacks";
 import "../css/admin1.css";
 import "../css/sb-admin-2.min.css";

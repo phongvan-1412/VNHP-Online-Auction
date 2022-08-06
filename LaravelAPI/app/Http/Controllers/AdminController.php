@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Customer;
+use App\Models\Product;
 use File;
+use Illuminate\Support\Facades\DB;
+
 
 class AdminController extends Controller
 {
@@ -32,7 +36,7 @@ class AdminController extends Controller
     public function Logout(Request $request)
     {
         $admin = Admin::select()->where('emp_id', $request->emp_id)->get();
-        
+
         if(count($admin) > 0)
         {
             Admin::where('emp_id', $request->emp_id)->update(['emp_login_status'=>0]);
@@ -80,7 +84,7 @@ class AdminController extends Controller
                 return $Admin;
             }
         }else{
-            return 0; 
+            return 0;
         }
     }
 
@@ -99,8 +103,39 @@ class AdminController extends Controller
             return 0;
         }
 
-        
-
     }
-    
+    public function AddCustomerTable(){
+        $customer = Customer::select()->get();
+        $paginate = [];
+
+        for($i = 1; $i <= count($customer)/10 + 1; $i++){
+            $paginate[] = $i;
+        }
+        return $paginate;
+    }
+    public function PaginateCustomerTable(Request $request){
+        $customers = Customer::select()->get();
+        $currentCustomer = [];
+        $tmp = 1;
+        if($request->paginate > count($customers)/10){
+            foreach($customers as $customer){
+                $currentCustomer[] = $customers;
+                if(count($currentCustomer) > $tmp){
+                    break;
+                }
+            }
+        }else{
+            $tmp = $request->paginate*10;
+            $getCustomer = DB::select("Select top".$tmp." * from customer order by customer_id desc");
+
+            foreach(array_reverse($getCustomer) as $product){
+                $currentProducts[] = $product;
+                if(count($currentCustomer) >= 10){
+                    break;
+                }
+            }
+        }
+        return array_reverse($currentCustomer);
+    }
+
 }

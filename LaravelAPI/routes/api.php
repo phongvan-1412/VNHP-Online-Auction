@@ -103,12 +103,14 @@ Route::get('/getaccount',[AdminController::class, 'Getaccount']);
 // BILL
 Route::get('/selectbill',[BillApi::class, 'SelectBill']);
 Route::post('/insertbill',[BillApi::class, 'InsertBill']);
- 
-//CUSTOMER 
+
+//CUSTOMER
 Route::get('/customerdata',[BillApi::class, 'CustomerData']);
 Route::get('/customerhistorydata',[BillApi::class, 'CustomerHistoryData']);
+Route::get('/addcustomertable',[AdminController::class,'AddCustomerTable']);
+Route::post('/paginatecustomertable',[AdminController::class,'PaginateCustomerTable']);
 
-//FEEDBACK 
+//FEEDBACK
 Route::get('/showfeedback',[FeedbackAPI::class, 'ShowFeedback']);
 Route::get('/producthasfeedback',[FeedbackAPI::class, 'ProductHasFeedback']);
 //CHART
