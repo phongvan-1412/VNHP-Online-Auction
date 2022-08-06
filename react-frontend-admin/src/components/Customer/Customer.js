@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import "../../css/customer.css";
+import axios from "axios";
 class Customer extends Component {
   constructor(props) {
     super(props);
@@ -8,10 +9,34 @@ class Customer extends Component {
       CustomerData: [],
       HistoryData: [],
       DetailAution: [],
-      DetailPayment: []
+      DetailPayment: [],
+      CustomerPaginate: [],
+      Customer: []
     };
   }
   componentDidMount() {
+    fetch("http://127.0.0.1:8000/api/addcustomertable", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({
+          CustomerPaginate: response,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    const self = this;
+    axios
+      .post(`http://127.0.0.1:8000/api/paginatecustomertable`, { paginate: 1 })
+      .then(function (response) {
+        self.setState({
+          Customer: response.data,
+          
+        });
+        console.log(response.data)
+      });
     fetch("http://127.0.0.1:8000/api/customerdata", {
       method: "GET",
     })
@@ -58,6 +83,18 @@ class Customer extends Component {
       });
       this.setState({ DetailPayment: payment });
       this.setState({ DetailAution: history });
+    };
+    const onPaginate = (e) => {
+      const self = this;
+      axios
+        .post(`http://127.0.0.1:8000/api/paginatecustomertable`, {
+          paginate: e.target.value,
+        })
+        .then(function (response) {
+          self.setState({
+            Customer: response.data,
+          });
+        });
     };
     return (
       <div className="container-fluid">
@@ -106,7 +143,7 @@ class Customer extends Component {
                   </tr>
                 </tfoot>
                 <tbody id="customerrecords">
-                  {this.state.CustomerData.map((p, index) => {
+                  {this.state.Customer.map((p, index) => {
                     return (
                       <tr id="record-hover">
                         <td className="align-middle" key={index}>
@@ -142,6 +179,13 @@ class Customer extends Component {
                   })}
                 </tbody>
               </table>
+                {this.state.CustomerPaginate.map((paginate, index) => {
+                  return (
+                    <button className="btn btn-outline-light" key={index} value={paginate} onClick={onPaginate}>
+                      {paginate}
+                    </button>
+                  );
+                })}
                 <div
                   className="modal fade bd-example-modal-lg"
                   tabIndex="-1"

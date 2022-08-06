@@ -30,6 +30,7 @@ Route::get('/selectcategories',[CategoryAPI::class, 'SelectCategories']);
 
 Route::post('/addcategory',[CategoryAPI::class,'AddCategory']);
 Route::get('/addcategorytable',[CategoryAPI::class,'AddCategoryTable']);
+Route::post('/paginatecategorytable',[CategoryAPI::class,'PaginateCategoryTable']);
 
 Route::post('/updatecategory',[CategoryAPI::class,'UpdateCategory']);
 Route::post('/changecategorystatus',[CategoryAPI::class,'UpdateCategoryStatus']);
@@ -103,12 +104,14 @@ Route::get('/getaccount',[AdminController::class, 'Getaccount']);
 // BILL
 Route::get('/selectbill',[BillApi::class, 'SelectBill']);
 Route::post('/insertbill',[BillApi::class, 'InsertBill']);
- 
-//CUSTOMER 
+
+//CUSTOMER
 Route::get('/customerdata',[BillApi::class, 'CustomerData']);
 Route::get('/customerhistorydata',[BillApi::class, 'CustomerHistoryData']);
+Route::get('/addcustomertable',[AdminController::class,'AddCustomerTable']);
+Route::post('/paginatecustomertable',[AdminController::class,'PaginateCustomerTable']);
 
-//FEEDBACK 
+//FEEDBACK
 Route::get('/showfeedback',[FeedbackAPI::class, 'ShowFeedback']);
 Route::get('/producthasfeedback',[FeedbackAPI::class, 'ProductHasFeedback']);
 //CHART

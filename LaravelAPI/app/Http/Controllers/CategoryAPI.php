@@ -40,10 +40,50 @@ class CategoryAPI extends Controller
     }
 
     // table add category
-    public function AddCategoryTable(){
-        $getcategory = Category::select()->orderBy('category_id','desc')->get();
-        return $getcategory;
+ 
 
+    public function AddCategoryTable(){
+        $products = Category::select()->get();
+        $paginate = [];
+
+        for($i = 1; $i <= count($products)/10 + 1;$i++ )
+        {
+            $paginate[] = $i;
+        }
+        return $paginate;
+    }
+
+    public function PaginateCategoryTable(Request $request)
+    {
+        $products = Category::select()->get();
+        $currentProducts = [];
+        $tmp = 1;
+        if($request->paginate > count($products)/10)
+        {
+            $tmp = (count($products)/10 - $request->paginate + 1) * 10;
+            foreach($products as $product){
+                $currentProducts[] = $product;
+                if(count($currentProducts) > $tmp)
+                {
+                    break;
+                }
+            }
+        }
+        else
+        {
+            $tmp = $request->paginate*10;
+            $getProduct = DB::select("select top ".$tmp." * from category order by category_id desc");
+    
+            foreach(array_reverse($getProduct) as $product){
+                $currentProducts[] = $product;
+                if(count($currentProducts) >= 10)
+                {
+                    break;
+                }
+            }
+        }
+        // return  response()->json(['data'=>array_reverse($currentProducts),'paginate'=>count($products)/10]);
+        return array_reverse($currentProducts);
     }
 
     public function CheckExistsCategory(Request $request)

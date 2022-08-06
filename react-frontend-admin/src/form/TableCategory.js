@@ -9,6 +9,7 @@ class Category extends Component {
     this.state = {
       CategoryData: [],
       categoryName: "",
+      categoryPaginate: [],
     };
   }
   componentDidMount() {
@@ -18,11 +19,22 @@ class Category extends Component {
       .then((response) => response.json())
       .then((response) => {
         this.setState({
-          CategoryData: response,
+          categoryPaginate: response,
         });
       })
       .catch((err) => {
         console.log(err);
+      });
+
+    const self = this;
+    axios
+      .post(`http://127.0.0.1:8000/api/paginatecategorytable`, {
+        paginate: 1,
+      })
+      .then(function (response) {
+        self.setState({
+          CategoryData: response.data,
+        });
       });
   }
 
@@ -43,6 +55,20 @@ class Category extends Component {
           console.log(err);
         });
     };
+    const onPaginate = (e) => {
+      console.log(e.target.value)
+      const self = this;
+      axios
+        .post(`http://127.0.0.1:8000/api/paginatecategorytable`, {
+          paginate: e.target.value,
+        })
+        .then(function (response) {
+          self.setState({
+            CategoryData: response.data,
+          });
+        });
+    };
+
     const onClick = (e) => {
       const category = {
         category_name: e.target.name,
@@ -115,6 +141,7 @@ class Category extends Component {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
       });
     }
+
     return (
       <div className="container-fluid">
         <button
@@ -289,10 +316,17 @@ class Category extends Component {
                   })}
                 </tbody>
               </table>
+              {this.state.categoryPaginate.map((paginate, index) => {
+                return (
+                  <button key={index} value={paginate} onClick={onPaginate}>
+                    {paginate}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
-        <AddCategory updateCategoryTable={updateCategoryTable}/>
+        <AddCategory updateCategoryTable={updateCategoryTable} />
       </div>
     );
   }
