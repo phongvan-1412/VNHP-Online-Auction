@@ -1755,9 +1755,13 @@
     font-weight: bold;
 }
 ---------------USERACTION---------------
+.slick-slider .slick-list .slick-track .slick-active{
+    display: none;
+  }
 .slick-slider .slick-list .slick-track .slick-cloned{
     display: none;
   }
+ 
   .form-waring-text {
     position: absolute;
   }

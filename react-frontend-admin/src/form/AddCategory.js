@@ -18,7 +18,7 @@ function AddCategory({updateCategoryTable}) {
           result.css("color", "red");
           checkCategory = false;
         } else {
-          if (category_name != "" && category_name.length <= 200) {
+          if (category_name != "" && category_name.length <= 100) {
             result.text("");
             checkCategory = true;
           } else {

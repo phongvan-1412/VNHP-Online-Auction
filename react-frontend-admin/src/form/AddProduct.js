@@ -134,7 +134,7 @@ function AddProduct({ categories }) {
       result.css("color", "red");
       validProductInfo = false;
     } else {
-      if (information.length >= 100 && information.length <= 4000) {
+      if (information.length >= 100 && information.length <= 2000) {
         result.text("");
         result.css("color", "green");
         validProductInfo = true;
@@ -604,7 +604,7 @@ function AddProduct({ categories }) {
                   <textarea
                     className="form-control"
                     id="input-information-product"
-                    placeholder="max 4000 character"
+                    placeholder="max 2000 character"
                     onBlur={onProductInfoOnBlur}
                   ></textarea>
                   <div id="product-info-check-result"></div>
@@ -618,7 +618,7 @@ function AddProduct({ categories }) {
                   <textarea
                     className="form-control "
                     id="input-ingredients-product"
-                    placeholder="max 4000 character"
+                    placeholder="max 2000 character"
                     onBlur={onIngredientOnBlur}
                   />
                 </div>
@@ -632,7 +632,7 @@ function AddProduct({ categories }) {
                   <textarea
                     className="form-control "
                     id="input-instruction-store-product"
-                    placeholder="max 4000 character"
+                    placeholder="max 2000 character"
                     onBlur={onInstructionStoreOnBlur}
                   />
                 </div>

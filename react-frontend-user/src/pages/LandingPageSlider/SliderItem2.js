@@ -4,8 +4,7 @@ import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import $ from "jquery";
 
 const SliderItem2 = ({ product }) => {
-  var countDownDate = new Date(product.product_end_aution_day).getTime();
-
+  var countDownDate = new Date(product.product_end_aution_day.substring(0,19).replace(/-/g,"/")).getTime();
   var slider3 = setInterval(function () {
     var productStartDate = product.product_start_aution_day;
     var productEndDate = product.product_end_aution_day;
@@ -53,7 +52,7 @@ const SliderItem2 = ({ product }) => {
     <div className="product-grid">
       <div className="product-item-countdownstart-wrapper">
         <span className="product-item-countdownstart-headtext">Auction Start Date: </span>
-        <span className="product-item-countdownstart-time">{product.product_start_aution_day}</span>
+        <span className="product-item-countdownstart-time">{product.product_start_aution_day.substring(0,19)}</span>
       </div>
 
       <div className="product-item-countdownend-wrapper">

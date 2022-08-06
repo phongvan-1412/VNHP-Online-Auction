@@ -1,11 +1,7 @@
 import React, { useRef, useEffect } from "react";
 // import { PayPalButton } from "react-paypal-button-v2";
 import axios from "axios";
-import {
-  PayPalScriptProvider,
-  PayPalButtons,
-  usePayPalScriptReducer,
-} from "@paypal/react-paypal-js";
+
 import ReactDOM from "react-dom";
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
@@ -47,7 +43,8 @@ const PayPal = ({ currentBill }) => {
           axios
             .post(`http://127.0.0.1:8000/api/paybill`, paymentDetail)
             .then(function (response) {
-                $('#payment-result').text("Payment successfully.");
+                $('#payment-result').text("Payment successfully.Redirect to Home.");
+                $('#payment-result').css('color','green')
                 setInterval(redirectToHome,10000)
             });
         }}

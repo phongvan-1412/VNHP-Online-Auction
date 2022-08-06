@@ -286,7 +286,7 @@ class ProductAPI extends Controller
     {
         return DB::select("select * from product p join category c
         on (p.category_id = c.category_id)
-        where p.product_status = 1 and convert(datetime, product_end_aution_day, 120) > getdate()
+        where p.product_status = 1  and convert(datetime, product_end_aution_day, 120) > getdate()
         order by p.product_end_aution_day
         ");
     }
