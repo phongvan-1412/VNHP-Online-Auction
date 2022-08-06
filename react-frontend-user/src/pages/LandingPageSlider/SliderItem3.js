@@ -14,10 +14,8 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
     var countDownEndDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
     var now = new Date().getTime();
 
-    var distance = countDownDate - now;
-
     // Find the distance between now and the count down date
-    var distance = countDownDate - now;
+    var distance = countDownEndDate - now;
 
     // Time calculations for days, hours, minutes and seconds
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
