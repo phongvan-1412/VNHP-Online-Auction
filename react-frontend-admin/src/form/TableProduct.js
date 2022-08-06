@@ -468,7 +468,13 @@ class TableProduct extends Component {
               </table>
               {this.state.productPaginate.map((paginate, index) => {
                 return (
-                  <button key={index} value={paginate} onClick={onPaginate}>
+                  <button
+                    className="btn btn-outline-dark align-center
+                  "
+                    key={index}
+                    value={paginate}
+                    onClick={onPaginate}
+                  >
                     {paginate}
                   </button>
                 );

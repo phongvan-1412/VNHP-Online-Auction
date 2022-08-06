@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\NameSetting as Name;
 use App\Models\Category;
-
+use File;
 class CategoryAPI extends Controller
 {
     public function SelectCategories()
@@ -96,6 +96,48 @@ class CategoryAPI extends Controller
         }
         return 0;
     }
+
+
+    public function UpdateCategory(Request $request)
+    {
+        $categories = Category::select()->where('category_id',$request->category_id)->get();
+        $category_name = time().'-'.'category'.$request->img_extension;
+        if(count($categories) > 0)
+        {
+            $tmp = '';
+            foreach($categories as $category)
+            {
+                $tmp = $category;
+            }
+            if($request->category_name == $tmp->category_name && $request->category_img_name != "")
+            {
+                File::delete(public_path('CategoryImg/'.$tmp->category_img_name));
+                $customer_avatar = $request->file('category_img');
+                $customer_avatar->move(public_path('CategoryImg'), $category_name);
+                Category::select()->where('category_id',$request->category_id)
+                                    ->update(['category_img_name'=>$category_name]);
+                return 1;
+            }
+            else if($request->category_img_name == "" && $request->category_name != $tmp->category_nam)
+            {
+                Category::select()->where('category_id',$request->category_id)
+                                    ->update(['category_name'=>$request->category_name]);
+                return 1;
+            }
+            else
+            {
+                File::delete(public_path('CategoryImg/'.$tmp->category_img_name));
+                $customer_avatar = $request->file('category_img');
+                $customer_avatar->move(public_path('CategoryImg'), $category_name);
+                Category::select()->where('category_id',$request->category_id)
+                                    ->update(['category_img_name'=>$category_name,
+                                                'category_name'=>$request->category_name]);
+                return 1;
+            }
+        }
+        return 0;
+    }
+    
 
     public function UpdateCategoryStatus(Request $request){
         $categories = Category::select()->where('category_name',$request->category_name)->get();
