@@ -17,7 +17,7 @@ class ProductAPI extends Controller
     {
         $tmp_products = DB::select("select p.product_id,p.product_end_aution_day,p.product_img_name1,p.product_img_name2,p.product_img_name3,p.product_information,
         p.product_ingredients,p.product_instruction_store,p.product_name,p.product_start_aution_day,p.product_start_price,p.product_status,p.product_thumbnail_img_name,
-        c.category_name,c.category_status,c.category_id,max(ap.aution_price) as current_bid
+        c.category_name,c.category_status,c.category_id,max(ap.aution_price) as current_bid,ca.customer_name
         from product p 
         join category c on (p.category_id = c.category_id) 
         join customer_account ca on (p.owner_id = ca.customer_id)
@@ -25,13 +25,13 @@ class ProductAPI extends Controller
         where p.product_status = 1 and c.category_status = 1
         group by p.product_id,p.product_end_aution_day,p.product_img_name1,p.product_img_name2,p.product_img_name3,p.product_information,
         p.product_ingredients,p.product_instruction_store,p.product_name,p.product_start_aution_day,p.product_start_price,p.product_status,p.product_thumbnail_img_name,
-        c.category_name,c.category_status,c.category_id
+        c.category_name,c.category_status,c.category_id,ca.customer_name
         
         union
         
         select p.product_id,p.product_end_aution_day,p.product_img_name1,p.product_img_name2,p.product_img_name3,p.product_information,
         p.product_ingredients,p.product_instruction_store,p.product_name,p.product_start_aution_day,p.product_start_price,p.product_status,p.product_thumbnail_img_name,
-        c.category_name,c.category_status,c.category_id,0
+        c.category_name,c.category_status,c.category_id,0,ca.customer_name
         from product p 
         join category c on (p.category_id = c.category_id) 
         join customer_account ca on (p.owner_id = ca.customer_id)
