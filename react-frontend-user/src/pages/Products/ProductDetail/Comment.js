@@ -102,9 +102,7 @@ const Comment = ({ productId, currentFeedback }) => {
         return (
           <div className="show-comment" key={index}>
             <div className="customer-avatar">
-              <img
-                src={require(`../../../../../LaravelAPI/public/UserImage/${itemFeedback.customer_img_name}`)}
-              />
+              <img src={"http://localhost:8000/UserImage/" + itemFeedback.customer_img_name}/>
             </div>
             <div className="customer-name">{itemFeedback.customer_name}</div>
             <div className="feedback-date">{itemFeedback.feedback_date}</div>

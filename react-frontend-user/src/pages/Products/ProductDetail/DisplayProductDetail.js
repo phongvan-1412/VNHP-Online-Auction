@@ -10,8 +10,7 @@ const DisplayProductDetail = ({ product, currentFeedback,updateProduct }) => {
   const verticalTab = (index) => {
     setVerticalState(index);
   };
-  // let verticalState = 1;
-  // const verticalTab = () => {};
+
   return (
     <div className="container product-detail-display" style={{ margin: "0px", padding: "0px" }}>
       <div className="product-detail-item-wrapper" style={{ margin: "0px", padding: "0px" }}>
