@@ -452,7 +452,7 @@ class Register extends Component {
               VNHP Aution will be used to create an account and will be subject
               to the VNHP Aution{" "}
               <Link
-                to="#"
+                to="/termandpolicy"
                 className="term-link"
                 style={{ textDecoration: "underline" }}
               >
@@ -460,7 +460,7 @@ class Register extends Component {
               </Link>{" "}
               and{" "}
               <Link
-                to="#"
+                to="/termandpolicy"
                 className="term-link"
                 style={{ textDecoration: "underline" }}
               >
