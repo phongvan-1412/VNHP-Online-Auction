@@ -1549,6 +1549,10 @@
     text-transform: uppercase;
     background-color: rgba(255, 255, 255, .6);
     color: var(--countdownColor);
+    opacity: 0;
+}
+#product-quick-view:hover{
+    opacity: 1;
 }
 #quickview-slider .slick-slider .slick-list .slick-track{
     width: 500px;
@@ -1747,7 +1751,7 @@
     color: var(--buttonColor);
     font-weight: bold;
 }
-/* ---------------USERACTION--------------- */
+---------------USERACTION---------------
 .slick-slider .slick-list .slick-track .slick-cloned{
     display: none;
   }
