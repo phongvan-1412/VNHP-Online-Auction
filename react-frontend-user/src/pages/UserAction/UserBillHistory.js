@@ -81,7 +81,7 @@ function UserBillHistory({ billHistory }) {
                   return (
                     <tr key={index}>
                       <td>{(currentPage - 1) * 10 + i++}</td>
-                      <td>{bh.payment_mode_id}</td>
+                      <td>{bh.payId}</td>
                       <td>$ {parseInt(bh.aution_price).toLocaleString()}</td>
                       <td>{bh.product_name ? bh.product_name.replace(/-/g," ") : null}</td>
                       <td>{new Date(bh.bill_date).toLocaleString()}</td>
