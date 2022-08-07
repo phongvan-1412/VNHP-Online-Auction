@@ -306,8 +306,10 @@ class ProductAPI extends Controller
     }
 
     public function FilterProductSelect(Request $request){
-    // { return $request->now;
-        $date = date("Y-m-d");
+
+        $date = date('Y-m-d H:i:s');
+        $newDate = Carbon::createFromFormat ('Y-m-d H:i:s', $date)->format ('Y/m/d H:i:s');
+
         if($request->option == 0){
             $product = Product::select()->where('category_id', $request->categoryId)->get();
             return $product;
@@ -316,9 +318,10 @@ class ProductAPI extends Controller
 
         if($request->option == 1){
             $product = Product::select()
+            ->where('product_status', 1)
             ->where('category_id', $request->categoryId)
-            ->where('product_start_aution_day','<=',$date)
-            ->where('product_end_aution_day','>=',$date)
+            ->where('product_start_aution_day','<=',$newDate)
+            ->where('product_end_aution_day','>=',$newDate)
             ->get();
             return $product;
         }

@@ -30,8 +30,8 @@ const Products = ({ products, category, categories }) => {
 
   //Filter by Date
   const [totalProducts, setTotalProducts] = useState(products);
-  const [categoryId, setCategoryId] = useState(category.category_id);
   const onChange = (e) => {
+    const categoryId = category.category_id;
     let option = e.target.value;
     axios
       .post("http://127.0.0.1:8000/api/filterproductselect", {
@@ -39,6 +39,7 @@ const Products = ({ products, category, categories }) => {
         categoryId,
       })
       .then(function (res) {
+        console.log(res.data)
         setTotalProducts(res.data);
       });
   };

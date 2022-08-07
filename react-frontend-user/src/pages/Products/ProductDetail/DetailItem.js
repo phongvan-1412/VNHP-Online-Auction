@@ -17,7 +17,6 @@ const DetailItem = ({ product,updateProduct }) => {
   }
   //COUNTDOWN
   var productEndDate = product.product_end_aution_day;
-  // var countDownDate = new Date(new Date("2022/08/04 20:48:00").toLocaleString()).getTime();
   var countDownDate = new Date(
     new Date(productEndDate).toLocaleString()
   ).getTime();

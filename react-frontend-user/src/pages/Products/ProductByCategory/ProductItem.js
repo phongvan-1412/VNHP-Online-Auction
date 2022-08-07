@@ -4,10 +4,13 @@ import axios from "axios";
 import $ from "jquery";
 
 const ProductItem = ({ product }) => {
-  console.log(product)
+
   //COUNTDOWN
-  var countDownStartDate = new Date(new Date(product.product_start_aution_day).toLocaleString()).getTime();
-  var countDownEndDate = new Date(new Date(product.product_end_aution_day).toLocaleString()).getTime();
+  var productStartDate = product.product_start_aution_day;
+  var productEndDate = product.product_end_aution_day;
+
+  var countDownStartDate = new Date(new Date(productStartDate).toLocaleString()).getTime();
+  var countDownEndDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
   var productNow = setInterval(function() {
     var now = new Date(new Date().toLocaleString()).getTime();
   
@@ -37,6 +40,7 @@ const ProductItem = ({ product }) => {
       axios
         .post("http://127.0.0.1:8000/api/changeproductstatus", {product_id, product_status})
         .then(function (response) {
+          
             });
         return;
 
