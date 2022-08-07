@@ -298,31 +298,30 @@ class ProductAPI extends Controller
         ,p.product_img_name2,p.product_img_name3,p.product_start_price,p.product_start_aution_day,p.product_end_aution_day,c.category_name from product p
         join category c on (p.category_id = c.category_id)
         join aution_price ap on(p.product_id = ap.product_id)
-        where p.product_status = 1 and convert(datetime, product_end_aution_day, 120) > getdate()
+        
+        where p.product_status = 1 and getdate() <= convert(datetime, product_end_aution_day, 120)
+        and getdate() >= convert(datetime, product_start_aution_day, 120)
+
         group by p.product_id,p.product_name,p.category_id,p.owner_id, c.category_name,
         p.product_information,p.product_ingredients,p.product_instruction_store,p.product_thumbnail_img_name,p.product_img_name1
         ,p.product_img_name2,p.product_img_name3,p.product_start_price,p.product_start_aution_day,p.product_end_aution_day
+
         order by count(ap.aution_id) desc");
     }
 
-    public function FilterProductSelect(Request $request){
-
-        $date = date('Y-m-d H:i:s');
-        $newDate = Carbon::createFromFormat ('Y-m-d H:i:s', $date)->format ('Y/m/d H:i:s');
-
+    public function FilterProductSelect(Request $request)
+    {
         if($request->option == 0){
-            $product = Product::select()->where('category_id', $request->categoryId)->get();
+            $product = Product::select()->where('product_status', 1)->where('category_id', $request->categoryId)->get();
             return $product;
-
         }
 
         if($request->option == 1){
-            $product = Product::select()
-            ->where('product_status', 1)
-            ->where('category_id', $request->categoryId)
-            ->where('product_start_aution_day','<=',$newDate)
-            ->where('product_end_aution_day','>=',$newDate)
-            ->get();
+            $category_id = $request->categoryId;
+            $product = DB::select("select * from product 
+            where product_status = 1 and category_id = ".$category_id."
+            and getdate() <= convert(datetime, product_end_aution_day, 120)
+            and getdate() >= convert(datetime, product_start_aution_day, 120)");
             return $product;
         }
 

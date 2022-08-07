@@ -9,7 +9,6 @@ import { Slider } from "@material-ui/core";
 import ProductView from "./ProductView";
 
 const Products = ({ products, category, categories }) => {
-
   //Filter by Price
   const [value, setVal] = useState([0, 20000]);
 
@@ -30,9 +29,12 @@ const Products = ({ products, category, categories }) => {
 
   //Filter by Date
   const [totalProducts, setTotalProducts] = useState(products);
-  const onChange = (e) => {
+
+  const onChangeFilter = (e) => {
+
     const categoryId = category.category_id;
     let option = e.target.value;
+
     axios
       .post("http://127.0.0.1:8000/api/filterproductselect", {
         option,
@@ -87,10 +89,7 @@ const Products = ({ products, category, categories }) => {
   };
 
   return (
-    <div
-      className="container-fluid"
-      style={{ padding: "0px", margin: "0px" }}
-    >
+    <div className="container-fluid" style={{ padding: "0px", margin: "0px" }}>
       <div className="row" style={{ padding: "0px", margin: "0px 30px" }}>
         <div className="container" style={{ padding: "0px", margin: "0px" }}>
           <div className="row">
@@ -124,7 +123,7 @@ const Products = ({ products, category, categories }) => {
                       className="list-style vertical-list list-limited"
                       data-show="6"
                     >
-                      {categoryItems.map((item,index) => {
+                      {categoryItems.map((item, index) => {
                         return (
                           <li className="list-item" key={index}>
                             <Link
@@ -166,7 +165,7 @@ const Products = ({ products, category, categories }) => {
                     <h2 className="widget-title">CUSTOM CHOICES</h2>
                     <div className="widget-content-date">
                       <div className="range-date">
-                        <select defaultValue="0" onChange={onChange}>
+                        <select defaultValue="0" onChange={onChangeFilter}>
                           <option value="0">All Products</option>
                           <option value="1">On Bidding</option>
                         </select>
@@ -180,9 +179,13 @@ const Products = ({ products, category, categories }) => {
 
             <div className="col-md-10 display-products-wrapper">
               <div className="row">
-                {currentProducts.map((product,index) => {
+                {currentProducts.map((product, index) => {
                   return (
-                    <ProductView key={index} product={product} products={products} />
+                    <ProductView
+                      key={index}
+                      product={product}
+                      products={products}
+                    />
                   );
                 })}
               </div>
@@ -198,7 +201,7 @@ const Products = ({ products, category, categories }) => {
 
           <div className="col-md-10" style={{ padding: "0px", margin: "0px" }}>
             <ul className="pagination">
-              {pageNumbers.map((number,index) => (
+              {pageNumbers.map((number, index) => (
                 <li key={index} className="page-item">
                   <Link
                     to="#"

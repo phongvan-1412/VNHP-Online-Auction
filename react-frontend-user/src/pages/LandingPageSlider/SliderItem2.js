@@ -13,6 +13,7 @@ const SliderItem2 = ({ product }) => {
   var countDownEndDate = new Date(
     new Date(productEndDate).toLocaleString()
   ).getTime();
+
   var slider2 = setInterval(function () {
     var now = new Date(new Date().toLocaleString()).getTime();
 
@@ -25,13 +26,16 @@ const SliderItem2 = ({ product }) => {
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     //SHOW ANNOUCEMENT PROUCT IS ON BIDDING
-    document.getElementById(
-      "bidding-annoucement" + product.product_id + product.product_name
-    )
-      ? (document.getElementById(
-          "bidding-annoucement" + product.product_id + product.product_name
-        ).innerHTML = "Product is on bidding")
-      : null;
+    if (countDownStartDate <= now && now <= countDownEndDate) {
+      document.getElementById(
+        "bidding-annoucement2" + product.product_id + product.product_name
+      )
+        ? (document.getElementById(
+            "bidding-annoucement2" + product.product_id + product.product_name
+          ).innerHTML = "Product is on bidding")
+        : null;
+    }
+
     if (
       document.getElementById(
         "slider2" + product.product_id + product.product_name

@@ -29,10 +29,10 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
     // SHOW ANNOUCEMENT PROUCT IS ON BIDDING
     if (countDownStartDate <= now && now <= countDownEndDate) {
       document.getElementById(
-        "bidding-annoucement" + product.product_id + product.product_name
+        "bidding-annoucement3" + product.product_id + product.product_name
       )
         ? (document.getElementById(
-            "bidding-annoucement" + product.product_id + product.product_name
+            "bidding-annoucement3" + product.product_id + product.product_name
           ).innerHTML = "Product is on bidding")
         : null;
     }
