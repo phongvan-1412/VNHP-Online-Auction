@@ -1,9 +1,6 @@
 import React, { useState, useRef } from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 import ProductItem from "./ProductItem";
 import ProductDetailItemSlide from "../ProductDetail/ProductDetailItemSlide";
@@ -28,7 +25,6 @@ const ProductView = ({ product, categories }) => {
     
       <Modal
         show={show}
-        onHide={() => setShow(false)}
         dialogClassName="modal-90w"
         aria-labelledby="example-custom-modal-styling-title"
         size="xl"

@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import $ from "jquery";
 import axios from "axios";
 
 function AddCategory({updateCategoryTable}) {
   let checkCategory = false;
   let checkCategoryImage = false;
-
 
   const onCategoryNameBlur = (e) => {
     const category_name = e.target.value.trim().replace(/ /g, "-");
@@ -47,7 +48,13 @@ function AddCategory({updateCategoryTable}) {
       checkCategoryImage = false;
     }
   };
-  const buttononclick = () => {
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const buttononclick = (e) => {
     const category_name = $("#input-add-category")
       .val()
       .trim()
@@ -99,79 +106,63 @@ function AddCategory({updateCategoryTable}) {
   };
 
   return (
-    <div
-      className="modal fade"
-      id="add-category-modal"
-      tabIndex="-1"
-      aria-labelledby="myLargeModalLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog modal-lg">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h4 className="modal-title" id="myLargeModalLabel">Add Category</h4>
-            <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-              aria-hidden="true"
-            >
-              ×
-            </button>
+    <div>
+      {/* <Button onClick={buttononclick} show={show}>
+          ADD CATEGORY
+      </Button>
+      <Modal
+        dialogClassName="modal-90w"
+        aria-labelledby="example-custom-modal-styling-title"
+        size="lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-custom-modal-styling-title">
+            
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          
+        </Modal.Body>
+      </Modal> */}
+      <Button variant="primary" onClick={handleShow}>
+        ADD CATEGORY
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>ADD CATEGORY</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <div>
+            <label>Category Name</label>     
+            <input className="form-control" id="input-add-category" placeholder="max length 200 character" onBlur={onCategoryNameBlur}/> 
+            <div id="check-category-result"></div>
           </div>
-          <div className="modal-body p-4">
-            <div className="row">
-              <div className="container">
-                <div id="add-category-result"></div>
-                <div className="form-group">
-                  <label
-                    className="control-lable admin-category-label"
-                    htmlFor="id"
-                  >
-                    Category Name
-                  </label>
-                  <input
-                    className="form-control"
-                    id="input-add-category"
-                    placeholder="max length 200 character"
-                    onBlur={onCategoryNameBlur}
-                  />
-                  <div id="check-category-result"></div>
-                </div>
-                <div className="form-group">
-                  <label
-                    className="control-lable admin-category-label"
-                    htmlFor="id"
-                  >
-                    Img
-                  </label>
-                  <input
-                    className="form-control"
-                    type="file"
-                    id="input-img-category"
-                    onChange={onCategoryImageChange}
-                  />
-                  <div id="check-img-result"></div>
-                </div>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                className="btn btn-secondary waves-effect"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <input
-                type="submit"
-                className="btn btn-info waves-effect waves-light"
-                onClick={buttononclick}
-                value="Create"
-              />
-            </div>
+
+          <div>
+            <label>Img</label>     
           </div>
-        </div>
-      </div>
+
+          <input className="form-control"
+                type="file"
+                id="input-img-category"
+                onChange={onCategoryImageChange}/>
+          <div id="check-img-result"></div>
+              
+        
+          <input
+            type="submit"
+            className="btn btn-info waves-effect waves-light"
+            onClick={buttononclick}
+            value="Create"
+          />
+        </Modal.Body>
+
+        <Modal.Footer>
+          
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

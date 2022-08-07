@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import AddCategory from "./AddCategory";
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
+
+import AddCategory from "./AddCategory";
 
 class Category extends Component {
   constructor(props) {
@@ -41,6 +43,7 @@ class Category extends Component {
   }
 
   render() {
+
     let i = 1;
 
     const updateCategoryTable = () => {
@@ -186,14 +189,8 @@ class Category extends Component {
 
     return (
       <div className="container-fluid">
-        <button
-          className="btn btn-success mb-3 "
-          data-toggle="modal"
-          data-target="#add-category-modal"
-        >
-          Add new
-        </button>
-
+        <AddCategory updateCategoryTable={updateCategoryTable} />
+    
         <div className="card shadow mb-4">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-primary">Category</h6>
@@ -232,7 +229,7 @@ class Category extends Component {
                           <img
                             className="imgcategory"
                             style={{ width: "100px", height: "100px" }}
-                            src={require(`../../../LaravelAPI/public/CategoryImg/${h.category_img_name}`)}
+                            src={h.category_img_name ? require(`../../../LaravelAPI/public/CategoryImg/${h.category_img_name}`)  : null}
                           />
                         </td>
                         <td>{h.category_name.replace(/-/g, " ")}</td>
@@ -386,7 +383,6 @@ class Category extends Component {
             </div>
           </div>
         </div>
-        <AddCategory updateCategoryTable={updateCategoryTable} />
       </div>
     );
   }

@@ -154,14 +154,7 @@ class TableProduct extends Component {
 
     return (
       <div className="container-fluid">
-        <button
-          className="btn btn-success mb-3 "
-          data-toggle="modal"
-          data-target="#add-product-modal"
-        >
-          Add new
-        </button>
-
+        <AddProduct categories={this.state.categories} />
         <div className="card shadow mb-4">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-primary">Product</h6>
@@ -487,7 +480,6 @@ class TableProduct extends Component {
           </div>
         </div>
 
-        <AddProduct categories={this.state.categories} />
       </div>
     );
   }

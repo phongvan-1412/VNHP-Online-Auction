@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import $ from "jquery";
 import axios from "axios";
 
@@ -26,6 +28,11 @@ function AddProduct({ categories }) {
   let start_price = "";
   let start_aution_day = "";
   let end_aution_day = "";
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const categoryOnChange = (e) => {
     categories.forEach((category) => {
@@ -57,7 +64,7 @@ function AddProduct({ categories }) {
             result.text("error: min 15 character");
             result.css("color", "red");
             validProductName = false;
-          }else if (product_name.length > 200) {
+          } else if (product_name.length > 200) {
             result.text("error: max 200 character");
             result.css("color", "red");
             validProductName = false;
@@ -253,7 +260,7 @@ function AddProduct({ categories }) {
   };
 
   const productElement = () => {
-   
+
     const input_imgs_product = $("#input-imgs-product").prop('files')[0];
     const input_img1_product = $("#input-img1-product").prop('files')[0];
     const input_img2_product = $("#input-img2-product").prop('files')[0];
@@ -419,7 +426,7 @@ function AddProduct({ categories }) {
     formData.set("product_information", information);
     formData.set("product_ingredients", ingredients);
     formData.set("product_instruction_store", instruction_store);
-    
+
     axios
       .post(`http://127.0.0.1:8000/api/addproduct`, formData)
       .then(function (response) {
@@ -435,82 +442,78 @@ function AddProduct({ categories }) {
   };
 
   return (
-    <div
-      className="modal fade bd-example-modal-lg"
-      tabIndex="-1"
-      id="add-product-modal"
-      aria-labelledby="myLargeModalLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog modal-lg">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h4 className="modal-title">Add Product</h4>
-            <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-              aria-hidden="true"
-            >
-              ×
-            </button>
-          </div>
-          <div className="modal-body p-4">
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label" htmlFor="id">
-                    Product Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="input-product_name"
-                    placeholder="max 200 character"
-                    onBlur={onProductNameBlur}
-                  />
-                  <div id="check-product-name-result"></div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label" htmlFor="id">
-                    Category Name
-                  </label>
-                  <select
-                    className="form-control"
-                    onChange={categoryOnChange}
-                    defaultValue={"Choose Category"}
-                  >
-                    <option hidden>Please Choose Category... </option>
-                    {categories.map((category) => {
-                      return (
-                        <option key={category.category_id}>
-                          {category.category_name.replace(/-/g, " ")}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  <div id="check-category-name-result"></div>
-                </div>
+    <div>
+      <Button variant="primary" onClick={handleShow}>
+        ADD PRODUCT
+      </Button>
+
+      <Modal show={show} onHide={handleClose} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>ADD PRODUCT</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <div className="row">
+
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="control-label" htmlFor="id">
+                  Product Name
+                </label>
+
+                <input
+                  type="text"
+                  className="form-control"
+                  id="input-product_name"
+                  placeholder="max 200 character"
+                  onBlur={onProductNameBlur}
+                />
+                <div id="check-product-name-result"></div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label" htmlFor="id">
-                    Images
-                  </label>
-                  <input
-                    className="form-control "
-                    type="file"
-                    id="input-imgs-product"
-                    onChange={onProductThumbnailImgChange}
-                  />
-                  <div id="product-thumbnail-img-check-result"></div>
-                </div>
+
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="control-label" htmlFor="id">
+                  Category Name
+                </label>
+                <select
+                  className="form-control"
+                  onChange={categoryOnChange}
+                  defaultValue={"Choose Category"}
+                >
+                  <option hidden>Please Choose Category... </option>
+                  {categories.map((category) => {
+                    return (
+                      <option key={category.category_id}>
+                        {category.category_name.replace(/-/g, " ")}
+                      </option>
+                    );
+                  })}
+                </select>
+                <div id="check-category-name-result"></div>
               </div>
-              <div className="col-md-6">
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="control-label" htmlFor="id">
+                  Images
+                </label>
+                <input
+                  className="form-control "
+                  type="file"
+                  id="input-imgs-product"
+                  onChange={onProductThumbnailImgChange}
+                />
+                <div id="product-thumbnail-img-check-result"></div>
+              </div>
+            </div>
+
+            <div className="col-md-6">
+              <div className="form-group">
                 <label className="control-label">Start Price</label>
                 <input
                   className="form-control "
@@ -522,141 +525,148 @@ function AddProduct({ categories }) {
                 <div id="product-price-check-result"></div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label" htmlFor="id">
-                    Images 1
-                  </label>
-                  <input
-                    className="form-control "
-                    type="file"
-                    id="input-img1-product"
-                    onChange={onProductImg1Change}
-                  />
-                  <div id="product-img1-check-result"></div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label">Start Aution Day</label>
-                  <input
-                    className="form-control "
-                    id="input-start-aution-product"
-                    type="datetime-local"
-                    onBlur={onProductStartAutionDayOnBlur}
-                  />
-                  <div id="product-start-aution-day-check-result"></div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label" htmlFor="id">
-                    Images 2
-                  </label>
-                  <input
-                    className="form-control "
-                    type="file"
-                    id="input-img2-product"
-                    onChange={onProductImg2Change}
-                  />
-                  <div id="product-img2-check-result"></div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label">End Aution Day</label>
-                  <input
-                    className="form-control"
-                    id="input-end-aution-product"
-                    onBlur={onProductEndAutionDayOnBlur}
-                    type="datetime-local"
-                  />
-                  <div id="product-end-aution-day-check-result"></div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label" htmlFor="id">
-                    Images 3
-                  </label>
-                  <input
-                    className="form-control "
-                    type="file"
-                    id="input-img3-product"
-                    onChange={onProductImg3Change}
-                  />
-                  <div id="product-img3-check-result"></div>
-                </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="control-label" htmlFor="id">
+                  Images 1
+                </label>
+                <input
+                  className="form-control "
+                  type="file"
+                  id="input-img1-product"
+                  onChange={onProductImg1Change}
+                />
+                <div id="product-img1-check-result"></div>
               </div>
             </div>
 
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label" htmlFor="id">
-                    Information
-                  </label>
-                  <textarea
-                    className="form-control"
-                    id="input-information-product"
-                    placeholder="max 2000 character"
-                    onBlur={onProductInfoOnBlur}
-                  ></textarea>
-                  <div id="product-info-check-result"></div>
-                </div>
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="control-label">Start Aution Day</label>
+                <input
+                  className="form-control "
+                  id="input-start-aution-product"
+                  type="datetime-local"
+                  onBlur={onProductStartAutionDayOnBlur}
+                />
+                <div id="product-start-aution-day-check-result"></div>
               </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label" htmlFor="id">
-                    Ingredients
-                  </label>
-                  <textarea
-                    className="form-control "
-                    id="input-ingredients-product"
-                    placeholder="max 2000 character"
-                    onBlur={onIngredientOnBlur}
-                  />
-                </div>
-              </div>
-              
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="control-label" htmlFor="id">
-                    Instruction store
-                  </label>
-                  <textarea
-                    className="form-control "
-                    id="input-instruction-store-product"
-                    placeholder="max 2000 character"
-                    onBlur={onInstructionStoreOnBlur}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <div id="add-product-result"></div>
-              <button
-                className="btn btn-secondary waves-effect"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <input
-                type="submit"
-                className="btn btn-info waves-effect waves-light"
-                onClick={productElement}
-                value="Create"
-              />
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+
+          <div className="row">
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="control-label" htmlFor="id">
+                  Images 2
+                </label>
+                <input
+                  className="form-control "
+                  type="file"
+                  id="input-img2-product"
+                  onChange={onProductImg2Change}
+                />
+                <div id="product-img2-check-result"></div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="control-label">End Aution Day</label>
+                <input
+                  className="form-control"
+                  id="input-end-aution-product"
+                  onBlur={onProductEndAutionDayOnBlur}
+                  type="datetime-local"
+                />
+                <div id="product-end-aution-day-check-result"></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="control-label" htmlFor="id">
+                  Images 3
+                </label>
+                <input
+                  className="form-control "
+                  type="file"
+                  id="input-img3-product"
+                  onChange={onProductImg3Change}
+                />
+                <div id="product-img3-check-result"></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="control-label" htmlFor="id">
+                  Information
+                </label>
+                <textarea
+                  className="form-control"
+                  id="input-information-product"
+                  placeholder="max 2000 character"
+                  onBlur={onProductInfoOnBlur}
+                ></textarea>
+                <div id="product-info-check-result"></div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="control-label" htmlFor="id">
+                  Ingredients
+                </label>
+                <textarea
+                  className="form-control "
+                  id="input-ingredients-product"
+                  placeholder="max 2000 character"
+                  onBlur={onIngredientOnBlur}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-6">
+              <div className="form-group">
+                <label className="control-label" htmlFor="id">
+                  Instruction store
+                </label>
+                <textarea
+                  className="form-control "
+                  id="input-instruction-store-product"
+                  placeholder="max 2000 character"
+                  onBlur={onInstructionStoreOnBlur}
+                />
+              </div>
+            </div>
+          </div>
+      </Modal.Body>
+
+      <Modal.Footer>
+        <div id="add-product-result"></div>
+        <button
+          className="btn btn-secondary waves-effect"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+        <input
+          type="submit"
+          className="btn btn-info waves-effect waves-light"
+          onClick={productElement}
+          value="Create"
+        />
+      </Modal.Footer>
+    </Modal>
+    </div >
   );
 }
 export default AddProduct;
