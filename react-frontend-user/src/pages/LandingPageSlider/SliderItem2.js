@@ -4,15 +4,17 @@ import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import $ from "jquery";
 
 const SliderItem2 = ({ product }) => {
-  
+  var productStartDate = product.product_start_aution_day;
+  var productEndDate = product.product_end_aution_day;
+
+  var countDownStartDate = new Date(
+    new Date(productStartDate).toLocaleString()
+  ).getTime();
+  var countDownEndDate = new Date(
+    new Date(productEndDate).toLocaleString()
+  ).getTime();
   var slider2 = setInterval(function () {
     var now = new Date(new Date().toLocaleString()).getTime();
-
-    var productStartDate = product.product_start_aution_day;
-    var productEndDate = product.product_end_aution_day;
-
-    var countDownStartDate = new Date(new Date(productStartDate).toLocaleString()).getTime();
-    var countDownEndDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
 
     var distance = countDownEndDate - now;
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -23,9 +25,13 @@ const SliderItem2 = ({ product }) => {
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     //SHOW ANNOUCEMENT PROUCT IS ON BIDDING
-    if(countDownStartDate <= now && now <= countDownEndDate){
-      document.getElementById("bidding-annoucement" + product.product_id + product.product_name).innerHTML = "Product is on bidding";
-    }
+    document.getElementById(
+      "bidding-annoucement" + product.product_id + product.product_name
+    )
+      ? (document.getElementById(
+          "bidding-annoucement" + product.product_id + product.product_name
+        ).innerHTML = "Product is on bidding")
+      : null;
     if (
       document.getElementById(
         "slider2" + product.product_id + product.product_name
@@ -51,15 +57,22 @@ const SliderItem2 = ({ product }) => {
   return (
     <div className="product-grid">
       <div className="product-item-countdownstart-wrapper">
-        <span className="product-item-countdownstart-headtext">Auction Start Date: </span>
-        <span className="product-item-countdownstart-time">{product.product_start_aution_day.substring(0,19)}</span>
+        <span className="product-item-countdownstart-headtext">
+          Auction Start Date:{" "}
+        </span>
+        <span className="product-item-countdownstart-time">
+          {product.product_start_aution_day.substring(0, 19)}
+        </span>
       </div>
 
       <div className="product-item-countdownend-wrapper">
         <span className="product-item-countdownend-headtext">Timed out: </span>
-        <span id={"slider2" + product.product_id + product.product_name} className="product-item-countdownend"></span>
+        <span
+          id={"slider2" + product.product_id + product.product_name}
+          className="product-item-countdownend"
+        ></span>
       </div>
-      
+
       <Link
         to={`/${product.category_id}/${product.product_name}`}
         replace
@@ -75,7 +88,9 @@ const SliderItem2 = ({ product }) => {
       </Link>
 
       <div className="product-item-categoryname">
-        <Link to={`/category/${product.category_name}`}>{product.category_name.replace(/-/g, " ")}</Link>
+        <Link to={`/category/${product.category_name}`}>
+          {product.category_name.replace(/-/g, " ")}
+        </Link>
       </div>
 
       <div className="product-name">
@@ -98,8 +113,18 @@ const SliderItem2 = ({ product }) => {
         </div>
 
         <div className="cart-icons">
-          <div id={"bidding-annoucement2" + product.product_id + product.product_name} className="bidding-annoucement"></div>
-          <Link to={`/${product.category_id}/${product.product_name}`} className="btn-view">View Bidding</Link>
+          <div
+            id={
+              "bidding-annoucement2" + product.product_id + product.product_name
+            }
+            className="bidding-annoucement"
+          ></div>
+          <Link
+            to={`/${product.category_id}/${product.product_name}`}
+            className="btn-view"
+          >
+            View Bidding
+          </Link>
         </div>
       </div>
     </div>

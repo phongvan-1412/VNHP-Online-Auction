@@ -1,18 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import $ from "jquery";
 
 const SliderItem3 = ({ product, hotAuctionProducts }) => {
+  var productStartDate = product.product_start_aution_day;
+  var productEndDate = product.product_end_aution_day;
 
+  var countDownStartDate = new Date(
+    new Date(productStartDate).toLocaleString()
+  ).getTime();
+  var countDownEndDate = new Date(
+    new Date(productEndDate).toLocaleString()
+  ).getTime();
   var slider3 = setInterval(function () {
     var now = new Date(new Date().toLocaleString()).getTime();
 
-    var productStartDate = product.product_start_aution_day;
-    var productEndDate = product.product_end_aution_day;
-
-    var countDownStartDate = new Date(new Date(productStartDate).toLocaleString()).getTime();
-    var countDownEndDate = new Date(new Date(productEndDate).toLocaleString()).getTime();
     // Find the distance between now and the count down date
     var distance = countDownEndDate - now;
 
@@ -25,8 +27,14 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     // SHOW ANNOUCEMENT PROUCT IS ON BIDDING
-    if(countDownStartDate <= now && now <= countDownEndDate){
-      document.getElementById("bidding-annoucement" + product.product_id + product.product_name).innerHTML = "Product is on bidding";
+    if (countDownStartDate <= now && now <= countDownEndDate) {
+      document.getElementById(
+        "bidding-annoucement" + product.product_id + product.product_name
+      )
+        ? (document.getElementById(
+            "bidding-annoucement" + product.product_id + product.product_name
+          ).innerHTML = "Product is on bidding")
+        : null;
     }
 
     if (
@@ -51,13 +59,20 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
   return (
     <div className="product-grid">
       <div className="product-item-countdownstart-wrapper">
-        <span className="product-item-countdownstart-headtext">Auction Start Date: </span>
-        <span className="product-item-countdownstart-time">{product.product_start_aution_day}</span>
+        <span className="product-item-countdownstart-headtext">
+          Auction Start Date:{" "}
+        </span>
+        <span className="product-item-countdownstart-time">
+          {product.product_start_aution_day}
+        </span>
       </div>
 
       <div className="product-item-countdownend-wrapper">
         <span className="product-item-countdownend-headtext">Timed out: </span>
-        <span id={"slider3" + product.product_id + product.product_name} className="product-item-countdownend"></span>
+        <span
+          id={"slider3" + product.product_id + product.product_name}
+          className="product-item-countdownend"
+        ></span>
       </div>
 
       <Link
@@ -75,7 +90,9 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
       </Link>
 
       <div replace="true" className="product-item-categoryname">
-        <Link to={`/category/${product.category_name}`}>{product.category_name.replace(/-/g," ")}</Link>
+        <Link to={`/category/${product.category_name}`}>
+          {product.category_name.replace(/-/g, " ")}
+        </Link>
       </div>
 
       <div className="product-name">
@@ -85,7 +102,7 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
           replace="true"
           className="product-name-item"
         >
-          {product.product_name.replace(/-/g," ")}
+          {product.product_name.replace(/-/g, " ")}
         </Link>
       </div>
 
@@ -98,10 +115,19 @@ const SliderItem3 = ({ product, hotAuctionProducts }) => {
         </div>
 
         <div className="cart-icons">
-          <div id={"bidding-annoucement3" + product.product_id + product.product_name} className="bidding-annoucement"></div>
-          <Link to={`/${product.category_id}/${product.product_name}`} className="btn-view">View Bidding</Link>
+          <div
+            id={
+              "bidding-annoucement3" + product.product_id + product.product_name
+            }
+            className="bidding-annoucement"
+          ></div>
+          <Link
+            to={`/${product.category_id}/${product.product_name}`}
+            className="btn-view"
+          >
+            View Bidding
+          </Link>
         </div>
-
       </div>
     </div>
   );
