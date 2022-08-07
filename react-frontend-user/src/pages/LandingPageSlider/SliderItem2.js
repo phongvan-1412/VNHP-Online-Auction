@@ -5,7 +5,8 @@ import $ from "jquery";
 
 const SliderItem2 = ({ product }) => {
   var countDownDate = new Date(product.product_end_aution_day.substring(0,19).replace(/-/g,"/")).getTime();
-  var slider3 = setInterval(function () {
+
+  var slider2 = setInterval(function () {
     var productStartDate = product.product_start_aution_day;
     var productEndDate = product.product_end_aution_day;
 
@@ -14,7 +15,6 @@ const SliderItem2 = ({ product }) => {
     var now = new Date().getTime();
 
     var distance = countDownDate - now;
-
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
     var hours = Math.floor(
       (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)

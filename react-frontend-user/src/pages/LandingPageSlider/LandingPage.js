@@ -44,7 +44,7 @@ class LandingPage extends Component {
         });
     };
 
-    const endingSoonProducts = () => {
+    const endingSoonProduct = () => {
       fetch("http://127.0.0.1:8000/api/endingsoonproducts", { method: "GET" })
         .then((response) => response.json())
         .then((response) => {
@@ -68,7 +68,7 @@ class LandingPage extends Component {
 
         <div className="col-md-10" style={{ padding: "0px", margin: "0px" }}>
           <LandingPageSlider1 products={this.state.updateComingProducts} updateComingProducts={updateComingProducts}/>
-          <LandingPageSlider2 products={this.state.endingSoonProducts} endingSoonProducts={endingSoonProducts}/>
+          <LandingPageSlider2 endingSoonProducts={this.state.endingSoonProducts} endingSoonProduct={endingSoonProduct}/>
           <LandingPageSlider3 products={hotAuctionProducts} hotAuctionProducts={hotAuctionProducts}/>
           <LandingPageCategories categories={categories} />
         </div>

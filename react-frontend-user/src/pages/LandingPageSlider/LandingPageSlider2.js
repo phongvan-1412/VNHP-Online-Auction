@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { GiNextButton, GiPreviousButton} from 'react-icons/gi'
+import { GiConsoleController, GiNextButton, GiPreviousButton} from 'react-icons/gi'
 
 import SliderItem2 from "./SliderItem2";
-
-const LandingPageSlider2 = ({products}) => {
+const LandingPageSlider2 = ({endingSoonProducts}) => {
   //SLIDER
   const ref = useRef({})
 
@@ -61,7 +60,6 @@ const LandingPageSlider2 = ({products}) => {
   //   });
   // }
   const [filterProduct, setFilterProduct] = useState("");
-
     return (
         <div className=" landingpage-slider slide-title">
           <div className="slide-title top-content">
@@ -75,22 +73,22 @@ const LandingPageSlider2 = ({products}) => {
           </div>
 
           <Slider ref={ref} {...settings}>
-            {products.slice(0, 35).filter((val) => {
-                if(filterProduct === ""){
-                  return val;
-                }else if((val.product_name.replace(/-/g, " ").toLowerCase()).includes(filterProduct.toLowerCase())){
-                  return val;
-                }else if((val.category_name.replace(/-/g, " ").toLowerCase()).includes(filterProduct.toLowerCase())){
-                  return val;
-                }else if((val.product_start_price.toLowerCase()).includes(filterProduct.toLowerCase())){
-                  return val;
-                }else if((val.product_start_aution_day.toLocaleString()).includes(filterProduct.toLocaleString())){
-                  return val;
+            {endingSoonProducts.slice(0, 30).filter((product) => {
+                if(filterProduct.length == 0){
+                  return product;
+                }else if((product.product_name.replace(/-/g, " ").toLowerCase()).includes(filterProduct.toLowerCase())){
+                  return product;
+                }else if((product.category_name.replace(/-/g, " ").toLowerCase()).includes(filterProduct.toLowerCase())){
+                  return product;
+                }else if((product.product_start_price.toLowerCase()).includes(filterProduct.toLowerCase())){
+                  return product;
+                }else if((product.product_start_aution_day.toLocaleString()).includes(filterProduct.toLocaleString())){
+                  return product;
                 }
-              }).map((val) => {
+              }).map((product) => {
                 return(
-                  <div className="product-grid-wrapper" key={val.product_id} >
-                    <SliderItem2 product={val}></SliderItem2>
+                  <div className="product-grid-wrapper" key={product.product_id} >
+                    <SliderItem2 product={product}></SliderItem2>
                   </div>
                 )
               })

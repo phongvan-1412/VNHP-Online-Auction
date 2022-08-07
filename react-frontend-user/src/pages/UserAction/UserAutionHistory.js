@@ -74,6 +74,7 @@ function UserAutionHistory({ autionHistory }) {
                   <th>Product</th>
                   <th>Aution Bid Price</th>
                   <th>Date</th>
+                  <th>Auction Status</th>
                 </tr>
               </thead>
               <tbody id="aution-history">
@@ -88,6 +89,7 @@ function UserAutionHistory({ autionHistory }) {
                       </td>
                       <td>$ {parseInt(ah.aution_price).toLocaleString()}</td>
                       <td>{new Date(ah.aution_day).toLocaleString()}</td>
+                      <td>{ah.aution_status ? "Win" : "Lose"}</td>
                     </tr>
                   );
                 })}
