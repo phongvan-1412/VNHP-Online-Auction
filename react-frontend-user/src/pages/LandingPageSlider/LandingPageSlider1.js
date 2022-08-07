@@ -72,7 +72,7 @@ const [filter, setFilter] = useState("")
       </div>
 
       <Slider ref={ref} {...settings}>
-        {products.slice(0, 15).filter((val, index) => {
+        {products.slice(0, 35).filter((val) => {
           if(filter === ""){
             return val;
           }else if((val.product_name.replace(/-/g, " ").toLowerCase()).includes(filter.toLowerCase())){

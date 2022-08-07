@@ -86,6 +86,7 @@ const DetailItem = ({ product,updateProduct }) => {
       ).customer_id;
       const auctionDay = new Date(new Date().toLocaleString());
       setLoading(true);
+      $("#login-btn").style.display = "none";
       axios
         .post("http://127.0.0.1:8000/api/currentbidprice", {
           realBidPrice,
@@ -195,6 +196,7 @@ const DetailItem = ({ product,updateProduct }) => {
             <Link
               to="/login"
               className="product-detail-product-bidprice-register"
+              id="login-btn"
             >
               Login to Bid
             </Link>

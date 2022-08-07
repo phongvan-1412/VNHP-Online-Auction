@@ -4,7 +4,7 @@ import axios from "axios";
 import $ from "jquery";
 
 const ProductItem = ({ product }) => {
-  
+  console.log(product)
   //COUNTDOWN
   var countDownStartDate = new Date(new Date(product.product_start_aution_day).toLocaleString()).getTime();
   var countDownEndDate = new Date(new Date(product.product_end_aution_day).toLocaleString()).getTime();
@@ -79,7 +79,7 @@ const ProductItem = ({ product }) => {
         </Link>
       </div>
 
-      <div className="product-item-owner">by {product.customer_name}</div>
+      <div className="product-item-owner">{product.customer_name ? "by " + product.customer_name : null}</div>
       <div className="product-metapane-wrapper">
         <div className="product-price">
           <span className="product-price-headtext">Start Price:</span>
