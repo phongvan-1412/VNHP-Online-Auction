@@ -7,24 +7,31 @@ import ProductDetailItemSlide from "../ProductDetail/ProductDetailItemSlide";
 
 const ProductView = ({ product, categories }) => {
   const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+
   const [currentProduct, setCurrentProduct] = useState({})
-  const onClick = (e) => {
+  const handleShow = (e) => {
     if(product.product_id == e.target.value){
       setCurrentProduct(product)
     }
     setShow(true);
+  }
+
+  const onClick = (e) => {
+    
   }
   return (
     <div
       className="product-grid-wrapper col-xl-3 col-md-4 col-xs-6"
       id="product-grid-wrapper">
     
-      <Button value={product.product_id} onClick={onClick} id="product-quick-view">
+      <Button value={product.product_id} onClick={handleShow} id="product-quick-view">
         QUICK VIEW
       </Button>
     
       <Modal
-        show={show}
+        show={show} 
+        onHide={handleClose}
         dialogClassName="modal-90w"
         aria-labelledby="example-custom-modal-styling-title"
         size="xl"
