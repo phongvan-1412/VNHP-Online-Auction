@@ -16,5 +16,5 @@ root.render(
   </BrowserRouter>
 );
 
-
+// localStorage.removeItem("admin_info");
 reportWebVitals();
